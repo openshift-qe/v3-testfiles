@@ -1,0 +1,13 @@
+{
+    "kind": "DeploymentConfigRollback",
+    "apiVersion": "v1",
+    "spec": {
+        "from": {
+            "name": "hooks-1"
+        },
+        "includeTriggers": true,
+        "includeTemplate": true,
+        "includeReplicationMeta": true,
+        "includeStrategy": true
+    }
+}

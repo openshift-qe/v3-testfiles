@@ -1,0 +1,121 @@
+{
+    "kind": "DeploymentConfig",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "hooks",
+        "creationTimestamp": null,
+        "labels": {
+            "name": "mysql"
+        }
+    },
+    "spec": {
+        "strategy": {
+            "type": "Rolling",
+            "recreateParams": {
+                "pre": {
+                    "failurePolicy": "Retry",
+                    "execNewPod": {
+                        "command": [
+                            "/bin/true"
+                        ],
+                        "env": [
+                            {
+                                "name": "VAR",
+                                "value": "pre-deployment"
+                            }
+                        ],
+                        "containerName": "mysql-55-centos7"
+                    }
+                },
+                "post": {
+                    "failurePolicy": "Ignore",
+                    "execNewPod": {
+                        "command": [
+                            "/bin/false"
+                        ],
+                        "env": [
+                            {
+                                "name": "VAR",
+                                "value": "post-deployment"
+                            }
+                        ],
+                        "containerName": "mysql-55-centos7"
+                    }
+                }
+            },
+            "rollingParams": {
+                "updatePeriodSeconds": 1,
+                "intervalSeconds": 1,
+                "timeoutSeconds": 120
+            },
+            "resources": {}
+        },
+        "triggers": [
+            {
+                "type": "ImageChange",
+                "imageChangeParams": {
+                    "automatic": true,
+                    "containerNames": [
+                        "mysql-container"
+                    ],
+                    "from": {
+                        "kind": "ImageStreamTag",
+                        "name": "mysql-55-centos7:latest"
+                    }
+                }
+            }
+        ],
+        "replicas": 2,
+        "selector": {
+            "name": "mysql"
+        },
+        "template": {
+            "metadata": {
+                "creationTimestamp": null,
+                "labels": {
+                    "name": "mysql"
+                }
+            },
+            "spec": {
+                "containers": [
+                    {
+                        "name": "mysql-55-centos7",
+                        "image": "openshift/mysql-55-centos7:latest",
+                        "ports": [
+                            {
+                                "containerPort": 3306,
+                                "protocol": "TCP"
+                            }
+                        ],
+                        "env": [
+                            {
+                                "name": "MYSQL_USER",
+                                "value": "user8Y2"
+                            },
+                            {
+                                "name": "MYSQL_PASSWORD",
+                                "value": "Plqe5Wevchange"
+                            },
+                            {
+                                "name": "MYSQL_DATABASE",
+                                "value": "root"
+                            }
+                        ],
+                        "resources": {},
+                        "terminationMessagePath": "/dev/termination-log",
+                        "imagePullPolicy": "Always",
+                        "securityContext": {
+                            "capabilities": {},
+                            "privileged": false
+                        }
+                    }
+                ],
+                "restartPolicy": "Always",
+                "dnsPolicy": "ClusterFirst"
+            }
+        }
+    },
+    "status": {
+        "latestVersion": 2
+   }
+}
