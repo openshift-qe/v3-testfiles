@@ -1,0 +1,35 @@
+{
+    "kind": "DeploymentConfig",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "dc1",
+        "labels": {
+            "region": "r1"
+        }
+    },
+    "spec": {
+        "replicas": 1,
+        "selector": {
+            "region": "r1"
+        },
+        "template": {
+            "metadata": {
+                "labels": {
+                    "region": "r1"
+                }
+            },
+            "spec": {
+                "containers": [
+                    {
+                        "name": "dc",
+                        "image": "openshift/hello-openshift"
+                    }
+                ],
+                "nodeSelector": {
+                    "region": "r1"
+                },
+                "serviceAccount": "system:serviceaccount:default:deployer"
+            }
+        }
+    }
+}
