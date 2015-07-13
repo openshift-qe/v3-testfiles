@@ -1,0 +1,22 @@
+{
+  "apiVersion":"v1",
+  "kind": "Pod",
+  "metadata": {
+    "name": "resource-pod",
+    "labels": {
+      "name": "resource-pod"
+    }
+  },
+  "spec": {
+    "containers": [{
+      "name": "resource-pod",
+      "image": "openshift/hello-openshift",
+      "resources":{
+        "limits":{
+          "cpu":1,
+          "memory":800000000
+        }
+      }
+    }]
+  }
+}

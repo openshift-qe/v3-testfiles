@@ -1,0 +1,18 @@
+{
+    "kind": "Route",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "route-passthrough"
+    },
+    "spec": {
+        "host": "my-tls-server",
+        "to": {
+            "kind": "Service",
+            "name": "tls-service"
+        },
+        "tls": {
+        "termination": "passthrough",
+     }
+    }
+}
+

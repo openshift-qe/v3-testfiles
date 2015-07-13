@@ -1,0 +1,65 @@
+{
+    "kind": "Pod",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "hello-openshift",
+        "creationTimestamp": null,
+        "labels": {
+            "name": "hello-openshift"
+        }
+    },
+    "spec": {
+        "containers": [
+            {
+                "name": "hello-openshift",
+                "image": "openshift/hello-openshift",
+                "ports": [
+                    {
+                        "hostPort": 6061,
+                        "containerPort": 8080,
+                        "protocol": "TCP"
+                    }
+                ],
+                "env": [
+                    {
+                        "name": "zzhao",
+                        "value": "redhat"
+                    },
+                    {
+                        "name": "test2",
+                        "value": "$(zzhao)"
+                    },
+                    {
+                        "name": "test3",
+                        "value": "___$(zzhao)___"
+                    },
+                    {
+                        "name": "test4",
+                        "value": "$$(zzhao)_$(test2)"
+                    },
+                    {
+                        "name": "test5",
+                        "value": "foo\\\\$(zzhao)bar"
+                    },
+                    {
+                        "name": "test6",
+                        "value": "$(zzhao$(zzhao)"
+                    },
+                    {
+                        "name": "test7",
+                        "value": "$$$$$$(zzhao)"
+                    },
+                    {
+                        "name": "test8",
+                        "value": "$$$$$$$(zzhao)"
+                    }
+                ],
+                "resources": {},
+                "securityContext": {
+                    "privileged": true
+                }
+            }
+        ]
+    },
+    "status": {}
+}

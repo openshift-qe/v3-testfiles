@@ -1,0 +1,55 @@
+{
+    "apiVersion": "v1",
+    "id": "hello-openshift",
+    "kind": "Pod",
+    "metadata": {
+        "name": "hello-openshift",
+        "labels": {
+            "name": "hello-openshift"
+        }
+    },
+    "spec": {
+        "volumes": [
+            {
+                "name": "dshm",
+                "emptyDir": {
+                    "medium": "Memory"
+                }
+            }
+        ],
+        "containers": [
+            {
+                "image": "kubernetes/pause",
+                "name": "hello-container1",
+                "ports": [
+                    {
+                        "containerPort": 8080,
+                        "hostPort": 6061
+                    }
+                ],
+                "volumeMounts": [
+                    {
+                        "mountPath": "/dev/shm",
+                        "name": "dshm"
+                    }
+                ]
+            },
+            {
+                "image": "kubernetes/pause",
+                "name": "hello-container2",
+                "ports": [
+                    {
+                        "containerPort": 8081,
+                        "hostPort": 6062
+                    }
+                ],
+                "volumeMounts": [
+                    {
+                        "mountPath": "/dev/shm",
+                        "name": "dshm"
+                    }
+                ]
+            }
+        ]
+    }
+}
