@@ -1,0 +1,16 @@
+{
+  "apiVersion": "v1beta3",
+  "displayName": "jhou testing node selector",
+  "kind": "Project",
+  "metadata": {
+    "annotations": {
+      "description": "This is a test project of jhou",
+      "openshift.io/node-selector": "region=infra"
+    },
+    "labels": {
+      "name": "jhou"
+    },
+    "name": "jhouns"
+  }
+}
+

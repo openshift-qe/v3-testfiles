@@ -1,0 +1,20 @@
+kind: Pod
+apiVersion: v1beta3
+metadata:
+  name: nfspod
+  labels:
+    name: frontendhttp
+spec:
+  containers:
+    - name: myfrontend
+      image: jhou/hello-openshift
+      imagePullPolicy: "IfNotPresent"
+      volumeMounts:
+      - mountPath: "/opt"
+        name: mypd
+  volumes:
+    - name: mypd
+      nfs:
+        server: 10.66.79.155
+        path: "/nfsshare"
+        readOnly: false

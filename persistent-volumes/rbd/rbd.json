@@ -1,0 +1,39 @@
+{
+    "apiVersion": "v1beta3",
+    "id": "rbdpd",
+    "kind": "Pod",
+    "metadata": {
+        "name": "rbd"
+    },
+    "spec": {
+        "containers": [
+            {
+                "name": "rbd-rw",
+                "image": "kubernetes/pause",
+                "volumeMounts": [
+                    {
+                        "mountPath": "/mnt/rbd",
+                        "name": "rbdpd"
+                    }
+                ]
+            }
+        ],
+        "volumes": [
+            {
+                "name": "rbdpd",
+                "rbd": {
+                    "monitors": [
+        						"192.168.42.10:6789",
+						        "192.168.42.11:6789"
+    				 ],
+                    "image": "jhoutest",
+                    "keyring": "/var/lib/ceph/osd/ceph-0/keyring",
+                    "user": "admin",
+                    "pool": "rbd",
+                    "fsType": "ext4",
+                    "readOnly": true
+                }
+            }
+        ]
+    }
+}

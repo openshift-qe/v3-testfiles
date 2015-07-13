@@ -1,0 +1,33 @@
+{
+    "apiVersion": "v1beta3",
+    "kind": "Pod",
+    "metadata": {
+        "name": "iscsi"
+    },
+    "spec": {
+        "containers": [
+            {
+                "name": "iscsi",
+                "image": "kubernetes/pause",
+                "volumeMounts": [
+                    {
+                        "mountPath": "/mnt/iscsi",
+                        "name": "iscsi"
+                    }
+                ]
+            }
+        ],
+        "volumes": [
+            {
+                "name": "iscsi",
+                "iscsi": {
+                    "targetPortal": "192.168.0.225:3260",
+                    "iqn": "iqn.2015-06.world.server:storage.target00",
+                    "lun": 0,
+                    "fsType": "xfs",
+                    "readOnly": false
+                }
+            }
+        ]
+    }
+}

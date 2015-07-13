@@ -1,0 +1,33 @@
+{
+    "apiVersion": "v1beta3",
+    "id": "glusterfs",
+    "kind": "Pod",
+    "metadata": {
+        "name": "glusterfs"
+    },
+    "spec": {
+        "containers": [
+            {
+                "name": "glusterfs",
+                "image": "nginx",
+                "imagePullPolicy": "IfNotPresent",
+                "volumeMounts": [
+                    {
+                        "mountPath": "/mnt/glusterfs",
+                        "name": "glusterfsvol"
+                    }
+                ]
+            }
+        ],
+        "volumes": [
+            {
+                "name": "glusterfsvol",
+                "glusterfs": {
+                    "endpoints": "glusterfs-cluster",
+                    "path": "testvol",
+                    "readOnly": true
+                }
+            }
+        ]
+    }
+}

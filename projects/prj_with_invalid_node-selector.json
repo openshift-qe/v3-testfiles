@@ -1,0 +1,15 @@
+{
+  "apiVersion": "v1beta3",
+  "displayName": "jhou test",
+  "kind": "Project",
+  "metadata": {
+    "annotations": {
+      "description": "This is a test project of jhou",
+      "openshift.io/node-selector": "env,qa"
+    },
+    "labels": {
+      "name": "jhou"
+    },
+    "name": "jhou"
+  }
+}
