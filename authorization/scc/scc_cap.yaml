@@ -1,0 +1,15 @@
+allowedCapabilities:
+- KILL
+apiVersion: v1
+groups:
+- system:serviceaccounts
+kind: SecurityContextConstraints
+metadata:
+  labels:
+    name: scc-cap
+  name: scc-cap
+runAsUser:
+  type: RunAsAny
+seLinuxContext:
+  type: RunAsAny
+

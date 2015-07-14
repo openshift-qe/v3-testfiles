@@ -1,0 +1,32 @@
+{
+  "apiVersion":"v1",
+  "kind": "Pod",
+  "metadata": {
+    "name": "disk-pod",
+    "labels": {
+      "name": "disk-pod"
+    }
+  },
+  "spec": {
+    "containers": [{
+      "name": "disk-pod",
+      "image": "pweil/hello-nginx-docker",
+      "volumeMounts" : [
+                {
+                "name":"testvol",
+                "mountPath" : "/tmp/testdir"
+                }
+               ]
+    }],
+      "volumes": [{
+                "name" : "testvol",
+                "source" : {
+                        "hostDir": {
+                                "path": "/tmp/testdir"
+                                   }
+                           }
+                }]
+
+  }
+}
+
