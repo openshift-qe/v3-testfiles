@@ -1,0 +1,14 @@
+seLinuxContext:
+  type: RunAsAny
+runAsUser:
+  type: MustRunAsRange
+  UIDRangeMin: 1000
+  UIDRangeMax: 2000
+apiVersion: v1
+groups:
+- system:serviceaccounts
+kind: SecurityContextConstraints
+metadata:
+  labels:
+    name: scc-user-mustrunasrange
+  name: scc-user-mustrunasrange

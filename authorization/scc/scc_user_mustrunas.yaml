@@ -1,0 +1,13 @@
+seLinuxContext:
+  type: RunAsAny
+runAsUser:
+  type: MustRunAs
+  UID: 1000
+apiVersion: v1
+groups:
+- system:serviceaccounts
+kind: SecurityContextConstraints
+metadata:
+  labels:
+    name: scc-user-mustrunas
+  name: scc-user-mustrunas

@@ -1,0 +1,12 @@
+seLinuxContext:
+  type: RunAsAny
+runAsUser:
+  type: RunAsAny
+apiVersion: v1
+groups:
+- system:serviceaccounts
+kind: SecurityContextConstraints
+metadata:
+  labels:
+    name: scc-runasany
+  name: scc-runasany
