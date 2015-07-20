@@ -1,5 +1,9 @@
 allowedCapabilities:
 - KILL
+runAsUser:
+  type: RunAsAny
+seLinuxContext:
+  type: RunAsAny
 apiVersion: v1
 groups:
 - system:serviceaccounts
@@ -8,8 +12,3 @@ metadata:
   labels:
     name: scc-cap
   name: scc-cap
-runAsUser:
-  type: RunAsAny
-seLinuxContext:
-  type: RunAsAny
-

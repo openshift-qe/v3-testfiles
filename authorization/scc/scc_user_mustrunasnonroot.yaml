@@ -1,0 +1,12 @@
+seLinuxContext:
+  type: RunAsAny
+runAsUser:
+  type: MustRunAsNonRoot
+apiVersion: v1
+groups:
+- system:serviceaccounts
+kind: SecurityContextConstraints
+metadata:
+  labels:
+    name: scc-user-mustrunasnonroot
+  name: scc-user-mustrunasnonroot
