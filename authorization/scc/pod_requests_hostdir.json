@@ -10,7 +10,7 @@
   "spec": {
     "containers": [{
       "name": "disk-pod",
-      "image": "pweil/hello-nginx-docker",
+      "image": "bmeng/hello-openshift",
       "volumeMounts" : [
                 {
                 "name":"testvol",
