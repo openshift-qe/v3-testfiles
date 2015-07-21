@@ -4,10 +4,13 @@
     "metadata": {
         "name": "iscsi",
         "labels": {
-            "name": "frontendhttp"
+            "name": "iscsi"
         }
     },
     "spec": {
+        "nodeSelector": {
+           "storage": "iscsi"
+         },
         "containers": [{
             "name": "myfrontend",
             "image": "jhou/hello-openshift",
