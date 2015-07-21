@@ -1,5 +1,7 @@
 # Quickstart
-yum -y install iscsi-initiator-utils
+Install required packages on your node:
+
+`yum -y install iscsi-initiator-utils`
 
 ## Configure iscsi initiator on your node
 ```
@@ -27,10 +29,10 @@ iscsiadm -m session -o show
 ```
 ## Make file system
 ```
-parted --script /dev/sda “mklabel msdos” 
-parted --script /dev/sda “mkpart primary 0% 100%” 
-mkfs -t xfs -f /dev/sda
-mount /dev/sdb1 /mnt
+parted --script /dev/sda "mklabel msdos"
+parted --script /dev/sda "mkpart primary 0% 100%"
+mkfs.ext4 /dev/sda
+mount /dev/sda /mnt
 df -hT
 ```
 
