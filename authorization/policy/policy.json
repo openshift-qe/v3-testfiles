@@ -1,0 +1,12 @@
+{
+    "kind": "PolicyBinding",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "wsuntest",
+        "namespace": "wsuntest"
+    },
+    "policyRef": {
+        "namespace": "wsuntest"
+    }
+}
+

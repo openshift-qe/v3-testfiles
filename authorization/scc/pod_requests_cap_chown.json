@@ -10,9 +10,9 @@
   "spec": {
       "containers": [{
         "name": "hello-pod",
-        "image": "openshift/hello-openshift",
+        "image": "bmeng/hello-openshift",
         "securityContext": {
-                "capabilities": {"ADD":["KILL"]}
+                "capabilities": {"ADD":["CHOWN"]}
         }
       }]
   }
