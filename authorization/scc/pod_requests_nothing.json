@@ -15,16 +15,10 @@
         "image": "bmeng/hello-openshift",
         "ports": [
           {
-            "containerPort": 8080
+            "containerPort": 8080,
+            "hostPort": 6061
           }
-        ],
-        "securityContext": {
-            "seLinuxOptions":{
-                "level":"s0:c9",
-                "user": "system_u",
-                "role":"object_r"
-            }
-        }
+        ]
       }]
   }
 }
