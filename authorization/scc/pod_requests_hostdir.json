@@ -20,11 +20,9 @@
     }],
       "volumes": [{
                 "name" : "testvol",
-                "source" : {
-                        "hostDir": {
+                "hostPath": {
                                 "path": "/tmp/testdir"
                                    }
-                           }
                 }]
 
   }
