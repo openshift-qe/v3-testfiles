@@ -3,22 +3,19 @@
   "apiVersion":"v1",
 
   "metadata": {
-        "name": "hello-nginx-docker",
+        "name": "hello-pod",
         "labels": {
-                "name": "hello-nginx-docker"
+                "name": "hello-pod"
         }
   },
 
   "spec": {
       "containers": [{
-        "name": "hello-nginx-docker-pod",
+        "name": "hello-pod",
         "image": "bmeng/hello-openshift",
         "ports": [
           {
             "containerPort": 80
-          },
-          {
-            "containerPort": 443
           }
         ],
         "securityContext": {

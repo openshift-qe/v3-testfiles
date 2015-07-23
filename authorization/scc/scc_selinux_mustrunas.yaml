@@ -1,9 +1,7 @@
 seLinuxContext:
   seLinuxOptions:
     user: system_u
-    role: object_r
-    type: user_home_t
-    level: s0:c1
+    level: s0:c0
   type: MustRunAs
 runAsUser:
   type: RunAsAny
