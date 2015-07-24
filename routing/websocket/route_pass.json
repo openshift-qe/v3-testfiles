@@ -1,0 +1,18 @@
+{
+    "kind": "Route",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "route-passthrough"
+    },
+    "spec": {
+        "host": "www.example.com",
+        "to": {
+            "kind": "Service",
+            "name": "hello-ws-secure"
+        },
+        "tls": {
+        "termination": "passthrough",
+     }
+    }
+}
+
