@@ -12,7 +12,7 @@
   "spec": {
       "containers": [{
         "name": "hello-websocket",
-        "image": "pweil/hello-websocket",
+        "image": "zhaozhanqi/hello-websocket",
         "ports": [
           {
             "containerPort": 9999
