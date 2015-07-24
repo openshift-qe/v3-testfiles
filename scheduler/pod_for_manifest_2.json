@@ -1,0 +1,24 @@
+{
+  "kind": "Pod",
+  "apiVersion":"v1",
+  "metadata": {
+        "name": "hello-pod-2",
+        "labels": {
+                "name": "hello-pod-2"
+        }
+  },
+  "spec": {
+      "containers": [{
+        "name": "hello-pod-2",
+        "image": "openshift/hello-openshift",
+        "securityContext": {
+                    "privileged": false,
+                    "seLinuxOptions": {
+                        "level": "s0:c1,c0"
+                    },
+                    "runAsUser": 1000000000
+                }
+
+      }]
+  }
+}
