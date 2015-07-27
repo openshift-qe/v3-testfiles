@@ -11,7 +11,7 @@
             "name": "tls-service"
         },
         "tls": {
-        "termination": "passthrough",
+        "termination": "passthrough"
      }
     }
 }
