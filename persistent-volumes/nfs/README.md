@@ -9,3 +9,6 @@ Test files for NFS persistent volumes for Kubernetes and OpenShift
 
 ## via Pod directly
 `osc create -f pod-with-nfs.yaml`
+
+## Use case
+The `mysql.json` is a template that makes use of nfs
