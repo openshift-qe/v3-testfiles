@@ -1,0 +1,21 @@
+{
+    "kind": "Service",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "hello-ws-secure"
+    },
+    "spec": {
+        "ports": [
+                {
+                        "name": "https",
+                        "protocol": "TCP",
+                        "port": 27443,
+        "targetPort": 9443
+                }
+        ],
+        "selector": {
+                "name": "hello-websocket"
+        }
+    }
+}
+

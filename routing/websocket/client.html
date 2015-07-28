@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>  <title>WebSocket Test</title>
+
+        <script language="javascript" type="text/javascript">
+            var app = {
+                display: {
+                    status: "status",
+                    output: "output"
+                },
+
+                testSocket: function(type){
+                    app.type = type;
+
+                    var url;
+                    if (type == "secure") {
+                        url = "wss://www.example.com/echo";
+                    }else if (type == "reencrypt"){
+                        url = "wss://www.example2.com/echo";
+                    }else{
+                        url = "ws://www.example.com/echo";
+                    }
+
+                    app.write(app.display.status, "Testing " + type + " socket");
+                    app.ws = new WebSocket(url);
+                    app.ws.onopen = app.onOpen;
+                    app.ws.onclose = app.onClose;
+                    app.ws.onmessage = app.onMessage;
+                    app.ws.onerror = app.onError;
+                },
+
+                onError: function(e){
+                    app.write(app.display.status, "Error:" + e)
+                },
+
+                onOpen: function(e){
+                    msg = app.type + "-Hello";
+                    app.write(app.display.status, "connected");
+                    app.write(app.display.status, "Sending: " + msg);
+                    app.ws.send(msg);
+                },
+
+                onMessage: function(e){
+                    app.write(app.display.output, "Server said: " + e.data);
+                    app.ws.close();
+                },
+
+                onClose: function(e){
+                    app.write(app.display.status, "closed");
+                },
+
+                write: function(target, text){
+                    child = document.createElement("p");
+                    child.innerHTML = text;
+                    document.getElementById(target).appendChild(child);
+                }
+            };
+        </script>
+    </head>
+    <body>
+        <a href="#" onclick="app.testSocket('unsecure');return false;">Test Unsecure</a>
+        <a href="#" onclick="app.testSocket('secure');return false;">Test Secure</a>
+        <a href="#" onclick="app.testSocket('reencrypt');return false;">Test Reencrypt</a>
+        <h2>WebSocket Test</h2>
+        <div id="status">
+            <h4>Status</h4>
+        </div>
+        <div id="output">
+            <h4>Responses</h4>
+        </div>
+    </body>
+</html>

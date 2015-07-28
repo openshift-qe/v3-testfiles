@@ -5,13 +5,13 @@
         "name": "route-passthrough"
     },
     "spec": {
-        "host": "my-tls-server",
+        "host": "www.example.com",
         "to": {
             "kind": "Service",
-            "name": "tls-service"
+            "name": "hello-ws-secure"
         },
         "tls": {
-        "termination": "passthrough"
+        "termination": "passthrough",
      }
     }
 }
