@@ -66,5 +66,5 @@ openshift-114.lab.sjc.redhat.com
 
 # host group for nodes
 [nodes]
-openshift-114.lab.sjc.redhat.com openshift_public_hostname="openshift-114.lab.sjc.redhat.com,10.14.6.114" openshift_scheduleable=False
-openshift-121.lab.sjc.redhat.com openshift_public_hostname="openshift-121.lab.sjc.redhat.com,10.14.6.121" openshift_node_labels="{'region': 'primary', 'zone': 'default'}"
+openshift-114.lab.sjc.redhat.com openshift_hostname="openshift-114.lab.sjc.redhat.com" openshift_public_hostname="10.14.6.114" openshift_scheduleable=False
+openshift-121.lab.sjc.redhat.com openshift_hostname="openshift-121.lab.sjc.redhat.com" openshift_public_hostname="10.14.6.121" openshift_node_labels="{'region': 'primary', 'zone': 'default'}"
