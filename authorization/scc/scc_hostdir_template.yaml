@@ -6,6 +6,6 @@ seLinuxContext:
 apiVersion: v1
 kind: SecurityContextConstraints
 metadata:
-  name: scc-hostdir-#USER#
-users:
-- #USER#
+  name: scc-hostdir-#NS#
+groups:
+- system:serviceaccounts:#NS#

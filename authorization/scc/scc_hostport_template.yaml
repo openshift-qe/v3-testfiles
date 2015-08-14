@@ -3,10 +3,10 @@ allowHostPorts: true
 apiVersion: v1
 kind: SecurityContextConstraints
 metadata:
-  name: hostport
+  name: hostport-#NS#
 runAsUser:
   type: RunAsAny
 seLinuxContext:
   type: RunAsAny
-users:
-- system:serviceaccount:default:router
+groups:
+- system:serviceaccounts:#NS#
