@@ -1,0 +1,11 @@
+allowHostDirVolumePlugin: true
+runAsUser:
+  type: RunAsAny
+seLinuxContext:
+  type: RunAsAny
+apiVersion: v1
+kind: SecurityContextConstraints
+metadata:
+  name: scc-hostdir-#USER#
+users:
+- #USER#
