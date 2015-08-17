@@ -8,10 +8,10 @@
     "capacity": {
         "storage": "5Gi"
     },
-    "accessModes": [ "ReadWriteMany" ],
+    "accessModes": [ "ReadWriteOnce" ],
     "nfs": {
-        "path": "/opt/osev3-auto-pv",
-        "server": "10.14.6.120"
+        "path": "/nfsshare",
+        "server": "10.66.79.155"
     },
     "persistentVolumeReclaimPolicy": "Recycle"
   }
