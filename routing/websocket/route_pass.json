@@ -11,7 +11,7 @@
             "name": "hello-ws-secure"
         },
         "tls": {
-        "termination": "passthrough",
+        "termination": "passthrough"
      }
     }
 }

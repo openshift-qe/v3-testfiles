@@ -10,7 +10,7 @@
                         "name": "https",
                         "protocol": "TCP",
                         "port": 27443,
-        "targetPort": 9443
+                        "targetPort": 9443
                 }
         ],
         "selector": {
