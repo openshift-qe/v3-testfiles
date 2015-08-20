@@ -1,0 +1,14 @@
+{
+    "kind": "Route",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "route"
+    },
+    "spec": {
+        "to": {
+            "kind": "Service",
+            "name": "hello-nginx"
+        }
+    }
+}
+

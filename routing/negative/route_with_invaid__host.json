@@ -1,0 +1,15 @@
+{
+    "kind": "Route",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "route"
+    },
+    "spec": {
+        "host": "www.testzy%$#.com",
+        "to": {
+            "kind": "Service",
+            "name": "hello-nginx"
+        }
+    }
+}
+
