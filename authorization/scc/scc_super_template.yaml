@@ -10,6 +10,6 @@ seLinuxContext:
 apiVersion: v1
 kind: SecurityContextConstraints
 metadata:
-  name: super-#NS#
+  name: super-#ACCOUNT#
 groups:
-- system:serviceaccounts:#NS#
+- system:serviceaccounts:#ACCOUNT#
