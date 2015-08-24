@@ -10,7 +10,7 @@ fi
 master=$1
 user=$2
 password=$3
-ca_dir=/home/hjw
+ca_dir=$HOME
 sshopts="-o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
 
 echo 'Creating user'
