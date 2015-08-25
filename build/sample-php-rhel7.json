@@ -360,7 +360,7 @@
           "spec": {
             "containers": [
               {
-                "name": "php-helloworld-database",
+               "name": "php-helloworld-database",
                 "image": "$registry/mysql-55-rhel7:latest",
                 "ports": [
                   {
