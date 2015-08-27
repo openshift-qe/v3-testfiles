@@ -5,7 +5,7 @@
         "name": "nfsc"
     },
     "spec": {
-        "accessModes": [ "ReadWriteOnce" ],
+        "accessModes": [ "ReadWriteMany" ],
         "volumeName": "nfs",
         "resources": {
             "requests": {
