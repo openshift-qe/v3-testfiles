@@ -1,0 +1,29 @@
+{
+  "kind": "ImageStreamList",
+  "apiVersion": "v1beta3",
+  "metadata": {},
+  "items": [
+    {
+      "kind": "ImageStream",
+      "apiVersion": "v1beta3",
+      "metadata": {
+        "name": "busybox",
+        "creationTimestamp": null
+      },
+      "spec": {
+        "dockerImageRepository": "jhou/busybox",
+        "tags": [
+          {
+            "name": "latest",
+            "annotations": {
+              "description": "jhou tests"
+            }
+          }
+        ]
+      },
+      "status": {
+        "dockerImageRepository": ""
+      }
+    }
+  ]
+}
