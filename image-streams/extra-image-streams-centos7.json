@@ -32,7 +32,7 @@
           }
         ]
       }
-    },
+    }, 
     {
       "kind": "ImageStream",
       "apiVersion": "v1",
