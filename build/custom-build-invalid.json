@@ -4,7 +4,7 @@
     "metadata": {
         "name": "ruby-sample-build",
         "namespace": "custom",
-        "selfLink": "/osapi/v1beta3/namespaces/custom/buildconfigs/ruby-sample-build",
+        "selfLink": "/osapi/v1/namespaces/custom/buildconfigs/ruby-sample-build",
         "uid": "c5144b64-130b-11e5-b1ed-fa163e0c4b6f",
         "resourceVersion": "1767",
         "creationTimestamp": "2015-06-15T03:08:17Z",
