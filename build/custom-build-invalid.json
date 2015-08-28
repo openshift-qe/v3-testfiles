@@ -1,0 +1,71 @@
+{
+    "kind": "BuildConfig",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "ruby-sample-build",
+        "namespace": "custom",
+        "selfLink": "/osapi/v1/namespaces/custom/buildconfigs/ruby-sample-build",
+        "uid": "c5144b64-130b-11e5-b1ed-fa163e0c4b6f",
+        "resourceVersion": "1767",
+        "creationTimestamp": "2015-06-15T03:08:17Z",
+        "labels": {
+            "name": "ruby-sample-build",
+            "template": "application-template-custombuild"
+        }
+    },
+    "spec": {
+        "triggers": [
+            {
+                "type": "GitHub",
+                "github": {
+                    "secret": "secret101"
+                }
+            },
+            {
+                "type": "Generic",
+                "generic": {
+                    "secret": "secret101"
+                }
+            },
+            {
+                "type": "ImageChange",
+                "imageChange": {
+                    "lastTriggeredImageID": "openshift/origin-custom-docker-builder:latest"
+                }
+            }
+        ],
+        "source": {
+            "type": "Git",
+            "git": {
+                "uri": "git://github.com/openshift/ruby-hello-world.git"
+            }
+        },
+        "strategy": {
+            "type": "abc",
+            "customStrategy": {
+                "from": {
+                    "kind": "ImageStreamTag",
+                    "name": "origin-custom-docker-builder:latest"
+                },
+
+                "env": [
+                    {
+                        "name": "OPENSHIFT_CUSTOM_BUILD_BASE_IMAGE",
+                        "value": "openshift/origin-custom-docker-builder"
+                    }
+                ],
+                "exposeDockerSocket": true
+            }
+        },
+        "output": {
+            "to": {
+                "kind": "ImageStreamTag",
+                "name": "origin-ruby-sample:latest"
+            }
+        },
+        "resources": {}
+    },
+    "status": {
+        "lastVersion": 1
+    }
+}
