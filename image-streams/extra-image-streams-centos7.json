@@ -1,11 +1,11 @@
 {
   "kind": "ImageStreamList",
-  "apiVersion": "v1",
+  "apiVersion": "v1beta3",
   "metadata": {},
   "items": [
     {
       "kind": "ImageStream",
-      "apiVersion": "v1",
+      "apiVersion": "v1beta3",
       "metadata": {
         "name": "ruby",
         "creationTimestamp": null
@@ -32,10 +32,10 @@
           }
         ]
       }
-    }, 
+    },
     {
       "kind": "ImageStream",
-      "apiVersion": "v1",
+      "apiVersion": "v1beta3",
       "metadata": {
         "name": "perl",
         "creationTimestamp": null
@@ -65,7 +65,7 @@
     },
     {
       "kind": "ImageStream",
-      "apiVersion": "v1",
+      "apiVersion": "v1beta3",
       "metadata": {
         "name": "php",
         "creationTimestamp": null
@@ -95,7 +95,7 @@
     },
     {
       "kind": "ImageStream",
-      "apiVersion": "v1",
+      "apiVersion": "v1beta3",
       "metadata": {
         "name": "python",
         "creationTimestamp": null
@@ -125,7 +125,7 @@
     },
     {
       "kind": "ImageStream",
-      "apiVersion": "v1",
+      "apiVersion": "v1beta3",
       "metadata": {
         "name": "mysql",
         "creationTimestamp": null
@@ -145,4 +145,6 @@
           }
         ]
       }
+    }
+  ]
 }
