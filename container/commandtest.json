@@ -8,7 +8,7 @@
     "containers": [
       {
         "name": "test-container",
-        "image": "openshift/hello-openshift",
+        "image": "gcr.io/google_containers/busybox",
         "command": [
           "/bin/sh",
           "-c",

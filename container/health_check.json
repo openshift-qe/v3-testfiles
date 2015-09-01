@@ -1,0 +1,34 @@
+{
+    "id": "hello-openshift4",
+    "kind": "Pod",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "hello-openshift",
+        "labels": {
+            "name": "hello-openshift"
+        }
+    },
+    "spec": {
+        "containers": [
+            {
+                "name": "hello-openshift",
+                "image": "zzhao/hello-openshift",
+                "ports": [
+                    {
+                        "hostPort": 6064,
+                        "containerPort": 8080
+                    }
+                ],
+                "livenessProbe": {
+                    "enable": true,
+                    "type": "http",
+                    "initialDelaySeconds": 10,
+                    "httpGet": {
+                        "path": "/nonexist",
+                        "port": 8080
+                    }
+                }
+            }
+        ]
+    }
+}
