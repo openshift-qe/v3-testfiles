@@ -71,7 +71,7 @@
             "containers": [
               {
                 "name": "mysql",
-                "image": "$registry/mysql-55-rhel7",
+                "image": "openshift/mysql-56-centos7",
                 "ports": [
                   {
                     "containerPort": 3306,
@@ -94,6 +94,26 @@
                   {
                     "name": "MYSQL_ROOT_PASSWORD",
                     "value": "${MYSQL_ROOT_PASSWORD}"
+                  },
+                  {
+                     "name": "MYSQL_LOWER_CASE_TABLE_NAMES",
+                     "value": "1"
+                  },
+                  {
+                     "name": "MYSQL_MAX_CONNECTIONS",
+                     "value": "100"
+                  },
+                  {
+                      "name": "MYSQL_FT_MIN_WORD_LEN",
+                      "value": "5"
+                  },
+                  {
+                      "name": "MYSQL_FT_MAX_WORD_LEN",
+                      "value": "15"
+                  },
+                  {
+                      "name": "MYSQL_AIO",
+                      "value": "1"
                   }
                 ],
                 "resources": {},
@@ -132,7 +152,7 @@
     {
       "name": "DATABASE_SERVICE_NAME",
       "description": "Database service name",
-      "value": "mysql-55"
+      "value": "mysql-56"
     },
     {
       "name": "MYSQL_USER",

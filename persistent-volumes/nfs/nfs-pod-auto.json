@@ -2,25 +2,29 @@
     "apiVersion": "v1",
     "kind": "Pod",
     "metadata": {
-        "name": "gluster",
+        "name": "nfs",
         "labels": {
-            "name": "gluster"
+            "name": "frontendhttp"
         }
     },
     "spec": {
         "containers": [{
-            "name": "gluster",
+            "name": "myfrontend",
             "image": "jhou/hello-openshift",
             "imagePullPolicy": "IfNotPresent",
+            "ports": [{
+                "containerPort": 80,
+                "name": "http-server"
+            }],
             "volumeMounts": [{
-                "mountPath": "/mnt/gluster",
-                "name": "gluster"
+                "mountPath": "/",
+                "name": "nfs"
             }]
         }],
         "volumes": [{
-            "name": "gluster",
+            "name": "nfs",
             "persistentVolumeClaim": {
-                "claimName": "glusterc"
+                "claimName": "nfsc"
             }
         }]
     }

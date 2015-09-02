@@ -2,7 +2,7 @@
   "kind": "Template",
   "apiVersion": "v1",
   "metadata": {
-    "name": "mysql",
+    "name": "mysql-ephemeral",
     "creationTimestamp": null,
     "annotations": {
       "description": "MySQL database service, without persistent storage. WARNING: Any data stored will be lost upon pod destruction. Only use this template for testing",
@@ -53,6 +53,21 @@
         },
         "triggers": [
           {
+            "type": "ImageChange",
+            "imageChangeParams": {
+              "automatic": true,
+              "containerNames": [
+                "mysql"
+              ],
+              "from": {
+                "kind": "ImageStreamTag",
+                "name": "mysql:latest",
+                "namespace": "openshift"
+              },
+              "lastTriggeredImage": ""
+            }
+          },
+          {
             "type": "ConfigChange"
           }
         ],
@@ -71,7 +86,7 @@
             "containers": [
               {
                 "name": "mysql",
-                "image": "$registry/mysql-55-rhel7",
+                "image": "mysql",
                 "ports": [
                   {
                     "containerPort": 3306,
@@ -92,8 +107,24 @@
                     "value": "${MYSQL_DATABASE}"
                   },
                   {
-                    "name": "MYSQL_ROOT_PASSWORD",
-                    "value": "${MYSQL_ROOT_PASSWORD}"
+                     "name": "MYSQL_LOWER_CASE_TABLE_NAMES",
+                     "value": "1"
+                  },
+                  {
+                     "name": "MYSQL_MAX_CONNECTIONS",
+                     "value": "100"
+                  },
+                  {
+                      "name": "MYSQL_FT_MIN_WORD_LEN",
+                      "value": "5"
+                  },
+                  {
+                      "name": "MYSQL_FT_MAX_WORD_LEN",
+                      "value": "15"
+                  },
+                  {
+                      "name": "MYSQL_AIO",
+                      "value": "1"
                   }
                 ],
                 "resources": {},
@@ -132,30 +163,28 @@
     {
       "name": "DATABASE_SERVICE_NAME",
       "description": "Database service name",
-      "value": "mysql-55"
+      "value": "mysql",
+      "required": true
     },
     {
       "name": "MYSQL_USER",
       "description": "Username for MySQL user that will be used for accessing the database",
       "generate": "expression",
-      "from": "user[A-Z0-9]{3}"
+      "from": "user[A-Z0-9]{3}",
+      "required": true
     },
     {
       "name": "MYSQL_PASSWORD",
       "description": "Password for the MySQL user",
       "generate": "expression",
-      "from": "[a-zA-Z0-9]{16}"
+      "from": "[a-zA-Z0-9]{16}",
+      "required": true
     },
     {
       "name": "MYSQL_DATABASE",
       "description": "Database name",
-      "value": "sampledb"
-    },
-    {
-      "name": "MYSQL_ROOT_PASSWORD",
-      "description": "The password for the MySQL adminitrator",
-      "generate": "expression",
-      "from": "[a-zA-Z0-9]{12}"
+      "value": "sampledb",
+      "required": true
     }
   ],
   "labels": {

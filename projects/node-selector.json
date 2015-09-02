@@ -5,12 +5,12 @@
   "metadata": {
     "annotations": {
       "description": "This is a test project of jhou",
-      "openshift.io/node-selector": "region=infra"
+      "openshift.io/node-selector": "env=qa"
     },
     "labels": {
       "name": "jhou"
     },
-    "name": "jhouns"
+    "name": "jhou1"
   }
 }
 
