@@ -66,7 +66,7 @@
         "name": "origin-ruby-sample",
         "creationTimestamp": null
       },
-      "spec": {"dockerImageRepository": "docker.io/chunyunchen/ruby-sample-docker"},
+      "spec": {"dockerImageRepository": "docker.io/aosqe/ruby-sample-docker"},
       "status": {
         "dockerImageRepository": ""
       }
