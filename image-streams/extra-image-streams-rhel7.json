@@ -11,7 +11,7 @@
         "creationTimestamp": null
       },
       "spec": {
-        "dockerImageRepository": "$registry/ruby-20-rhel7",
+        "dockerImageRepository": "$registry/ruby-22-rhel7",
         "tags": [
           {
             "name": "latest"
@@ -146,3 +146,5 @@
         ]
       }
     }
+  ]
+}
