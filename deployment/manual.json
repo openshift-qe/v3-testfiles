@@ -45,6 +45,7 @@
             },
             "resources": {}
         },
+        "triggers": [],
         "replicas": 1,
         "selector": {
             "name": "mysql"
