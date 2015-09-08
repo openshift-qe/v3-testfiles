@@ -68,7 +68,7 @@
         "name": "python-sample-sti",
         "creationTimestamp": null
       },
-      "spec": {"dockerImageRepository": "aosqe/python-sample-sti"},
+      "spec": {"dockerImageRepository": "docker.io/chunyunchen/python-sample-sti"},
       "status": {
         "dockerImageRepository": ""
       }
