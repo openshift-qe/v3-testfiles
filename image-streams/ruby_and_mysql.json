@@ -1,0 +1,60 @@
+{
+  "kind": "ImageStreamList",
+  "apiVersion": "v1",
+  "metadata": {},
+  "items": [
+    {
+      "kind": "ImageStream",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "ruby",
+        "creationTimestamp": null
+      },
+      "spec": {
+        "dockerImageRepository": "openshift/ruby-20-centos7",
+        "tags": [
+          {
+            "name": "latest"
+          },
+          {
+            "name": "2.0",
+            "annotations": {
+              "description": "Build and run Ruby 2.0 applications",
+              "iconClass": "icon-ruby",
+              "tags": "builder,ruby",
+              "supports": "ruby:2.0,ruby",
+              "version": "2.0"
+            },
+            "from": {
+              "Kind": "ImageStreamTag",
+              "Name": "latest"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "ImageStream",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "mysql",
+        "creationTimestamp": null
+      },
+      "spec": {
+        "dockerImageRepository": "openshift/mysql-55-centos7",
+        "tags": [
+          {
+            "name": "latest"
+          },
+          {
+            "name": "5.5",
+            "from": {
+              "Kind": "ImageStreamTag",
+              "Name": "latest"
+            }
+          }
+        ]
+      }
+    },
+  ]
+}
