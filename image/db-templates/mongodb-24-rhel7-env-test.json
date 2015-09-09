@@ -90,7 +90,7 @@
                                 "value": "false"
                             }
                         ],
-                        "image": "$registry/mongodb-24-rhel7",
+                        "image": "registry.access.redhat.com/openshift3/mongodb-24-rhel7",
                         "imagePullPolicy": "IfNotPresent",
                         "name": "mongodb-helloworld-database",
                         "ports": [
