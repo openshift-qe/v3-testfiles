@@ -15,8 +15,7 @@
         "image": "bmeng/hello-openshift",
         "ports": [
           {
-            "containerPort": 8080,
-            "hostPort": 6061
+            "containerPort": 8080
           }
         ]
       }]
