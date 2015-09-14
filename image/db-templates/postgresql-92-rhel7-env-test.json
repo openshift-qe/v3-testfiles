@@ -82,7 +82,7 @@
                                 "value": "42"
                             }
                         ],
-                        "image": "$registry/postgresql-92-rhel7",
+                        "image": "registry.access.redhat.com/openshift3/postgresql-92-rhel7",
                         "imagePullPolicy": "IfNotPresent",
                         "name": "postgresql-helloworld-database",
                         "ports": [
