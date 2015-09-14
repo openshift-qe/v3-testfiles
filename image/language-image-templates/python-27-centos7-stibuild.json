@@ -2,12 +2,12 @@
   "kind": "Template",
   "apiVersion": "v1",
   "metadata": {
-    "name": "php-helloworld-sample",
+    "name": "python-helloworld-sample",
     "creationTimestamp": null,
     "annotations": {
-      "description": "This example shows how to create a simple php application in openshift origin v3",
-      "iconClass": "icon-php",
-      "tags": "instant-app,php,mysql"
+      "description": "This example shows how to create a simple python application in openshift origin v3",
+      "iconClass": "icon-python",
+      "tags": "instant-app,python,mysql"
     }
   },
   "objects": [
@@ -65,7 +65,7 @@
       "kind": "ImageStream",
       "apiVersion": "v1",
       "metadata": {
-        "name": "origin-php-sample",
+        "name": "origin-python-sample",
         "creationTimestamp": null
       },
       "spec": {},
@@ -77,11 +77,11 @@
       "kind": "ImageStream",
       "apiVersion": "v1",
       "metadata": {
-        "name": "php-55-rhel7",
+        "name": "python-27-centos7",
         "creationTimestamp": null
       },
       "spec": {
-        "dockerImageRepository": "registry.access.redhat.com/openshift3/php-55/rhel7"
+        "dockerImageRepository": "openshift/python-27-centos7"
       },
       "status": {
         "dockerImageRepository": ""
@@ -91,10 +91,10 @@
       "kind": "BuildConfig",
       "apiVersion": "v1",
       "metadata": {
-        "name": "php-sample-build",
+        "name": "python-sample-build",
         "creationTimestamp": null,
         "labels": {
-          "name": "php-sample-build"
+          "name": "python-sample-build"
         }
       },
       "spec": {
@@ -114,15 +114,12 @@
           {
             "type": "ImageChange",
             "imageChange": {}
-          },
-          {
-            "type": "ConfigChange"
           }
         ],
         "source": {
           "type": "Git",
           "git": {
-            "uri": "https://github.com/wzheng1/php-example-app"
+            "uri": "https://github.com/openshift/django-ex.git"
           }
         },
         "strategy": {
@@ -130,56 +127,14 @@
           "sourceStrategy": {
             "from": {
               "kind": "ImageStreamTag",
-              "name": "php-55-rhel7:latest"
-            },
-          "env": [
-             { 
-              "name": "ERROR_REPORTING",
-              "value": "E_ALL & ~E_NOTICE"
-             },
-             {
-              "name": "DISPLAY_ERRORS",
-              "value": "ON"
-             },
-             {
-              "name": "DISPLAY_STARTUP_ERRORS",
-              "value": "OFF"
-             },
-             {
-              "name": "TRACK_ERRORS",
-              "value": "OFF"
-             },
-            {
-              "name": "HTML_ERRORS",
-              "value": "ON"
-             },
-            {
-              "name": "INCLUDE_PATH",
-              "value": "/opt/app-root/src"
-             },          
-            {
-              "name": "SESSION_PATH",
-              "value": "/tmp/sessions"
-             },
-            {
-              "name": "OPCACHE_MEMORY_CONSUMPTION",
-              "value": "16M"
-             },
-            {
-              "name": "PHPRC",
-              "value": "/opt/rh/php55/root/etc/"
-             },
-            {
-              "name": "PHP_INI_SCAN_DIR",
-              "value": "/opt/rh/php55/root/etc/"
-             }
-           ]
+              "name": "python-27-centos7:latest"
+            }
           }
         },
         "output": {
           "to": {
             "kind": "ImageStreamTag",
-            "name": "origin-php-sample:latest"
+            "name": "origin-python-sample:latest"
           }
         },
         "resources": {}
@@ -214,7 +169,7 @@
                     "value": "custom_value1"
                   }
                 ],
-                "containerName": "php-helloworld"
+                "containerName": "python-helloworld"
               }
             },
             "post": {
@@ -229,7 +184,7 @@
                     "value": "custom_value2"
                   }
                 ],
-                "containerName": "php-helloworld"
+                "containerName": "python-helloworld"
               }
             }
           },
@@ -241,11 +196,11 @@
             "imageChangeParams": {
               "automatic": true,
               "containerNames": [
-                "php-helloworld"
+                "python-helloworld"
               ],
               "from": {
                 "kind": "ImageStreamTag",
-                "name": "origin-php-sample:latest"
+                "name": "origin-python-sample:latest"
               }
             }
           },
@@ -267,8 +222,8 @@
           "spec": {
             "containers": [
               {
-                "name": "php-helloworld",
-                "image": "origin-php-sample",
+                "name": "python-helloworld",
+                "image": "origin-python-sample",
                 "ports": [
                   {
                     "containerPort": 8080,
@@ -364,7 +319,7 @@
                     "value": "custom_value1"
                   }
                 ],
-                "containerName": "php-helloworld-database"
+                "containerName": "python-helloworld-database"
               }
             },
             "post": {
@@ -379,7 +334,7 @@
                     "value": "custom_value2"
                   }
                 ],
-                "containerName": "php-helloworld-database"
+                "containerName": "python-helloworld-database"
               }
             }
           },
@@ -404,7 +359,7 @@
           "spec": {
             "containers": [
               {
-                "name": "php-helloworld-database",
+                "name": "python-helloworld-database",
                 "image": "openshift/mysql-55-centos7:latest",
                 "ports": [
                   {
@@ -460,21 +415,18 @@
       "name": "MYSQL_USER",
       "description": "database username",
       "generate": "expression",
-      "from": "user[A-Z0-9]{3}",
-      "required": true
+      "from": "user[A-Z0-9]{3}"
     },
     {
       "name": "MYSQL_PASSWORD",
       "description": "database password",
       "generate": "expression",
-      "from": "[a-zA-Z0-9]{8}",
-      "required": true
+      "from": "[a-zA-Z0-9]{8}"
     },
     {
       "name": "MYSQL_DATABASE",
       "description": "database name",
-      "value": "root",
-      "required": true
+      "value": "root"
     }
   ],
   "labels": {

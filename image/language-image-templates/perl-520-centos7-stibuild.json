@@ -2,12 +2,12 @@
   "kind": "Template",
   "apiVersion": "v1",
   "metadata": {
-    "name": "php-helloworld-sample",
+    "name": "perl-sample",
     "creationTimestamp": null,
     "annotations": {
-      "description": "This example shows how to create a simple php application in openshift origin v3",
-      "iconClass": "icon-php",
-      "tags": "instant-app,php,mysql"
+      "description": "This example shows how to create a simple ruby application in openshift origin v3",
+      "iconClass": "icon-ruby",
+      "tags": "instant-app,ruby,mysql"
     }
   },
   "objects": [
@@ -65,7 +65,7 @@
       "kind": "ImageStream",
       "apiVersion": "v1",
       "metadata": {
-        "name": "origin-php-sample",
+        "name": "origin-ruby-sample",
         "creationTimestamp": null
       },
       "spec": {},
@@ -77,11 +77,11 @@
       "kind": "ImageStream",
       "apiVersion": "v1",
       "metadata": {
-        "name": "php-55-rhel7",
+        "name": "perl-520-centos7",
         "creationTimestamp": null
       },
       "spec": {
-        "dockerImageRepository": "registry.access.redhat.com/openshift3/php-55/rhel7"
+        "dockerImageRepository": "openshift/perl-520-centos7"
       },
       "status": {
         "dockerImageRepository": ""
@@ -91,10 +91,10 @@
       "kind": "BuildConfig",
       "apiVersion": "v1",
       "metadata": {
-        "name": "php-sample-build",
+        "name": "perl-sample-build",
         "creationTimestamp": null,
         "labels": {
-          "name": "php-sample-build"
+          "name": "perl-sample-build"
         }
       },
       "spec": {
@@ -122,64 +122,34 @@
         "source": {
           "type": "Git",
           "git": {
-            "uri": "https://github.com/wzheng1/php-example-app"
-          }
+            "uri": "https://github.com/openshift/sti-perl.git"
+          },
+          "contextDir": "5.20/test/sample-test-app",
+          "type": "Git"
         },
         "strategy": {
           "type": "Source",
           "sourceStrategy": {
             "from": {
               "kind": "ImageStreamTag",
-              "name": "php-55-rhel7:latest"
+              "name": "perl-520-centos7:latest"
             },
-          "env": [
-             { 
-              "name": "ERROR_REPORTING",
-              "value": "E_ALL & ~E_NOTICE"
-             },
-             {
-              "name": "DISPLAY_ERRORS",
-              "value": "ON"
-             },
-             {
-              "name": "DISPLAY_STARTUP_ERRORS",
-              "value": "OFF"
-             },
-             {
-              "name": "TRACK_ERRORS",
-              "value": "OFF"
-             },
-            {
-              "name": "HTML_ERRORS",
-              "value": "ON"
-             },
-            {
-              "name": "INCLUDE_PATH",
-              "value": "/opt/app-root/src"
-             },          
-            {
-              "name": "SESSION_PATH",
-              "value": "/tmp/sessions"
-             },
-            {
-              "name": "OPCACHE_MEMORY_CONSUMPTION",
-              "value": "16M"
-             },
-            {
-              "name": "PHPRC",
-              "value": "/opt/rh/php55/root/etc/"
-             },
-            {
-              "name": "PHP_INI_SCAN_DIR",
-              "value": "/opt/rh/php55/root/etc/"
-             }
-           ]
+         "env": [
+             {   
+              "name": "ENABLE_CPAN_TEST",
+              "value": "on"
+             },  
+             {   
+              "name": "CPAN_MIRROR",
+              "value": ""
+             }  
+            ]
           }
         },
         "output": {
           "to": {
             "kind": "ImageStreamTag",
-            "name": "origin-php-sample:latest"
+            "name": "origin-ruby-sample:latest"
           }
         },
         "resources": {}
@@ -214,7 +184,7 @@
                     "value": "custom_value1"
                   }
                 ],
-                "containerName": "php-helloworld"
+                "containerName": "ruby-helloworld"
               }
             },
             "post": {
@@ -229,7 +199,7 @@
                     "value": "custom_value2"
                   }
                 ],
-                "containerName": "php-helloworld"
+                "containerName": "ruby-helloworld"
               }
             }
           },
@@ -241,11 +211,11 @@
             "imageChangeParams": {
               "automatic": true,
               "containerNames": [
-                "php-helloworld"
+                "ruby-helloworld"
               ],
               "from": {
                 "kind": "ImageStreamTag",
-                "name": "origin-php-sample:latest"
+                "name": "origin-ruby-sample:latest"
               }
             }
           },
@@ -267,8 +237,8 @@
           "spec": {
             "containers": [
               {
-                "name": "php-helloworld",
-                "image": "origin-php-sample",
+                "name": "ruby-helloworld",
+                "image": "origin-ruby-sample",
                 "ports": [
                   {
                     "containerPort": 8080,
@@ -364,7 +334,7 @@
                     "value": "custom_value1"
                   }
                 ],
-                "containerName": "php-helloworld-database"
+                "containerName": "ruby-helloworld-database"
               }
             },
             "post": {
@@ -379,7 +349,7 @@
                     "value": "custom_value2"
                   }
                 ],
-                "containerName": "php-helloworld-database"
+                "containerName": "ruby-helloworld-database"
               }
             }
           },
@@ -404,7 +374,7 @@
           "spec": {
             "containers": [
               {
-                "name": "php-helloworld-database",
+                "name": "ruby-helloworld-database",
                 "image": "openshift/mysql-55-centos7:latest",
                 "ports": [
                   {

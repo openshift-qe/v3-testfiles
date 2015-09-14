@@ -11,7 +11,7 @@
         "creationTimestamp": null
       },
       "spec": {
-        "dockerImageRepository": "$registry/ruby-22-rhel7",
+        "dockerImageRepository": "registry.access.redhat.com/openshift3/ruby-22-rhel7",
         "tags": [
           {
             "name": "latest"
@@ -41,7 +41,7 @@
         "creationTimestamp": null
       },
       "spec": {
-        "dockerImageRepository": "$registry/perl-520-rhel7",
+        "dockerImageRepository": "registry.access.redhat.com/openshift3/perl-520-rhel7",
         "tags": [
           {
             "name": "latest"
@@ -71,7 +71,7 @@
         "creationTimestamp": null
       },
       "spec": {
-        "dockerImageRepository": "$registry/php-56-rhel7",
+        "dockerImageRepository": "registry.access.redhat.com/openshift3/php-56-rhel7",
         "tags": [
           {
             "name": "latest"
@@ -101,7 +101,7 @@
         "creationTimestamp": null
       },
       "spec": {
-        "dockerImageRepository": "$registry/python-34-rhel7",
+        "dockerImageRepository": "registry.access.redhat.com/openshift3/python-34-rhel7",
         "tags": [
           {
             "name": "latest"
@@ -131,7 +131,7 @@
         "creationTimestamp": null
       },
       "spec": {
-        "dockerImageRepository": "$registry/mysql-56-rhel7",
+        "dockerImageRepository": "registry.access.redhat.com/openshift3/mysql-56-rhel7",
         "tags": [
           {
             "name": "latest"
