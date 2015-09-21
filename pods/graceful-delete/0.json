@@ -42,6 +42,7 @@
     ],
     "restartPolicy": "Always",
     "dnsPolicy": "ClusterFirst",
+    "terminationGracePeriodSeconds": 0,
     "serviceAccount": ""
   },
   "status": {}
