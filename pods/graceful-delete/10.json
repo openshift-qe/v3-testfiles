@@ -2,7 +2,7 @@
   "kind": "Pod",
   "apiVersion": "v1",
   "metadata": {
-    "name": "grace20",
+    "name": "grace10",
     "creationTimestamp": null,
     "labels": {
       "name": "graceful"
