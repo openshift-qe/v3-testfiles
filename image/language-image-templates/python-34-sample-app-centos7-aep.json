@@ -61,7 +61,7 @@
                 "containers": [
                     {
                         "name": "python-sample-app",
-                        "image": "virt-openshift-08.lab.eng.nay.redhat.com:5000/builtimages/python-34-sample-app-centos7:latest",
+                        "image": "$registry/builtimages/python-34-sample-app-centos7:latest",
                         "ports": [
                             {
                                 "containerPort": 3306,

@@ -61,7 +61,7 @@
                 "containers": [
                     {
                         "name": "ruby-sample-app",
-                        "image": "virt-openshift-08.lab.eng.nay.redhat.com:5000/builtimages/ruby-22-sample-app-centos7:latest",
+                        "image": "$registry/builtimages/ruby-22-sample-app-centos7:latest",
                         "ports": [
                             {
                                 "containerPort": 3306,

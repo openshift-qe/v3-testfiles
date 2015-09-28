@@ -61,7 +61,7 @@
                 "containers": [
                     {
                         "name": "perl-sample-app",
-                        "image": "virt-openshift-08.lab.eng.nay.redhat.com:5000/builtimages/perl-520-sample-app-centos7:latest",
+                        "image": "$registry/builtimages/perl-520-sample-app-centos7:latest",
                         "ports": [
                             {
                                 "containerPort": 3306,
