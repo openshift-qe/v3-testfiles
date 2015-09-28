@@ -37,6 +37,52 @@
       "kind": "ImageStream",
       "apiVersion": "v1",
       "metadata": {
+        "name": "postgresql",
+        "creationTimestamp": null
+      },
+      "spec": {
+        "dockerImageRepository": "registry.access.redhat.com/rhscl/postgresql-94-rhel7",
+        "tags": [
+          {
+            "name": "latest"
+          },
+          {
+            "name": "9.4",
+            "from": {
+              "Kind": "ImageStreamTag",
+              "Name": "latest"
+            }
+          }
+        ]
+      }
+    },
+      {
+      "kind": "ImageStream",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "mongodb",
+        "creationTimestamp": null
+      },
+      "spec": {
+        "dockerImageRepository": "registry.access.redhat.com/rhscl/mongodb-26-rhel7",
+        "tags": [
+          {
+            "name": "latest"
+          },
+          {
+            "name": "2.6",
+            "from": {
+              "Kind": "ImageStreamTag",
+              "Name": "latest"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "ImageStream",
+      "apiVersion": "v1",
+      "metadata": {
         "name": "perl",
         "creationTimestamp": null
       },
