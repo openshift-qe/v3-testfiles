@@ -1,0 +1,88 @@
+{
+    "kind": "DeploymentConfig",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "perl",
+        "creationTimestamp": null,
+        "labels": {
+            "name": "perl"
+        }
+    },
+    "spec": {
+        "strategy": {
+            "type": "Recreate",
+            "recreateParams": {
+                "pre": {
+                    "failurePolicy": "Retry",
+                    "execNewPod": {
+                        "command": [
+                            "/bin/true"
+                        ],
+                        "env": [
+                        ],
+                        "containerName": "perl-sample-app"
+                    }
+                },
+                "post": {
+                    "failurePolicy": "Ignore",
+                    "execNewPod": {
+                        "command": [
+                            "/bin/false"
+                        ],
+                        "env": [
+                            {
+                                "name": "VAR",
+                                "value": "post-deployment"
+                            }
+                        ],
+                        "containerName": "perl-sample-app"
+                    }
+                }
+            },
+            "resources": {}
+        },
+        "triggers": [
+            {
+                "type": "ConfigChange"
+            }
+        ],
+        "replicas": 1,
+        "selector": {
+            "name": "perl"
+        },
+        "template": {
+            "metadata": {
+                "creationTimestamp": null,
+                "labels": {
+                    "name": "perl"
+                }
+            },
+            "spec": {
+                "containers": [
+                    {
+                        "name": "perl-sample-app",
+                        "image": "virt-openshift-08.lab.eng.nay.redhat.com:5000/builtimages/perl-520-sample-app-centos7:latest",
+                        "ports": [
+                            {
+                                "containerPort": 3306,
+                                "protocol": "TCP"
+                            }
+                        ],
+                        "env": [
+                        ],
+                        "resources": {},
+                        "terminationMessagePath": "/dev/termination-log",
+                        "imagePullPolicy": "IfNotPresent",
+                        "securityContext": {
+                            "capabilities": {},
+                            "privileged": false
+                        }
+                    }
+                ],
+                "restartPolicy": "Always",
+                "dnsPolicy": "ClusterFirst"
+            }
+        }
+    },
+    "status": {}
+}
