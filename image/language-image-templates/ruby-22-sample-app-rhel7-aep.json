@@ -1,0 +1,88 @@
+{
+    "kind": "DeploymentConfig",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "ruby",
+        "creationTimestamp": null,
+        "labels": {
+            "name": "ruby"
+        }
+    },
+    "spec": {
+        "strategy": {
+            "type": "Recreate",
+            "recreateParams": {
+                "pre": {
+                    "failurePolicy": "Retry",
+                    "execNewPod": {
+                        "command": [
+                            "/bin/true"
+                        ],
+                        "env": [
+                        ],
+                        "containerName": "ruby-sample-app"
+                    }
+                },
+                "post": {
+                    "failurePolicy": "Ignore",
+                    "execNewPod": {
+                        "command": [
+                            "/bin/false"
+                        ],
+                        "env": [
+                            {
+                                "name": "VAR",
+                                "value": "post-deployment"
+                            }
+                        ],
+                        "containerName": "ruby-sample-app"
+                    }
+                }
+            },
+            "resources": {}
+        },
+        "triggers": [
+            {
+                "type": "ConfigChange"
+            }
+        ],
+        "replicas": 1,
+        "selector": {
+            "name": "ruby"
+        },
+        "template": {
+            "metadata": {
+                "creationTimestamp": null,
+                "labels": {
+                    "name": "ruby"
+                }
+            },
+            "spec": {
+                "containers": [
+                    {
+                        "name": "ruby-sample-app",
+                        "image": "$registry/builtimages/ruby-20-sample-app-rhel7:latest",
+                        "ports": [
+                            {
+                                "containerPort": 3306,
+                                "protocol": "TCP"
+                            }
+                        ],
+                        "env": [
+                        ],
+                        "resources": {},
+                        "terminationMessagePath": "/dev/termination-log",
+                        "imagePullPolicy": "IfNotPresent",
+                        "securityContext": {
+                            "capabilities": {},
+                            "privileged": false
+                        }
+                    }
+                ],
+                "restartPolicy": "Always",
+                "dnsPolicy": "ClusterFirst"
+            }
+        }
+    },
+    "status": {}
+}
