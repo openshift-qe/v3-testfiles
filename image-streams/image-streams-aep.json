@@ -1,0 +1,607 @@
+{
+  "kind": "ImageStreamList",
+  "apiVersion": "v1",
+  "metadata": {},
+  "items": [
+    {
+      "kind": "ImageStream",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "perl-516-centos7-aep",
+        "creationTimestamp": null
+      },
+      "spec": {
+        "dockerImageRepository": "$registry/builtimages/perl-516-centos7-aep",
+        "tags": [
+          {
+            "name": "latest"
+          },
+          {
+            "name": "perl-516-centos7-aep",
+            "annotations": {
+              "description": "Build and run perl 5.16 applications",
+              "iconClass": "icon-perl",
+              "tags": "builder,perl",
+              "supports": "perl-5.16,perl",
+              "version": "5.16"
+            },
+            "from": {
+              "Kind": "ImageStreamTag",
+              "Name": "latest"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "ImageStream",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "perl-516-rhel7-aep",
+        "creationTimestamp": null
+      },
+      "spec": {
+        "dockerImageRepository": "$registry/builtimages/perl-516-rhel7-aep",
+        "tags": [
+          {
+            "name": "latest"
+          },
+          {
+            "name": "perl-516-rhel7-aep",
+            "annotations": {
+              "description": "Build and run perl 5.16 applications",
+              "iconClass": "icon-perl",
+              "tags": "builder,perl",
+              "supports": "perl-5.16,perl",
+              "version": "5.16"
+            },
+            "from": {
+              "Kind": "ImageStreamTag",
+              "Name": "latest"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "ImageStream",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "perl-520-rhel7-aep",
+        "creationTimestamp": null
+      },
+      "spec": {
+        "dockerImageRepository": "$registry/builtimages/perl-520-rhel7-aep",
+        "tags": [
+          {
+            "name": "latest"
+          },
+          {
+            "name": "perl-520-rhel7-aep",
+            "annotations": {
+              "description": "Build and run perl 5.20 applications",
+              "iconClass": "icon-perl",
+              "tags": "builder,perl",
+              "supports": "perl-5.20,perl",
+              "version": "5.20"
+            },
+            "from": {
+              "Kind": "ImageStreamTag",
+              "Name": "latest"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "ImageStream",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "perl-520-centos7-aep",
+        "creationTimestamp": null
+      },
+      "spec": {
+        "dockerImageRepository": "$registry/builtimages/perl-520-centos7-aep",
+        "tags": [
+          {
+            "name": "latest"
+          },
+          {
+            "name": "perl-520-centos7-aep",
+            "annotations": {
+              "description": "Build and run perl 5.20 applications",
+              "iconClass": "icon-perl",
+              "tags": "builder,perl",
+              "supports": "perl-5.20,perl",
+              "version": "5.20"
+            },
+            "from": {
+              "Kind": "ImageStreamTag",
+              "Name": "latest"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "ImageStream",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "php-55-centos7-aep",
+        "creationTimestamp": null
+      },
+      "spec": {
+        "dockerImageRepository": "$registry/builtimages/php-55-centos7-aep",
+        "tags": [
+          {
+            "name": "latest"
+          },
+          {
+            "name": "php-55-centos7-aep",
+            "annotations": {
+              "description": "Build and run php 5.5 applications",
+              "iconClass": "icon-php",
+              "tags": "builder,php",
+              "supports": "php-5.5,php",
+              "version": "5.5"
+            },
+            "from": {
+              "Kind": "ImageStreamTag",
+              "Name": "latest"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "ImageStream",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "php-55-rhel7-aep",
+        "creationTimestamp": null
+      },
+      "spec": {
+        "dockerImageRepository": "$registry/builtimages/php-55-rhel7-aep",
+        "tags": [
+          {
+            "name": "latest"
+          },
+          {
+            "name": "php-55-rhel7-aep",
+            "annotations": {
+              "description": "Build and run php 5.5 applications",
+              "iconClass": "icon-php",
+              "tags": "builder,php",
+              "supports": "php-5.5,php",
+              "version": "5.5"
+            },
+            "from": {
+              "Kind": "ImageStreamTag",
+              "Name": "latest"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "ImageStream",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "php-56-centos7-aep",
+        "creationTimestamp": null
+      },
+      "spec": {
+        "dockerImageRepository": "$registry/builtimages/php-56-centos7-aep",
+        "tags": [
+          {
+            "name": "latest"
+          },
+          {
+            "name": "php-56-centos7-aep",
+            "annotations": {
+              "description": "Build and run php 5.6 applications",
+              "iconClass": "icon-php",
+              "tags": "builder,php",
+              "supports": "php-5.6,php",
+              "version": "5.6"
+            },
+            "from": {
+              "Kind": "ImageStreamTag",
+              "Name": "latest"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "ImageStream",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "php-56-rhel7-aep",
+        "creationTimestamp": null
+      },
+      "spec": {
+        "dockerImageRepository": "$registry/builtimages/php-56-rhel7-aep",
+        "tags": [
+          {
+            "name": "latest"
+          },
+          {
+            "name": "php-56-rhel7-aep",
+            "annotations": {
+              "description": "Build and run php 5.6 applications",
+              "iconClass": "icon-php",
+              "tags": "builder,php",
+              "supports": "php-5.6,php",
+              "version": "5.6"
+            },
+            "from": {
+              "Kind": "ImageStreamTag",
+              "Name": "latest"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "ImageStream",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "python-27-rhel7-aep",
+        "creationTimestamp": null
+      },
+      "spec": {
+        "dockerImageRepository": "$registry/builtimages/python-27-rhel7-aep",
+        "tags": [
+          {
+            "name": "latest"
+          },
+          {
+            "name": "python-27-rhel7-aep",
+            "annotations": {
+              "description": "Build and run python 2.7 applications",
+              "iconClass": "icon-python",
+              "tags": "builder,python",
+              "supports": "python-2.7,python",
+              "version": "2.7"
+            },
+            "from": {
+              "Kind": "ImageStreamTag",
+              "Name": "latest"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "ImageStream",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "python-27-centos7-aep",
+        "creationTimestamp": null
+      },
+      "spec": {
+        "dockerImageRepository": "$registry/builtimages/python-27-centos7-aep",
+        "tags": [
+          {
+            "name": "latest"
+          },
+          {
+            "name": "python-27-centos7-aep",
+            "annotations": {
+              "description": "Build and run python 2.7 applications",
+              "iconClass": "icon-python",
+              "tags": "builder,python",
+              "supports": "python-2.7,python",
+              "version": "2.7"
+            },
+            "from": {
+              "Kind": "ImageStreamTag",
+              "Name": "latest"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "ImageStream",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "python-33-rhel7-aep",
+        "creationTimestamp": null
+      },
+      "spec": {
+        "dockerImageRepository": "$registry/builtimages/python-33-rhel7-aep",
+        "tags": [
+          {
+            "name": "latest"
+          },
+          {
+            "name": "python-33-rhel7-aep",
+            "annotations": {
+              "description": "Build and run python 3.3 applications",
+              "iconClass": "icon-python",
+              "tags": "builder,python",
+              "supports": "python-3.3,python",
+              "version": "3.3"
+            },
+            "from": {
+              "Kind": "ImageStreamTag",
+              "Name": "latest"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "ImageStream",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "python-33-centos7-aep",
+        "creationTimestamp": null
+      },
+      "spec": {
+        "dockerImageRepository": "$registry/builtimages/python-33-centos7-aep",
+        "tags": [
+          {
+            "name": "latest"
+          },
+          {
+            "name": "python-33-centos7-aep",
+            "annotations": {
+              "description": "Build and run python 3.3 applications",
+              "iconClass": "icon-python",
+              "tags": "builder,python",
+              "supports": "python-3.3,python",
+              "version": "3.3"
+            },
+            "from": {
+              "Kind": "ImageStreamTag",
+              "Name": "latest"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "ImageStream",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "python-34-rhel7-aep",
+        "creationTimestamp": null
+      },
+      "spec": {
+        "dockerImageRepository": "$registry/builtimages/python-34-rhel7-aep",
+        "tags": [
+          {
+            "name": "latest"
+          },
+          {
+            "name": "python-34-rhel7-aep",
+            "annotations": {
+              "description": "Build and run python 3.4 applications",
+              "iconClass": "icon-python",
+              "tags": "builder,python",
+              "supports": "python-3.4,python",
+              "version": "3.4"
+            },
+            "from": {
+              "Kind": "ImageStreamTag",
+              "Name": "latest"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "ImageStream",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "python-34-centos7-aep",
+        "creationTimestamp": null
+      },
+      "spec": {
+        "dockerImageRepository": "$registry/builtimages/python-34-centos7-aep",
+        "tags": [
+          {
+            "name": "latest"
+          },
+          {
+            "name": "python-34-centos7-aep",
+            "annotations": {
+              "description": "Build and run python 3.4 applications",
+              "iconClass": "icon-python",
+              "tags": "builder,python",
+              "supports": "python-3.4,python",
+              "version": "3.4"
+            },
+            "from": {
+              "Kind": "ImageStreamTag",
+              "Name": "latest"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "ImageStream",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "ruby-20-centos7-aep",
+        "creationTimestamp": null
+      },
+      "spec": {
+        "dockerImageRepository": "$registry/builtimages/ruby-20-centos7-aep",
+        "tags": [
+          {
+            "name": "latest"
+          },
+          {
+            "name": "ruby-20-centos7-aep",
+            "annotations": {
+              "description": "Build and run ruby 2.0 applications",
+              "iconClass": "icon-ruby",
+              "tags": "builder,ruby",
+              "supports": "ruby-2.0,ruby",
+              "version": "2.0"
+            },
+            "from": {
+              "Kind": "ImageStreamTag",
+              "Name": "latest"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "ImageStream",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "ruby-20-rhel7-aep",
+        "creationTimestamp": null
+      },
+      "spec": {
+        "dockerImageRepository": "$registry/builtimages/ruby-20-rhel7-aep",
+        "tags": [
+          {
+            "name": "latest"
+          },
+          {
+            "name": "ruby-20-rhel7-aep",
+            "annotations": {
+              "description": "Build and run ruby 2.0 applications",
+              "iconClass": "icon-ruby",
+              "tags": "builder,ruby",
+              "supports": "ruby-2.0,ruby",
+              "version": "2.0"
+            },
+            "from": {
+              "Kind": "ImageStreamTag",
+              "Name": "latest"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "ImageStream",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "ruby-22-centos7-aep",
+        "creationTimestamp": null
+      },
+      "spec": {
+        "dockerImageRepository": "$registry/builtimages/ruby-22-centos7-aep",
+        "tags": [
+          {
+            "name": "latest"
+          },
+          {
+            "name": "ruby-22-centos7-aep",
+            "annotations": {
+              "description": "Build and run ruby 2.2 applications",
+              "iconClass": "icon-ruby",
+              "tags": "builder,ruby",
+              "supports": "ruby-2.2,ruby",
+              "version": "2.2"
+            },
+            "from": {
+              "Kind": "ImageStreamTag",
+              "Name": "latest"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "ImageStream",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "ruby-22-rhel7-aep",
+        "creationTimestamp": null
+      },
+      "spec": {
+        "dockerImageRepository": "$registry/builtimages/ruby-22-rhel7-aep",
+        "tags": [
+          {
+            "name": "latest"
+          },
+          {
+            "name": "ruby-22-rhel7-aep",
+            "annotations": {
+              "description": "Build and run ruby 2.2 applications",
+              "iconClass": "icon-ruby",
+              "tags": "builder,ruby",
+              "supports": "ruby-2.2,ruby",
+              "version": "2.2"
+            },
+            "from": {
+              "Kind": "ImageStreamTag",
+              "Name": "latest"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "ImageStream",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "nodejs-010-rhel7-aep",
+        "creationTimestamp": null
+      },
+      "spec": {
+        "dockerImageRepository": "$registry/builtimages/nodejs-010-rhel7-aep",
+        "tags": [
+          {
+            "name": "latest"
+          },
+          {
+            "name": "nodejs-010-rhel7-aep",
+            "annotations": {
+              "description": "Build and run nodejs 0.10 applications",
+              "iconClass": "icon-nodejs",
+              "tags": "builder,nodejs",
+              "supports": "nodejs-0.10,nodejs",
+              "version": "0.10"
+            },
+            "from": {
+              "Kind": "ImageStreamTag",
+              "Name": "latest"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "ImageStream",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "nodejs-010-centos7-aep",
+        "creationTimestamp": null
+      },
+      "spec": {
+        "dockerImageRepository": "$registry/builtimages/nodejs-010-centos7-aep",
+        "tags": [
+          {
+            "name": "latest"
+          },
+          {
+            "name": "nodejs-010-centos7-aep",
+            "annotations": {
+              "description": "Build and run nodejs 0.10 applications",
+              "iconClass": "icon-nodejs",
+              "tags": "builder,nodejs",
+              "supports": "nodejs-0.10,nodejs",
+              "version": "0.10"
+            },
+            "from": {
+              "Kind": "ImageStreamTag",
+              "Name": "latest"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
