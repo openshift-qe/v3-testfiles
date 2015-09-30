@@ -1,0 +1,21 @@
+{
+  "apiVersion": "v1",
+  "kind": "PersistentVolume",
+  "metadata": {
+    "name": "iscsi"
+  },
+  "spec": {
+    "capacity": {
+        "storage": "5Gi"
+    },
+    "accessModes": [ "ReadOnlyMany" ],
+    "iscsi": {
+        "targetPortal": "192.168.0.225:3260",
+        "iqn": "iqn.2015-06.world.server:storage.target00",
+        "lun": 0,
+        "fsType": "ext4",
+        "readOnly": false
+    },
+    "persistentVolumeReclaimPolicy": "Retain"
+  }
+}
