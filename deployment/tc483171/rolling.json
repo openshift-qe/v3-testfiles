@@ -1,0 +1,64 @@
+{
+  "apiVersion": "v1beta1",
+  "kind": "Config",
+  "items": [
+    {
+      "apiVersion": "v1beta2",
+      "containerPort": 8080,
+      "id": "hello-service",
+      "kind": "Service",
+      "port": 5555,
+      "selector": {"name": "hello-pod"}
+    },
+    {
+     "metadata":{
+         "name": "rolling"
+     },
+     "kind": "DeploymentConfig",
+     "apiVersion": "v1beta1",
+     "LatestVersion": 1,
+     "triggers": [
+       {
+         "type": "ConfigChange"
+       }
+     ],
+     "template": {
+         "strategy": {
+             "type":"Rolling"
+         },
+         "controllerTemplate": {
+             "replicas": 2,
+             "replicaSelector": {
+                 "name": "hello-pod"
+             },
+             "podTemplate": {
+                 "desiredState": {
+                     "manifest": {
+                         "version": "v1beta1",
+                         "containers": [
+                             {
+                                 "name": "hello-container",
+                                 "image": "openshift/hello-openshift",
+                                 "ports": [{
+                                     "containerPort": 8080
+                                 }],
+                                 "env": [
+                                     {
+                                         "name": "FOO",
+                                         "value": "1"
+                                     }
+                                 ]
+                             }
+                         ]
+
+                     }
+                 },
+                 "labels": {
+                     "name": "hello-pod"
+                 }
+             }
+         }
+     }
+  }
+  ]
+}
