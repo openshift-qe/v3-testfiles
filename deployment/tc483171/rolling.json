@@ -1,9 +1,9 @@
 {
-  "apiVersion": "v1beta1",
+  "apiVersion": "v1",
   "kind": "Config",
   "items": [
     {
-      "apiVersion": "v1beta2",
+      "apiVersion": "v1",
       "containerPort": 8080,
       "id": "hello-service",
       "kind": "Service",
@@ -15,7 +15,7 @@
          "name": "rolling"
      },
      "kind": "DeploymentConfig",
-     "apiVersion": "v1beta1",
+     "apiVersion": "v1",
      "LatestVersion": 1,
      "triggers": [
        {
@@ -34,7 +34,7 @@
              "podTemplate": {
                  "desiredState": {
                      "manifest": {
-                         "version": "v1beta1",
+                         "version": "v1",
                          "containers": [
                              {
                                  "name": "hello-container",
