@@ -47,11 +47,11 @@
         "creationTimestamp": null
       },
       "spec": {
-        "host": "${APPLICATION_DOMAIN}",
+        "host": "www.example.com",
         "to": {
           "kind": "Service",
           "name": "frontend"
-        },
+        }
       },
       "status": {}
     },
@@ -394,11 +394,6 @@
   ],
   "parameters": [
     {
-      "name": "APPLICATION_DOMAIN",
-      "description": "The exposed hostname that will route to the Django service, if left blank a value will be defaulted.",
-      "value": ""
-    },
-    {
       "name": "ADMIN_USERNAME",
       "description": "administrator username",
       "generate": "expression",
@@ -432,3 +427,4 @@
     "template": "application-template-stibuild"
   }
 }
+
