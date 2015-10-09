@@ -400,6 +400,11 @@
   ],
   "parameters": [
     {
+      "name": "APPLICATION_DOMAIN",
+      "description": "The exposed hostname that will route to the Django service, if left blank a value will be defaulted.",
+      "value": ""
+    },
+    {
       "name": "ADMIN_USERNAME",
       "description": "administrator username",
       "generate": "expression",
