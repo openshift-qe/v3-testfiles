@@ -9,10 +9,7 @@ if [ ! ${UID} -eq 0 ]; then
 fi
 
 # Make volume
-dd if=/dev/zero of=/dev/nfs bs=1G count=10
-mkfs -t ext4 /dev/nfs
 mkdir /nfs
-mount /dev/nfs /nfs
 chown -R nfsnobody:nfsnobody /nfs
 chmod 700 -R /nfs
 
