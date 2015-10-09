@@ -23,7 +23,7 @@
                         "containers": [
                             {
                                 "image": "bmeng/hello-openshift",
-                                "name": "service-pod"
+                                "name": "test-pod"
                             }
                         ]
                     }
