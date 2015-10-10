@@ -71,7 +71,7 @@
             "containers": [
               {
                 "name": "mysql",
-                "image": "openshift/mysql-56-rhel7",
+                "image": "registry.access.redhat.com/rhscl/mysql-56-rhel7",
                 "ports": [
                   {
                     "containerPort": 3306,
