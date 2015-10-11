@@ -77,7 +77,7 @@
       "kind": "ImageStream",
       "apiVersion": "v1",
       "metadata": {
-        "name": "python-34-rhel7",
+        "name": "python-27-rhel7",
         "creationTimestamp": null
       },
       "spec": {
@@ -120,14 +120,14 @@
           "type": "Git",
           "git": {
             "uri": "https://github.com/openshift/django-ex.git"
-          }
+            }
         },
         "strategy": {
           "type": "Source",
           "sourceStrategy": {
             "from": {
               "kind": "DockerImage",
-              "name": "registry.access.redhat.com/rhscl/python-34-rhel7:latest"
+              "name": "registry.access.redhat.com/rhscl/python-27-rhel7:latest"
             }
           }
         },
