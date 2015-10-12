@@ -1,11 +1,11 @@
 {
   "kind": "ImageStreamList",
-  "apiVersion": "v1beta3",
+  "apiVersion": "v1",
   "metadata": {},
   "items": [
     {
       "kind": "ImageStream",
-      "apiVersion": "v1beta3",
+      "apiVersion": "v1",
       "metadata": {
         "name": "external",
         "creationTimestamp": null
