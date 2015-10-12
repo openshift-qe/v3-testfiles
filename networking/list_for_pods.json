@@ -7,23 +7,23 @@
             "kind": "ReplicationController",
             "metadata": {
                 "labels": {
-                    "name": "service-spreading"
+                    "name": "test-rc"
                 },
-                "name": "service-spreading"
+                "name": "test-rc"
             },
             "spec": {
-                "replicas": 5,
+                "replicas": 2,
                 "template": {
                     "metadata": {
                         "labels": {
-                            "name": "service-spreading"
+                            "name": "test-pods"
                         }
                     },
                     "spec": {
                         "containers": [
                             {
-                                "image": "openshift/hello-openshift",
-                                "name": "service-pod"
+                                "image": "bmeng/hello-openshift",
+                                "name": "test-pod"
                             }
                         ]
                     }
@@ -35,9 +35,9 @@
             "kind": "Service",
             "metadata": {
                 "labels": {
-                    "name": "service-spreading"
+                    "name": "test-service"
                 },  
-                "name": "service-spreading"
+                "name": "test-service"
             },
             "spec": {
                 "ports": [
@@ -49,7 +49,7 @@
                     }
                 ],  
                 "selector": {
-                    "name": "service-spreading"
+                    "name": "test-pods"
                 }   
             }
         }

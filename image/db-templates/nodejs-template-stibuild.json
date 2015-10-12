@@ -1,19 +1,19 @@
 {
   "kind": "Template",
-  "apiVersion": "v1",
+  "apiVersion": "v1beta3",
   "metadata": {
-    "name": "python-helloworld-sample",
+    "name": "nodejs-helloworld-sample",
     "creationTimestamp": null,
     "annotations": {
-      "description": "This example shows how to create a simple python application in openshift origin v3",
-      "iconClass": "icon-python",
-      "tags": "instant-app,python,mysql"
+      "description": "This example shows how to create a simple nodejs application in openshift origin v3",
+      "iconClass": "icon-nodejs",
+      "tags": "instant-app,nodejs,mysql"
     }
   },
   "objects": [
     {
       "kind": "Service",
-      "apiVersion": "v1",
+      "apiVersion": "v1beta3",
       "metadata": {
         "name": "frontend",
         "creationTimestamp": null
@@ -41,7 +41,7 @@
     },
     {
       "kind": "Route",
-      "apiVersion": "v1",
+      "apiVersion": "v1beta3",
       "metadata": {
         "name": "route-edge",
         "creationTimestamp": null
@@ -63,9 +63,9 @@
     },
     {
       "kind": "ImageStream",
-      "apiVersion": "v1",
+      "apiVersion": "v1beta3",
       "metadata": {
-        "name": "origin-python-sample",
+        "name": "origin-nodejs-sample",
         "creationTimestamp": null
       },
       "spec": {},
@@ -75,13 +75,13 @@
     },
     {
       "kind": "ImageStream",
-      "apiVersion": "v1",
+      "apiVersion": "v1beta3",
       "metadata": {
-        "name": "python-34-rhel7",
+        "name": "nodejs-010-rhel7",
         "creationTimestamp": null
       },
       "spec": {
-        "dockerImageRepository": ""
+        "dockerImageRepository": "registry.access.redhat.com/openshift3/nodejs-010-rhel7"
       },
       "status": {
         "dockerImageRepository": ""
@@ -89,52 +89,53 @@
     },
     {
       "kind": "BuildConfig",
-      "apiVersion": "v1",
+      "apiVersion": "v1beta3",
       "metadata": {
-        "name": "python-sample-build",
+        "name": "nodejs-sample-build",
         "creationTimestamp": null,
         "labels": {
-          "name": "python-sample-build"
+          "name": "nodejs-sample-build"
         }
       },
       "spec": {
         "triggers": [
           {
-            "type": "GitHub",
+            "type": "github",
             "github": {
               "secret": "secret101"
             }
           },
           {
-            "type": "Generic",
+            "type": "generic",
             "generic": {
               "secret": "secret101"
             }
           },
           {
-            "type": "ImageChange",
+            "type": "imageChange",
             "imageChange": {}
           }
         ],
         "source": {
           "type": "Git",
           "git": {
-            "uri": "https://github.com/openshift/django-ex.git"
+            "uri": "git://github.com/mdshuai/nodejs-example.git"
           }
         },
         "strategy": {
           "type": "Source",
           "sourceStrategy": {
             "from": {
-              "kind": "DockerImage",
-              "name": "registry.access.redhat.com/rhscl/python-34-rhel7:latest"
-            }
+              "kind": "ImageStreamTag",
+              "name": "nodejs-010-rhel7:latest"
+            },
+            "incremental": true
           }
         },
         "output": {
           "to": {
             "kind": "ImageStreamTag",
-            "name": "origin-python-sample:latest"
+            "name": "origin-nodejs-sample:latest"
           }
         },
         "resources": {}
@@ -145,7 +146,7 @@
     },
     {
       "kind": "DeploymentConfig",
-      "apiVersion": "v1",
+      "apiVersion": "v1beta3",
       "metadata": {
         "name": "frontend",
         "creationTimestamp": null
@@ -169,7 +170,7 @@
                     "value": "custom_value1"
                   }
                 ],
-                "containerName": "python-helloworld"
+                "containerName": "nodejs-helloworld"
               }
             },
             "post": {
@@ -184,7 +185,7 @@
                     "value": "custom_value2"
                   }
                 ],
-                "containerName": "python-helloworld"
+                "containerName": "nodejs-helloworld"
               }
             }
           },
@@ -196,12 +197,13 @@
             "imageChangeParams": {
               "automatic": true,
               "containerNames": [
-                "python-helloworld"
+                "nodejs-helloworld"
               ],
               "from": {
                 "kind": "ImageStreamTag",
-                "name": "origin-python-sample:latest"
-              }
+                "name": "origin-nodejs-sample:latest"
+              },
+              "lastTriggeredImage": ""
             }
           },
           {
@@ -222,8 +224,8 @@
           "spec": {
             "containers": [
               {
-                "name": "python-helloworld",
-                "image": "origin-python-sample",
+                "name": "nodejs-helloworld",
+                "image": "origin-nodejs-sample",
                 "ports": [
                   {
                     "containerPort": 8080,
@@ -240,21 +242,22 @@
                     "value": "${ADMIN_PASSWORD}"
                   },
                   {
-                    "name": "MYSQL_USER",
-                    "value": "${MYSQL_USER}"
+                    "name": "POSTGRESQL_USER",
+                    "value": "${POSTGRESQL_USER}"
                   },
                   {
-                    "name": "MYSQL_PASSWORD",
-                    "value": "${MYSQL_PASSWORD}"
+                    "name": "POSTGRESQL_PASSWORD",
+                    "value": "${POSTGRESQL_PASSWORD}"
                   },
                   {
-                    "name": "MYSQL_DATABASE",
-                    "value": "${MYSQL_DATABASE}"
+                    "name": "POSTGRESQL_DATABASE",
+                    "value": "${POSTGRESQL_DATABASE}"
                   }
                 ],
                 "resources": {},
                 "terminationMessagePath": "/dev/termination-log",
                 "imagePullPolicy": "IfNotPresent",
+                "capabilities": {},
                 "securityContext": {
                   "capabilities": {},
                   "privileged": false
@@ -262,7 +265,8 @@
               }
             ],
             "restartPolicy": "Always",
-            "dnsPolicy": "ClusterFirst"
+            "dnsPolicy": "ClusterFirst",
+            "serviceAccount": ""
           }
         }
       },
@@ -270,7 +274,7 @@
     },
     {
       "kind": "Service",
-      "apiVersion": "v1",
+      "apiVersion": "v1beta3",
       "metadata": {
         "name": "database",
         "creationTimestamp": null
@@ -281,7 +285,7 @@
             "name": "db",
             "protocol": "TCP",
             "port": 5434,
-            "targetPort": 3306,
+            "targetPort": 5432,
             "nodePort": 0
           }
         ],
@@ -298,7 +302,7 @@
     },
     {
       "kind": "DeploymentConfig",
-      "apiVersion": "v1",
+      "apiVersion": "v1beta3",
       "metadata": {
         "name": "database",
         "creationTimestamp": null
@@ -319,7 +323,7 @@
                     "value": "custom_value1"
                   }
                 ],
-                "containerName": "python-helloworld-database"
+                "containerName": "nodejs-helloworld-database"
               }
             },
             "post": {
@@ -334,7 +338,7 @@
                     "value": "custom_value2"
                   }
                 ],
-                "containerName": "python-helloworld-database"
+                "containerName": "nodejs-helloworld-database"
               }
             }
           },
@@ -359,31 +363,32 @@
           "spec": {
             "containers": [
               {
-                "name": "python-helloworld-database",
-                "image": "registry.access.redhat.com/openshift3/mysql-55-rhel7:latest",
+                "name": "nodejs-helloworld-database",
+                "image": "registry.access.redhat.com/rhscl/postgresql-94-rhel7:latest",
                 "ports": [
                   {
-                    "containerPort": 3306,
+                    "containerPort": 5432,
                     "protocol": "TCP"
                   }
                 ],
                 "env": [
                   {
-                    "name": "MYSQL_USER",
-                    "value": "${MYSQL_USER}"
+                    "name": "POSTGRESQL_USER",
+                    "value": "${POSTGRESQL_USER}"
                   },
                   {
-                    "name": "MYSQL_PASSWORD",
-                    "value": "${MYSQL_PASSWORD}"
+                    "name": "POSTGRESQL_PASSWORD",
+                    "value": "${POSTGRESQL_PASSWORD}"
                   },
                   {
-                    "name": "MYSQL_DATABASE",
-                    "value": "${MYSQL_DATABASE}"
+                    "name": "POSTGRESQL_DATABASE",
+                    "value": "${POSTGRESQL_DATABASE}"
                   }
                 ],
                 "resources": {},
                 "terminationMessagePath": "/dev/termination-log",
-                "imagePullPolicy": "Always",
+                "imagePullPolicy": "IfNotPresent",
+                "capabilities": {},
                 "securityContext": {
                   "capabilities": {},
                   "privileged": false
@@ -391,7 +396,8 @@
               }
             ],
             "restartPolicy": "Always",
-            "dnsPolicy": "ClusterFirst"
+            "dnsPolicy": "ClusterFirst",
+            "serviceAccount": ""
           }
         }
       },
@@ -412,19 +418,19 @@
       "from": "[a-zA-Z0-9]{8}"
     },
     {
-      "name": "MYSQL_USER",
+      "name": "POSTGRESQL_USER",
       "description": "database username",
       "generate": "expression",
       "from": "user[A-Z0-9]{3}"
     },
     {
-      "name": "MYSQL_PASSWORD",
+      "name": "POSTGRESQL_PASSWORD",
       "description": "database password",
       "generate": "expression",
       "from": "[a-zA-Z0-9]{8}"
     },
     {
-      "name": "MYSQL_DATABASE",
+      "name": "POSTGRESQL_DATABASE",
       "description": "database name",
       "value": "root"
     }

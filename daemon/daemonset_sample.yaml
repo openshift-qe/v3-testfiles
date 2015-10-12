@@ -1,0 +1,30 @@
+kind: DaemonSet
+apiVersion: experimental/v1alpha1
+metadata:
+  labels:
+    name: prometheus-node-exporter
+  name: prometheus-node-exporter
+  namespace: default
+spec:
+  selector:
+    name: prometheus-node-exporter
+  template:
+    metadata:
+      labels:
+        name: prometheus-node-exporter
+      name: prometheus-node-exporter
+    spec:
+      containers:
+      - image: prom/prometheus
+        imagePullPolicy: IfNotPresent
+        name: c
+        ports:
+        - containerPort: 9090
+          hostPort: 9090
+          name: serverport
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30

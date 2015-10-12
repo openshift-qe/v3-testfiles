@@ -77,7 +77,7 @@
       "kind": "ImageStream",
       "apiVersion": "v1",
       "metadata": {
-        "name": "python-34-rhel7",
+        "name": "python-27-rhel7",
         "creationTimestamp": null
       },
       "spec": {
@@ -127,8 +127,26 @@
           "sourceStrategy": {
             "from": {
               "kind": "DockerImage",
-              "name": "registry.access.redhat.com/rhscl/python-34-rhel7:latest"
-            }
+              "name": "registry.access.redhat.com/rhscl/python-27-rhel7:latest"
+            },
+           "env": [
+             {
+              "name": "APP_FILE",
+              "value": "app.py"
+             },
+             {
+              "name": "APP_MODULE",
+              "value": "testapp:application"
+             },
+             {
+              "name": "DISABLE_COLLECTSTATIC",
+              "value": "false"
+             },
+             {
+              "name": "DISABLE_MIGRATE",
+              "value": "false"
+             }
+           ]
           }
         },
         "output": {
