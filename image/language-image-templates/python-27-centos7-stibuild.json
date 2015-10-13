@@ -81,7 +81,7 @@
         "creationTimestamp": null
       },
       "spec": {
-        "dockerImageRepository": "openshift/python-27-centos7"
+        "dockerImageRepository": ""
       },
       "status": {
         "dockerImageRepository": ""
@@ -127,6 +127,7 @@
           "sourceStrategy": {
             "from": {
               "kind": "ImageStreamTag",
+               "namespace": "openshift",
               "name": "python-27-centos7:latest"
             }
           }
