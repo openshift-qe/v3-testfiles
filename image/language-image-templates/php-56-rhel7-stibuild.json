@@ -77,11 +77,11 @@
       "kind": "ImageStream",
       "apiVersion": "v1",
       "metadata": {
-        "name": "php-20-rhel7",
+        "name": "php-56-rhel7",
         "creationTimestamp": null
       },
       "spec": {
-        "dockerImageRepository": "registry.access.redhat.com/openshift3/php-55-rhel7"
+        "dockerImageRepository": "registry.access.redhat.com/openshift3/php-56-rhel7"
       },
       "status": {
         "dockerImageRepository": ""
@@ -114,12 +114,15 @@
           {
             "type": "ImageChange",
             "imageChange": {}
+          },
+          {
+            "type": "ConfigChange"
           }
         ],
         "source": {
           "type": "Git",
           "git": {
-            "uri": "https://github.com/wzheng1/sample-php"
+            "uri": "https://github.com/wzheng1/php-example-app"
           }
         },
         "strategy": {
@@ -127,9 +130,50 @@
           "sourceStrategy": {
             "from": {
               "kind": "ImageStreamTag",
-              "name": "php:latest",
-              "namespace":"openshift"
-            }
+              "name": "php-56-rhel7:latest"
+            },
+          "env": [
+             { 
+              "name": "ERROR_REPORTING",
+              "value": "E_ALL & ~E_NOTICE"
+             },
+             {
+              "name": "DISPLAY_ERRORS",
+              "value": "ON"
+             },
+             {
+              "name": "DISPLAY_STARTUP_ERRORS",
+              "value": "OFF"
+             },
+             {
+              "name": "TRACK_ERRORS",
+              "value": "OFF"
+             },
+            {
+              "name": "HTML_ERRORS",
+              "value": "ON"
+             },
+            {
+              "name": "INCLUDE_PATH",
+              "value": "/opt/app-root/src"
+             },          
+            {
+              "name": "SESSION_PATH",
+              "value": "/tmp/sessions"
+             },
+            {
+              "name": "OPCACHE_MEMORY_CONSUMPTION",
+              "value": "16M"
+             },
+            {
+              "name": "PHPRC",
+              "value": "/opt/rh/php55/root/etc/"
+             },
+            {
+              "name": "PHP_INI_SCAN_DIR",
+              "value": "/opt/rh/php55/root/etc/"
+             }
+           ]
           }
         },
         "output": {
@@ -360,7 +404,7 @@
           "spec": {
             "containers": [
               {
-               "name": "php-helloworld-database",
+                "name": "php-helloworld-database",
                 "image": "registry.access.redhat.com/openshift3/mysql-55-rhel7:latest",
                 "ports": [
                   {
@@ -384,7 +428,7 @@
                 ],
                 "resources": {},
                 "terminationMessagePath": "/dev/termination-log",
-                "imagePullPolicy": "IfNotPresent",
+                "imagePullPolicy": "Always",
                 "securityContext": {
                   "capabilities": {},
                   "privileged": false
@@ -416,18 +460,21 @@
       "name": "MYSQL_USER",
       "description": "database username",
       "generate": "expression",
-      "from": "user[A-Z0-9]{3}"
+      "from": "user[A-Z0-9]{3}",
+      "required": true
     },
     {
       "name": "MYSQL_PASSWORD",
       "description": "database password",
       "generate": "expression",
-      "from": "[a-zA-Z0-9]{8}"
+      "from": "[a-zA-Z0-9]{8}",
+      "required": true
     },
     {
       "name": "MYSQL_DATABASE",
       "description": "database name",
-      "value": "root"
+      "value": "root",
+      "required": true
     }
   ],
   "labels": {

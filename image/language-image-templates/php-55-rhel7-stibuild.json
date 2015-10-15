@@ -405,7 +405,7 @@
             "containers": [
               {
                 "name": "php-helloworld-database",
-                "image": "openshift/mysql-55-centos7:latest",
+                "image": "registry.access.redhat.com/openshift3/mysql-55-rhel7:latest",
                 "ports": [
                   {
                     "containerPort": 3306,
