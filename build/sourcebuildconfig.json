@@ -1,0 +1,46 @@
+{
+  "kind": "List",
+  "apiVersion": "v1",
+  "metadata": {},
+  "items": [
+    {
+      "kind": "ImageStream",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "origin-php-sample"
+      },
+      "spec": {},
+      "status": {
+        "dockerImageRepository": ""
+      }
+    },
+    {
+      "kind": "BuildConfig",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "source-build"
+      },
+      "spec": {
+        "completionDeadlineSeconds": 5,
+        "triggers": [],
+        "source": {
+          "type": "Git",
+          "git": {
+            "uri": "https://github.com/wzheng1/pending-pod-php-rhel7"
+          }
+        },
+        "strategy": {
+          "type": "Source",
+          "sourceStrategy": {
+            "from": {
+              "kind": "ImageStreamTag",
+              "name": "php:5.5",
+              "namespace": "openshift"
+            },
+          "pullSecret": {"name" : "pull"}
+          }
+        }
+      }
+    }
+  ]
+}
