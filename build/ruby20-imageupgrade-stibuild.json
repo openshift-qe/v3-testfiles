@@ -131,12 +131,8 @@
             "from": {
               "kind": "ImageStreamTag",
               "name": "ruby-20-rhel7:latest"
-<<<<<<< HEAD
-            }
-=======
             },
             "forcePull": true
->>>>>>> b86e9d9e99df7becb360af56072f5b166e29229c
           }
         },
         "output": {
