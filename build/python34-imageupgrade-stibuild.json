@@ -128,7 +128,8 @@
             "from": {
               "kind": "ImageStreamTag",
               "name": "python-34-rhel7:latest"
-            }
+            },
+              "forcePull": true
           }
         },
         "output": {
