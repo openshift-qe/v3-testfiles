@@ -81,7 +81,7 @@
         "creationTimestamp": null
       },
       "spec": {
-        "dockerImageRepository": "registry.access.redhat.com/rhscl/python-33-rhel7"
+        "dockerImageRepository": "registry.access.redhat.com/openshift3/python-33-rhel7"
       },
       "status": {
         "dockerImageRepository": ""
