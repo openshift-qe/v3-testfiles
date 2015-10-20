@@ -1,0 +1,12 @@
+{
+    "kind": "Role",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "deploy"
+        },
+    "rules":[ {
+        "deny":false,
+        "verbs": ["watch", "list", "get"], 
+        "resources": ["resourcegroup:deployments"] 
+    }]
+}
