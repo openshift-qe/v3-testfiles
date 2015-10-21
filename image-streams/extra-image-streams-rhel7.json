@@ -56,6 +56,29 @@
         ]
       }
     },
+        {
+      "kind": "ImageStream",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "wildfly",
+        "creationTimestamp": null
+      },
+      "spec": {
+        "dockerImageRepository": "registry.access.redhat.com/rhscl/wildfly-81-rhel7",
+        "tags": [
+          {
+            "name": "latest"
+          },
+          {
+            "name": "8.1",
+            "from": {
+              "Kind": "ImageStreamTag",
+              "Name": "latest"
+            }
+          }
+        ]
+      }
+    },
       {
       "kind": "ImageStream",
       "apiVersion": "v1",
