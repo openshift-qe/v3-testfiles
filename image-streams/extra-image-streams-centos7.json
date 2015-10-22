@@ -11,7 +11,7 @@
         "creationTimestamp": null
       },
       "spec": {
-        "dockerImageRepository": "openshift/ruby-22-centos7",
+        "dockerImageRepository": "centos/ruby-22-centos7",
         "tags": [
           {
             "name": "latest"
@@ -87,7 +87,7 @@
         "creationTimestamp": null
       },
       "spec": {
-        "dockerImageRepository": "openshift/perl-520-centos7",
+        "dockerImageRepository": "centos/perl-520-centos7",
         "tags": [
           {
             "name": "latest"
@@ -117,7 +117,7 @@
         "creationTimestamp": null
       },
       "spec": {
-        "dockerImageRepository": "openshift/php-56-centos7",
+        "dockerImageRepository": "centos/php-56-centos7",
         "tags": [
           {
             "name": "latest"
@@ -147,7 +147,7 @@
         "creationTimestamp": null
       },
       "spec": {
-        "dockerImageRepository": "openshift/python-34-centos7",
+        "dockerImageRepository": "centos/python-34-centos7",
         "tags": [
           {
             "name": "latest"
@@ -177,7 +177,7 @@
         "creationTimestamp": null
       },
       "spec": {
-        "dockerImageRepository": "openshift/mysql-56-centos7",
+        "dockerImageRepository": "centos/mysql-56-centos7",
         "tags": [
           {
             "name": "latest"
