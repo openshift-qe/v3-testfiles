@@ -1,0 +1,31 @@
+{
+    "apiVersion": "v1",
+    "kind": "Pod",
+    "metadata": {
+        "name": "fcpd",
+        "labels": {
+            "name": "frontendhttp"
+        }
+    },
+    "spec": {
+        "containers": [{
+            "name": "myfrontend",
+            "image": "jhou/hello-openshift",
+            "imagePullPolicy": "IfNotPresent",
+            "ports": [{
+                "containerPort": 80,
+                "name": "http-server"
+            }],
+            "volumeMounts": [{
+                "mountPath": "/mnt/fc",
+                "name": "pvol"
+            }]
+        }],
+        "volumes": [{
+            "name": "pvol",
+            "persistentVolumeClaim": {
+                "claimName": "claim-fc"
+            }
+        }]
+    }
+}
