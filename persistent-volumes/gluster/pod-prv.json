@@ -1,0 +1,30 @@
+{
+    "apiVersion": "v1",
+    "kind": "Pod",
+    "metadata": {
+        "name": "gluster",
+        "labels": {
+            "name": "gluster"
+        }
+    },
+    "spec": {
+        "containers": [{
+            "name": "gluster",
+            "image": "jhou/hello-openshift",
+            "imagePullPolicy": "IfNotPresent",
+            "securityContext": {
+                "privileged": true
+            },
+            "volumeMounts": [{
+                "mountPath": "/mnt/gluster",
+                "name": "gluster"
+            }]
+        }],
+        "volumes": [{
+            "name": "gluster",
+            "persistentVolumeClaim": {
+                "claimName": "glusterc"
+            }
+        }]
+    }
+}
