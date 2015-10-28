@@ -383,7 +383,7 @@
             "containers": [
               {
                 "name": "python-helloworld-database",
-                "image": "openshift/mysql-55-centos7:latest",
+                "image": "registry.access.redhat.com/openshift/mysql-55-rhel7:latest",
                 "ports": [
                   {
                     "containerPort": 3306,
