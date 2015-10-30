@@ -81,7 +81,7 @@
         "creationTimestamp": null
       },
       "spec": {
-        "dockerImageRepository": "$registry/php-55/rhel7"
+        "dockerImageRepository": "registry.access.redhat.com/openshift3/php-55-rhel7"
       },
       "status": {
         "dockerImageRepository": ""
@@ -405,7 +405,7 @@
             "containers": [
               {
                 "name": "php-helloworld-database",
-                "image": "openshift/mysql-55-centos7:latest",
+                "image": "registry.access.redhat.com/openshift3/mysql-55-rhel7:latest",
                 "ports": [
                   {
                     "containerPort": 3306,

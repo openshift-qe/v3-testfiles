@@ -1,0 +1,45 @@
+{
+    "kind": "Pod",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "pv-scrubber"
+    },
+    "spec": {
+        "volumes": [
+            {
+                "name": "vol",
+                "nfs": {
+                    "server": "192.168.0.149",
+                    "path": "/nfs"
+                }
+            }
+        ],
+        "containers": [
+            {
+                "name": "pv-recycler",
+                "image": "docker.io/jhou/scrubber",
+                "command": [
+                    "/bin/sh"
+                ],
+                "args": [
+                    "-c",
+                    "test -e /scrub \u0026\u0026 echo $(date) \u003e /scrub/trash.txt \u0026\u0026 rm -rf /scrub/* /scrub/.* \u0026\u0026 test -z \"$(ls -A /scrub)\" || exit 1"
+                ],
+                "resources": {},
+                "volumeMounts": [
+                    {
+                        "name": "vol",
+                        "mountPath": "/scrub"
+                    }
+                ],
+                "terminationMessagePath": "/dev/termination-log",
+                "imagePullPolicy": "IfNotPresent"
+            }
+        ],
+        "restartPolicy": "Never",
+        "terminationGracePeriodSeconds": 30,
+        "activeDeadlineSeconds": 300,
+        "securityContext": {}
+    }
+}
+

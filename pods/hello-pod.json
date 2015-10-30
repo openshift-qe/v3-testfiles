@@ -1,6 +1,6 @@
 {
   "kind": "Pod",
-  "apiVersion": "v1beta3",
+  "apiVersion": "v1",
   "metadata": {
     "name": "hello-openshift",
     "creationTimestamp": null,
@@ -12,7 +12,7 @@
     "containers": [
       {
         "name": "hello-openshift",
-        "image": "openshift/hello-openshift",
+        "image": "jhou/hello-openshift",
         "ports": [
           {
             "containerPort": 8080,
@@ -28,7 +28,6 @@
         ],
         "terminationMessagePath": "/dev/termination-log",
         "imagePullPolicy": "IfNotPresent",
-        "capabilities": {},
         "securityContext": {
           "capabilities": {},
           "privileged": false

@@ -71,7 +71,7 @@
             "containers": [
               {
                 "name": "mongodb",
-                "image": "$registry/mongodb-24-rhel7",
+                "image": "registry.access.redhat.com/openshift3/mongodb-24-rhel7",
                 "ports": [
                   {
                     "containerPort": 27017,

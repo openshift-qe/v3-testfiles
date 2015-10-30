@@ -1,16 +1,16 @@
 {
-  "apiVersion": "v1beta3",
+  "apiVersion": "v1",
   "displayName": "jhou testing node selector",
   "kind": "Project",
   "metadata": {
     "annotations": {
       "description": "This is a test project of jhou",
-      "openshift.io/node-selector": "env=qa"
+      "openshift.io/node-selector": "region=west"
     },
     "labels": {
       "name": "jhou"
     },
-    "name": "jhou1"
+    "name": "jhou"
   }
 }
 

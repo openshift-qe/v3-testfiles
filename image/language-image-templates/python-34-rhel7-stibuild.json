@@ -81,7 +81,7 @@
         "creationTimestamp": null
       },
       "spec": {
-        "dockerImageRepository": "$registry/python-34-rhel7"
+        "dockerImageRepository": ""
       },
       "status": {
         "dockerImageRepository": ""
@@ -126,8 +126,8 @@
           "type": "Source",
           "sourceStrategy": {
             "from": {
-              "kind": "ImageStreamTag",
-              "name": "python-34-rhel7:latest"
+              "kind": "DockerImage",
+              "name": "registry.access.redhat.com/rhscl/python-34-rhel7:latest"
             }
           }
         },
@@ -360,7 +360,7 @@
             "containers": [
               {
                 "name": "python-helloworld-database",
-                "image": "openshift/mysql-55-rhel7:latest",
+                "image": "registry.access.redhat.com/openshift3/mysql-55-rhel7:latest",
                 "ports": [
                   {
                     "containerPort": 3306,

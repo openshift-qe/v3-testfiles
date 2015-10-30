@@ -12,7 +12,7 @@
   "spec": {
       "containers": [{
         "name": "hello-nginx-docker-pod",
-        "image": "pweil/hello-nginx-docker",
+        "image": "bmeng/hello-nginx-docker",
         "ports": [
           {
             "containerPort": 80

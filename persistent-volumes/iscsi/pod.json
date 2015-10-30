@@ -8,9 +8,6 @@
         }
     },
     "spec": {
-        "nodeSelector": {
-           "storage": "iscsi"
-         },
         "containers": [{
             "name": "myfrontend",
             "image": "jhou/hello-openshift",

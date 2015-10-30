@@ -11,7 +11,7 @@
         "creationTimestamp": null
       },
       "spec": {
-        "dockerImageRepository": "openshift/ruby-22-centos7",
+        "dockerImageRepository": "centos/ruby-22-centos7",
         "tags": [
           {
             "name": "latest"
@@ -33,6 +33,52 @@
         ]
       }
     }, 
+   {
+      "kind": "ImageStream",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "postgresql",
+        "creationTimestamp": null
+      },
+      "spec": {
+        "dockerImageRepository": "centos/postgresql-94-centos7",
+        "tags": [
+          {
+            "name": "latest"
+          },
+          {
+            "name": "9.4",
+            "from": {
+              "Kind": "ImageStreamTag",
+              "Name": "latest"
+            }
+          }
+        ]
+      }
+    },
+     {
+      "kind": "ImageStream",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "mongodb",
+        "creationTimestamp": null
+      },
+      "spec": {
+        "dockerImageRepository": "centos/mongodb-26-centos7",
+        "tags": [
+          {
+            "name": "latest"
+          },
+          {
+            "name": "2.6",
+            "from": {
+              "Kind": "ImageStreamTag",
+              "Name": "latest"
+            }
+          }
+        ]
+      }
+    },
     {
       "kind": "ImageStream",
       "apiVersion": "v1",
@@ -41,7 +87,7 @@
         "creationTimestamp": null
       },
       "spec": {
-        "dockerImageRepository": "openshift/perl-520-centos7",
+        "dockerImageRepository": "centos/perl-520-centos7",
         "tags": [
           {
             "name": "latest"
@@ -71,7 +117,7 @@
         "creationTimestamp": null
       },
       "spec": {
-        "dockerImageRepository": "openshift/php-56-centos7",
+        "dockerImageRepository": "centos/php-56-centos7",
         "tags": [
           {
             "name": "latest"
@@ -101,7 +147,7 @@
         "creationTimestamp": null
       },
       "spec": {
-        "dockerImageRepository": "openshift/python-34-centos7",
+        "dockerImageRepository": "centos/python-34-centos7",
         "tags": [
           {
             "name": "latest"
@@ -131,7 +177,7 @@
         "creationTimestamp": null
       },
       "spec": {
-        "dockerImageRepository": "openshift/mysql-56-centos7",
+        "dockerImageRepository": "centos/mysql-56-centos7",
         "tags": [
           {
             "name": "latest"
@@ -145,4 +191,6 @@
           }
         ]
       }
+    }
+  ]
 }

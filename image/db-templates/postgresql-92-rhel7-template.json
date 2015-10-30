@@ -71,7 +71,7 @@
             "containers": [
               {
                 "name": "postgresql",
-                "image": "$registry/postgresql-92-rhel7",
+                "image": "registry.access.redhat.com/openshift3/postgresql-92-rhel7",
                 "ports": [
                   {
                     "containerPort": 5432,
