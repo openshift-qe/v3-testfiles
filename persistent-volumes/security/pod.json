@@ -32,7 +32,7 @@
                 "user": "system_u",
                 "role": "object_r",
                 "type": "svirt_sandbox_file_t",
-                "level": "s1:c1,c3"
+                "level": "s0"
             }
         },
         "volumes": [{
