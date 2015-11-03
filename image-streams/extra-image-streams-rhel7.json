@@ -200,7 +200,7 @@
         "creationTimestamp": null
       },
       "spec": {
-        "dockerImageRepository": "rcm-img-docker01.build.eng.bos.redhat.com:5001/rhscl/python-27-rhel7",
+        "dockerImageRepository": "registry.access.redhat.com/rhscl/python-27-rhel7",
         "tags": [
           {
             "name": "latest"
