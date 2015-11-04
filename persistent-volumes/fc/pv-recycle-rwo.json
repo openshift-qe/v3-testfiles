@@ -11,7 +11,7 @@
     "accessModes": [ "ReadWriteOnce" ],
     "fc": {
         "targetWWNS": [ "500a0981891b8dc5", "500a0981991b8dc5"],
-        "lun": "6",
+        "lun": 2,
         "fsType": "ext4"
     },
     "persistentVolumeReclaimPolicy": "Recycle"
