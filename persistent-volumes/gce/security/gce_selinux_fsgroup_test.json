@@ -22,8 +22,8 @@
         "resources": {},
         "volumeMounts": [
           {
-            "name":"tmp",
-            "mountPath":"/tmp"
+            "name":"gcepd",
+            "mountPath":"/mnt/gce"
           }
         ],
         "terminationMessagePath": "/dev/termination-log",
