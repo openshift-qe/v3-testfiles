@@ -1,0 +1,79 @@
+{
+  "kind": "Pod",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "emptydir-t",
+    "creationTimestamp": null,
+    "labels": {
+      "name": "volume-test"
+    }
+  },
+  "spec": {
+    "containers": [
+      {
+        "name": "c1",
+        "image": "jhou/hello-openshift",
+        "ports": [
+          {
+            "containerPort": 8080,
+            "protocol": "TCP"
+          }
+        ],
+        "resources": {},
+        "volumeMounts": [
+          {
+            "name":"tmp",
+            "mountPath":"/tmp"
+          }
+        ],
+        "terminationMessagePath": "/dev/termination-log",
+        "imagePullPolicy": "IfNotPresent",
+        "securityContext": {
+          "runAsUser": 1000160000,
+          "privileged": false
+        }
+      },
+      {
+        "name": "c2",
+        "image": "jhou/hello-openshift-fedora",
+        "ports": [
+          {
+            "containerPort": 8081,
+            "protocol": "TCP"
+          }
+        ],
+        "resources": {},
+        "volumeMounts": [
+          {
+            "name":"tmp",
+            "mountPath":"/tmp"
+          }
+        ],
+        "terminationMessagePath": "/dev/termination-log",
+        "imagePullPolicy": "IfNotPresent",
+        "securityContext": {
+          "runAsUser": 1000160200,
+          "privileged": false
+        }
+      }
+    ],
+    "securityContext": {
+         "fsGroup": 123456,
+         "runAsUser": 1000160011,
+         "seLinuxOptions": {
+            "level": "s0:c13,c2"
+         }
+    },
+    "volumes": [
+      {
+        "name":"tmp",
+        "emptyDir": {}
+      }
+    ],
+
+    "restartPolicy": "Always",
+    "dnsPolicy": "ClusterFirst",
+    "serviceAccount": ""
+  },
+  "status": {}
+}
