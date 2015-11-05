@@ -81,7 +81,7 @@
         "creationTimestamp": null
       },
       "spec": {
-        "dockerImageRepository": "registry.access.redhat.com/openshift3/nodejs-010-rhel7"
+        "dockerImageRepository": ""
       },
       "status": {
         "dockerImageRepository": ""
@@ -127,7 +127,8 @@
           "sourceStrategy": {
             "from": {
               "kind": "ImageStreamTag",
-              "name": "nodejs-010-rhel7:latest"
+              "namespace": "openshift",
+              "name": "nodejs:latest"
             },
             "incremental": true
           }
@@ -364,7 +365,7 @@
             "containers": [
               {
                 "name": "nodejs-helloworld-database",
-                "image": "registry.access.redhat.com/rhscl/postgresql-94-rhel7:latest",
+                "image": "rcm-img-docker01.build.eng.bos.redhat.com:5001/rhscl/postgresql-94-rhel7:latest",
                 "ports": [
                   {
                     "containerPort": 5432,
