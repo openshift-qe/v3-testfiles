@@ -22,7 +22,7 @@ oadm policy add-cluster-role-to-user cluster-admin $user
 EOF
 
 echo 'Copying ca cert'
-scp $sshopts root@$master:/etc/openshift/master/ca.crt ~/
+scp $sshopts root@$master:/etc/origin/master/ca.crt ~/
 
 rm -f ~/.config/openshift/config
 oc login $master:8443 --certificate-authority=$ca_dir/ca.crt -u $user -p $password
