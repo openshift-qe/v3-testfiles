@@ -1,0 +1,37 @@
+{
+  "kind": "ImageStreamList",
+  "apiVersion": "v1",
+  "metadata": {},
+  "items": [
+    {
+      "kind": "ImageStream",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "python",
+        "creationTimestamp": null
+      },
+      "spec": {
+        "dockerImageRepository": "rcm-img-docker01.build.eng.bos.redhat.com:5001/rhscl/python-27-rhel7",
+        "tags": [
+          {
+            "name": "latest"
+          },
+          {
+            "name": "2.7",
+            "annotations": {
+              "description": "Build and run Python 2.7 applications",
+              "iconClass": "icon-python",
+              "tags": "builder,python",
+              "supports":"python:2.7,python",
+              "version": "2.7"
+            },
+            "from": {
+              "Kind": "ImageStreamTag",
+              "Name": "latest"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
