@@ -35,7 +35,6 @@
     ],
     "securityContext": {
          "fsGroup": 123456,
-         "runAsUser": 1000160000,
          "seLinuxOptions": {
             "level": "s0:c13,c2"
          }
