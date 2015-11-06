@@ -2,12 +2,12 @@
   "kind": "Template",
   "apiVersion": "v1",
   "metadata": {
-    "name": "nodejs-helloworld-sample",
+    "name": "nodejs-sample",
     "creationTimestamp": null,
     "annotations": {
-      "description": "This example shows how to create a simple nodejs application in openshift origin v3",
-      "iconClass": "icon-nodejs",
-      "tags": "instant-app,nodejs,mysql"
+      "description": "This example shows how to create a simple ruby application in openshift origin v3",
+      "iconClass": "icon-ruby",
+      "tags": "instant-app,ruby,mysql"
     }
   },
   "objects": [
@@ -65,7 +65,7 @@
       "kind": "ImageStream",
       "apiVersion": "v1",
       "metadata": {
-        "name": "origin-nodejs-sample",
+        "name": "origin-ruby-sample",
         "creationTimestamp": null
       },
       "spec": {},
@@ -77,11 +77,11 @@
       "kind": "ImageStream",
       "apiVersion": "v1",
       "metadata": {
-        "name": "nodejs-010-rhel7",
+        "name": "node",
         "creationTimestamp": null
       },
       "spec": {
-        "dockerImageRepository": ""
+        "dockerImageRepository": "chunyunchen/docker-node"
       },
       "status": {
         "dockerImageRepository": ""
@@ -91,52 +91,61 @@
       "kind": "BuildConfig",
       "apiVersion": "v1",
       "metadata": {
-        "name": "nodejs-sample-build",
+        "name": "ruby-sample-build",
         "creationTimestamp": null,
         "labels": {
-          "name": "nodejs-sample-build"
+          "name": "ruby-sample-build"
         }
       },
       "spec": {
         "triggers": [
           {
-            "type": "github",
+            "type": "GitHub",
             "github": {
               "secret": "secret101"
             }
           },
           {
-            "type": "generic",
+            "type": "Generic",
             "generic": {
               "secret": "secret101"
             }
           },
           {
-            "type": "imageChange",
+            "type": "ImageChange",
             "imageChange": {}
+          },
+          {
+            "type": "ConfigChange"
           }
         ],
         "source": {
           "type": "Git",
           "git": {
-            "uri": "git://github.com/mdshuai/nodejs-example.git"
-          }
+            "uri": "https://github.com/openshift/sti-nodejs"
+          },
+          "contextDir": "0.10/test/test-app"
         },
         "strategy": {
           "type": "Source",
           "sourceStrategy": {
             "from": {
               "kind": "ImageStreamTag",
-              "namespace": "openshift",
-              "name": "nodejs:latest"
+              "name": "node:latest"
             },
-            "incremental": true
-          }
+            "scripts": "https://raw.githubusercontent.com/openshift/sti-nodejs/master/0.10/s2i/bin/"
+          },
+          "env": [
+            {
+              "name": "EXAMPLE",
+              "value": "sample-app"
+            }
+          ]
         },
         "output": {
           "to": {
             "kind": "ImageStreamTag",
-            "name": "origin-nodejs-sample:latest"
+            "name": "origin-ruby-sample:latest"
           }
         },
         "resources": {}
@@ -171,7 +180,7 @@
                     "value": "custom_value1"
                   }
                 ],
-                "containerName": "nodejs-helloworld"
+                "containerName": "ruby-helloworld"
               }
             },
             "post": {
@@ -186,7 +195,7 @@
                     "value": "custom_value2"
                   }
                 ],
-                "containerName": "nodejs-helloworld"
+                "containerName": "ruby-helloworld"
               }
             }
           },
@@ -198,13 +207,12 @@
             "imageChangeParams": {
               "automatic": true,
               "containerNames": [
-                "nodejs-helloworld"
+                "ruby-helloworld"
               ],
               "from": {
                 "kind": "ImageStreamTag",
-                "name": "origin-nodejs-sample:latest"
-              },
-              "lastTriggeredImage": ""
+                "name": "origin-ruby-sample:latest"
+              }
             }
           },
           {
@@ -225,8 +233,8 @@
           "spec": {
             "containers": [
               {
-                "name": "nodejs-helloworld",
-                "image": "origin-nodejs-sample",
+                "name": "ruby-helloworld",
+                "image": "origin-ruby-sample",
                 "ports": [
                   {
                     "containerPort": 8080,
@@ -243,22 +251,21 @@
                     "value": "${ADMIN_PASSWORD}"
                   },
                   {
-                    "name": "POSTGRESQL_USER",
-                    "value": "${POSTGRESQL_USER}"
+                    "name": "MYSQL_USER",
+                    "value": "${MYSQL_USER}"
                   },
                   {
-                    "name": "POSTGRESQL_PASSWORD",
-                    "value": "${POSTGRESQL_PASSWORD}"
+                    "name": "MYSQL_PASSWORD",
+                    "value": "${MYSQL_PASSWORD}"
                   },
                   {
-                    "name": "POSTGRESQL_DATABASE",
-                    "value": "${POSTGRESQL_DATABASE}"
+                    "name": "MYSQL_DATABASE",
+                    "value": "${MYSQL_DATABASE}"
                   }
                 ],
                 "resources": {},
                 "terminationMessagePath": "/dev/termination-log",
                 "imagePullPolicy": "IfNotPresent",
-                "capabilities": {},
                 "securityContext": {
                   "capabilities": {},
                   "privileged": false
@@ -266,8 +273,7 @@
               }
             ],
             "restartPolicy": "Always",
-            "dnsPolicy": "ClusterFirst",
-            "serviceAccount": ""
+            "dnsPolicy": "ClusterFirst"
           }
         }
       },
@@ -286,7 +292,7 @@
             "name": "db",
             "protocol": "TCP",
             "port": 5434,
-            "targetPort": 5432,
+            "targetPort": 3306,
             "nodePort": 0
           }
         ],
@@ -324,7 +330,7 @@
                     "value": "custom_value1"
                   }
                 ],
-                "containerName": "nodejs-helloworld-database"
+                "containerName": "ruby-helloworld-database"
               }
             },
             "post": {
@@ -339,7 +345,7 @@
                     "value": "custom_value2"
                   }
                 ],
-                "containerName": "nodejs-helloworld-database"
+                "containerName": "ruby-helloworld-database"
               }
             }
           },
@@ -364,32 +370,31 @@
           "spec": {
             "containers": [
               {
-                "name": "nodejs-helloworld-database",
-                "image": "registry.access.redhat.com/rhscl/postgresql-94-rhel7:latest",
+                "name": "ruby-helloworld-database",
+                "image": "openshift/mysql-55-centos7:latest",
                 "ports": [
                   {
-                    "containerPort": 5432,
+                    "containerPort": 3306,
                     "protocol": "TCP"
                   }
                 ],
                 "env": [
                   {
-                    "name": "POSTGRESQL_USER",
-                    "value": "${POSTGRESQL_USER}"
+                    "name": "MYSQL_USER",
+                    "value": "${MYSQL_USER}"
                   },
                   {
-                    "name": "POSTGRESQL_PASSWORD",
-                    "value": "${POSTGRESQL_PASSWORD}"
+                    "name": "MYSQL_PASSWORD",
+                    "value": "${MYSQL_PASSWORD}"
                   },
                   {
-                    "name": "POSTGRESQL_DATABASE",
-                    "value": "${POSTGRESQL_DATABASE}"
+                    "name": "MYSQL_DATABASE",
+                    "value": "${MYSQL_DATABASE}"
                   }
                 ],
                 "resources": {},
                 "terminationMessagePath": "/dev/termination-log",
-                "imagePullPolicy": "IfNotPresent",
-                "capabilities": {},
+                "imagePullPolicy": "Always",
                 "securityContext": {
                   "capabilities": {},
                   "privileged": false
@@ -397,8 +402,7 @@
               }
             ],
             "restartPolicy": "Always",
-            "dnsPolicy": "ClusterFirst",
-            "serviceAccount": ""
+            "dnsPolicy": "ClusterFirst"
           }
         }
       },
@@ -419,21 +423,24 @@
       "from": "[a-zA-Z0-9]{8}"
     },
     {
-      "name": "POSTGRESQL_USER",
+      "name": "MYSQL_USER",
       "description": "database username",
       "generate": "expression",
-      "from": "user[A-Z0-9]{3}"
+      "from": "user[A-Z0-9]{3}",
+      "required": true
     },
     {
-      "name": "POSTGRESQL_PASSWORD",
+      "name": "MYSQL_PASSWORD",
       "description": "database password",
       "generate": "expression",
-      "from": "[a-zA-Z0-9]{8}"
+      "from": "[a-zA-Z0-9]{8}",
+      "required": true
     },
     {
-      "name": "POSTGRESQL_DATABASE",
+      "name": "MYSQL_DATABASE",
       "description": "database name",
-      "value": "root"
+      "value": "root",
+      "required": true
     }
   ],
   "labels": {
