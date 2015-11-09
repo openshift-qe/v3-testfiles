@@ -1,0 +1,182 @@
+{
+  "kind": "Template",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "PVCs"
+  },
+  "objects": [
+     {
+        "kind": "PersistentVolumeClaim",
+        "apiVersion": "v1",
+        "metadata": {
+           "name": "template-pvc-1"
+        },
+        "spec": {
+           "accessModes": [
+              "ReadWriteOnce"
+           ],
+           "resources": {
+              "requests": {
+                 "storage": "1Gi"
+              }
+           }
+        }
+     },
+     {
+        "kind": "PersistentVolumeClaim",
+        "apiVersion": "v1",
+        "metadata": {
+           "name": "template-pvc-2"
+        },
+        "spec": {
+           "accessModes": [
+              "ReadWriteOnce"
+           ],
+           "resources": {
+              "requests": {
+                 "storage": "1Gi"
+              }
+           }
+        }
+     },
+     {
+        "kind": "PersistentVolumeClaim",
+        "apiVersion": "v1",
+        "metadata": {
+           "name": "template-pvc-3"
+        },
+        "spec": {
+           "accessModes": [
+              "ReadWriteOnce"
+           ],
+           "resources": {
+              "requests": {
+                 "storage": "1Gi"
+              }
+           }
+        }
+     },
+     {
+        "kind": "PersistentVolumeClaim",
+        "apiVersion": "v1",
+        "metadata": {
+           "name": "template-pvc-4"
+        },
+        "spec": {
+           "accessModes": [
+              "ReadWriteOnce"
+           ],
+           "resources": {
+              "requests": {
+                 "storage": "1Gi"
+              }
+           }
+        }
+     },
+     {
+        "kind": "PersistentVolumeClaim",
+        "apiVersion": "v1",
+        "metadata": {
+           "name": "template-pvc-5"
+        },
+        "spec": {
+           "accessModes": [
+              "ReadWriteOnce"
+           ],
+           "resources": {
+              "requests": {
+                 "storage": "1Gi"
+              }
+           }
+        }
+     },
+     {
+        "kind": "PersistentVolumeClaim",
+        "apiVersion": "v1",
+        "metadata": {
+           "name": "template-pvc-6"
+        },
+        "spec": {
+           "accessModes": [
+              "ReadWriteOnce"
+           ],
+           "resources": {
+              "requests": {
+                 "storage": "1Gi"
+              }
+           }
+        }
+     },
+     {
+        "kind": "PersistentVolumeClaim",
+        "apiVersion": "v1",
+        "metadata": {
+           "name": "template-pvc-7"
+        },
+        "spec": {
+           "accessModes": [
+              "ReadWriteOnce"
+           ],
+           "resources": {
+              "requests": {
+                 "storage": "1Gi"
+              }
+           }
+        }
+     },
+     {
+        "kind": "PersistentVolumeClaim",
+        "apiVersion": "v1",
+        "metadata": {
+           "name": "template-pvc-8"
+        },
+        "spec": {
+           "accessModes": [
+              "ReadWriteOnce"
+           ],
+           "resources": {
+              "requests": {
+                 "storage": "1Gi"
+              }
+           }
+        }
+     },
+     {
+        "kind": "PersistentVolumeClaim",
+        "apiVersion": "v1",
+        "metadata": {
+           "name": "template-pvc-9"
+        },
+        "spec": {
+           "accessModes": [
+              "ReadWriteOnce"
+           ],
+           "resources": {
+              "requests": {
+                 "storage": "1Gi"
+              }
+           }
+        }
+     },
+     {
+        "kind": "PersistentVolumeClaim",
+        "apiVersion": "v1",
+        "metadata": {
+           "name": "template-pvc-10"
+        },
+        "spec": {
+           "accessModes": [
+              "ReadWriteOnce"
+           ],
+           "resources": {
+              "requests": {
+                 "storage": "1Gi"
+              }
+           }
+        }
+     }
+  ],
+  "labels": {
+    "template": "PVs"
+  }
+}
