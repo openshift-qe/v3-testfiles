@@ -21,7 +21,7 @@ metadata:
   selfLink: /api/v1/securitycontextconstraints/scc-runasany
   uid: 139a1920-7ed9-11e5-86be-0e253a63af95
 runAsUser:
-  type: MustRunAsRange
+  type: RunAsAny
 seLinuxContext:
   type: RunAsAny
 supplementalGroups:
