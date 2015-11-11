@@ -24,8 +24,8 @@
         "volumes": [{
             "name": "pvol",
             "nfs": {
-                "server": "10.66.79.155",
-                "path": "/nfsshare",
+                "server": "10.66.79.133",
+                "path": "/jhou",
                 "readOnly": false
             }
         }]
