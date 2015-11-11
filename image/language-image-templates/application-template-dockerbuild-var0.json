@@ -2,12 +2,10 @@
   "kind": "Template",
   "apiVersion": "v1",
   "metadata": {
-    "name": "python-helloworld-sample",
+    "name": "ruby-helloworld-sample",
     "creationTimestamp": null,
     "annotations": {
-      "description": "This example shows how to create a simple python application in openshift origin v3",
-      "iconClass": "icon-python",
-      "tags": "instant-app,python,mysql"
+      "description": "This example shows how to create a simple ruby application in openshift origin v3"
     }
   },
   "objects": [
@@ -65,7 +63,7 @@
       "kind": "ImageStream",
       "apiVersion": "v1",
       "metadata": {
-        "name": "origin-python-sample",
+        "name": "origin-ruby-sample",
         "creationTimestamp": null
       },
       "spec": {},
@@ -77,11 +75,11 @@
       "kind": "ImageStream",
       "apiVersion": "v1",
       "metadata": {
-        "name": "python-33-rhel7",
+        "name": "ruby-20-rhel7",
         "creationTimestamp": null
       },
       "spec": {
-        "dockerImageRepository": "registry.access.redhat.com/openshift3/python-33-rhel7"
+        "dockerImageRepository": "registry.access.redhat.com/openshift3/ruby-20-rhel7"
       },
       "status": {
         "dockerImageRepository": ""
@@ -91,73 +89,63 @@
       "kind": "BuildConfig",
       "apiVersion": "v1",
       "metadata": {
-        "name": "python-sample-build",
+        "name": "ruby-sample-build",
         "creationTimestamp": null,
         "labels": {
-          "name": "python-sample-build"
+          "name": "ruby-sample-build"
         }
       },
       "spec": {
         "triggers": [
           {
-            "type": "GitHub",
+            "type": "github",
             "github": {
               "secret": "secret101"
             }
           },
           {
-            "type": "Generic",
+            "type": "generic",
             "generic": {
               "secret": "secret101"
             }
           },
           {
-            "type": "ImageChange",
+            "type": "imageChange",
             "imageChange": {}
+          },
+          {
+            "type": "ConfigChange"
           }
         ],
         "source": {
           "type": "Git",
           "git": {
-            "uri": "git://github.com/openshift/sti-python.git"
-          },
-         "contextDir": "3.3/test/standalone-test-app"
+            "uri": "git://github.com/openshift/ruby-hello-world.git"
+          }
         },
         "strategy": {
-          "type": "Source",
-          "sourceStrategy": {
+          "type": "Docker",
+          "dockerStrategy": {
             "from": {
               "kind": "ImageStreamTag",
-              "name": "python-33-rhel7:latest"
+              "name": "ruby-20-rhel7:latest"
             },
-            "env": [      
-            {
-              "name": "APP_FILE",
-              "value": "app.py"
-             },
-            {
-              "name": "APP_MODULE",
-              "value": "testapp:application"
-             },
-            {
-              "name": "APP_CONFIG",
-              "value": "3.3/test/setup-test-app"
-             },
-            {
-              "name": "DISABLE_COLLECTSTATIC",
-              "value": "false"
-             },
-            {
-              "name": "DISABLE_MIGRATE",
-              "value": "false"
-             }
-           ]
+            "env": [
+              {
+                "name": "EXAMPLE",
+                "value": "sample-app"
+              },
+               {
+                "name": "",
+                "value": ""
+              }
+            ]
           }
         },
         "output": {
           "to": {
             "kind": "ImageStreamTag",
-            "name": "origin-python-sample:latest"
+            "name": "origin-ruby-sample:latest"
           }
         },
         "resources": {}
@@ -179,37 +167,7 @@
           "rollingParams": {
             "updatePeriodSeconds": 1,
             "intervalSeconds": 1,
-            "timeoutSeconds": 120,
-            "pre": {
-              "failurePolicy": "Abort",
-              "execNewPod": {
-                "command": [
-                  "/bin/true"
-                ],
-                "env": [
-                  {
-                    "name": "CUSTOM_VAR1",
-                    "value": "custom_value1"
-                  }
-                ],
-                "containerName": "python-helloworld"
-              }
-            },
-            "post": {
-              "failurePolicy": "Ignore",
-              "execNewPod": {
-                "command": [
-                  "/bin/false"
-                ],
-                "env": [
-                  {
-                    "name": "CUSTOM_VAR2",
-                    "value": "custom_value2"
-                  }
-                ],
-                "containerName": "python-helloworld"
-              }
-            }
+            "timeoutSeconds": 120
           },
           "resources": {}
         },
@@ -219,12 +177,13 @@
             "imageChangeParams": {
               "automatic": true,
               "containerNames": [
-                "python-helloworld"
+                "ruby-helloworld"
               ],
               "from": {
                 "kind": "ImageStreamTag",
-                "name": "origin-python-sample:latest"
-              }
+                "name": "origin-ruby-sample:latest"
+              },
+              "lastTriggeredImage": ""
             }
           },
           {
@@ -245,8 +204,8 @@
           "spec": {
             "containers": [
               {
-                "name": "python-helloworld",
-                "image": "origin-python-sample",
+                "name": "ruby-helloworld",
+                "image": "origin-ruby-sample",
                 "ports": [
                   {
                     "containerPort": 8080,
@@ -278,6 +237,7 @@
                 "resources": {},
                 "terminationMessagePath": "/dev/termination-log",
                 "imagePullPolicy": "IfNotPresent",
+                "capabilities": {},
                 "securityContext": {
                   "capabilities": {},
                   "privileged": false
@@ -285,7 +245,8 @@
               }
             ],
             "restartPolicy": "Always",
-            "dnsPolicy": "ClusterFirst"
+            "dnsPolicy": "ClusterFirst",
+            "serviceAccount": ""
           }
         }
       },
@@ -329,38 +290,6 @@
       "spec": {
         "strategy": {
           "type": "Recreate",
-          "recreateParams": {
-            "pre": {
-              "failurePolicy": "Abort",
-              "execNewPod": {
-                "command": [
-                  "/bin/true"
-                ],
-                "env": [
-                  {
-                    "name": "CUSTOM_VAR1",
-                    "value": "custom_value1"
-                  }
-                ],
-                "containerName": "python-helloworld-database"
-              }
-            },
-            "post": {
-              "failurePolicy": "Ignore",
-              "execNewPod": {
-                "command": [
-                  "/bin/false"
-                ],
-                "env": [
-                  {
-                    "name": "CUSTOM_VAR2",
-                    "value": "custom_value2"
-                  }
-                ],
-                "containerName": "python-helloworld-database"
-              }
-            }
-          },
           "resources": {}
         },
         "triggers": [
@@ -382,7 +311,7 @@
           "spec": {
             "containers": [
               {
-                "name": "python-helloworld-database",
+                "name": "ruby-helloworld-database",
                 "image": "registry.access.redhat.com/openshift3/mysql-55-rhel7:latest",
                 "ports": [
                   {
@@ -406,7 +335,8 @@
                 ],
                 "resources": {},
                 "terminationMessagePath": "/dev/termination-log",
-                "imagePullPolicy": "Always",
+                "imagePullPolicy": "IfNotPresent",
+                "capabilities": {},
                 "securityContext": {
                   "capabilities": {},
                   "privileged": false
@@ -414,7 +344,8 @@
               }
             ],
             "restartPolicy": "Always",
-            "dnsPolicy": "ClusterFirst"
+            "dnsPolicy": "ClusterFirst",
+            "serviceAccount": ""
           }
         }
       },
@@ -453,6 +384,6 @@
     }
   ],
   "labels": {
-    "template": "application-template-stibuild"
+    "template": "application-template-dockerbuild"
   }
 }
