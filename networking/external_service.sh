@@ -62,5 +62,5 @@ clean_account
 
 clean_account
 service_to_external_service
-#service_to_other_pod
-#service_to_other_service
+service_to_other_pod
+service_to_other_service

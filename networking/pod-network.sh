@@ -107,7 +107,7 @@ function pod_make_global_by_selector() {
 }
 
 
-#pod_join_network
+pod_join_network
 pod_join_network_by_selector
-#pod_make_globel
+pod_make_globel
 pod_make_global_by_selector
