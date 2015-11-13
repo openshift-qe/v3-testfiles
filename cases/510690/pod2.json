@@ -1,8 +1,9 @@
+
 {
     "apiVersion": "v1",
     "kind": "Pod",
     "metadata": {
-        "name": "mypod1",
+        "name": "pod-510690-2",
         "labels": {
             "name": "frontendhttp"
         }
@@ -16,16 +17,23 @@
                 "containerPort": 80,
                 "name": "http-server"
             }],
+            "securityContext": {
+                "privileged": false
+            },
             "volumeMounts": [{
-                "mountPath": "/opt",
+                "mountPath": "/mnt/nfs",
                 "name": "pvol"
             }]
         }],
+        "securityContext": {
+            "runAsUser": 1000031001,
+            "supplementalGroups": [1000031021]
+        },
         "volumes": [{
             "name": "pvol",
             "nfs": {
                 "server": "10.66.79.133",
-                "path": "/jhou",
+                "path": "/home/data/510690/pv02",
                 "readOnly": false
             }
         }]

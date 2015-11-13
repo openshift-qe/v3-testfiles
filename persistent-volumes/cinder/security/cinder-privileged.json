@@ -2,7 +2,7 @@
   "kind": "Pod",
   "apiVersion": "v1",
   "metadata": {
-    "name": "gitrepo",
+    "name": "cinderpd",
     "creationTimestamp": null,
     "labels": {
       "name": "volume-test"
@@ -11,7 +11,7 @@
   "spec": {
     "containers": [
       {
-        "name": "c1",
+        "name": "cinder",
         "image": "jhou/hello-openshift",
         "ports": [
           {
@@ -22,19 +22,18 @@
         "resources": {},
         "volumeMounts": [
           {
-            "name":"gitrepo",
-            "mountPath":"/mnt/git"
+            "name":"cinder",
+            "mountPath":"/mnt/cinder"
           }
         ],
         "terminationMessagePath": "/dev/termination-log",
         "imagePullPolicy": "IfNotPresent",
         "securityContext": {
-          "privileged": false
+          "privileged": true
         }
       }
     ],
     "securityContext": {
-         "runAsUser": 1000130000,
          "fsGroup": 123456,
          "seLinuxOptions": {
             "level": "s0:c13,c2"
@@ -42,11 +41,11 @@
     },
     "volumes": [
       {
-        "name":"gitrepo",
-        "gitRepo": {
-            "repository": "https://github.com/jhou1/gitrepoVolume.git",
-            "revision": "5ead1a2fba0bd6af433beb8064ef4493b63e368c"
-        }
+          "name": "cinder",
+          "cinder": {
+              "volumeID": "614ac6ef-423d-490b-be4a-16fa829f20cc",
+              "fsType": "ext4"
+          }
       }
     ],
     "restartPolicy": "Always",

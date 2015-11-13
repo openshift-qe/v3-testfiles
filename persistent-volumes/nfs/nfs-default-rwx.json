@@ -10,8 +10,8 @@
     },
     "accessModes": [ "ReadWriteMany" ],
     "nfs": {
-        "path": "/nfsshare",
-        "server": "10.66.79.155"
+        "path": "/jhou",
+        "server": "10.66.79.133"
     },
     "persistentVolumeReclaimPolicy": "Default"
   }

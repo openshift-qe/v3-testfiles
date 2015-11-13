@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hostpath
+spec:
+  securityContext:
+    fsGroup: 123456
+  containers:
+  - name: a
+    image: jhou/hello-openshift
+    ports:
+      - containerPort: 8080
+        protocol: "TCP"
+    securityContext:
+      privileged: true
+    volumeMounts:
+      - mountPath: "/example/hostpath/a"
+        name: host-vol
+  - name: b
+    image: jhou/hello-openshift-fedora
+    ports:
+      - containerPort: 8081
+        protocol: "TCP"
+    securityContext:
+      privileged: true
+    volumeMounts:
+      - mountPath: "/example/hostpath/b"
+        name: host-vol
+  volumes:
+    - name: host-vol
+      hostPath:
+        path: "/tmp/example-pod"
+        readlOnly: false

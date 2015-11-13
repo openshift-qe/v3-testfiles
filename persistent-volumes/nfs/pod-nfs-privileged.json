@@ -2,7 +2,7 @@
     "apiVersion": "v1",
     "kind": "Pod",
     "metadata": {
-        "name": "mypod1",
+        "name": "nfs1",
         "labels": {
             "name": "frontendhttp"
         }
@@ -16,6 +16,9 @@
                 "containerPort": 80,
                 "name": "http-server"
             }],
+            "securityContext": {
+                "privileged": true
+            },
             "volumeMounts": [{
                 "mountPath": "/opt",
                 "name": "pvol"

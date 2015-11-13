@@ -8,11 +8,11 @@
     "capacity": {
         "storage": "5Gi"
     },
-    "accessModes": [ "ReadWriteOnce" ],
+    "accessModes": [ "ReadWriteMany" ],
     "nfs": {
         "path": "/jhou",
         "server": "10.66.79.133"
     },
-    "persistentVolumeReclaimPolicy": "Recycle"
+    "persistentVolumeReclaimPolicy": "Default"
   }
 }

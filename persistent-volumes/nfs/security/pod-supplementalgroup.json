@@ -2,7 +2,7 @@
     "apiVersion": "v1",
     "kind": "Pod",
     "metadata": {
-        "name": "mypod1",
+        "name": "nfs",
         "labels": {
             "name": "frontendhttp"
         }
@@ -17,16 +17,18 @@
                 "name": "http-server"
             }],
             "volumeMounts": [{
-                "mountPath": "/opt",
+                "mountPath": "/mnt/nfs",
                 "name": "pvol"
             }]
         }],
+        "securityContext": {
+	    "runAsUser": 1010101,
+	    "supplementalGroups": [65534]
+	},
         "volumes": [{
             "name": "pvol",
-            "nfs": {
-                "server": "10.66.79.133",
-                "path": "/jhou",
-                "readOnly": false
+            "persistentVolumeClaim": {
+                "claimName": "nfsc"
             }
         }]
     }

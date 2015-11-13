@@ -21,6 +21,10 @@
                 "name": "pvol"
             }]
         }],
+        "securityContext": {
+            "runAsUser": 1002234,
+            "supplementalGroups": [65534]
+        },
         "volumes": [{
             "name": "pvol",
             "nfs": {

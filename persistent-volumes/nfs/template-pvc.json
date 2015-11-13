@@ -177,6 +177,6 @@
      }
   ],
   "labels": {
-    "template": "PVs"
+    "template": "PVCs"
   }
 }
