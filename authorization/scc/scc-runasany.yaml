@@ -1,0 +1,28 @@
+llowHostDirVolumePlugin: false
+allowHostIPC: true
+allowHostNetwork: false
+allowHostPID: false
+allowHostPorts: false
+allowPrivilegedContainer: false
+allowedCapabilities: null
+apiVersion: v1
+fsGroup:
+  type: RunAsAny
+groups:
+- system:serviceaccounts
+- system:authenticated
+kind: SecurityContextConstraints
+metadata:
+  creationTimestamp: 2015-10-30T07:37:30Z
+  labels:
+    name: scc-runasany
+  name: scc-runasany
+  resourceVersion: "963"
+  selfLink: /api/v1/securitycontextconstraints/scc-runasany
+  uid: 139a1920-7ed9-11e5-86be-0e253a63af95
+runAsUser:
+  type: RunAsAny
+seLinuxContext:
+  type: RunAsAny
+supplementalGroups:
+  type: RunAsAny

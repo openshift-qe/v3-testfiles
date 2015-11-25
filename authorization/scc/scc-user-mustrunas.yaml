@@ -1,0 +1,35 @@
+llowHostDirVolumePlugin: false
+allowHostIPC: false
+allowHostNetwork: false
+allowHostPID: false
+allowHostPorts: false
+allowPrivilegedContainer: false
+allowedCapabilities: null
+apiVersion: v1
+fsGroup:
+  ranges:
+  - max: 1001
+    min: 1001
+  type: MustRunAs
+groups:
+- system:serviceaccounts
+- system:authenticated
+kind: SecurityContextConstraints
+metadata:
+  creationTimestamp: 2015-10-30T08:11:11Z
+  labels:
+    name: scc-user-mustrunas
+  name: scc-user-mustrunas
+  resourceVersion: "1893"
+  selfLink: /api/v1/securitycontextconstraints/scc-user-mustrunas
+  uid: c83b36fe-7edd-11e5-9c83-0e253a63af95
+runAsUser:
+  type: MustRunAs
+  uid: 1000
+seLinuxContext:
+  type: RunAsAny
+supplementalGroups:
+  ranges:
+  - max: 1000
+    min: 1000
+  type: MustRunAs

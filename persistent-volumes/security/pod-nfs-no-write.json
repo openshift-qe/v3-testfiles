@@ -1,0 +1,47 @@
+{
+    "apiVersion": "v1",
+    "kind": "Pod",
+    "metadata": {
+        "name": "mypod1",
+        "labels": {
+            "name": "frontendhttp"
+        }
+    },
+    "spec": {
+        "containers": [{
+            "name": "myfrontend",
+            "image": "jhou/hello-openshift",
+            "imagePullPolicy": "IfNotPresent",
+            "ports": [{
+                "containerPort": 80,
+                "name": "http-server"
+            }],
+            "securityContext": {
+                "privileged": false
+            },
+            "volumeMounts": [{
+                "mountPath": "/mnt/nfs",
+                "name": "pvol"
+            }]
+        }],
+        "securityContext": {
+            "supplementalGroups": [10000131],
+            "runAsUser": 1001,
+            "fsGroup": 4444,
+            "seLinuxOptions": {
+                "user": "system_u",
+                "role": "object_r",
+                "type": "svirt_sandbox_file_t",
+                "level": "s0"
+            }
+        },
+        "volumes": [{
+            "name": "pvol",
+            "nfs": {
+                "server": "10.66.79.133",
+                "path": "/jhou",
+                "readOnly": false
+            }
+        }]
+    }
+}

@@ -15,14 +15,14 @@ sshopts="-o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
 
 echo 'Creating user'
 ssh $sshopts root@$master <<EOF
-htpasswd -b /etc/openshift/htpasswd $user $password
+htpasswd -b /etc/origin/htpasswd $user $password
 oadm new-project $user
 oadm policy add-role-to-user admin $user
 oadm policy add-cluster-role-to-user cluster-admin $user
 EOF
 
 echo 'Copying ca cert'
-scp $sshopts root@$master:/etc/openshift/master/ca.crt ~/
+scp $sshopts root@$master:/etc/origin/master/ca.crt ~/
 
 rm -f ~/.config/openshift/config
 oc login $master:8443 --certificate-authority=$ca_dir/ca.crt -u $user -p $password

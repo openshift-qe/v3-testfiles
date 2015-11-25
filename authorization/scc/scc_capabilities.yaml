@@ -6,7 +6,7 @@ seLinuxContext:
   type: RunAsAny
 apiVersion: v1
 groups:
-- system:serviceaccounts
+- system:serviceaccounts:default
 kind: SecurityContextConstraints
 metadata:
   labels:

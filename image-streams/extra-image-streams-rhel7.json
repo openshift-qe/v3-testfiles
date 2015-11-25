@@ -11,7 +11,7 @@
         "creationTimestamp": null
       },
       "spec": {
-        "dockerImageRepository": "registry.access.redhat.com/openshift3/ruby-22-rhel7",
+        "dockerImageRepository": "registry.access.redhat.com/rhscl/ruby-22-rhel7",
         "tags": [
           {
             "name": "latest"
@@ -56,6 +56,29 @@
         ]
       }
     },
+        {
+      "kind": "ImageStream",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "wildfly",
+        "creationTimestamp": null
+      },
+      "spec": {
+        "dockerImageRepository": "registry.access.redhat.com/rhscl/wildfly-81-rhel7",
+        "tags": [
+          {
+            "name": "latest"
+          },
+          {
+            "name": "8.1",
+            "from": {
+              "Kind": "ImageStreamTag",
+              "Name": "latest"
+            }
+          }
+        ]
+      }
+    },
       {
       "kind": "ImageStream",
       "apiVersion": "v1",
@@ -87,7 +110,7 @@
         "creationTimestamp": null
       },
       "spec": {
-        "dockerImageRepository": "registry.access.redhat.com/openshift3/perl-520-rhel7",
+        "dockerImageRepository": "registry.access.redhat.com/rhscl/perl-520-rhel7",
         "tags": [
           {
             "name": "latest"
@@ -117,7 +140,7 @@
         "creationTimestamp": null
       },
       "spec": {
-        "dockerImageRepository": "registry.access.redhat.com/openshift3/php-56-rhel7",
+        "dockerImageRepository": "registry.access.redhat.com/rhscl/php-56-rhel7",
         "tags": [
           {
             "name": "latest"
@@ -147,7 +170,7 @@
         "creationTimestamp": null
       },
       "spec": {
-        "dockerImageRepository": "registry.access.redhat.com/openshift3/python-34-rhel7",
+        "dockerImageRepository": "registry.access.redhat.com/rhscl/python-34-rhel7",
         "tags": [
           {
             "name": "latest"
@@ -173,11 +196,41 @@
       "kind": "ImageStream",
       "apiVersion": "v1",
       "metadata": {
+        "name": "python",
+        "creationTimestamp": null
+      },
+      "spec": {
+        "dockerImageRepository": "registry.access.redhat.com/rhscl/python-27-rhel7",
+        "tags": [
+          {
+            "name": "latest"
+          },
+          {
+            "name": "2.7",
+            "annotations": {
+              "description": "Build and run Python 2.7 applications",
+              "iconClass": "icon-python",
+              "tags": "builder,python",
+              "supports":"python:2.7,python",
+              "version": "2.7"
+            },
+            "from": {
+              "Kind": "ImageStreamTag",
+              "Name": "latest"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "ImageStream",
+      "apiVersion": "v1",
+      "metadata": {
         "name": "mysql",
         "creationTimestamp": null
       },
       "spec": {
-        "dockerImageRepository": "registry.access.redhat.com/openshift3/mysql-56-rhel7",
+        "dockerImageRepository": "registry.access.redhat.com/rhscl/mysql-56-rhel7",
         "tags": [
           {
             "name": "latest"

@@ -1,0 +1,102 @@
+{
+  "kind": "Template",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "PVs"
+  },
+  "objects": [
+     {
+        "apiVersion": "v1",
+        "kind": "PersistentVolume",
+        "metadata": {
+           "name": "template-pv-1"
+        },
+        "spec": {
+           "capacity": {
+              "storage": "5Gi"
+           },
+           "accessModes": [ "ReadWriteOnce" ],
+           "nfs": {
+              "path": "/home/data/pv01",
+              "server": "localhost"
+           },
+           "persistentVolumeReclaimPolicy": "Recycle"
+        }
+     },
+     {
+        "apiVersion": "v1",
+        "kind": "PersistentVolume",
+        "metadata": {
+           "name": "template-pv-2"
+        },
+        "spec": {
+           "capacity": {
+              "storage": "5Gi"
+           },
+           "accessModes": [ "ReadWriteOnce" ],
+           "nfs": {
+              "path": "/home/data/pv02",
+              "server": "localhost"
+           },
+           "persistentVolumeReclaimPolicy": "Recycle"
+        }
+     },
+     {
+        "apiVersion": "v1",
+        "kind": "PersistentVolume",
+        "metadata": {
+           "name": "template-pv-3"
+        },
+        "spec": {
+           "capacity": {
+              "storage": "5Gi"
+           },
+           "accessModes": [ "ReadWriteOnce" ],
+           "nfs": {
+              "path": "/home/data/pv03",
+              "server": "localhost"
+           },
+           "persistentVolumeReclaimPolicy": "Recycle"
+        }
+     },
+     {
+        "apiVersion": "v1",
+        "kind": "PersistentVolume",
+        "metadata": {
+           "name": "template-pv-4"
+        },
+        "spec": {
+           "capacity": {
+              "storage": "5Gi"
+           },
+           "accessModes": [ "ReadWriteOnce" ],
+           "nfs": {
+              "path": "/home/data/pv04",
+              "server": "localhost"
+           },
+           "persistentVolumeReclaimPolicy": "Recycle"
+        }
+     },
+     {
+        "apiVersion": "v1",
+        "kind": "PersistentVolume",
+        "metadata": {
+           "name": "template-pv-5"
+        },
+        "spec": {
+           "capacity": {
+              "storage": "5Gi"
+           },
+           "accessModes": [ "ReadWriteOnce" ],
+           "nfs": {
+              "path": "/home/data/pv05",
+              "server": "localhost"
+           },
+           "persistentVolumeReclaimPolicy": "Recycle"
+        }
+     }
+  ],
+  "labels": {
+    "template": "PVs"
+  }
+}
