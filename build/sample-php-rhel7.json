@@ -47,7 +47,7 @@
         "creationTimestamp": null
       },
       "spec": {
-        "host": "www.example.com",
+        "host": "www.php.example.com",
         "to": {
           "kind": "Service",
           "name": "frontend"
@@ -127,7 +127,7 @@
           "sourceStrategy": {
             "from": {
               "kind": "ImageStreamTag",
-              "name": "php:latest",
+              "name": "php:5.5",
               "namespace":"openshift"
             }
           }

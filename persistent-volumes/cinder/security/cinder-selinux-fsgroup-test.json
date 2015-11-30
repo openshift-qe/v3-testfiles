@@ -1,0 +1,57 @@
+{
+  "kind": "Pod",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "cinderpd",
+    "creationTimestamp": null,
+    "labels": {
+      "name": "volume-test"
+    }
+  },
+  "spec": {
+    "containers": [
+      {
+        "name": "cinder",
+        "image": "jhou/hello-openshift",
+        "ports": [
+          {
+            "containerPort": 8080,
+            "protocol": "TCP"
+          }
+        ],
+        "resources": {},
+        "volumeMounts": [
+          {
+            "name":"cinder",
+            "mountPath":"/mnt/cinder"
+          }
+        ],
+        "terminationMessagePath": "/dev/termination-log",
+        "imagePullPolicy": "IfNotPresent",
+        "securityContext": {
+          "privileged": false
+        }
+      }
+    ],
+    "securityContext": {
+         "runAsUser": 101010,
+         "fsGroup": 123456,
+         "seLinuxOptions": {
+            "level": "s0:c13,c2"
+         }
+    },
+    "volumes": [
+      {
+          "name": "cinder",
+          "cinder": {
+              "volumeID": "614ac6ef-423d-490b-be4a-16fa829f20cc",
+              "fsType": "ext4"
+          }
+      }
+    ],
+    "restartPolicy": "Always",
+    "dnsPolicy": "ClusterFirst",
+    "serviceAccount": ""
+  },
+  "status": {}
+}

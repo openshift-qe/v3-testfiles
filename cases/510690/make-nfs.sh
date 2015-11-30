@@ -2,11 +2,8 @@
 
 CaseID='510690'
 
-if ! ( rpm -qa | grep -q nfs-utils )
-then
-  yum install -y nfs-utils
-fi
-
+# Run this on your NFS server
+# e.g, 10.66.79.133
 mkdir --parents /home/data/$CaseID/pv{01,02}
 
 chown -R 1000031001:nfsnobody  /home/data/$CaseID/pv01
@@ -26,8 +23,3 @@ done
 systemctl start rpcbind
 systemctl start nfs-server
 exportfs -a
-
-if ( getsebool virt_use_nfs | grep -q off )
-then
-  setsebool -P virt_use_nfs 1
-fi

@@ -15,7 +15,7 @@ sshopts="-o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
 
 echo 'Creating user'
 ssh $sshopts root@$master <<EOF
-htpasswd -b /etc/openshift/htpasswd $user $password
+htpasswd -b /etc/origin/htpasswd $user $password
 oadm new-project $user
 oadm policy add-role-to-user admin $user
 oadm policy add-cluster-role-to-user cluster-admin $user
