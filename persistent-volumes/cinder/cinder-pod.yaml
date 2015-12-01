@@ -9,7 +9,7 @@ spec:
     - resources:
         limits :
           cpu: 0.5
-      image: jhou/hello-openshift
+      image: aosqe/hello-openshift
       name: cinder
       ports: 
         - containerPort: 3306
