@@ -12,9 +12,6 @@
             "name": "myfrontend",
             "image": "aosqe/hello-openshift",
             "imagePullPolicy": "IfNotPresent",
-            "securityContext": {
-                  "capabilities": {}
-	    },
             "ports": [{
                 "containerPort": 80,
                 "name": "http-server"
@@ -24,6 +21,9 @@
                 "name": "pvol"
             }]
         }],
+        "securityContext": {
+            "fsGroup": 123456
+        },
         "volumes": [{
             "name": "pvol",
             "persistentVolumeClaim": {
