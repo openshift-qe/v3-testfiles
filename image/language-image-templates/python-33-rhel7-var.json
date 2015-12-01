@@ -128,7 +128,7 @@
           "sourceStrategy": {
             "from": {
               "kind": "ImageStreamTag",
-              "name": "python-33-rhel7:latest"
+              "name": "python-33-rhel7:3.3"
             },
             "env": [      
             {
