@@ -81,7 +81,7 @@
         "creationTimestamp": null
       },
       "spec": {
-        "dockerImageRepository": "registry.access.redhat.com/openshift3/python-33-rhel7"
+        "dockerImageRepository": ""
       },
       "status": {
         "dockerImageRepository": ""
@@ -128,7 +128,8 @@
           "sourceStrategy": {
             "from": {
               "kind": "ImageStreamTag",
-              "name": "python-33-rhel7:latest"
+              "namespace": "openshift",
+              "name": "python:3.3"
             },
             "env": [      
             {
