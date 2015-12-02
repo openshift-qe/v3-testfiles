@@ -129,7 +129,6 @@
               "kind": "ImageStreamTag",
               "name": "python:2.7",
               "namespace": "openshift"
-            
             },
            "env": [
              {
