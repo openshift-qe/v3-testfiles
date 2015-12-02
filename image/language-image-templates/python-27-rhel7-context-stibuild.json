@@ -127,8 +127,9 @@
           "type": "Source",
           "sourceStrategy": {
             "from": {
-              "kind": "DockerImage",
-              "name": "registry.access.redhat.com/rhscl/python-27-rhel7:latest"
+              "kind": "ImageStreamTag",
+              "namespace": "openshift",
+              "name": "python:2.7"
             }
           }
         },
