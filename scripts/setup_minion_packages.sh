@@ -12,5 +12,5 @@ ssh $sshopts root@$minion <<EOF
 yum install nfs-utils glusterfs glusterfs-fuse attr iscsi-initiator-utils -y
 echo '10.66.79.133 nfs-server' >> /etc/hosts
 echo '10.66.79.108 glusterfs-node01' >> /etc/hosts
-echo '10.66.79.154 glusterfs-node02' >> /etc/hosts
+echo '10.66.79.134 glusterfs-node02' >> /etc/hosts
 EOF
