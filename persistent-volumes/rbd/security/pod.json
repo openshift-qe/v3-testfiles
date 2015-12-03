@@ -1,0 +1,38 @@
+{
+    "apiVersion": "v1",
+    "kind": "Pod",
+    "metadata": {
+        "name": "rbdpd",
+        "labels": {
+            "name": "frontendhttp"
+        }
+    },
+    "spec": {
+        "containers": [{
+            "name": "myfrontend",
+            "image": "aosqe/hello-openshift",
+            "imagePullPolicy": "IfNotPresent",
+            "ports": [{
+                "containerPort": 80,
+                "name": "http-server"
+            }],
+            "volumeMounts": [{
+                "mountPath": "/mnt/rbd",
+                "name": "pvol"
+            }]
+        }],
+        "securityContext": {
+            "runAsUser": 1000180011,
+            "fsGroup": 123456,
+            "seLinuxContext": {
+                 "level": "s0:c13,c12"
+            }
+        },
+        "volumes": [{
+            "name": "pvol",
+            "persistentVolumeClaim": {
+                "claimName": "rbdc"
+            }
+        }]
+    }
+}
