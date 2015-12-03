@@ -119,7 +119,7 @@
         "source": {
           "type": "Git",
           "git": {
-            "uri": "git://github.com/mdshuai/nodejs-example.git"
+            "uri": "git://github.com/openshift-qe/nodejs-example.git"
           }
         },
         "strategy": {
