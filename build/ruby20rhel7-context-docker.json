@@ -5,9 +5,7 @@
     "name": "ruby-helloworld-sample",
     "creationTimestamp": null,
     "annotations": {
-      "description": "This example shows how to create a simple ruby application in openshift origin v3",
-      "iconClass": "icon-ruby",
-      "tags": "instant-app,ruby,mysql"
+      "description": "This example shows how to create a simple ruby application in openshift origin v3"
     }
   },
   "objects": [
@@ -64,7 +62,7 @@
       "kind": "ImageStream",
       "apiVersion": "v1",
       "metadata": {
-        "name": "origin-ruby22-sample",
+        "name": "origin-ruby20-sample",
         "creationTimestamp": null
       },
       "spec": {},
@@ -90,28 +88,28 @@
       "kind": "BuildConfig",
       "apiVersion": "v1",
       "metadata": {
-        "name": "ruby22-sample-build",
+        "name": "ruby20-sample-build",
         "creationTimestamp": null,
         "labels": {
-          "name": "ruby22-sample-build"
+          "name": "ruby20-sample-build"
         }
       },
       "spec": {
         "triggers": [
           {
-            "type": "GitHub",
+            "type": "github",
             "github": {
               "secret": "secret101"
             }
           },
           {
-            "type": "Generic",
+            "type": "generic",
             "generic": {
               "secret": "secret101"
             }
           },
           {
-            "type": "ImageChange",
+            "type": "imageChange",
             "imageChange": {}
           },
           {
@@ -121,29 +119,30 @@
         "source": {
           "type": "Git",
           "git": {
-            "uri": "https://github.com/openshift/ruby-hello-world.git"
-          }
+            "uri": "https://github.com/openshift-qe/ruby-hello-world-context.git"
+          },
+          "contextDir": "test"
         },
         "strategy": {
-          "type": "Source",
-          "sourceStrategy": {
+          "type": "Docker",
+          "dockerStrategy": {
             "from": {
               "kind": "ImageStreamTag",
-              "name": "ruby:2.2",
-              "name": "openshift"
-            }
-          },
-          "env": [
-            {
-              "name": "EXAMPLE",
-              "value": "sample-app"
-            }
-          ]
+              "name": "ruby:2.0",
+              "namespace": "openshift"
+            },
+            "env": [
+              {
+                "name": "EXAMPLE",
+                "value": "sample-app"
+              }
+            ]
+          }
         },
         "output": {
           "to": {
             "kind": "ImageStreamTag",
-            "name": "origin-ruby22-sample:latest"
+            "name": "origin-ruby20-sample:latest"
           }
         },
         "resources": {}
@@ -165,37 +164,7 @@
           "rollingParams": {
             "updatePeriodSeconds": 1,
             "intervalSeconds": 1,
-            "timeoutSeconds": 120,
-            "pre": {
-              "failurePolicy": "Abort",
-              "execNewPod": {
-                "command": [
-                  "/bin/true"
-                ],
-                "env": [
-                  {
-                    "name": "CUSTOM_VAR1",
-                    "value": "custom_value1"
-                  }
-                ],
-                "containerName": "ruby-helloworld"
-              }
-            },
-            "post": {
-              "failurePolicy": "Ignore",
-              "execNewPod": {
-                "command": [
-                  "/bin/false"
-                ],
-                "env": [
-                  {
-                    "name": "CUSTOM_VAR2",
-                    "value": "custom_value2"
-                  }
-                ],
-                "containerName": "ruby-helloworld"
-              }
-            }
+            "timeoutSeconds": 120
           },
           "resources": {}
         },
@@ -209,8 +178,9 @@
               ],
               "from": {
                 "kind": "ImageStreamTag",
-                "name": "origin-ruby22-sample:latest"
-              }
+                "name": "origin-ruby20-sample:latest"
+              },
+              "lastTriggeredImage": ""
             }
           },
           {
@@ -232,7 +202,7 @@
             "containers": [
               {
                 "name": "ruby-helloworld",
-                "image": "origin-ruby22-sample",
+                "image": "origin-ruby20-sample",
                 "ports": [
                   {
                     "containerPort": 8080,
@@ -264,6 +234,7 @@
                 "resources": {},
                 "terminationMessagePath": "/dev/termination-log",
                 "imagePullPolicy": "IfNotPresent",
+                "capabilities": {},
                 "securityContext": {
                   "capabilities": {},
                   "privileged": false
@@ -271,7 +242,8 @@
               }
             ],
             "restartPolicy": "Always",
-            "dnsPolicy": "ClusterFirst"
+            "dnsPolicy": "ClusterFirst",
+            "serviceAccount": ""
           }
         }
       },
@@ -315,38 +287,6 @@
       "spec": {
         "strategy": {
           "type": "Recreate",
-          "recreateParams": {
-            "pre": {
-              "failurePolicy": "Abort",
-              "execNewPod": {
-                "command": [
-                  "/bin/true"
-                ],
-                "env": [
-                  {
-                    "name": "CUSTOM_VAR1",
-                    "value": "custom_value1"
-                  }
-                ],
-                "containerName": "ruby-helloworld-database"
-              }
-            },
-            "post": {
-              "failurePolicy": "Ignore",
-              "execNewPod": {
-                "command": [
-                  "/bin/false"
-                ],
-                "env": [
-                  {
-                    "name": "CUSTOM_VAR2",
-                    "value": "custom_value2"
-                  }
-                ],
-                "containerName": "ruby-helloworld-database"
-              }
-            }
-          },
           "resources": {}
         },
         "triggers": [
@@ -392,7 +332,8 @@
                 ],
                 "resources": {},
                 "terminationMessagePath": "/dev/termination-log",
-                "imagePullPolicy": "Always",
+                "imagePullPolicy": "IfNotPresent",
+                "capabilities": {},
                 "securityContext": {
                   "capabilities": {},
                   "privileged": false
@@ -400,7 +341,8 @@
               }
             ],
             "restartPolicy": "Always",
-            "dnsPolicy": "ClusterFirst"
+            "dnsPolicy": "ClusterFirst",
+            "serviceAccount": ""
           }
         }
       },
@@ -424,24 +366,21 @@
       "name": "MYSQL_USER",
       "description": "database username",
       "generate": "expression",
-      "from": "user[A-Z0-9]{3}",
-      "required": true
+      "from": "user[A-Z0-9]{3}"
     },
     {
       "name": "MYSQL_PASSWORD",
       "description": "database password",
       "generate": "expression",
-      "from": "[a-zA-Z0-9]{8}",
-      "required": true
+      "from": "[a-zA-Z0-9]{8}"
     },
     {
       "name": "MYSQL_DATABASE",
       "description": "database name",
-      "value": "root",
-      "required": true
+      "value": "root"
     }
   ],
   "labels": {
-    "template": "application-template-stibuild"
+    "template": "application-template-dockerbuild"
   }
 }

@@ -122,7 +122,7 @@
         "source": {
           "type": "Git",
           "git": {
-            "uri": "https://github.com/wzheng1/php-example-app"
+            "uri": "https://github.com/openshift-qe/php-example-app"
           }
         },
         "strategy": {
