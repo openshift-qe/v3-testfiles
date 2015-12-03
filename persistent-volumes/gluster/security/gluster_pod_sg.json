@@ -8,7 +8,7 @@
         "containers": [
             {
                 "name": "glusterfs",
-                "image": "jhou/hello-openshift",
+                "image": "aosqe/hello-openshift",
                 "imagePullPolicy": "IfNotPresent",
                 "volumeMounts": [
                     {
@@ -19,9 +19,10 @@
             }
         ],
         "securityContext": {
-            "supplementalGroups": [1000160001,1000160002],
+            "runAsUser": 1000180022,
+            "supplementalGroups": [1000080001,1000180000,1000180001],
             "seLinuxOptions": {
-                "level": "s0"
+                "level": "s0:c13,c12"
             }
         },
         "volumes": [
