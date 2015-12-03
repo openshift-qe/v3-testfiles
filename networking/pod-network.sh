@@ -14,24 +14,29 @@ function check_admin_kubeconfig() {
 function access_in_pod() {
     pod_ips=`for i in 1 2 3 4; do oc get po -o yaml -n bmengu1p$i ; done | grep podIP | cut -d ':' -f 2 | sed ':a;N;s/\n//g;ta'`
     service_ips=`for i in 1 2 3 4 ; do oc get svc  -n bmengu1p$i ; done | awk '{print $2}' | grep -v CLUSTER | sed ':a;N;s/\n/ /g;ta'`
-    for i in 1 2
+    for i in 1 2 3 4
     do 
         oc project bmengu1p$i
         pod_name=`oc get po -n bmengu1p$i| grep test-rc | sed -n 1p | cut -d ' ' -f1`
         new_pod_name=`oc get po -n bmengu1p$i| grep new-test-rc | sed -n 1p | cut -d ' ' -f1`
+        echo "POD" >> $result_log 
         oc exec -t $pod_name -- bash -c "for ip in $pod_ips ; do curl --connect-timeout 1 \$ip:8080 ; done" >> $result_log
+        echo "SERVICE" >> $result_log
         oc exec -t $new_pod_name -- bash -c "for ip in $service_ips ; do curl --connect-timeout 1 \$ip:27017 ; done" >> $result_log
         echo >> $result_log
     done	
-    for k in 3 4 
-    do
-        oc project bmengu1p$k
-        pod_name=`oc get po -n bmengu1p$k| grep test-rc | sed -n 1p | cut -d ' ' -f1`
-        new_pod_name=`oc get po -n bmengu1p$k| grep new-test-rc | sed -n 1p | cut -d ' ' -f1`
-        oc exec -t $new_pod_name -- bash -c "for ip in $pod_ips ; do curl --connect-timeout 1 \$kp:8080 ; done" >> $result_log
-        oc exec -t $pod_name -- bash -c "for ip in $service_ips ; do curl --connect-timeout 1 \$kp:27017 ; done" >> $result_log                                                       
+}
+
+function access_service_in_pod() {
+    service_ips=`for i in 1 2 3 4 ; do oc get svc  -n bmengu1p$i ; done | awk '{print $2}' | grep -v CLUSTER | sed ':a;N;s/\n/ /g;ta'`
+    for i in 1 2 3 4
+    do 
+        oc project bmengu1p$i
+        pod_name=`oc get po -n bmengu1p$i| grep test-rc | sed -n 1p | cut -d ' ' -f1`
+        echo "SERVICE" >> $result_log
+        oc exec -t $pod_name -- bash -c "for ip in $service_ips ; do curl --connect-timeout 1 \$ip:27017 ; done" >> $result_log
         echo >> $result_log
-    done
+    done	
 }
 
 function clean_account() {
@@ -71,6 +76,7 @@ function project_join_network() {
 
     echo "access after create:" >> $result_log
     access_in_pod
+    access_service_in_pod
 
     oadm pod-network join-projects --to bmengu1p1 bmengu1p3 bmengu1p4 --config $admin_conf
     create_2nd_round
