@@ -10,7 +10,7 @@
     "spec": {
         "containers": [{
             "name": "myfrontend",
-            "image": "jhou/hello-openshift",
+            "image": "aosqe/hello-openshift",
             "imagePullPolicy": "IfNotPresent",
             "volumeMounts": [{
                 "mountPath": "/mnt/iscsi",
