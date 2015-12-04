@@ -1,0 +1,39 @@
+{
+    "apiVersion": "v1",
+    "kind": "Pod",
+    "metadata": {
+        "name": "iscsi",
+        "labels": {
+            "name": "iscsi"
+        }
+    },
+    "spec": {
+        "nodeSelector": {
+            "storage": "y"
+        },
+        "containers": [{
+            "name": "myfrontend",
+            "image": "jhou/hello-openshift",
+            "imagePullPolicy": "IfNotPresent",
+            "securityContext": {
+                "privileged": true
+            },
+            "volumeMounts": [{
+                "mountPath": "/mnt/iscsi",
+                "name": "iscsi"
+            }]
+        }],
+        "securityContext": {
+            "fsGroup": 123456,
+            "seLinuxOptions": {
+                "level": "s0:c13,c2"
+            }
+        },
+        "volumes": [{
+            "name": "iscsi",
+            "persistentVolumeClaim": {
+                "claimName": "iscsic"
+            }
+        }]
+    }
+}
