@@ -1,0 +1,40 @@
+{
+    "kind": "Pod",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "recycler"
+    },
+    "spec": {
+        "volumes": [
+            {
+                "name": "vol"
+            }
+        ],
+        "containers": [
+            {
+                "name": "pv-recycler",
+                "image": "docker.io/jhou/recycler",
+                "command": [
+                    "/bin/sh"
+                ],
+                "args": [
+                    "-c",
+                    "test -e /scrub \u0026\u0026 echo $(date) \u003e /scrub/trash.txt \u0026\u0026 rm -rf /scrub/* /scrub/.* \u0026\u0026 test -z \"$(ls -A /scrub)\" || exit 1"
+                ],
+                "resources": {},
+                "volumeMounts": [
+                    {
+                        "name": "vol",
+                        "mountPath": "/scrub"
+                    }
+                ],
+                "terminationMessagePath": "/dev/termination-log",
+                "imagePullPolicy": "IfNotPresent"
+            }
+        ],
+        "restartPolicy": "Never",
+        "terminationGracePeriodSeconds": 30,
+        "activeDeadlineSeconds": 300,
+        "securityContext": {}
+    }
+}
