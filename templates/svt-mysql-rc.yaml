@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: mysql-1
+spec:
+  replicas: 1
+  selector:
+    name: mysql
+  template:
+    metadata:
+      labels:
+        name: mysql
+    spec:
+      containers:
+      - env:
+        - name: MYSQL_USER
+          value: user789
+        - name: MYSQL_PASSWORD
+          value: mypass123
+        - name: MYSQL_NAME
+          value: sampledb
+        - name: MYSQL_HOST
+          value: mysql
+        image: openshift/mysql-56-centos7
+        imagePullPolicy: IfNotPresent
+        name: mysql
+        ports:
+        - containerPort: 3306
+          name: mysql
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        volumeMounts:
+        - mountPath: /var/lib/mysql/data
+          name: mysql-ephemeral-storage
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      securityContext: {}
+      volumes:
+      - emptyDir: {}
+        name: mysql-ephemeral-storage
