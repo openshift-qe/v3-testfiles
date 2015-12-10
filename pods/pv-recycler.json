@@ -14,7 +14,7 @@
         "containers": [
             {
                 "name": "pv-recycler",
-                "image": "docker.io/jhou/recycler",
+                "image": "docker.io/aosqe/recycler",
                 "command": [
                     "/bin/sh"
                 ],
