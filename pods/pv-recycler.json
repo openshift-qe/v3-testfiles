@@ -18,10 +18,7 @@
                 "command": [
                     "/bin/sh"
                 ],
-                "args": [
-                    "-c",
-                    "test -e /scrub \u0026\u0026 echo $(date) \u003e /scrub/trash.txt \u0026\u0026 rm -rf /scrub/* /scrub/.* \u0026\u0026 test -z \"$(ls -A /scrub)\" || exit 1"
-                ],
+                "args": [],
                 "resources": {},
                 "volumeMounts": [
                     {
