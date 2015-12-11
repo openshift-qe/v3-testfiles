@@ -13,8 +13,8 @@
     "allowHostDirVolumePlugin": true,
     "allowHostNetwork": true,
     "allowHostPorts": true,
-    "allowHostPID": true,
-    "allowHostIPC": true,
+    "allowHostPID": false,
+    "allowHostIPC": false,
     "seLinuxContext": {
         "type": "RunAsAny"
     },
