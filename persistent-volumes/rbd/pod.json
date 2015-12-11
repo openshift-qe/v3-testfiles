@@ -21,6 +21,9 @@
                 "name": "pvol"
             }]
         }],
+        "securityContext": {
+            "privileged": true
+        },
         "volumes": [{
             "name": "pvol",
             "persistentVolumeClaim": {
