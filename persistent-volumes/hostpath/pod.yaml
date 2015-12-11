@@ -12,7 +12,7 @@ spec:
         - containerPort: 80
           name: "http-server"
       volumeMounts:
-      - mountPath: "/mnt"
+      - mountPath: "/mnt/local"
         name: local
   volumes:
     - name: local
