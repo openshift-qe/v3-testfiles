@@ -10,7 +10,7 @@
     },
     "accessModes": [ "ReadWriteMany" ],
     "nfs": {
-        "path": "/jhou",
+        "path": "/jhou1",
         "server": "10.66.79.133"
     },
     "persistentVolumeReclaimPolicy": "Default"

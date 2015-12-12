@@ -23,7 +23,7 @@
         }],
         "securityContext": {
     	    "runAsUser": 101,
-    	    "supplementalGroups": [111111]
+    	    "supplementalGroups": [222222]
     	},
         "volumes": [{
             "name": "pvol",
