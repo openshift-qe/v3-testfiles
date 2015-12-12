@@ -2,13 +2,13 @@
     "apiVersion": "v1",
     "kind": "Pod",
     "metadata": {
-        "name": "glusterpd"
+        "name": "glusterpdneg"
     },
     "spec": {
         "containers": [
             {
                 "name": "glusterfs",
-                "image": "jhou/hello-openshift",
+                "image": "aosqe/hello-openshift",
                 "imagePullPolicy": "IfNotPresent",
                 "volumeMounts": [
                     {
