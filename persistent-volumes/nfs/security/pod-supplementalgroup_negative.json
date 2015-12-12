@@ -2,7 +2,7 @@
     "apiVersion": "v1",
     "kind": "Pod",
     "metadata": {
-        "name": "nfs_neg",
+        "name": "nfsneg",
         "labels": {
             "name": "frontendhttp"
         }
