@@ -19,11 +19,8 @@
             }
         ],
         "securityContext": {
-            "runAsUser": 1000180022,
-            "supplementalGroups": [1000080001,1000180000,1000180001],
-            "seLinuxOptions": {
-                "level": "s0:c13,c12"
-            }
+            "runAsUser": 101,
+            "supplementalGroups": [123456]
         },
         "volumes": [
             {
