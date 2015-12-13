@@ -19,6 +19,7 @@
             }
         ],
         "securityContext": {
+            "runAsUser": 111,
             "supplementalGroups": [1000160002],
             "seLinuxOptions": {
                 "level": "s0"
