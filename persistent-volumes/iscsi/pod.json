@@ -12,6 +12,9 @@
             "name": "myfrontend",
             "image": "aosqe/hello-openshift",
             "imagePullPolicy": "IfNotPresent",
+            "securityContext": {
+                "privileged": true
+            },
             "volumeMounts": [{
                 "mountPath": "/mnt/iscsi",
                 "name": "iscsi"
