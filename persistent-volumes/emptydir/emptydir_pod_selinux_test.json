@@ -59,6 +59,7 @@
     ],
     "securityContext": {
          "fsGroup": 123456,
+         "supplementalGroups": [654321],
          "seLinuxOptions": {
             "level": "s0:c13,c2"
          }
