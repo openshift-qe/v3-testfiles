@@ -10,7 +10,7 @@
     "spec": {
         "containers": [{
             "name": "myfrontend",
-            "image": "aosqe/hello-openshift",
+            "image": "jhou/hello-openshift",
             "imagePullPolicy": "IfNotPresent",
             "securityContext": {
                 "privileged": false
@@ -21,7 +21,10 @@
             }]
         }],
         "securityContext": {
-            "fsGroup": 654321
+            "fsGroup": 654321,
+            "seLinuxOptions": {
+                 "level": "s0"
+            }
         },
         "volumes": [{
             "name": "iscsi",
