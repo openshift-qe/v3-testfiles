@@ -66,7 +66,7 @@
         "name": "origin-ruby-sample",
         "creationTimestamp": null
       },
-      "spec": {"dockerImageRepository": "docker.io/aosqe/ruby-sample-docker"},
+      "spec": {"dockerImageRepository": ""},
       "status": {
         "dockerImageRepository": ""
       }
@@ -134,8 +134,8 @@
         },
         "output": {
           "to": {
-            "kind": "ImageStreamTag",
-            "name": "origin-ruby-sample:latest"
+            "kind": "DockerImage",
+            "name": "docker.io/aosqe/python-sample-docker:latest"
           },
           "pushSecret":{
              "name":"sec-push"
