@@ -21,7 +21,7 @@
             "name": "ceph-secret"
         },
         "secretFile": "/etc/ceph/admin.secret",
-        "readOnly": true
+        "readOnly": false
     },
     "persistentVolumeReclaimPolicy": "Default"
   }
