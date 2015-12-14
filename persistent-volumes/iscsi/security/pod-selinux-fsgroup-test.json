@@ -8,9 +8,6 @@
         }
     },
     "spec": {
-        "nodeSelector": {
-            "storage": "y"
-        },
         "containers": [{
             "name": "myfrontend",
             "image": "aosqe/hello-openshift",
