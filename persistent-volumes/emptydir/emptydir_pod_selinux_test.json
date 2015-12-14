@@ -2,7 +2,7 @@
   "kind": "Pod",
   "apiVersion": "v1",
   "metadata": {
-    "name": "emptydir-t",
+    "name": "emptydir",
     "creationTimestamp": null,
     "labels": {
       "name": "volume-test"
@@ -12,7 +12,7 @@
     "containers": [
       {
         "name": "c1",
-        "image": "jhou/hello-openshift",
+        "image": "aosqe/hello-openshift",
         "ports": [
           {
             "containerPort": 8080,
