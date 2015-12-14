@@ -17,6 +17,9 @@
                     "192.168.0.147:6789"
          ],
         "user": "admin",
+        "secretRef": {
+            "name": "ceph-secret"
+        },
         "secretFile": "/etc/ceph/admin.secret",
         "readOnly": false
     },
