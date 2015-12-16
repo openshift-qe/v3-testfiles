@@ -12,14 +12,14 @@
             "name": "myfrontend",
             "image": "aosqe/hello-openshift",
             "imagePullPolicy": "IfNotPresent",
-            "securityContext": {
-                "privileged": true
-            },
             "volumeMounts": [{
                 "mountPath": "/mnt/iscsi",
                 "name": "iscsi"
             }]
         }],
+        "securityContext": {
+            "fsGroup": 123456
+        },
         "volumes": [{
             "name": "iscsi",
             "persistentVolumeClaim": {
