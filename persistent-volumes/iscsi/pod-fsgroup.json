@@ -18,6 +18,7 @@
             }]
         }],
         "securityContext": {
+            "runAsUser": 1010,
             "fsGroup": 123456
         },
         "volumes": [{
