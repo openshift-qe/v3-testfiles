@@ -140,7 +140,7 @@
              },  
              {   
               "name": "DISABLE_ASSET_COMPILATION",
-              "value": "ture"
+              "value": "true"
              }
             ]  
           }
