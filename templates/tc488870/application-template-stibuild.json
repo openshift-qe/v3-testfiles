@@ -88,7 +88,7 @@
         "output": {
           "to": {
             "kind": "DockerImage",
-            "name": "docker.io/chunyunchen/python-sample-sti:${OUTPUT_IMAGE_TAG}"
+            "name": "docker.io/aosqe/python-sample-sti:${OUTPUT_IMAGE_TAG}"
           },
           "pushSecret":{
              "name":"sec-push"
