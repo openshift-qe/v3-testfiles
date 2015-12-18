@@ -1,0 +1,24 @@
+{
+  "kind": "Service",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "header-test-secure",
+    "labels": {
+      "name": "header-test-secure"
+    }
+  },
+  "spec": {
+    "ports": [
+      {
+        "name": "http",
+        "protocol": "TCP",
+        "port": 8443,
+        "targetPort": 8443
+      }
+    ],
+    "selector": {
+      "name": "header-test"
+    }
+  }
+}
+
