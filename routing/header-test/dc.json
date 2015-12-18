@@ -18,7 +18,7 @@
         "containers": [
           {
             "name": "header-test-container",
-            "image": "ramr/header-test",
+            "image": "aosqe/http-header-test",
             "ports": [
               {
                 "containerPort": 8080,
