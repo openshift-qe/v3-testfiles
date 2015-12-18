@@ -18,7 +18,7 @@
         "name": "python-sample-sti",
         "creationTimestamp": null
       },
-      "spec": {"dockerImageRepository": "docker.io/chunyunchen/python-sample-sti"},
+      "spec": {"dockerImageRepository": ""},
       "status": {
         "dockerImageRepository": ""
       }
@@ -87,8 +87,8 @@
         },
         "output": {
           "to": {
-            "kind": "ImageStreamTag",
-            "name": "python-sample-sti:${OUTPUT_IMAGE_TAG}"
+            "kind": "DockerImage",
+            "name": "docker.io/chunyunchen/python-sample-sti:${OUTPUT_IMAGE_TAG}"
           },
           "pushSecret":{
              "name":"sec-push"
