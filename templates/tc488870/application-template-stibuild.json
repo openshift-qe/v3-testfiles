@@ -20,7 +20,7 @@
       },
       "spec": {"dockerImageRepository": ""},
       "status": {
-        "dockerImageRepository": ""
+        "dockerImageRepository": "docker.io/aosqe/python-sample-sti"
       }
     },
     {
