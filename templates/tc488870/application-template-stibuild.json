@@ -18,9 +18,9 @@
         "name": "python-sample-sti",
         "creationTimestamp": null
       },
-      "spec": {"dockerImageRepository": "docker.io/chunyunchen/python-sample-sti"},
+      "spec": {"dockerImageRepository": ""},
       "status": {
-        "dockerImageRepository": ""
+        "dockerImageRepository": "docker.io/aosqe/python-sample-sti"
       }
     },
     {
@@ -87,8 +87,8 @@
         },
         "output": {
           "to": {
-            "kind": "ImageStreamTag",
-            "name": "python-sample-sti:${OUTPUT_IMAGE_TAG}"
+            "kind": "DockerImage",
+            "name": "docker.io/aosqe/python-sample-sti:${OUTPUT_IMAGE_TAG}"
           },
           "pushSecret":{
              "name":"sec-push"
