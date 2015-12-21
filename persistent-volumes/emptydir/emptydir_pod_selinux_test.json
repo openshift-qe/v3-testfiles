@@ -35,7 +35,7 @@
       },
       {
         "name": "c2",
-        "image": "jhou/hello-openshift-fedora",
+        "image": "jhou/hello-openshift-i",
         "ports": [
           {
             "containerPort": 8081,
@@ -59,10 +59,7 @@
     ],
     "securityContext": {
          "fsGroup": 123456,
-         "supplementalGroups": [654321],
-         "seLinuxOptions": {
-            "level": "s0:c13,c2"
-         }
+         "supplementalGroups": [654321]
     },
     "volumes": [
       {
