@@ -18,20 +18,20 @@
         "name": "python-sample-sti",
         "creationTimestamp": null
       },
-      "spec": {"dockerImageRepository": ""},
+      "spec": {"dockerImageRepository": "docker.io/aosqe/python-sample-sti"},
       "status": {
-        "dockerImageRepository": "docker.io/aosqe/python-sample-sti"
+        "dockerImageRepository": ""
       }
     },
     {
       "kind": "ImageStream",
       "apiVersion": "v1",
       "metadata": {
-        "name": "python-33-centos7-sti",
+        "name": "python-33-rhel7-sti",
         "creationTimestamp": null
       },
       "spec": {
-        "dockerImageRepository": "openshift/python-33-centos7"
+        "dockerImageRepository": "openshift/python-33-rhel7"
       },
       "status": {
         "dockerImageRepository": ""
@@ -81,7 +81,8 @@
           "sourceStrategy": {
             "from": {
               "kind": "ImageStreamTag",
-              "name": "python-33-centos7-sti:latest"
+              "name": "python:latest",
+              "namespace": "openshift"
             }
           }
         },
