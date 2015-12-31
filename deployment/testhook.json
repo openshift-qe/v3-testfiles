@@ -16,8 +16,9 @@
                     "failurePolicy": "Ignore",
                     "execNewPod": {
                         "command": [
-                            "/usr/bin/curl",
-                            "10.66.128.78/pre/"
+                             "/bin/bash",
+                             "-c",
+                             "/usr/bin/sleep 60"
                         ],
                         "env": [
                             {
@@ -25,15 +26,17 @@
                                 "value": "pre-deployment"
                             }
                         ],
-                        "containerName": "mysql-55-centos7"
+                        "volumes": ["dataem"],
+                        "containerName": "mysql-55-rhel7"
                     }
                 },
                 "post": {
                     "failurePolicy": "Retry",
                     "execNewPod": {
                         "command": [
-                            "/usr/bin/curl",
-                            "10.66.128.78/post/"
+                             "/bin/bash",
+                             "-c",
+                             "/usr/bin/sleep 60"
                         ],
                         "env": [
                             {
@@ -41,7 +44,8 @@
                                 "value": "post-deployment"
                             }
                         ],
-                        "containerName": "mysql-55-centos7"
+                        "volumes": ["dataem"],
+                        "containerName": "mysql-55-rhel7"
                     }
                 }
             },
@@ -64,10 +68,16 @@
                 }
             },
             "spec": {
+                "volumes": [
+                    {
+                        "name": "dataem",
+                        "emptyDir": {}
+                    }
+                ],
                 "containers": [
                     {
-                        "name": "mysql-55-centos7",
-                        "image": "openshift/mysql-55-centos7:latest",
+                        "name": "mysql-55-rhel7",
+                        "image": "openshift3/mysql-55-rhel7:latest",
                         "ports": [
                             {
                                 "containerPort": 3306,
@@ -89,6 +99,12 @@
                             }
                         ],
                         "resources": {},
+                        "volumeMounts": [
+                            {
+                                "name": "dataem",
+                                "mountPath": "/opt1empt"
+                            }
+                        ],
                         "terminationMessagePath": "/dev/termination-log",
                         "imagePullPolicy": "Always",
                         "securityContext": {
