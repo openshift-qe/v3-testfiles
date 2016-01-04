@@ -1,0 +1,68 @@
+{
+  "kind": "List",
+  "apiVersion": "v1",
+  "metadata": {},
+  "items": [
+    { 
+      "kind": "Service",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "ha-service"
+      },
+      "spec": {
+        "ports": [
+          { 
+            "protocol": "TCP",
+            "port": 9736,
+            "targetPort": 0,
+            "nodePort": 0
+          }
+        ],
+        "selector": {
+          "ha-service": "ha"
+        },
+        "type": "ClusterIP",
+        "sessionAffinity": "None"
+      }
+    },
+    { 
+      "kind": "ReplicationController",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "ha-service",
+        "labels": {
+          "ha-service": "ha"
+        }
+      },
+      "spec": {
+        "replicas": 2,
+        "template": {
+          "metadata": {
+            "labels": {
+              "ha-service": "ha"
+            }
+          },
+          "spec": {
+            "nodeSelector": {
+              "ha-service": "ha"
+            },
+            "containers": [
+              {
+                "name": "ha-service-container",
+                "image": "bmeng/hello-openshift",
+                "ports": [
+                  {
+                    "containerPort": 8080,
+                    "protocol": "TCP",
+                    "hostPort": 9736
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}
+
