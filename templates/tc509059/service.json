@@ -1,0 +1,32 @@
+{
+  "kind": "ServiceList",
+  "apiVersion": "v1",
+  "metadata": {},
+  "items": [{
+  "kind": "Service",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "kibana",
+        "creationTimestamp": null
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "web",
+            "protocol": "TCP",
+            "port": 9200,
+            "targetPort": 9200,
+            "nodePort": 0
+          }
+        ],
+        "selector": {
+          "name": "kinana"
+        },
+        "portalIP": "",
+        "type": "ClusterIP",
+        "sessionAffinity": "None"
+      },
+      "status": {
+        "loadBalancer": {}
+      }
+}]}
