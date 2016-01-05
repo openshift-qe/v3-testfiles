@@ -13,12 +13,12 @@
             "type": "Recreate",
             "recreateParams": {
                 "pre": {
-                    "failurePolicy": "Ignore",
+                    "failurePolicy": "Retry",
                     "execNewPod": {
                         "command": [
                              "/bin/bash",
                              "-c",
-                             "/usr/bin/sleep 60"
+                             "/usr/bin/sleep 200"
                         ],
                         "env": [
                             {
@@ -31,12 +31,10 @@
                     }
                 },
                 "post": {
-                    "failurePolicy": "Retry",
+                    "failurePolicy": "Ignore",
                     "execNewPod": {
                         "command": [
-                             "/bin/bash",
-                             "-c",
-                             "/usr/bin/sleep 60"
+                            "/bin/false"
                         ],
                         "env": [
                             {
@@ -44,7 +42,6 @@
                                 "value": "post-deployment"
                             }
                         ],
-                        "volumes": ["dataem"],
                         "containerName": "mysql-55-rhel7"
                     }
                 }
@@ -118,7 +115,5 @@
             }
         }
     },
-    "status": {
-       "latestVersion": 1
-   }
+    "status": {}
 }

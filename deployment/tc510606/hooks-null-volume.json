@@ -13,12 +13,12 @@
             "type": "Recreate",
             "recreateParams": {
                 "pre": {
-                    "failurePolicy": "Ignore",
+                    "failurePolicy": "Retry",
                     "execNewPod": {
                         "command": [
-                             "/bin/bash",
-                             "-c",
-                             "/usr/bin/sleep 60"
+                            "/bin/bash",
+                            "-c",
+                            "/usr/bin/sleep 200"
                         ],
                         "env": [
                             {
@@ -26,17 +26,15 @@
                                 "value": "pre-deployment"
                             }
                         ],
-                        "volumes": ["dataem"],
+                        "volumes": [""],
                         "containerName": "mysql-55-rhel7"
                     }
                 },
                 "post": {
-                    "failurePolicy": "Retry",
+                    "failurePolicy": "Ignore",
                     "execNewPod": {
                         "command": [
-                             "/bin/bash",
-                             "-c",
-                             "/usr/bin/sleep 60"
+                            "/bin/false"
                         ],
                         "env": [
                             {
@@ -44,7 +42,6 @@
                                 "value": "post-deployment"
                             }
                         ],
-                        "volumes": ["dataem"],
                         "containerName": "mysql-55-rhel7"
                     }
                 }
@@ -68,12 +65,6 @@
                 }
             },
             "spec": {
-                "volumes": [
-                    {
-                        "name": "dataem",
-                        "emptyDir": {}
-                    }
-                ],
                 "containers": [
                     {
                         "name": "mysql-55-rhel7",
@@ -99,12 +90,6 @@
                             }
                         ],
                         "resources": {},
-                        "volumeMounts": [
-                            {
-                                "name": "dataem",
-                                "mountPath": "/opt1empt"
-                            }
-                        ],
                         "terminationMessagePath": "/dev/termination-log",
                         "imagePullPolicy": "Always",
                         "securityContext": {
@@ -118,7 +103,5 @@
             }
         }
     },
-    "status": {
-       "latestVersion": 1
-   }
+    "status": {}
 }
