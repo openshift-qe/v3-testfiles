@@ -122,7 +122,7 @@
         "source": {
           "type": "Git",
           "git": {
-            "uri": "https://github.com/openshift/ruby-hello-world.git"
+            "uri": "https://github.com/openshift-qe/incremental-app.git"
           }
         },
         "strategy": {
@@ -130,7 +130,8 @@
           "sourceStrategy": {
             "from": {
               "kind": "ImageStreamTag",
-              "name": "ruby-20-centos7:latest"
+              "name": "ruby:2.0",
+              "namespace": "openshift" 
             },
             "incremental": true
           },
