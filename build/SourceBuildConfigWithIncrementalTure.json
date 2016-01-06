@@ -37,7 +37,7 @@
               "namespace": "openshift"
             }
           },
-        "incremental": true
+        "incremental": true,
         }
       }
     }
