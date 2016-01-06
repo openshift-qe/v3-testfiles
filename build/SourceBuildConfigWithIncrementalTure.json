@@ -35,8 +35,7 @@
               "kind": "ImageStreamTag",
               "name": "ruby:2.0",
               "namespace": "openshift"
-            },
-          "pullSecret": {"name" : "pull"}
+            }
           },
         "incremental": true
         }
