@@ -1,0 +1,32 @@
+{
+  "kind": "ServiceList",
+  "apiVersion": "v1",
+  "metadata": {},
+  "items": [{
+  "kind": "Service",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "heapster",
+        "creationTimestamp": null
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "web",
+            "protocol": "TCP",
+            "port": 5601,
+            "targetPort": 5601,
+            "nodePort": 0
+          }
+        ],
+        "selector": {
+          "name": "heapster"
+        },
+        "portalIP": "",
+        "type": "ClusterIP",
+        "sessionAffinity": "None"
+      },
+      "status": {
+        "loadBalancer": {}
+      }
+}]}
