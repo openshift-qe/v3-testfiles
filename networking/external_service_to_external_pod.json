@@ -16,10 +16,7 @@
                         "protocol": "TCP",
                         "targetPort": 8080
                     }
-                ],
-                "selector": {
-                    "name": "selector-less-service"
-                }
+                ]
             }
         },
         {
