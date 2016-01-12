@@ -1,0 +1,8 @@
+ global:
+   scrape_interval: "15s"  # This is for demo purposes, usually you’d use 60s
+ 
+ scrape_configs:
+   - job_name: "haproxy"
+     target_groups:
+     - targets:
+         - "nodeip:9101"
