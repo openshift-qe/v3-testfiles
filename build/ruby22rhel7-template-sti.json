@@ -130,7 +130,7 @@
             "from": {
               "kind": "ImageStreamTag",
               "name": "ruby:2.2",
-              "name": "openshift"
+              "namespace": "openshift"
             }
           },
           "env": [
