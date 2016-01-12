@@ -10,8 +10,8 @@
     },
     "accessModes": [ "ReadWriteOnce" ],
     "nfs": {
-        "path": "/jhou",
-        "server": "10.66.79.133"
+        "path": "/",
+        "server": "#NFS-Service-IP"
     },
     "persistentVolumeReclaimPolicy": "Recycle"
   }
