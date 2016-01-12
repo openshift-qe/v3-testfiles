@@ -8,9 +8,9 @@
         "spec": {
             "ports": [
                 {
-                    "port": 10086,
+                    "port": 21186,
                     "protocol": "TCP",
-                    "targetPort": 8080
+                    "targetPort": 8181
                  }
             ],
             "selector": {
