@@ -1,0 +1,17 @@
+allowHostDirVolumePlugin: true
+allowHostNetwork: true
+allowHostPorts: true
+allowPrivilegedContainer: true
+allowedCapabilities: null
+runAsUser:
+  type: RunAsAny
+seLinuxContext:
+  type: RunAsAny
+apiVersion: v1
+kind: SecurityContextConstraints
+metadata:
+  name: super-#ACCOUNT#
+groups:
+- system:serviceaccount:#NS#
+users:
+- #ACCOUNT#
