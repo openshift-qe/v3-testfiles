@@ -12,6 +12,6 @@ kind: SecurityContextConstraints
 metadata:
   name: super-#ACCOUNT#
 groups:
-- system:serviceaccount:#NS#
+- system:serviceaccounts:#NS#
 users:
 - #ACCOUNT#

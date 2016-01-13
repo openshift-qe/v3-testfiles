@@ -9,4 +9,4 @@ runAsUser:
 seLinuxContext:
   type: RunAsAny
 users:
-- system:serviceaccount:default:router
+- system:serviceaccounts:default:router
