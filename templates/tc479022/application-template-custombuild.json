@@ -137,7 +137,7 @@
               },
               {
                 "name": "http_proxy",
-                "value": "http://squid.apac.redhat.com:3128"
+                "value": "http://squid.example.com:3128"
               }
             ],
             "exposeDockerSocket": true
