@@ -602,6 +602,66 @@
           }
         ]
       }
+    },
+    {
+      "kind": "ImageStream",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "webserver30-tomcat8-openshift-aep",
+        "creationTimestamp": null
+      },
+      "spec": {
+        "dockerImageRepository": "$registry/builtimages/webserver30-tomcat8-openshift-aep",
+        "tags": [
+          {
+            "name": "latest"
+          },
+          {
+            "name": "webserver30-tomcat8-openshift-aep",
+            "annotations": {
+              "description": "JBoss Web Server 3.0 Tomcat 8 S2I images",
+              "iconClass": "icon-jboss",
+              "tags": "builder,tomcat,tomcat8,java,jboss,xpaas",
+              "supports": "tomcat8:3.0,tomcat:8,java:8",
+              "version": "1.1"
+            },
+            "from": {
+              "Kind": "ImageStreamTag",
+              "Name": "latest"
+            }
+          }
+        ]
+      }
+    }
+    {
+      "kind": "ImageStream",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "webserver30-tomcat7-openshift-aep",
+        "creationTimestamp": null
+      },
+      "spec": {
+        "dockerImageRepository": "$registry/builtimages/webserver30-tomcat7-openshift-aep",
+        "tags": [
+          {
+            "name": "latest"
+          },
+          {
+            "name": "webserver30-tomcat7-openshift-aep",
+            "annotations": {
+              "description": "JBoss Web Server 3.0 Tomcat 7 S2I images",
+              "iconClass": "icon-jboss",
+              "tags": "builder,tomcat,tomcat7,java,jboss,xpaas",
+              "supports": "tomcat7:3.0,tomcat:7,java:8",
+              "version": "1.1"
+            },
+            "from": {
+              "Kind": "ImageStreamTag",
+              "Name": "latest"
+            }
+          }
+        ]
+      }
     }
   ]
 }
