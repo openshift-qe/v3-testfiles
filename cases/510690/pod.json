@@ -1,0 +1,40 @@
+{
+    "apiVersion": "v1",
+    "kind": "Pod",
+    "metadata": {
+        "name": "#POD_NAME#",
+        "labels": {
+            "name": "frontendhttp"
+        }
+    },
+    "spec": {
+        "containers": [{
+            "name": "myfrontend",
+            "image": "aosqe/hello-openshift",
+            "imagePullPolicy": "IfNotPresent",
+            "ports": [{
+                "containerPort": 80,
+                "name": "http-server"
+            }],
+            "securityContext": {
+                "privileged": false
+            },
+            "volumeMounts": [{
+                "mountPath": "/mnt/nfs",
+                "name": "pvol"
+            }]
+        }],
+        "securityContext": {
+            "runAsUser": #USER_ID#,
+            "supplementalGroups": [#GROUP#]
+        },
+        "volumes": [{
+            "name": "pvol",
+            "nfs": {
+                "server": "10.66.79.133",
+                "path": "/home/data/510690",
+                "readOnly": false
+            }
+        }]
+    }
+}
