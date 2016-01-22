@@ -1,0 +1,105 @@
+{
+    "kind": "Pod",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "hello-openshift",
+        "labels": {
+            "name": "tc474047-mod1"
+        },
+        "annotations": {
+            "openshift.io/scc": "restricted"
+        }
+    },
+    "spec": {
+        "volumes": [
+            {
+                "name": "tmp",
+                "emptyDir": {}
+            },
+            {
+                "name": "default-token-a5v8u",
+                "secret": {
+                    "secretName": "default-token-a5v8u"
+                }
+            }
+        ],
+        "containers": [
+            {
+                "name": "hello-openshift",
+                "image": "openshift/hello-openshift",
+                "ports": [
+                    {
+                        "containerPort": 8080,
+                        "protocol": "TCP"
+                    }
+                ],
+                "resources": {},
+                "volumeMounts": [
+                    {
+                        "name": "tmp",
+                        "mountPath": "/tmp"
+                    },
+                    {
+                        "name": "default-token-a5v8u",
+                        "readOnly": true,
+                        "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount"
+                    }
+                ],
+                "terminationMessagePath": "/dev/termination-log",
+                "imagePullPolicy": "IfNotPresent",
+                "securityContext": {
+                    "privileged": false,
+                    "seLinuxOptions": {
+                        "level": "s0:c6,c0"
+                    },
+                    "runAsUser": 1000030000
+                }
+            }
+        ],
+        "restartPolicy": "Always",
+        "terminationGracePeriodSeconds": 30,
+        "dnsPolicy": "ClusterFirst",
+        "host": "ip-10-79-180-225.ec2.internal",
+        "serviceAccountName": "default",
+        "serviceAccount": "default",
+        "nodeName": "ip-10-79-180-225.ec2.internal",
+        "securityContext": {
+            "seLinuxOptions": {
+                "level": "s0:c6,c0"
+            }
+        },
+        "imagePullSecrets": [
+            {
+                "name": "default-dockercfg-51nih"
+            }
+        ]
+    },
+    "status": {
+        "phase": "Running",
+        "conditions": [
+            {
+                "type": "Ready",
+                "status": "True",
+                "lastProbeTime": null,
+                "lastTransitionTime": "2016-01-21T17:45:33Z"
+            }
+        ],
+        "hostIP": "10.79.180.225",
+        "podIP": "172.17.0.4",
+        "startTime": "2016-01-21T17:45:30Z",
+        "containerStatuses": [
+            {
+                "name": "hello-openshift",
+                "state": {
+                    "running": {
+                        "startedAt": "2016-01-21T17:45:33Z"
+                    }
+                },
+                "lastState": {},
+                "ready": true,
+                "restartCount": 0,
+                "image": "openshift/hello-openshift",
+            }
+        ]
+    }
+}
