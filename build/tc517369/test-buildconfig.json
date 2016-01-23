@@ -34,7 +34,7 @@
       "type": "Git",
       "git": {
         "uri": "https://github.com/openshift/ruby-hello-world.git"
-      }
+      },
       "SourceSecret":  { "Name": "mysecret" }
     },
     "strategy": {
