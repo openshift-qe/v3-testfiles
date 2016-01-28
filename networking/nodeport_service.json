@@ -19,7 +19,7 @@
             "image": "aosqe/hello-openshift",
             "ports": [
               {
-                "containerPort": 8080
+                "containerPort": 8081
               }
             ]
           }]
@@ -39,7 +39,7 @@
                             "protocol": "TCP",
                             "port": 27017,
                             "nodePort": 30000,
-                             "targetPort": 8080
+                             "targetPort": 8081
                            
                     }
             ],
