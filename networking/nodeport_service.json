@@ -38,10 +38,12 @@
                             "name": "http",
                             "protocol": "TCP",
                             "port": 27017,
+                            "nodePort": 30000,
                              "targetPort": 8081
                            
                     }
             ],
+            "type": "NodePort",
             "selector": {
                     "name": "hello-pod"
             }
@@ -49,3 +51,4 @@
     }
   ]
 }
+
