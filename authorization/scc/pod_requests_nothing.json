@@ -3,15 +3,15 @@
   "apiVersion":"v1",
 
   "metadata": {
-        "name": "hello-pod",
+        "name": "pod-request-nothing",
         "labels": {
-                "name": "hello-pod"
+                "name": "pod-request-nothing"
         }
   },
 
   "spec": {
       "containers": [{
-        "name": "hello-pod",
+        "name": "pod-request-nothing",
         "image": "bmeng/hello-openshift",
         "ports": [
           {

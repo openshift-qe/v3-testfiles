@@ -2,14 +2,14 @@
   "kind": "Pod",
   "apiVersion":"v1",
   "metadata": {
-        "name": "hello-pod",
+        "name": "pod-add-chown",
         "labels": {
-                "name": "hello-pod"
+                "name": "pod-add-chown"
         }
   },
   "spec": {
       "containers": [{
-        "name": "hello-pod",
+        "name": "pod-add-chown",
         "image": "bmeng/hello-openshift",
         "securityContext": {
                 "capabilities": {"ADD":["CHOWN"]}

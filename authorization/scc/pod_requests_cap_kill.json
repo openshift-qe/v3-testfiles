@@ -2,14 +2,14 @@
   "kind": "Pod",
   "apiVersion":"v1",
   "metadata": {
-        "name": "hello-pod",
+        "name": "pod-add-kill",
         "labels": {
-                "name": "hello-pod"
+                "name": "pod-add-kill"
         }
   },
   "spec": {
       "containers": [{
-        "name": "hello-pod",
+        "name": "pod-add-kill",
         "image": "bmeng/hello-openshift",
         "securityContext": {
                 "capabilities": {"ADD":["KILL"]}

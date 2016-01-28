@@ -3,15 +3,15 @@
   "apiVersion":"v1",
 
   "metadata": {
-        "name": "hello-pod",
+        "name": "pod-request-selinux",
         "labels": {
-                "name": "hello-pod"
+                "name": "pod-request-selinux"
         }
   },
 
   "spec": {
       "containers": [{
-        "name": "hello-pod",
+        "name": "pod-request-selinux",
         "image": "bmeng/hello-openshift",
         "ports": [
           {
