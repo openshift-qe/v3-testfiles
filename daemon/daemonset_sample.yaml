@@ -1,5 +1,5 @@
 kind: DaemonSet
-apiVersion: experimental/v1alpha1
+apiVersion: extensions/v1beta1
 metadata:
   labels:
     name: prometheus-node-exporter
