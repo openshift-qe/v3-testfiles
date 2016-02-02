@@ -74,20 +74,6 @@
       }
     },
     {
-      "kind": "ImageStream",
-      "apiVersion": "v1",
-      "metadata": {
-        "name": "nodejs-010-rhel7",
-        "creationTimestamp": null
-      },
-      "spec": {
-        "dockerImageRepository": ""
-      },
-      "status": {
-        "dockerImageRepository": ""
-      }
-    },
-    {
       "kind": "BuildConfig",
       "apiVersion": "v1",
       "metadata": {
@@ -114,6 +100,9 @@
           {
             "type": "imageChange",
             "imageChange": {}
+          },
+          {
+            "type": "ConfigChange"
           }
         ],
         "source": {
