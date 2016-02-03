@@ -1,0 +1,89 @@
+{
+    "kind": "List",
+    "apiVersion": "v1",
+    "metadata": {},
+    "items": [
+        {
+            "kind": "ReplicationController",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "test-rc",
+                "generation": 1,
+                "creationTimestamp": null,
+                "labels": {
+                    "name": "test-rc"
+                }
+            },
+            "spec": {
+                "replicas": 2,
+                "selector": {
+                    "name": "test-pods"
+                },
+                "template": {
+                    "metadata": {
+                        "creationTimestamp": null,
+                        "labels": {
+                            "name": "test-pods"
+                        }
+                    },
+                    "spec": {
+                        "containers": [
+                            {
+                                "name": "test-pod",
+                                "image": "bmeng/hello-openshift",
+                                "resources": {
+                                    "limits": {
+                                        "cpu": "1",
+                                        "memory": "800M"
+                                    },
+                                    "requests": {
+                                        "cpu": "1",
+                                        "memory": "800M"
+                                    }
+                                },
+                                "terminationMessagePath": "/dev/termination-log",
+                                "imagePullPolicy": "IfNotPresent"
+                            }
+                        ],
+                        "restartPolicy": "Always",
+                        "terminationGracePeriodSeconds": 30,
+                        "dnsPolicy": "ClusterFirst",
+                        "securityContext": {}
+                    }
+                }
+            },
+            "status": {
+                "replicas": 0
+            }
+        },
+        {
+            "kind": "Service",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "test-service",
+                "creationTimestamp": null,
+                "labels": {
+                    "name": "test-service"
+                }
+            },
+            "spec": {
+                "ports": [
+                    {
+                        "name": "http",
+                        "protocol": "TCP",
+                        "port": 27017,
+                        "targetPort": 8080
+                    }
+                ],
+                "selector": {
+                    "name": "test-pods"
+                },
+                "type": "ClusterIP",
+                "sessionAffinity": "None"
+            },
+            "status": {
+                "loadBalancer": {}
+            }
+        }
+    ]
+}
