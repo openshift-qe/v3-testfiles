@@ -3,24 +3,16 @@
   "apiVersion":"v1",
 
   "metadata": {
-        "name": "hello-nginx-docker",
+        "name": "hello-privileged",
         "labels": {
-                "name": "hello-nginx-docker"
+                "name": "hello-privileged"
         }
   },
 
   "spec": {
       "containers": [{
-        "name": "hello-nginx-docker-pod",
-        "image": "pweil/hello-nginx-docker",
-        "ports": [
-          {
-            "containerPort": 80
-          },
-          {
-            "containerPort": 443
-          }
-        ],
+        "name": "hello-privileged-pod",
+        "image": "aosqe/hello-openshift",
         "securityContext": {
                 "privileged":true
         }
