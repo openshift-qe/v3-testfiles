@@ -128,7 +128,6 @@
             "from": {
               "kind": "DockerImage",
               "name": "ruby:2.2",
-              "namespace": "openshift"
             },
             "env": [
               {
