@@ -26,8 +26,8 @@
               "version": "5.16"
             },
             "from": {
-              "Kind": "ImageStreamTag",
-              "Name": "latest"
+              "kind": "ImageStreamTag",
+              "name": "latest"
             }
           }
         ]
@@ -56,8 +56,8 @@
               "version": "5.16"
             },
             "from": {
-              "Kind": "ImageStreamTag",
-              "Name": "latest"
+              "kind": "ImageStreamTag",
+              "name": "latest"
             }
           }
         ]
@@ -86,8 +86,8 @@
               "version": "5.20"
             },
             "from": {
-              "Kind": "ImageStreamTag",
-              "Name": "latest"
+              "kind": "ImageStreamTag",
+              "name": "latest"
             }
           }
         ]
@@ -116,8 +116,8 @@
               "version": "5.20"
             },
             "from": {
-              "Kind": "ImageStreamTag",
-              "Name": "latest"
+              "kind": "ImageStreamTag",
+              "name": "latest"
             }
           }
         ]
@@ -146,8 +146,8 @@
               "version": "5.5"
             },
             "from": {
-              "Kind": "ImageStreamTag",
-              "Name": "latest"
+              "kind": "ImageStreamTag",
+              "name": "latest"
             }
           }
         ]
@@ -176,8 +176,8 @@
               "version": "5.5"
             },
             "from": {
-              "Kind": "ImageStreamTag",
-              "Name": "latest"
+              "kind": "ImageStreamTag",
+              "name": "latest"
             }
           }
         ]
@@ -206,8 +206,8 @@
               "version": "5.6"
             },
             "from": {
-              "Kind": "ImageStreamTag",
-              "Name": "latest"
+              "kind": "ImageStreamTag",
+              "name": "latest"
             }
           }
         ]
@@ -236,8 +236,8 @@
               "version": "5.6"
             },
             "from": {
-              "Kind": "ImageStreamTag",
-              "Name": "latest"
+              "kind": "ImageStreamTag",
+              "name": "latest"
             }
           }
         ]
@@ -266,8 +266,8 @@
               "version": "2.7"
             },
             "from": {
-              "Kind": "ImageStreamTag",
-              "Name": "latest"
+              "kind": "ImageStreamTag",
+              "name": "latest"
             }
           }
         ]
@@ -296,8 +296,8 @@
               "version": "2.7"
             },
             "from": {
-              "Kind": "ImageStreamTag",
-              "Name": "latest"
+              "kind": "ImageStreamTag",
+              "name": "latest"
             }
           }
         ]
@@ -326,8 +326,8 @@
               "version": "3.3"
             },
             "from": {
-              "Kind": "ImageStreamTag",
-              "Name": "latest"
+              "kind": "ImageStreamTag",
+              "name": "latest"
             }
           }
         ]
@@ -356,8 +356,8 @@
               "version": "3.3"
             },
             "from": {
-              "Kind": "ImageStreamTag",
-              "Name": "latest"
+              "kind": "ImageStreamTag",
+              "name": "latest"
             }
           }
         ]
@@ -386,8 +386,8 @@
               "version": "3.4"
             },
             "from": {
-              "Kind": "ImageStreamTag",
-              "Name": "latest"
+              "kind": "ImageStreamTag",
+              "name": "latest"
             }
           }
         ]
@@ -416,8 +416,8 @@
               "version": "3.4"
             },
             "from": {
-              "Kind": "ImageStreamTag",
-              "Name": "latest"
+              "kind": "ImageStreamTag",
+              "name": "latest"
             }
           }
         ]
@@ -446,8 +446,8 @@
               "version": "2.0"
             },
             "from": {
-              "Kind": "ImageStreamTag",
-              "Name": "latest"
+              "kind": "ImageStreamTag",
+              "name": "latest"
             }
           }
         ]
@@ -476,8 +476,8 @@
               "version": "2.0"
             },
             "from": {
-              "Kind": "ImageStreamTag",
-              "Name": "latest"
+              "kind": "ImageStreamTag",
+              "name": "latest"
             }
           }
         ]
@@ -506,8 +506,8 @@
               "version": "2.2"
             },
             "from": {
-              "Kind": "ImageStreamTag",
-              "Name": "latest"
+              "kind": "ImageStreamTag",
+              "name": "latest"
             }
           }
         ]
@@ -536,8 +536,8 @@
               "version": "2.2"
             },
             "from": {
-              "Kind": "ImageStreamTag",
-              "Name": "latest"
+              "kind": "ImageStreamTag",
+              "name": "latest"
             }
           }
         ]
@@ -566,8 +566,8 @@
               "version": "0.10"
             },
             "from": {
-              "Kind": "ImageStreamTag",
-              "Name": "latest"
+              "kind": "ImageStreamTag",
+              "name": "latest"
             }
           }
         ]
@@ -596,8 +596,8 @@
               "version": "0.10"
             },
             "from": {
-              "Kind": "ImageStreamTag",
-              "Name": "latest"
+              "kind": "ImageStreamTag",
+              "name": "latest"
             }
           }
         ]
@@ -626,13 +626,13 @@
               "version": "1.1"
             },
             "from": {
-              "Kind": "ImageStreamTag",
-              "Name": "latest"
+              "kind": "ImageStreamTag",
+              "name": "latest"
             }
           }
         ]
       }
-    }
+    },
     {
       "kind": "ImageStream",
       "apiVersion": "v1",
@@ -656,8 +656,8 @@
               "version": "1.1"
             },
             "from": {
-              "Kind": "ImageStreamTag",
-              "Name": "latest"
+              "kind": "ImageStreamTag",
+              "name": "latest"
             }
           }
         ]
