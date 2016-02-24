@@ -81,7 +81,7 @@
         "creationTimestamp": null
       },
       "spec": {
-        "dockerImageRepository": "chunyunchen/docker-node"
+        "dockerImageRepository": "docker.io/chunyunchen/docker-node"
       },
       "status": {
         "dockerImageRepository": ""
