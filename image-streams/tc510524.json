@@ -14,8 +14,8 @@
                               { "description": "test non-existen-image" },
                           "from":
                            {
-                               "Kind": "DockerImage",
-                                "Name": "aosqe/non-existen-image"
+                               "kind": "DockerImage",
+                               "name": "aosqe/non-existen-image"
                            }
                         }
              ]
