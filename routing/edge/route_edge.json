@@ -1,48 +1,19 @@
-apiVersion: v1
-kind: Route
-metadata:
-  name:  secured-edge-route
-spec:
-  host: www.edge.com
-  to:
-    kind: Service
-    name: hello-nginx
-  tls:
-    termination: edge
-    key: |
-      -----BEGIN RSA PRIVATE KEY-----
-      MIICWwIBAAKBgQDu4S3smZaFHxaSAeYIgDIRgwCQUM7RvYq50yGw0bZNae/KBpJ5
-      BrKheoU4r5skgB2vDoE7XaOEDw7c5d9iJmc0Q34bJuckt5MZpRPFTI2oJaiOKMZ5
-      aADK2q2nyJmCdx8mqsiQjD3ZDpz2+eRk0i3O6gZraTwsVQyeBppWcQCZ1QIDAQAB
-      AoGAK7P6yOyYgyZa5L+ALFH31whWlBCUpf69YJ3l7gmQBr245wcoyQeWqsBVmzdV
-      dOoThDFtJ0VMYx62I2fS5IwOGUE6o4LC/knYkNZ0VKfBc1srwAowWuS20bi7UgXe
-      kziPenkps/dS1sbkaHxkz/iX0cYomoqvknXLR+6vuBSQYMECQQD5fi9QAEK3iylT
-      t2mYxCyJaCIgTgVDwpdAduwyjdXH3FVm6Jrc6F72Iwt2ZKhoFaVOkqnKbYIYmeUa
-      nUVzTVz9AkEA9RwhsyY7BDKVbPbUzdVJoq0SyWQPxLljZVN/eohXgxeJuaTV72ms
-      RshrhJTdpkQuQyLHJOPSIjEYRtLcNHozuQJAG5W2CXRd7Ak44oau6DMYcYDP9R5r
-      OpizPG9pohVIg7Z6wswJA0+14CTzyX1LmWZ7Rnq0xyrgbXPmftDQsvTkyQJAXdRn
-      Ei2QagrzKMNUs3byuVOH3ZBweN5/LkrIgh+vYH+iOW7gdsX9LRuMDTTvpLZ0/z5Q
-      /c44ot4obPRLV8twAQJAXjZS1SAz3g2B9lVowGS6+y9KWCbVazu7hMJNmKz8EdxD
-      7YqIbAt1w5KWYQwSzo/QTgTrCJi6RMDch18MRsg/qA==
-      -----END RSA PRIVATE KEY-----
-    certificate: |
-      -----BEGIN CERTIFICATE-----
-      MIIDDTCCAfWgAwIBAgIBAzANBgkqhkiG9w0BAQUFADCBoTELMAkGA1UEBhMCVVMx
-      CzAJBgNVBAgMAlNDMRUwEwYDVQQHDAxEZWZhdWx0IENpdHkxHDAaBgNVBAoME0Rl
-      ZmF1bHQgQ29tcGFueSBMdGQxEDAOBgNVBAsMB1Rlc3QgQ0ExGjAYBgNVBAMMEXd3
-      dy5leGFtcGxlY2EuY29tMSIwIAYJKoZIhvcNAQkBFhNleGFtcGxlQGV4YW1wbGUu
-      Y29tMB4XDTE1MTExODEwMTIwMloXDTE2MTExNzEwMTIwMlowZzEVMBMGA1UEAwwM
-      d3d3LmVkZ2UuY29tMQswCQYDVQQIDAI4ODELMAkGA1UEBhMCODYxGTAXBgkqhkiG
-      9w0BCQEWCnJlZGhhdC5jb20xCzAJBgNVBAoMAjAwMQwwCgYDVQQLDANlc3QwgZ8w
-      DQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAO7hLeyZloUfFpIB5giAMhGDAJBQztG9
-      irnTIbDRtk1p78oGknkGsqF6hTivmySAHa8OgTtdo4QPDtzl32ImZzRDfhsm5yS3
-      kxmlE8VMjaglqI4oxnloAMrarafImYJ3HyaqyJCMPdkOnPb55GTSLc7qBmtpPCxV
-      DJ4GmlZxAJnVAgMBAAGjDTALMAkGA1UdEwQCMAAwDQYJKoZIhvcNAQEFBQADggEB
-      AF0yfZEC7G6FReA9SbqQU2fL4Je/UwQ+hzvb4SZGn0ostsHzPaNdQQ2nzB3Zvsq2
-      8Rs72YEqZu9x5yEMiGOgGwWm2086mL6Cbwz+BoTQA2g9+dBuyAaAp+TprSYlJTFu
-      m9n4UodIx0jbUFVutb6X/q1gIRXLF8xyDtk3FXw7H5GdPK0PAle3KGYneBgxI8xy
-      +nDfxW6PQsGU6b5l1Uz6jTPBuxj7yjX9ktCWIyk7nt8eHdy4gsV5rW41IEJwzub+
-      DB8C3Rt0SzWz5+xOix9NQ2b4/jsjQq5yISYcIo8dMCTslel6Pzsge6sCzWbfiWQ0
-      YjROWHVtJDPC5hA7jqYfNms=
-      -----END CERTIFICATE-----
-
+{
+  "apiVersion": "v1",
+  "kind": "Route",
+  "metadata": {
+    "name": "secured-edge-route"
+  },
+  "spec": {
+    "host": "www.edge.com",
+    "to": {
+      "kind": "Service",
+      "name": "hello-nginx"
+    },
+    "tls": {
+      "termination": "edge",
+      "key": "-----BEGIN RSA PRIVATE KEY-----\nMIICWwIBAAKBgQDu4S3smZaFHxaSAeYIgDIRgwCQUM7RvYq50yGw0bZNae/KBpJ5\nBrKheoU4r5skgB2vDoE7XaOEDw7c5d9iJmc0Q34bJuckt5MZpRPFTI2oJaiOKMZ5\naADK2q2nyJmCdx8mqsiQjD3ZDpz2+eRk0i3O6gZraTwsVQyeBppWcQCZ1QIDAQAB\nAoGAK7P6yOyYgyZa5L+ALFH31whWlBCUpf69YJ3l7gmQBr245wcoyQeWqsBVmzdV\ndOoThDFtJ0VMYx62I2fS5IwOGUE6o4LC/knYkNZ0VKfBc1srwAowWuS20bi7UgXe\nkziPenkps/dS1sbkaHxkz/iX0cYomoqvknXLR+6vuBSQYMECQQD5fi9QAEK3iylT\nt2mYxCyJaCIgTgVDwpdAduwyjdXH3FVm6Jrc6F72Iwt2ZKhoFaVOkqnKbYIYmeUa\nnUVzTVz9AkEA9RwhsyY7BDKVbPbUzdVJoq0SyWQPxLljZVN/eohXgxeJuaTV72ms\nRshrhJTdpkQuQyLHJOPSIjEYRtLcNHozuQJAG5W2CXRd7Ak44oau6DMYcYDP9R5r\nOpizPG9pohVIg7Z6wswJA0+14CTzyX1LmWZ7Rnq0xyrgbXPmftDQsvTkyQJAXdRn\nEi2QagrzKMNUs3byuVOH3ZBweN5/LkrIgh+vYH+iOW7gdsX9LRuMDTTvpLZ0/z5Q\n/c44ot4obPRLV8twAQJAXjZS1SAz3g2B9lVowGS6+y9KWCbVazu7hMJNmKz8EdxD\n7YqIbAt1w5KWYQwSzo/QTgTrCJi6RMDch18MRsg/qA==\n-----END RSA PRIVATE KEY-----\n",
+      "certificate": "-----BEGIN CERTIFICATE-----\nMIIDDTCCAfWgAwIBAgIBAzANBgkqhkiG9w0BAQUFADCBoTELMAkGA1UEBhMCVVMx\nCzAJBgNVBAgMAlNDMRUwEwYDVQQHDAxEZWZhdWx0IENpdHkxHDAaBgNVBAoME0Rl\nZmF1bHQgQ29tcGFueSBMdGQxEDAOBgNVBAsMB1Rlc3QgQ0ExGjAYBgNVBAMMEXd3\ndy5leGFtcGxlY2EuY29tMSIwIAYJKoZIhvcNAQkBFhNleGFtcGxlQGV4YW1wbGUu\nY29tMB4XDTE1MTExODEwMTIwMloXDTE2MTExNzEwMTIwMlowZzEVMBMGA1UEAwwM\nd3d3LmVkZ2UuY29tMQswCQYDVQQIDAI4ODELMAkGA1UEBhMCODYxGTAXBgkqhkiG\n9w0BCQEWCnJlZGhhdC5jb20xCzAJBgNVBAoMAjAwMQwwCgYDVQQLDANlc3QwgZ8w\nDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAO7hLeyZloUfFpIB5giAMhGDAJBQztG9\nirnTIbDRtk1p78oGknkGsqF6hTivmySAHa8OgTtdo4QPDtzl32ImZzRDfhsm5yS3\nkxmlE8VMjaglqI4oxnloAMrarafImYJ3HyaqyJCMPdkOnPb55GTSLc7qBmtpPCxV\nDJ4GmlZxAJnVAgMBAAGjDTALMAkGA1UdEwQCMAAwDQYJKoZIhvcNAQEFBQADggEB\nAF0yfZEC7G6FReA9SbqQU2fL4Je/UwQ+hzvb4SZGn0ostsHzPaNdQQ2nzB3Zvsq2\n8Rs72YEqZu9x5yEMiGOgGwWm2086mL6Cbwz+BoTQA2g9+dBuyAaAp+TprSYlJTFu\nm9n4UodIx0jbUFVutb6X/q1gIRXLF8xyDtk3FXw7H5GdPK0PAle3KGYneBgxI8xy\n+nDfxW6PQsGU6b5l1Uz6jTPBuxj7yjX9ktCWIyk7nt8eHdy4gsV5rW41IEJwzub+\nDB8C3Rt0SzWz5+xOix9NQ2b4/jsjQq5yISYcIo8dMCTslel6Pzsge6sCzWbfiWQ0\nYjROWHVtJDPC5hA7jqYfNms=\n-----END CERTIFICATE-----\n"
+    }
+  }
+}
