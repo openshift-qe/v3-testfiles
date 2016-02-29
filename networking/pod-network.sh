@@ -2,6 +2,15 @@
 admin_conf=./admin.kubeconfig
 result_log=./pod_network_log
 
+function check_whoami() {
+    if  [[ -n $KUBECONFIG ]]
+    then
+        echo -e "\e[1;31mDO NOT USE THE ADMIN CONFIG!!\e[0m"
+        exit 1
+    fi
+}
+
+
 function check_admin_kubeconfig() {
     oc get po --config $admin_conf
     if [ $? -ne 0 ]
@@ -139,6 +148,7 @@ function make_project_global_by_selector() {
 }
 
 rm -rf $result_log
+check_whoami
 check_admin_kubeconfig
 project_join_network
 project_join_network_by_selector
