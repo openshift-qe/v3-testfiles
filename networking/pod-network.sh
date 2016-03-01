@@ -68,6 +68,7 @@ function create_1st_round() {
     done
 	
     sleep 10
+    wait_for_running       
 }
 
 function create_2nd_round() {
