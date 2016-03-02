@@ -29,9 +29,9 @@ function access_in_pod() {
         pod_name=`oc get po -n bmengu1p$i| grep test-rc | sed -n 1p | cut -d ' ' -f1`
         new_pod_name=`oc get po -n bmengu1p$i| grep new-test-rc | sed -n 1p | cut -d ' ' -f1`
         echo "POD" >> $result_log 
-        oc exec -t $pod_name -- bash -c "for ip in $pod_ips ; do curl --connect-timeout 1 \$ip:8080 ; done" >> $result_log
+        oc exec -t $pod_name -- bash -c "for ip in $pod_ips ; do curl --connect-timeout 2 \$ip:8080 ; done" >> $result_log
         echo "SERVICE" >> $result_log
-        oc exec -t $new_pod_name -- bash -c "for ip in $service_ips ; do curl --connect-timeout 1 \$ip:27017 ; done" >> $result_log
+        oc exec -t $new_pod_name -- bash -c "for ip in $service_ips ; do curl --connect-timeout 2 \$ip:27017 ; done" >> $result_log
         echo >> $result_log
     done	
 }
