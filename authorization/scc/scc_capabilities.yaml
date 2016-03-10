@@ -1,4 +1,5 @@
 allowedCapabilities:
+- FSEDIT
 - KILL
 runAsUser:
   type: RunAsAny
