@@ -1,0 +1,19 @@
+{
+  "kind": "Pod",
+  "apiVersion":"v1",
+  "metadata": {
+        "name": "pod-add-fsedit",
+        "labels": {
+                "name": "pod-add-fsedit"
+        }
+  },
+  "spec": {
+      "containers": [{
+        "name": "pod-add-fsedit",
+        "image": "bmeng/hello-openshift",
+        "securityContext": {
+                "capabilities": {"ADD":["FSEDIT"]}
+        }
+      }]
+  }
+}
