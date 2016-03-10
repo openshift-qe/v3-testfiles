@@ -12,7 +12,7 @@
         "name": "pod-add-chown",
         "image": "bmeng/hello-openshift",
         "securityContext": {
-                "capabilities": {"ADD":["CHOWN"]}
+                "capabilities": {"add":["CHOWN"]}
         }
       }]
   }

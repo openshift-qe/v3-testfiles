@@ -12,7 +12,7 @@
         "name": "pod-add-fsetid",
         "image": "bmeng/hello-openshift",
         "securityContext": {
-                "capabilities": {"ADD":["FSETID"]}
+                "capabilities": {"add":["FSETID"]}
         }
       }]
   }
