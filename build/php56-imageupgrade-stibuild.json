@@ -81,7 +81,7 @@
         "creationTimestamp": null
       },
       "spec": {
-        "dockerImageRepository": "registry.access.redhat.com:5000/openshift3/php-56-rhel7"
+        "dockerImageRepository": "registry.access.redhat.com:5000/rhscl/php-56-rhel7"
       },
       "status": {
         "dockerImageRepository": ""
