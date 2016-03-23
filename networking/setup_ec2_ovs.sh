@@ -55,7 +55,7 @@ function install_latest_origin() {
         make clean build
         cp _output/local/bin/linux/amd64/* /usr/bin/
         popd
-        "
+        " &
     done
 }
 
