@@ -77,7 +77,7 @@
       "kind": "ImageStream",
       "apiVersion": "v1",
       "metadata": {
-        "name": "php55-rhel7",
+        "name": "php-55-rhel7",
         "creationTimestamp": null
       },
       "spec": {
