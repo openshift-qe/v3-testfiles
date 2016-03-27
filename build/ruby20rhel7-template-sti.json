@@ -77,11 +77,11 @@
       "kind": "ImageStream",
       "apiVersion": "v1",
       "metadata": {
-        "name": "ruby-22-centos7",
+        "name": "ruby-22-rhel7",
         "creationTimestamp": null
       },
       "spec": {
-        "dockerImageRepository": "centos/ruby-22-centos7"
+        "dockerImageRepository": "registry.access.redhat.com/rhscl/ruby-22-rhel7"
       },
       "status": {
         "dockerImageRepository": ""
@@ -391,7 +391,7 @@
             "containers": [
               {
                 "name": "ruby-helloworld-database",
-                "image": "openshift/mysql-55-centos7:latest",
+                "image": "registry.access.redhat.com/openshift3/mysql-55-rhel7",
                 "ports": [
                   {
                     "containerPort": 3306,

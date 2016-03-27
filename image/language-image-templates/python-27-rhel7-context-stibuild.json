@@ -131,7 +131,8 @@
           "sourceStrategy": {
             "from": {
               "kind": "ImageStreamTag",
-              "name": "python-27-rhel7:latest"
+              "name": "python:2.7",
+              "namespace": "openshift"
             },
             "env": [
               {
@@ -390,7 +391,7 @@
             "containers": [
               {
                 "name": "python-helloworld-database",
-                "image": "openshift/mysql-55-centos7:latest",
+                "image": "registry.access.redhat.com/openshift3/mysql-55-rhel7",
                 "ports": [
                   {
                     "containerPort": 3306,
