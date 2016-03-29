@@ -85,7 +85,7 @@
       "status": {
         "dockerImageRepository": ""
       }
-
+     },
     {
       "kind": "BuildConfig",
       "apiVersion": "v1",

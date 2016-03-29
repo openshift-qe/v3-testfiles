@@ -130,7 +130,7 @@
           "sourceStrategy": {
             "from": {
               "kind": "ImageStreamTag",
-              "name": "perl-516-rhel7:latest",
+              "name": "perl-516-rhel7:latest"
             },
             "forcePull": true,
             "env": [

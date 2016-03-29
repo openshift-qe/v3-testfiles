@@ -129,7 +129,7 @@
           "sourceStrategy": {
             "from": {
               "kind": "ImageStreamTag",
-              "name": "ruby-20-rhel7:latest",
+              "name": "ruby-20-rhel7:latest"
             },
             "forcePull": true,
             "env": [
