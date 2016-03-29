@@ -254,11 +254,25 @@
                   }
                 ],
                 "resources": {},
+                "volumeMounts": [
+                  {
+                    "name": "ruby-helloworld-data",
+                    "mountPath": "/var/lib/mysql/data"
+                  }
+                ],
                 "terminationMessagePath": "/dev/termination-log",
                 "imagePullPolicy": "IfNotPresent",
                 "securityContext": {
                   "capabilities": {},
                   "privileged": false
+                }
+              }
+            ],
+               "volumes": [
+              {
+                "name": "ruby-helloworld-data",
+                "emptyDir": {
+                  "medium": ""
                 }
               }
             ],
@@ -320,7 +334,8 @@
                     "value": "custom_value1"
                   }
                 ],
-                "containerName": "python-helloworld-database"
+                "containerName": "python-helloworld-database",
+                "volumes": ["python-helloworld-data"]
               }
             },
             "post": {
@@ -335,7 +350,8 @@
                     "value": "custom_value2"
                   }
                 ],
-                "containerName": "python-helloworld-database"
+                "containerName": "python-helloworld-database",
+                "volumes": ["python-helloworld-data"]
               }
             }
           },
@@ -383,11 +399,25 @@
                   }
                 ],
                 "resources": {},
+                "volumeMounts": [
+                  {
+                    "name": "python-helloworld-data",
+                    "mountPath": "/var/lib/mysql/data"
+                  }
+                ],
                 "terminationMessagePath": "/dev/termination-log",
                 "imagePullPolicy": "Always",
                 "securityContext": {
                   "capabilities": {},
                   "privileged": false
+                }
+              }
+            ],
+               "volumes": [
+              {
+                "name": "python-helloworld-data",
+                "emptyDir": {
+                  "medium": ""
                 }
               }
             ],
