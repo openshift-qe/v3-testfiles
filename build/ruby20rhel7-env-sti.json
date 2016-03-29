@@ -77,11 +77,11 @@
       "kind": "ImageStream",
       "apiVersion": "v1",
       "metadata": {
-        "name": "ruby-20-rhel7",
+        "name": "ruby-22-rhel7",
         "creationTimestamp": null
       },
       "spec": {
-        "dockerImageRepository": "registry.access.redhat.com/openshift3/ruby-20-rhel7"
+        "dockerImageRepository": "registry.access.redhat.com/rhscl/ruby-22-rhel7"
       },
       "status": {
         "dockerImageRepository": ""
@@ -131,18 +131,22 @@
             "from": {
               "kind": "ImageStreamTag",
               "name": "ruby:2.0",
-              "namespace": "openshift"
+              "namespace" : "openshift"
             },
-         "env": [
-             {   
+            "env": [
+              {
+                "name": "EXAMPLE",
+                "value": "sample-app"
+              },
+              {
               "name": "RAILS_ENV",
               "value": "production"
-             },  
-             {   
+             },
+             {
               "name": "DISABLE_ASSET_COMPILATION",
               "value": "true"
              }
-            ]  
+            ]
           }
         },
         "output": {
@@ -150,6 +154,9 @@
             "kind": "ImageStreamTag",
             "name": "origin-ruby-sample:latest"
           }
+        },
+        "postCommit": {
+          "args": ["bundle", "exec", "rake", "test"]
         },
         "resources": {}
       },
@@ -333,7 +340,24 @@
                     "value": "custom_value1"
                   }
                 ],
-                "containerName": "ruby-helloworld-database"
+                "containerName": "ruby-helloworld-database",
+                "volumes": ["ruby-helloworld-data"]
+              }
+            },
+            "mid": {
+              "failurePolicy": "Abort",
+              "execNewPod": {
+                "command": [
+                  "/bin/true"
+                ],
+                "env": [
+                  {
+                    "name": "CUSTOM_VAR2",
+                    "value": "custom_value2"
+                  }
+                ],
+                "containerName": "ruby-helloworld-database",
+                "volumes": ["ruby-helloworld-data"]
               }
             },
             "post": {
@@ -348,7 +372,8 @@
                     "value": "custom_value2"
                   }
                 ],
-                "containerName": "ruby-helloworld-database"
+                "containerName": "ruby-helloworld-database",
+                "volumes": ["ruby-helloworld-data"]
               }
             }
           },
@@ -374,7 +399,7 @@
             "containers": [
               {
                 "name": "ruby-helloworld-database",
-                "image": "openshift/mysql-55-centos7:latest",
+                "image": "registry.access.redhat.com/openshift3/mysql-55-rhel7",
                 "ports": [
                   {
                     "containerPort": 3306,
@@ -396,11 +421,25 @@
                   }
                 ],
                 "resources": {},
+                "volumeMounts": [
+                  {
+                    "name": "ruby-helloworld-data",
+                    "mountPath": "/var/lib/mysql/data"
+                  }
+                ],
                 "terminationMessagePath": "/dev/termination-log",
                 "imagePullPolicy": "Always",
                 "securityContext": {
                   "capabilities": {},
                   "privileged": false
+                }
+              }
+            ],
+            "volumes": [
+              {
+                "name": "ruby-helloworld-data",
+                "emptyDir": {
+                  "medium": ""
                 }
               }
             ],

@@ -81,7 +81,7 @@
         "creationTimestamp": null
       },
       "spec": {
-        "dockerImageRepository": ""
+        "dockerImageRepository": "registry.access.redhat.com/rhscl/python-27-rhel7"
       },
       "status": {
         "dockerImageRepository": ""
@@ -114,23 +114,32 @@
           {
             "type": "ImageChange",
             "imageChange": {}
+          },
+          {
+            "type": "ConfigChange"
           }
         ],
         "source": {
           "type": "Git",
           "git": {
             "uri": "https://github.com/openshift/sti-python.git"
-            },
-            "contextDir":"2.7/test/django-test-app" 
+          },
+          "contextDir":"2.7/test/django-test-app"
         },
         "strategy": {
           "type": "Source",
           "sourceStrategy": {
             "from": {
               "kind": "ImageStreamTag",
-              "namespace": "openshift",
-              "name": "python:2.7"
-            }
+              "name": "python:2.7",
+              "namespace": "openshift"
+            },
+            "env": [
+              {
+                "name": "EXAMPLE",
+                "value": "sample-app"
+              }
+            ]
           }
         },
         "output": {
@@ -138,6 +147,8 @@
             "kind": "ImageStreamTag",
             "name": "origin-python-sample:latest"
           }
+        },
+        "postCommit": {
         },
         "resources": {}
       },
@@ -321,7 +332,24 @@
                     "value": "custom_value1"
                   }
                 ],
-                "containerName": "python-helloworld-database"
+                "containerName": "python-helloworld-database",
+                "volumes": ["python-helloworld-data"]
+              }
+            },
+            "mid": {
+              "failurePolicy": "Abort",
+              "execNewPod": {
+                "command": [
+                  "/bin/true"
+                ],
+                "env": [
+                  {
+                    "name": "CUSTOM_VAR2",
+                    "value": "custom_value2"
+                  }
+                ],
+                "containerName": "python-helloworld-database",
+                "volumes": ["python-helloworld-data"]
               }
             },
             "post": {
@@ -336,7 +364,8 @@
                     "value": "custom_value2"
                   }
                 ],
-                "containerName": "python-helloworld-database"
+                "containerName": "python-helloworld-database",
+                "volumes": ["python-helloworld-data"]
               }
             }
           },
@@ -362,7 +391,7 @@
             "containers": [
               {
                 "name": "python-helloworld-database",
-                "image": "registry.access.redhat.com/openshift3/mysql-55-rhel7:latest",
+                "image": "registry.access.redhat.com/openshift3/mysql-55-rhel7",
                 "ports": [
                   {
                     "containerPort": 3306,
@@ -384,11 +413,25 @@
                   }
                 ],
                 "resources": {},
+                "volumeMounts": [
+                  {
+                    "name": "python-helloworld-data",
+                    "mountPath": "/var/lib/mysql/data"
+                  }
+                ],
                 "terminationMessagePath": "/dev/termination-log",
                 "imagePullPolicy": "Always",
                 "securityContext": {
                   "capabilities": {},
                   "privileged": false
+                }
+              }
+            ],
+            "volumes": [
+              {
+                "name": "python-helloworld-data",
+                "emptyDir": {
+                  "medium": ""
                 }
               }
             ],
@@ -417,18 +460,21 @@
       "name": "MYSQL_USER",
       "description": "database username",
       "generate": "expression",
-      "from": "user[A-Z0-9]{3}"
+      "from": "user[A-Z0-9]{3}",
+      "required": true
     },
     {
       "name": "MYSQL_PASSWORD",
       "description": "database password",
       "generate": "expression",
-      "from": "[a-zA-Z0-9]{8}"
+      "from": "[a-zA-Z0-9]{8}",
+      "required": true
     },
     {
       "name": "MYSQL_DATABASE",
       "description": "database name",
-      "value": "root"
+      "value": "root",
+      "required": true
     }
   ],
   "labels": {
