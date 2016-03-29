@@ -85,7 +85,7 @@
       "status": {
         "dockerImageRepository": ""
       }
-    },
+     },
     {
       "kind": "BuildConfig",
       "apiVersion": "v1",
@@ -131,20 +131,23 @@
               "kind": "ImageStreamTag",
               "name": "ruby:2.2",
               "namespace": "openshift"
-            }
-          },
-          "env": [
-            {
-              "name": "EXAMPLE",
-              "value": "sample-app"
-            }
-          ]
+            },
+            "env": [
+              {
+                "name": "EXAMPLE",
+                "value": "sample-app"
+              }
+            ]
+          }
         },
         "output": {
           "to": {
             "kind": "ImageStreamTag",
             "name": "origin-ruby22-sample:latest"
           }
+        },
+        "postCommit": {
+          "args": ["bundle", "exec", "rake", "test"]
         },
         "resources": {}
       },
@@ -331,6 +334,21 @@
                 "containerName": "ruby-helloworld-database"
               }
             },
+            "mid": {
+              "failurePolicy": "Abort",
+              "execNewPod": {
+                "command": [
+                  "/bin/true"
+                ],
+                "env": [
+                  {
+                    "name": "CUSTOM_VAR2",
+                    "value": "custom_value2"
+                  }
+                ],
+                "containerName": "ruby-helloworld-database"
+              }
+            },
             "post": {
               "failurePolicy": "Ignore",
               "execNewPod": {
@@ -391,11 +409,25 @@
                   }
                 ],
                 "resources": {},
+                "volumeMounts": [
+                  {
+                    "name": "ruby-helloworld-data",
+                    "mountPath": "/var/lib/mysql/data"
+                  }
+                ],
                 "terminationMessagePath": "/dev/termination-log",
                 "imagePullPolicy": "Always",
                 "securityContext": {
                   "capabilities": {},
                   "privileged": false
+                }
+              }
+            ],
+            "volumes": [
+              {
+                "name": "ruby-helloworld-data",
+                "emptyDir": {
+                  "medium": ""
                 }
               }
             ],
