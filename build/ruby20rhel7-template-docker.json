@@ -128,7 +128,7 @@
             "from": {
               "kind": "ImageStreamTag",
               "name": "ruby:2.0",
-              "namespace": "openshift"
+              "namespace": "openshift",
             },
             "env": [
               {
@@ -143,6 +143,9 @@
             "kind": "ImageStreamTag",
             "name": "origin-ruby20-sample:latest"
           }
+        },
+        "postCommit": {
+          "args": ["bundle", "exec", "rake", "test"]
         },
         "resources": {}
       },
@@ -330,12 +333,26 @@
                   }
                 ],
                 "resources": {},
+                "volumeMounts": [
+                  {
+                    "name": "ruby-helloworld-data",
+                    "mountPath": "/var/lib/mysql/data"
+                  }
+                ],
                 "terminationMessagePath": "/dev/termination-log",
                 "imagePullPolicy": "IfNotPresent",
                 "capabilities": {},
                 "securityContext": {
                   "capabilities": {},
                   "privileged": false
+                }
+              }
+            ],
+            "volumes": [
+              {
+                "name": "ruby-helloworld-data",
+                "emptyDir": {
+                  "medium": ""
                 }
               }
             ],

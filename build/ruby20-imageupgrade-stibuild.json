@@ -47,7 +47,6 @@
         "creationTimestamp": null
       },
       "spec": {
-        "host": "",
         "to": {
           "kind": "Service",
           "name": "frontend"
@@ -81,7 +80,7 @@
         "creationTimestamp": null
       },
       "spec": {
-        "dockerImageRepository": "registry.access.redhat.com:5000/openshift3/ruby-20-rhel7"
+        "dockerImageRepository": "registry.access.redhat.com/openshift3/ruby-20-rhel7"
       },
       "status": {
         "dockerImageRepository": ""
@@ -130,9 +129,15 @@
           "sourceStrategy": {
             "from": {
               "kind": "ImageStreamTag",
-              "name": "ruby-20-rhel7:latest"
+              "name": "ruby-20-rhel7:latest",
             },
-            "forcePull": true
+            "forcePull": true,
+            "env": [
+              {
+                "name": "EXAMPLE",
+                "value": "sample-app"
+              }
+            ]
           }
         },
         "output": {
@@ -141,6 +146,9 @@
             "name": "origin-ruby-sample:latest"
           }
         },
+        "postCommit": {
+          "args": ["bundle", "exec", "rake", "test"]
+
         "resources": {}
       },
       "status": {
@@ -258,7 +266,7 @@
                 ],
                 "resources": {},
                 "terminationMessagePath": "/dev/termination-log",
-                "imagePullPolicy": "IfNotPresent",
+                "imagePullPolicy": "Always",
                 "securityContext": {
                   "capabilities": {},
                   "privileged": false
@@ -326,6 +334,21 @@
                 "containerName": "ruby-helloworld-database"
               }
             },
+            "mid": {
+              "failurePolicy": "Abort",
+              "execNewPod": {
+                "command": [
+                  "/bin/true"
+                ],
+                "env": [
+                  {
+                    "name": "CUSTOM_VAR2",
+                    "value": "custom_value2"
+                  }
+                ],
+                "containerName": "ruby-helloworld-database"
+              }
+            },
             "post": {
               "failurePolicy": "Ignore",
               "execNewPod": {
@@ -386,11 +409,25 @@
                   }
                 ],
                 "resources": {},
+                "volumeMounts": [
+                  {
+                    "name": "ruby-helloworld-data",
+                    "mountPath": "/var/lib/mysql/data"
+                  }
+                ],
                 "terminationMessagePath": "/dev/termination-log",
                 "imagePullPolicy": "Always",
                 "securityContext": {
                   "capabilities": {},
                   "privileged": false
+                }
+              }
+            ],
+            "volumes": [
+              {
+                "name": "ruby-helloworld-data",
+                "emptyDir": {
+                  "medium": ""
                 }
               }
             ],

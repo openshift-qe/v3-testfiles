@@ -47,7 +47,6 @@
         "creationTimestamp": null
       },
       "spec": {
-        "host": "",
         "to": {
           "kind": "Service",
           "name": "frontend"
@@ -81,7 +80,7 @@
         "creationTimestamp": null
       },
       "spec": {
-        "dockerImageRepository": "virt-openshift-05.lab.eng.nay.redhat.com:5001/rhscl/perl-520-rhel7"
+        "dockerImageRepository": "registry.access.redhat.com/rhscl/perl-520-rhel7"
       },
       "status": {
         "dockerImageRepository": ""
@@ -131,9 +130,15 @@
           "sourceStrategy": {
             "from": {
               "kind": "ImageStreamTag",
-              "name": "perl-520-rhel7:latest"
+              "name": "perl-520-rhel7:latest",
             },
-            "forcePull": true
+            "forcePull": true,
+            "env": [
+              {
+                "name": "EXAMPLE",
+                "value": "sample-app"
+              }
+            ]
           }
         },
         "output": {
@@ -142,6 +147,9 @@
             "name": "origin-perl520-sample:latest"
           }
         },
+        "postCommit": {
+          "args": ["bundle", "exec", "rake", "test"]
+
         "resources": {}
       },
       "status": {
@@ -327,6 +335,21 @@
                 "containerName": "perl-app-database"
               }
             },
+            "mid": {
+              "failurePolicy": "Abort",
+              "execNewPod": {
+                "command": [
+                  "/bin/true"
+                ],
+                "env": [
+                  {
+                    "name": "CUSTOM_VAR2",
+                    "value": "custom_value2"
+                  }
+                ],
+                "containerName": "perl-app-database"
+              }
+            },
             "post": {
               "failurePolicy": "Ignore",
               "execNewPod": {
@@ -387,11 +410,25 @@
                   }
                 ],
                 "resources": {},
+                "volumeMounts": [
+                  {
+                    "name": "perl-app-data",
+                    "mountPath": "/var/lib/mysql/data"
+                  }
+                ],
                 "terminationMessagePath": "/dev/termination-log",
                 "imagePullPolicy": "Always",
                 "securityContext": {
                   "capabilities": {},
                   "privileged": false
+                }
+              }
+            ],
+            "volumes": [
+              {
+                "name": "perl-app-data",
+                "emptyDir": {
+                  "medium": ""
                 }
               }
             ],
