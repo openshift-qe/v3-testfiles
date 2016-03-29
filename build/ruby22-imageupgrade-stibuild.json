@@ -148,7 +148,7 @@
         },
         "postCommit": {
           "args": ["bundle", "exec", "rake", "test"]
-
+        },
         "resources": {}
       },
       "status": {

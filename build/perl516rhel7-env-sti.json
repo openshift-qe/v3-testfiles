@@ -151,9 +151,6 @@
             "name": "origin-perl-sample:latest"
           }
         },
-        "postCommit": {
-          "args": ["bundle", "exec", "rake", "test"]
-        },
         "resources": {}
       },
       "status": {
