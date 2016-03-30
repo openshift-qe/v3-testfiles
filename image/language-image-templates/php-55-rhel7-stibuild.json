@@ -178,7 +178,6 @@
               "name": "PHP_INI_SCAN_DIR",
               "value": "/opt/rh/php55/root/etc/"
              }
-
             ]
           }
         },
