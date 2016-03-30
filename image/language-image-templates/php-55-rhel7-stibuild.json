@@ -401,48 +401,7 @@
                   {
                     "name": "CUSTOM_VAR2",
                     "value": "custom_value2"
-                  },
-              {
-              "name": "ERROR_REPORTING",
-              "value": "E_ALL & ~E_NOTICE"
-             },
-             {
-              "name": "DISPLAY_ERRORS",
-              "value": "ON"
-             },
-             {
-              "name": "DISPLAY_STARTUP_ERRORS",
-              "value": "OFF"
-             },
-             {
-              "name": "TRACK_ERRORS",
-              "value": "OFF"
-             },
-            {
-              "name": "HTML_ERRORS",
-              "value": "ON"
-             },
-            {
-              "name": "INCLUDE_PATH",
-              "value": "/opt/app-root/src"
-             },
-            {
-              "name": "SESSION_PATH",
-              "value": "/tmp/sessions"
-             },
-            {
-              "name": "OPCACHE_MEMORY_CONSUMPTION",
-              "value": "16M"
-             },
-            {
-              "name": "PHPRC",
-              "value": "/opt/rh/php55/root/etc/"
-             },
-            {
-              "name": "PHP_INI_SCAN_DIR",
-              "value": "/opt/rh/php55/root/etc/"
-             }
-
+                  }
                 ],
                 "containerName": "php-helloworld-database",
                 "volumes": ["php-helloworld-data"]
