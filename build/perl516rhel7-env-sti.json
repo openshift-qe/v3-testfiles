@@ -333,7 +333,7 @@
                     "value": "custom_value1"
                   }
                 ],
-                "containerName": "perl-helloworld-database"
+                "containerName": "perl-helloworld-database",
                 "volumes": ["perl-helloworld-data"]
               }
             },
@@ -349,7 +349,7 @@
                     "value": "custom_value2"
                   }
                 ],
-                "containerName": "perl-helloworld-database"
+                "containerName": "perl-helloworld-database",
                 "volumes": ["perl-helloworld-data"]
               }
             },
@@ -365,7 +365,7 @@
                     "value": "custom_value2"
                   }
                 ],
-                "containerName": "perl-helloworld-database"
+                "containerName": "perl-helloworld-database",
                 "volumes": ["perl-helloworld-data"]
               }
             }
