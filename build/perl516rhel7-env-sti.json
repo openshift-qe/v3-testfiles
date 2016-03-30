@@ -2,7 +2,7 @@
   "kind": "Template",
   "apiVersion": "v1",
   "metadata": {
-    "name": "ruby-helloworld-sample",
+    "name": "perl-helloworld-sample",
     "creationTimestamp": null,
     "annotations": {
       "description": "This example shows how to create a simple ruby application in openshift origin v3",
@@ -183,7 +183,7 @@
                     "value": "custom_value1"
                   }
                 ],
-                "containerName": "ruby-helloworld"
+                "containerName": "perl-helloworld"
               }
             },
             "post": {
@@ -198,7 +198,7 @@
                     "value": "custom_value2"
                   }
                 ],
-                "containerName": "ruby-helloworld"
+                "containerName": "perl-helloworld"
               }
             }
           },
@@ -210,7 +210,7 @@
             "imageChangeParams": {
               "automatic": true,
               "containerNames": [
-                "ruby-helloworld"
+                "perl-helloworld"
               ],
               "from": {
                 "kind": "ImageStreamTag",
@@ -236,7 +236,7 @@
           "spec": {
             "containers": [
               {
-                "name": "ruby-helloworld",
+                "name": "perl-helloworld",
                 "image": "origin-perl-sample",
                 "ports": [
                   {
@@ -333,7 +333,8 @@
                     "value": "custom_value1"
                   }
                 ],
-                "containerName": "ruby-helloworld-database"
+                "containerName": "perl-helloworld-database"
+                "volumes": ["perl-helloworld-data"]
               }
             },
             "mid": {
@@ -348,7 +349,8 @@
                     "value": "custom_value2"
                   }
                 ],
-                "containerName": "ruby-helloworld-database"
+                "containerName": "perl-helloworld-database"
+                "volumes": ["perl-helloworld-data"]
               }
             },
             "post": {
@@ -363,7 +365,8 @@
                     "value": "custom_value2"
                   }
                 ],
-                "containerName": "ruby-helloworld-database"
+                "containerName": "perl-helloworld-database"
+                "volumes": ["perl-helloworld-data"]
               }
             }
           },
@@ -388,7 +391,7 @@
           "spec": {
             "containers": [
               {
-                "name": "ruby-helloworld-database",
+                "name": "perl-helloworld-database",
                 "image": "registry.access.redhat.com/rhscl/mysql-56-rhel7:latest",
                 "ports": [
                   {
@@ -413,7 +416,7 @@
                 "resources": {},
                 "volumeMounts": [
                   {
-                    "name": "ruby-helloworld-data",
+                    "name": "perl-helloworld-data",
                     "mountPath": "/var/lib/mysql/data"
                   }
                 ],
@@ -427,7 +430,7 @@
             ],
             "volumes": [
               {
-                "name": "ruby-helloworld-data",
+                "name": "perl-helloworld-data",
                 "emptyDir": {
                   "medium": ""
                 }

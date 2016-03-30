@@ -330,6 +330,7 @@
                   }
                 ],
                 "containerName": "perl-app-database"
+                "volumes": ["perl-app-data"]
               }
             },
             "mid": {
@@ -345,6 +346,7 @@
                   }
                 ],
                 "containerName": "perl-app-database"
+                "volumes": ["perl-app-data"]
               }
             },
             "post": {
@@ -360,6 +362,7 @@
                   }
                 ],
                 "containerName": "perl-app-database"
+                "volumes": ["perl-app-data"]
               }
             }
           },
