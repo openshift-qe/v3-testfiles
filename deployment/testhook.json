@@ -5,7 +5,7 @@
         "name": "hooks",
         "creationTimestamp": null,
         "labels": {
-            "name": "mysql"
+            "name": "hello-openshift"
         }
     },
     "spec": {
@@ -27,11 +27,11 @@
                             }
                         ],
                         "volumes": ["dataem"],
-                        "containerName": "mysql-55-rhel7"
+                        "containerName": "hello-openshift"
                     }
                 },
                 "post": {
-                    "failurePolicy": "Retry",
+                    "failurePolicy": "Ignore",
                     "execNewPod": {
                         "command": [
                              "/bin/bash",
@@ -45,7 +45,7 @@
                             }
                         ],
                         "volumes": ["dataem"],
-                        "containerName": "mysql-55-rhel7"
+                        "containerName": "hello-openshift"
                     }
                 }
             },
@@ -58,29 +58,31 @@
         ],
         "replicas": 1,
         "selector": {
-            "name": "mysql"
+            "name": "hello-openshift"
         },
         "template": {
             "metadata": {
                 "creationTimestamp": null,
                 "labels": {
-                    "name": "mysql"
+                    "name": "hello-openshift"
                 }
             },
             "spec": {
                 "volumes": [
                     {
                         "name": "dataem",
-                        "emptyDir": {}
+                        "emptyDir": {
+                           "medium": ""
+                        }
                     }
                 ],
                 "containers": [
                     {
-                        "name": "mysql-55-rhel7",
-                        "image": "openshift3/mysql-55-rhel7:latest",
+                        "name": "hello-openshift",
+                        "image": "openshift/origin",
                         "ports": [
                             {
-                                "containerPort": 3306,
+                                "containerPort": 8080,
                                 "protocol": "TCP"
                             }
                         ],
@@ -97,6 +99,11 @@
                                 "name": "MYSQL_DATABASE",
                                 "value": "root"
                             }
+                        ],
+                        "command": [
+                             "/bin/bash",
+                             "-c",
+                             "/usr/bin/sleep 30d"
                         ],
                         "resources": {},
                         "volumeMounts": [
@@ -118,7 +125,6 @@
             }
         }
     },
-    "status": {
-       "latestVersion": 1
-   }
+    "status": {}
 }
+
