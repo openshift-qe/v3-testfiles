@@ -332,6 +332,7 @@
                   }
                 ],
                 "containerName": "ruby-helloworld-database"
+                "volumes": ["ruby-helloworld-data"]
               }
             },
             "mid": {
@@ -347,6 +348,7 @@
                   }
                 ],
                 "containerName": "ruby-helloworld-database"
+                "volumes": ["ruby-helloworld-data"]
               }
             },
             "post": {
@@ -362,6 +364,7 @@
                   }
                 ],
                 "containerName": "ruby-helloworld-database"
+                "volumes": ["ruby-helloworld-data"]
               }
             }
           },
