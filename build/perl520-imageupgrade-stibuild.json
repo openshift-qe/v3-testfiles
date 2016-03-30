@@ -329,7 +329,7 @@
                     "value": "custom_value1"
                   }
                 ],
-                "containerName": "perl-app-database"
+                "containerName": "perl-app-database",
                 "volumes": ["perl-app-data"]
               }
             },
@@ -345,7 +345,7 @@
                     "value": "custom_value2"
                   }
                 ],
-                "containerName": "perl-app-database"
+                "containerName": "perl-app-database",
                 "volumes": ["perl-app-data"]
               }
             },
@@ -361,7 +361,7 @@
                     "value": "custom_value2"
                   }
                 ],
-                "containerName": "perl-app-database"
+                "containerName": "perl-app-database",
                 "volumes": ["perl-app-data"]
               }
             }
