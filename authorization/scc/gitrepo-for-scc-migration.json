@@ -1,0 +1,44 @@
+{
+    "kind": "Pod",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "gitrepo",
+        "creationTimestamp": null,
+        "labels": {
+            "name": "volume-test"
+        }
+    },
+    "spec": {
+        "containers": [{
+            "name": "c1",
+            "image": "aosqe/hello-openshift",
+            "ports": [{
+                "containerPort": 8080,
+                "protocol": "TCP"
+            }],
+            "resources": {},
+            "volumeMounts": [{
+                "name": "gitrepo",
+                "mountPath": "/mnt/git"
+            }],
+            "terminationMessagePath": "/dev/termination-log",
+            "imagePullPolicy": "IfNotPresent",
+            "securityContext": {
+                "privileged": false
+            }
+        }],
+        "securityContext": {
+        },
+        "volumes": [{
+            "name": "gitrepo",
+            "gitRepo": {
+                "repository": "https://github.com/jhou1/gitrepoVolume.git",
+                "revision": "5ead1a2fba0bd6af433beb8064ef4493b63e368c"
+            }
+        }],
+        "restartPolicy": "Always",
+        "dnsPolicy": "ClusterFirst",
+        "serviceAccount": ""
+    },
+    "status": {}
+}
