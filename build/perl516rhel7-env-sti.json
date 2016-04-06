@@ -123,14 +123,14 @@
           "git": {
             "uri": "https://github.com/openshift/sti-perl.git"
           },
-          "contextDir": "5.16/test/sample-test-app"
+          "contextDir": "5.20/test/sample-test-app"
         },
         "strategy": {
           "type": "Source",
           "sourceStrategy": {
             "from": {
               "kind": "ImageStreamTag",
-              "name": "perl:516",
+              "name": "perl:5.20",
               "namespace": "openshift"
             },
             "env": [
