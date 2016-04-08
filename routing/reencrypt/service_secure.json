@@ -2,7 +2,7 @@
     "kind": "Service",
     "apiVersion": "v1",
     "metadata": {
-        "name": "hello-nginx"
+        "name": "service-secure"
     },
     "spec": {
         "ports": [
@@ -10,11 +10,11 @@
                         "name": "https",
                         "protocol": "TCP",
                         "port": 27443,
-        "targetPort": 443
+        "targetPort": 8443
                 }
         ],
         "selector": {
-                "name": "hello-nginx-docker"
+                "name": "caddy-docker"
         }
     }
 }

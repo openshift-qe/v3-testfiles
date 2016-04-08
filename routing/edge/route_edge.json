@@ -8,7 +8,7 @@
     "host": "www.edge.com",
     "to": {
       "kind": "Service",
-      "name": "hello-nginx"
+      "name": "service-unsecure"
     },
     "tls": {
       "termination": "edge",
