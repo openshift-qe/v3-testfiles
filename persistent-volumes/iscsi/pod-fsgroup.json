@@ -18,8 +18,8 @@
             }]
         }],
         "securityContext": {
-            "runAsUser": 1010,
-            "fsGroup": 123456
+            "runAsUser": 1001920000,
+            "fsGroup": 1001920001
         },
         "volumes": [{
             "name": "iscsi",
