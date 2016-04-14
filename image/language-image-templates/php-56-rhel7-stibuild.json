@@ -81,7 +81,7 @@
         "creationTimestamp": null
       },
       "spec": {
-        "dockerImageRepository": "registry.access.redhat.com/openshift3/php-56-rhel7"
+        "dockerImageRepository": "registry.access.redhat.com/rhscl/php-56-rhel7"
       },
       "status": {
         "dockerImageRepository": ""
@@ -130,50 +130,15 @@
           "sourceStrategy": {
             "from": {
               "kind": "ImageStreamTag",
-              "name": "php-56-rhel7:latest"
+              "name": "php:5.6",
+              "namespace": "openshift"
             },
-          "env": [
-             { 
-              "name": "ERROR_REPORTING",
-              "value": "E_ALL & ~E_NOTICE"
-             },
-             {
-              "name": "DISPLAY_ERRORS",
-              "value": "ON"
-             },
-             {
-              "name": "DISPLAY_STARTUP_ERRORS",
-              "value": "OFF"
-             },
-             {
-              "name": "TRACK_ERRORS",
-              "value": "OFF"
-             },
-            {
-              "name": "HTML_ERRORS",
-              "value": "ON"
-             },
-            {
-              "name": "INCLUDE_PATH",
-              "value": "/opt/app-root/src"
-             },          
-            {
-              "name": "SESSION_PATH",
-              "value": "/tmp/sessions"
-             },
-            {
-              "name": "OPCACHE_MEMORY_CONSUMPTION",
-              "value": "16M"
-             },
-            {
-              "name": "PHPRC",
-              "value": "/opt/rh/php55/root/etc/"
-             },
-            {
-              "name": "PHP_INI_SCAN_DIR",
-              "value": "/opt/rh/php55/root/etc/"
-             }
-           ]
+            "env": [
+              {
+                "name": "EXAMPLE",
+                "value": "sample-app"
+              }
+            ]
           }
         },
         "output": {
@@ -181,6 +146,8 @@
             "kind": "ImageStreamTag",
             "name": "origin-php-sample:latest"
           }
+        },
+        "postCommit": {
         },
         "resources": {}
       },
@@ -364,7 +331,24 @@
                     "value": "custom_value1"
                   }
                 ],
-                "containerName": "php-helloworld-database"
+                "containerName": "php-helloworld-database",
+                "volumes": ["php-helloworld-data"]
+              }
+            },
+            "mid": {
+              "failurePolicy": "Abort",
+              "execNewPod": {
+                "command": [
+                  "/bin/true"
+                ],
+                "env": [
+                  {
+                    "name": "CUSTOM_VAR2",
+                    "value": "custom_value2"
+                  }
+                ],
+                "containerName": "php-helloworld-database",
+                "volumes": ["php-helloworld-data"]
               }
             },
             "post": {
@@ -379,7 +363,8 @@
                     "value": "custom_value2"
                   }
                 ],
-                "containerName": "php-helloworld-database"
+                "containerName": "php-helloworld-database",
+                "volumes": ["php-helloworld-data"]
               }
             }
           },
@@ -427,11 +412,25 @@
                   }
                 ],
                 "resources": {},
+                "volumeMounts": [
+                  {
+                    "name": "php-helloworld-data",
+                    "mountPath": "/var/lib/mysql/data"
+                  }
+                ],
                 "terminationMessagePath": "/dev/termination-log",
                 "imagePullPolicy": "Always",
                 "securityContext": {
                   "capabilities": {},
                   "privileged": false
+                }
+              }
+            ],
+            "volumes": [
+              {
+                "name": "php-helloworld-data",
+                "emptyDir": {
+                  "medium": ""
                 }
               }
             ],

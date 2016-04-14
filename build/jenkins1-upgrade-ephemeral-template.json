@@ -64,7 +64,7 @@
         "creationTimestamp": null
       },
       "spec": {
-        "dockerImageRepository": "virt-openshift-05.lab.eng.nay.redhat.com:5001/openshift3/jenkins-1-rhel7"
+        "dockerImageRepository": "registry.access.redhat.com/openshift3/jenkins-1-rhel7"
       },
       "status": {
         "dockerImageRepository": ""
@@ -85,7 +85,7 @@
           {
             "type": "ImageChange",
             "imageChangeParams": {
-              "automatic": false,
+              "automatic": ture,
               "containerNames": [
                 "jenkins"
               ],

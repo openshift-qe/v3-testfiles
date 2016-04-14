@@ -5,7 +5,7 @@
         "name": "hooks",
         "creationTimestamp": null,
         "labels": {
-            "name": "mysql"
+            "name": "hello-openshift"
         }
     },
     "spec": {
@@ -13,12 +13,12 @@
             "type": "Recreate",
             "recreateParams": {
                 "pre": {
-                    "failurePolicy": "Retry",
+                    "failurePolicy": "Ignore",
                     "execNewPod": {
                         "command": [
-                            "/bin/bash",
-                            "-c",
-                            "/usr/bin/sleep 10"
+                             "/bin/bash",
+                             "-c",
+                             "/usr/bin/sleep 60"
                         ],
                         "env": [
                             {
@@ -26,16 +26,17 @@
                                 "value": "pre-deployment"
                             }
                         ],
-                        "containerName": "mysql-55-centos7"
+                        "volumes": ["dataem"],
+                        "containerName": "hello-openshift"
                     }
                 },
                 "post": {
                     "failurePolicy": "Ignore",
                     "execNewPod": {
                         "command": [
-                            "/bin/bash",
-                            "-c",
-                            "/usr/bin/sleep 20"
+                             "/bin/bash",
+                             "-c",
+                             "/usr/bin/sleep 60"
                         ],
                         "env": [
                             {
@@ -43,7 +44,8 @@
                                 "value": "post-deployment"
                             }
                         ],
-                        "containerName": "mysql-55-centos7"
+                        "volumes": ["dataem"],
+                        "containerName": "hello-openshift"
                     }
                 }
             },
@@ -57,23 +59,31 @@
         "replicas": 1,
         "test": true,
         "selector": {
-            "name": "mysql"
+            "name": "hello-openshift"
         },
         "template": {
             "metadata": {
                 "creationTimestamp": null,
                 "labels": {
-                    "name": "mysql"
+                    "name": "hello-openshift"
                 }
             },
             "spec": {
+                "volumes": [
+                    {
+                        "name": "dataem",
+                        "emptyDir": {
+                           "medium": ""
+                        }
+                    }
+                ],
                 "containers": [
                     {
-                        "name": "mysql-55-centos7",
-                        "image": "openshift/mysql-55-centos7:latest",
+                        "name": "hello-openshift",
+                        "image": "openshift/origin",
                         "ports": [
                             {
-                                "containerPort": 3306,
+                                "containerPort": 8080,
                                 "protocol": "TCP"
                             }
                         ],
@@ -91,7 +101,18 @@
                                 "value": "root"
                             }
                         ],
+                        "command": [
+                             "/bin/bash",
+                             "-c",
+                             "/usr/bin/sleep 30d"
+                        ],
                         "resources": {},
+                        "volumeMounts": [
+                            {
+                                "name": "dataem",
+                                "mountPath": "/opt1empt"
+                            }
+                        ],
                         "terminationMessagePath": "/dev/termination-log",
                         "imagePullPolicy": "Always",
                         "securityContext": {
@@ -107,3 +128,4 @@
     },
     "status": {}
 }
+

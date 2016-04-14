@@ -2,7 +2,7 @@
   "kind": "Template",
   "apiVersion": "v1",
   "metadata": {
-    "name": "ruby-helloworld-sample",
+    "name": "perl-helloworld-sample",
     "creationTimestamp": null,
     "annotations": {
       "description": "This example shows how to create a simple ruby application in openshift origin v3",
@@ -47,7 +47,6 @@
         "creationTimestamp": null
       },
       "spec": {
-        "host": "www.example.com",
         "to": {
           "kind": "Service",
           "name": "frontend"
@@ -65,7 +64,7 @@
       "kind": "ImageStream",
       "apiVersion": "v1",
       "metadata": {
-        "name": "origin-ruby-sample",
+        "name": "origin-perl-sample",
         "creationTimestamp": null
       },
       "spec": {},
@@ -86,7 +85,7 @@
       "status": {
         "dockerImageRepository": ""
       }
-    },
+     },
     {
       "kind": "BuildConfig",
       "apiVersion": "v1",
@@ -124,33 +123,32 @@
           "git": {
             "uri": "https://github.com/openshift/sti-perl.git"
           },
-          "contextDir": "5.16/test/sample-test-app",
-          "type": "Git"
+          "contextDir": "5.20/test/sample-test-app"
         },
         "strategy": {
           "type": "Source",
           "sourceStrategy": {
             "from": {
               "kind": "ImageStreamTag",
-              "name": "perl:5.16",
+              "name": "perl:5.20",
               "namespace": "openshift"
             },
-         "env": [
-             {   
-              "name": "ENABLE_CPAN_TEST",
-              "value": "on"
-             },  
-             {   
-              "name": "CPAN_MIRROR",
-              "value": ""
-             }
+            "env": [
+              {
+                "name": "ENABLE_CPAN_TEST",
+                "value": "on"
+              },
+              {
+                "name": "CPAN_MIRROR",
+                "value": ""
+              }
             ]
           }
         },
         "output": {
           "to": {
             "kind": "ImageStreamTag",
-            "name": "origin-ruby-sample:latest"
+            "name": "origin-perl-sample:latest"
           }
         },
         "resources": {}
@@ -185,7 +183,7 @@
                     "value": "custom_value1"
                   }
                 ],
-                "containerName": "ruby-helloworld"
+                "containerName": "perl-helloworld"
               }
             },
             "post": {
@@ -200,7 +198,7 @@
                     "value": "custom_value2"
                   }
                 ],
-                "containerName": "ruby-helloworld"
+                "containerName": "perl-helloworld"
               }
             }
           },
@@ -212,11 +210,11 @@
             "imageChangeParams": {
               "automatic": true,
               "containerNames": [
-                "ruby-helloworld"
+                "perl-helloworld"
               ],
               "from": {
                 "kind": "ImageStreamTag",
-                "name": "origin-ruby-sample:latest"
+                "name": "origin-perl-sample:latest"
               }
             }
           },
@@ -238,8 +236,8 @@
           "spec": {
             "containers": [
               {
-                "name": "ruby-helloworld",
-                "image": "origin-ruby-sample",
+                "name": "perl-helloworld",
+                "image": "origin-perl-sample",
                 "ports": [
                   {
                     "containerPort": 8080,
@@ -335,7 +333,24 @@
                     "value": "custom_value1"
                   }
                 ],
-                "containerName": "ruby-helloworld-database"
+                "containerName": "perl-helloworld-database",
+                "volumes": ["perl-helloworld-data"]
+              }
+            },
+            "mid": {
+              "failurePolicy": "Abort",
+              "execNewPod": {
+                "command": [
+                  "/bin/true"
+                ],
+                "env": [
+                  {
+                    "name": "CUSTOM_VAR2",
+                    "value": "custom_value2"
+                  }
+                ],
+                "containerName": "perl-helloworld-database",
+                "volumes": ["perl-helloworld-data"]
               }
             },
             "post": {
@@ -350,7 +365,8 @@
                     "value": "custom_value2"
                   }
                 ],
-                "containerName": "ruby-helloworld-database"
+                "containerName": "perl-helloworld-database",
+                "volumes": ["perl-helloworld-data"]
               }
             }
           },
@@ -375,8 +391,8 @@
           "spec": {
             "containers": [
               {
-                "name": "ruby-helloworld-database",
-                "image": "openshift/mysql-55-centos7:latest",
+                "name": "perl-helloworld-database",
+                "image": "registry.access.redhat.com/rhscl/mysql-56-rhel7:latest",
                 "ports": [
                   {
                     "containerPort": 3306,
@@ -398,11 +414,25 @@
                   }
                 ],
                 "resources": {},
+                "volumeMounts": [
+                  {
+                    "name": "perl-helloworld-data",
+                    "mountPath": "/var/lib/mysql/data"
+                  }
+                ],
                 "terminationMessagePath": "/dev/termination-log",
                 "imagePullPolicy": "Always",
                 "securityContext": {
                   "capabilities": {},
                   "privileged": false
+                }
+              }
+            ],
+            "volumes": [
+              {
+                "name": "perl-helloworld-data",
+                "emptyDir": {
+                  "medium": ""
                 }
               }
             ],

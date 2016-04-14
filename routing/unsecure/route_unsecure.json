@@ -5,10 +5,10 @@
         "name": "route"
     },
     "spec": {
-        "host": "www.example.com",
+        "host": "unsecure.example.com",
         "to": {
             "kind": "Service",
-            "name": "hello-nginx"
+            "name": "service-unsecure"
         }
     }
 }

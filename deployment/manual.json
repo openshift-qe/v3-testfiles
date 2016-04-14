@@ -5,66 +5,45 @@
         "name": "hooks",
         "creationTimestamp": null,
         "labels": {
-            "name": "mysql"
+            "name": "hello-openshift"
         }
     },
     "spec": {
         "strategy": {
             "type": "Recreate",
             "recreateParams": {
-                "pre": {
-                    "failurePolicy": "Retry",
-                    "execNewPod": {
-                        "command": [
-                            "/bin/true"
-                        ],
-                        "env": [
-                            {
-                                "name": "VAR",
-                                "value": "pre-deployment"
-                            }
-                        ],
-                        "containerName": "mysql-55-centos7"
-                    }
-                },
-                "post": {
-                    "failurePolicy": "Ignore",
-                    "execNewPod": {
-                        "command": [
-                            "/bin/false"
-                        ],
-                        "env": [
-                            {
-                                "name": "VAR",
-                                "value": "post-deployment"
-                            }
-                        ],
-                        "containerName": "mysql-55-centos7"
-                    }
-                }
             },
             "resources": {}
         },
-        "triggers": [],
+        "triggers": [
+        ],
         "replicas": 1,
         "selector": {
-            "name": "mysql"
+            "name": "hello-openshift"
         },
         "template": {
             "metadata": {
                 "creationTimestamp": null,
                 "labels": {
-                    "name": "mysql"
+                    "name": "hello-openshift"
                 }
             },
             "spec": {
+                "volumes": [
+                    {
+                        "name": "dataem",
+                        "emptyDir": {
+                           "medium": ""
+                        }
+                    }
+                ],
                 "containers": [
                     {
-                        "name": "mysql-55-centos7",
-                        "image": "openshift/mysql-55-centos7:latest",
+                        "name": "hello-openshift",
+                        "image": "openshift/hello-openshift",
                         "ports": [
                             {
-                                "containerPort": 3306,
+                                "containerPort": 8080,
                                 "protocol": "TCP"
                             }
                         ],
@@ -83,6 +62,12 @@
                             }
                         ],
                         "resources": {},
+                        "volumeMounts": [
+                            {
+                                "name": "dataem",
+                                "mountPath": "/var/lib/etcd"
+                            }
+                        ],
                         "terminationMessagePath": "/dev/termination-log",
                         "imagePullPolicy": "Always",
                         "securityContext": {

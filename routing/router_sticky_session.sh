@@ -1,6 +1,6 @@
 #!/bin/bash
 admin_conf=./admin.kubeconfig
-project=bmengpr1
+project=bmengpr
 
 function check_router() {
     while [ `oc get po -n default --config $admin_conf | grep router | grep Running | wc -l` -eq 0 ]
@@ -15,7 +15,7 @@ function get_router_ip() {
     router_ip=()
     for i in ${router_host[*]}
     do
-                router_ip+=(`nslookup $i | grep Address | tail -1 | cut -d' ' -f2`)
+                router_ip+=(`ping -c 1 $i | grep icmp | cut -d \( -f2 | cut -d \) -f1`)
     done
 }
 
@@ -56,7 +56,7 @@ function clean_account() {
 
 function unsecure_route() {
     local app_url=bmeng.example.com
-    oc new-project $project
+    oc new-project ${project}
     curl -s https://raw.githubusercontent.com/openshift-qe/v3-testfiles/master/routing/unsecure/list_for_unsecure.json | sed s/www.example.com/$app_url/g| oc create -f - 
     wait_for_running
     echo UNSECURE >> routing_log
@@ -68,7 +68,7 @@ function unsecure_route() {
 
 function edge_route() {
     local app_url=bmengedge.example.com
-    oc new-project $project
+    oc new-project ${project}
     curl -s https://raw.githubusercontent.com/openshift-qe/v3-testfiles/master/routing/edge/list_for_edge.json | sed s/www.example.com/$app_url/g| oc create -f - 
     wait_for_running
     echo EDGE >> routing_log
@@ -79,7 +79,7 @@ function edge_route() {
 
 function reencrypt_route() {
     local app_url=bmengre.example2.com
-    oc new-project $project
+    oc new-project ${project}
     curl -s https://raw.githubusercontent.com/openshift-qe/v3-testfiles/master/routing/reencrypt/list_for_reencrypt.json | sed s/www.example2.com/$app_url/g| oc create -f - 
     wait_for_running
     echo REENCRYPT >> routing_log
