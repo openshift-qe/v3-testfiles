@@ -8,7 +8,7 @@
     "capacity": {
         "storage": "5Gi"
     },
-    "accessModes": [ "ReadWriteOnce" ],
+    "accessModes": [ "ReadOnlyMany" ],
     "iscsi": {
         "targetPortal": "192.168.0.225:3260",
         "iqn": "iqn.2015-06.world.server:storage.target00",

@@ -5,7 +5,7 @@
         "name": "iscsi-ro"
     },
     "spec": {
-        "accessModes": [ "ReadWriteOnce" ],
+        "accessModes": [ "ReadOnlyMany" ],
         "resources": {
             "requests": {
                 "storage": "5Gi"
