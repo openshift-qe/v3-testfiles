@@ -18,7 +18,8 @@
                 }],
                 "volumeMounts": [{
                     "mountPath": "/mnt/iscsi",
-                    "name": "iscsi-rw"
+                    "name": "iscsi-rw",
+                    "readOnly": false
                 }]
             },
             {
@@ -30,7 +31,8 @@
                 }],
                 "volumeMounts": [{
                     "mountPath": "/mnt/iscsi",
-                    "name": "iscsi-ro"
+                    "name": "iscsi-ro",
+                    "readOnly": true
                 }]
             }
         ],
