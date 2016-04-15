@@ -5,7 +5,7 @@
         "name": "route-path"
     },
     "spec": {
-        "host": "www.example.com",
+        "host": "unsecure.example.com",
         "path": "/test",
         "to": {
             "kind": "Service",
