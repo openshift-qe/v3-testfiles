@@ -1,0 +1,35 @@
+{
+  "kind": "ImageStream",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "nodejs","annotations": { "openshift.io/image.insecureRepository": "true"},
+    "creationTimestamp": null
+  },
+  "spec": {
+    "tags": [
+      {
+        "name": "latest",
+        "from": {
+          "Kind": "ImageStreamTag",
+          "Name": "0.10"
+        }
+      },
+      {
+        "name": "0.10",
+        "annotations": {
+          "description": "Build and run NodeJS 0.10 applications",
+          "iconClass": "icon-nodejs",
+          "tags": "builder,nodejs",
+          "supports":"nodejs:0.10,nodejs:0.1,nodejs",
+          "version": "0.10",
+          "sampleRepo": "https://github.com/openshift/nodejs-ex.git"
+        },
+        "from": {
+          "Kind": "DockerImage",
+          "Name": "yanpzhan/nodejs-010-rhel1:latest"
+        }
+      }
+    ]
+  }
+}
+
