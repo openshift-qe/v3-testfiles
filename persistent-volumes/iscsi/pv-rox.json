@@ -14,7 +14,7 @@
         "iqn": "iqn.2015-06.world.server:storage.target00",
         "lun": 0,
         "fsType": "ext4",
-        "readOnly": false
+        "readOnly": true
     },
     "persistentVolumeReclaimPolicy": "Retain"
   }
