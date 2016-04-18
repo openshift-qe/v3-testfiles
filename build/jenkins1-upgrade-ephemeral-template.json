@@ -85,7 +85,7 @@
           {
             "type": "ImageChange",
             "imageChangeParams": {
-              "automatic": ture,
+              "automatic": true,
               "containerNames": [
                 "jenkins"
               ],
