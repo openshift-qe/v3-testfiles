@@ -7,7 +7,7 @@ spec:
   path: /test
   to:
     kind: Service
-    name: hello-nginx
+    name: service-unsecure
   tls:
     termination: edge
     key: |

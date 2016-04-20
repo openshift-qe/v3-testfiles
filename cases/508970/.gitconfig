@@ -1,2 +1,2 @@
-[url "https://xiuwang:redhat320@bitbucket.org/xiuwang/ruby-hello-world.git"]
-    insteadOf = "https://bitbucket.org/xiuwang/ruby-hello-world.git"
+[url "https://xiuwang:redhat320@bitbucket.org/xiuwang/my-ruby-hello-world.git"]
+    insteadOf = "https://bitbucket.org/xiuwang/my-ruby-hello-world.git"

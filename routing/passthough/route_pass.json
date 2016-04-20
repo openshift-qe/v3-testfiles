@@ -5,14 +5,14 @@
         "name": "route-passthrough"
     },
     "spec": {
-        "host": "www.example.com",
+        "host": "pass.example.com",
         "to": {
             "kind": "Service",
-            "name": "hello-nginx"
+            "name": "service-secure"
         },
         "tls": {
         "termination": "passthrough"
-     }
+        }
     }
 }
 
