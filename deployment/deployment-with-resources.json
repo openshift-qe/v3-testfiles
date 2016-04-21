@@ -12,44 +12,13 @@
         "strategy": {
             "type": "Recreate",
             "recreateParams": {
-                "pre": {
-                    "failurePolicy": "Ignore",
-                    "execNewPod": {
-                        "command": [
-                             "/bin/bash",
-                             "-c",
-                             "/usr/bin/sleep 60"
-                        ],
-                        "env": [
-                            {
-                                "name": "VAR",
-                                "value": "pre-deployment"
-                            }
-                        ],
-                        "volumes": ["dataem"],
-                        "containerName": "hello-openshift"
-                    }
-                },
-                "post": {
-                    "failurePolicy": "Retry",
-                    "execNewPod": {
-                        "command": [
-                             "/bin/bash",
-                             "-c",
-                             "/usr/bin/sleep 60"
-                        ],
-                        "env": [
-                            {
-                                "name": "VAR",
-                                "value": "post-deployment"
-                            }
-                        ],
-                        "volumes": ["dataem"],
-                        "containerName": "hello-openshift"
-                    }
-                }
             },
-            "resources": {}
+            "resources": {
+                 "limits": {
+                     "cpu": "20m",
+                     "memory": "50Mi" 
+                 }
+           }
         },
         "triggers": [
             {
@@ -79,7 +48,7 @@
                 "containers": [
                     {
                         "name": "hello-openshift",
-                        "image": "openshift/origin",
+                        "image": "openshift/hello-openshift",
                         "ports": [
                             {
                                 "containerPort": 8080,
@@ -100,16 +69,16 @@
                                 "value": "root"
                             }
                         ],
-                        "command": [
-                             "/bin/bash",
-                             "-c",
-                             "/usr/bin/sleep 30d"
-                        ],
-                        "resources": {},
+                        "resources": {
+                            "limits": {
+                                "cpu": "400m",
+                                "memory": "200Mi" 
+                            }
+                        },
                         "volumeMounts": [
                             {
                                 "name": "dataem",
-                                "mountPath": "/opt1empt"
+                                "mountPath": "/var/lib/etcd"
                             }
                         ],
                         "terminationMessagePath": "/dev/termination-log",
@@ -127,4 +96,3 @@
     },
     "status": {}
 }
-
