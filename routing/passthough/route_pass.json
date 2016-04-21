@@ -5,7 +5,7 @@
         "name": "route-passthrough"
     },
     "spec": {
-        "host": "pass.example.com",
+        "host": "www.example.com",
         "to": {
             "kind": "Service",
             "name": "service-secure"
