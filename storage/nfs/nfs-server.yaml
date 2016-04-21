@@ -10,6 +10,7 @@ items:
     containers:
       - name: nfs-server
         image: aosqe/nfs-server
+        imagePullPolicy: IfNotPresent
         ports:
           - name: nfs
             containerPort: 2049
