@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: pi-runonce
+spec:
+  completions: 2
+  activeDeadlineSeconds: 1
+  parallelism: 5
+  template:
+    metadata:
+      name: pi-runonce
+    spec:
+      containers:
+      - name: pi-runonce
+        image: openshift/perl-516-centos7
+        command: ["perl",  "-Mbignum=bpi", "-wle", "print bpi(2000)"]
+      restartPolicy: Never
