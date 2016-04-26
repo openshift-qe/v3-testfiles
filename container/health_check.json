@@ -15,7 +15,6 @@
                 "image": "zzhao/hello-openshift",
                 "ports": [
                     {
-                        "hostPort": 6064,
                         "containerPort": 8080
                     }
                 ],
