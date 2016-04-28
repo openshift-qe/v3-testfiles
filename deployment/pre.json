@@ -16,9 +16,7 @@
                     "failurePolicy": "Retry",
                     "execNewPod": {
                         "command": [
-                             "/bin/bash",
-                             "-c",
-                             "/usr/bin/sleep 60"
+                             "/bin/false"
                         ],
                         "env": [
                             {
