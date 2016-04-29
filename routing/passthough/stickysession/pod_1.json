@@ -1,0 +1,24 @@
+{                                                                                                                                                                     
+        "kind": "Pod",
+        "apiVersion":"v1",
+
+        "metadata": {
+                "name": "tls-server",
+                "labels": {
+                        "name": "tls-server"
+                }
+        },
+
+        "spec": {
+                "containers": [{
+                        "name": "tls-server",
+                        "image": "bmeng/tls-server",
+                        "ports": [
+                        {
+                                "containerPort": 9999
+                        }
+                        ]
+                }]
+        }
+}
+

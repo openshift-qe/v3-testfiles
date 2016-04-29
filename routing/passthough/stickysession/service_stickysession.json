@@ -1,0 +1,21 @@
+{                                                                                                                                                                     
+        "kind": "Service",
+        "apiVersion": "v1",
+        "metadata": {
+                "name": "tls-service"
+        },
+        "spec": {
+                "ports": [
+                {   
+                        "name": "sni",
+                        "protocol": "tcp",
+                        "port": 2999,
+                        "targetPort": 9999
+                }
+                ],  
+                        "selector": {
+                                "name": "tls-server"
+                        }
+        }
+}
+
