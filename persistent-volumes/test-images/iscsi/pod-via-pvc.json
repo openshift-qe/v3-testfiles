@@ -1,0 +1,31 @@
+{
+    "apiVersion": "v1",
+    "kind": "Pod",
+    "metadata": {
+        "name": "iscsi",
+        "labels": {
+            "name": "iscsi"
+        }
+    },
+    "spec": {
+        "containers": [{
+            "name": "iscsi",
+            "image": "aosqe/hello-openshift",
+            "imagePullPolicy": "IfNotPresent",
+            "volumeMounts": [{
+                "mountPath": "/mnt/iscsi",
+                "name": "iscsi"
+            }]
+        }],
+        "securityContext": {
+            "runAsUser": 101010,
+            "fsGroup": 123456
+        },
+        "volumes": [{
+            "name": "iscsi",
+            "persistentVolumeClaim": {
+                "claimName": "iscsic"
+            }
+        }]
+    }
+}
