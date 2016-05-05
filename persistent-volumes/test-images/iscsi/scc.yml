@@ -12,7 +12,7 @@ defaultAddCapabilities:
 fsGroup:
   type: RunAsAny
 users:
-- jhou@redhat.com
+- YOURNAME
 kind: SecurityContextConstraints
 metadata:
   annotations:
