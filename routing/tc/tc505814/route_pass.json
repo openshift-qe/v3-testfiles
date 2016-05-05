@@ -1,0 +1,18 @@
+{
+    "kind": "Route",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "route-passthrough"
+    },
+    "spec": {
+        "host": "routekey.passthrough.com",
+        "to": {
+            "kind": "Service",
+            "name": "service-secure"
+        },
+        "tls": {
+        "termination": "passthrough"
+        }
+    }
+}
+
