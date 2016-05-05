@@ -1,0 +1,45 @@
+{
+    "apiVersion": "v1",
+    "kind": "Pod",
+    "metadata": {
+        "name": "rbd"
+    },
+    "spec": {
+        "containers": [
+            {
+                "name": "rbd",
+                "image": "aosqe/hello-openshift",
+                "volumeMounts": [
+                    {
+                        "mountPath": "/mnt/rbd",
+                        "name": "rbdpd"
+                    }
+                ]
+            }
+        ],
+        "securityContext": {
+            "runAsUser": 1000160000,
+            "fsGroup": 123456,
+            "seLinuxOptions": {
+                "level": "s0"
+            }
+        },
+        "volumes": [
+            {
+                "name": "rbdpd",
+                "rbd": {
+                    "monitors": ["10.240.0.7:6789"],
+                    "pool": "rbd",
+                    "image": "foo",
+                    "user": "admin",
+                    "keyring": "/etc/ceph/keyring",
+                    "secretRef": {
+                        "name": "cephrbd-secret"
+                    },
+                    "fsType": "ext4",
+                    "readOnly": false
+                }
+            }
+        ]
+    }
+}

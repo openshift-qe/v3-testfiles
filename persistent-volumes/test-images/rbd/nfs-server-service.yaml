@@ -1,0 +1,9 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: rbd-server
+spec:
+  ports:
+    - port: 6789
+  selector:
+    role: rbd-server
