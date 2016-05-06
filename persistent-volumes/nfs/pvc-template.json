@@ -9,7 +9,10 @@
       "kind": "PersistentVolumeClaim",
       "apiVersion": "v1",
       "metadata": {
-        "name": "pvcname-1m-rox-#NS#"
+        "name": "pvcname-1m-rox-#NS#",
+        "labels": {
+            "usedFor": "tc522127"
+        }
       },
       "spec": {
         "accessModes": [ "ReadOnlyMany" ],
@@ -24,7 +27,10 @@
       "kind": "PersistentVolumeClaim",
       "apiVersion": "v1",
       "metadata": {
-        "name": "pvcname-128m-rox-#NS#"
+        "name": "pvcname-128m-rox-#NS#",
+        "labels": {
+            "usedFor": "tc522127"
+        }
       },
       "spec": {
         "accessModes": [ "ReadOnlyMany" ],
@@ -39,7 +45,10 @@
       "kind": "PersistentVolumeClaim",
       "apiVersion": "v1",
       "metadata": {
-        "name": "pvcname-130m-rox-#NS#"
+        "name": "pvcname-130m-rox-#NS#",
+        "labels": {
+            "usedFor": "tc522127"
+        }
       },
       "spec": {
         "accessModes": [ "ReadOnlyMany" ],
@@ -54,7 +63,10 @@
       "kind": "PersistentVolumeClaim",
       "apiVersion": "v1",
       "metadata": {
-        "name": "pvcname-258m-rox-#NS#"
+        "name": "pvcname-258m-rox-#NS#",
+        "labels": {
+            "usedFor": "tc522127"
+        }
       },
       "spec": {
         "accessModes": [ "ReadOnlyMany" ],
@@ -69,7 +81,10 @@
       "kind": "PersistentVolumeClaim",
       "apiVersion": "v1",
       "metadata": {
-        "name": "pvcname-1m-rwo-#NS#"
+        "name": "pvcname-1m-rwo-#NS#",
+        "labels": {
+            "usedFor": "tc522127"
+        }
       },
       "spec": {
         "accessModes": [ "ReadWriteOnce" ],
@@ -84,7 +99,10 @@
       "kind": "PersistentVolumeClaim",
       "apiVersion": "v1",
       "metadata": {
-        "name": "pvcname-128m-rwo-#NS#"
+        "name": "pvcname-128m-rwo-#NS#",
+        "labels": {
+            "usedFor": "tc522127"
+        }
       },
       "spec": {
         "accessModes": [ "ReadWriteOnce" ],
@@ -99,7 +117,10 @@
       "kind": "PersistentVolumeClaim",
       "apiVersion": "v1",
       "metadata": {
-        "name": "pvcname-130m-rwo-#NS#"
+        "name": "pvcname-130m-rwo-#NS#",
+        "labels": {
+            "usedFor": "tc522127"
+        }
       },
       "spec": {
         "accessModes": [ "ReadWriteOnce" ],
@@ -114,7 +135,10 @@
       "kind": "PersistentVolumeClaim",
       "apiVersion": "v1",
       "metadata": {
-        "name": "pvcname-258m-rwo-#NS#"
+        "name": "pvcname-258m-rwo-#NS#",
+        "labels": {
+            "usedFor": "tc522127"
+        }
       },
       "spec": {
         "accessModes": [ "ReadWriteOnce" ],
@@ -129,7 +153,10 @@
       "kind": "PersistentVolumeClaim",
       "apiVersion": "v1",
       "metadata": {
-        "name": "pvcname-1m-rwx-#NS#"
+        "name": "pvcname-1m-rwx-#NS#",
+        "labels": {
+            "usedFor": "tc522127"
+        }
       },
       "spec": {
         "accessModes": [ "ReadWriteMany" ],
@@ -144,7 +171,10 @@
       "kind": "PersistentVolumeClaim",
       "apiVersion": "v1",
       "metadata": {
-        "name": "pvcname-128m-rwx-#NS#"
+        "name": "pvcname-128m-rwx-#NS#",
+        "labels": {
+            "usedFor": "tc522127"
+        }
       },
       "spec": {
         "accessModes": [ "ReadWriteMany" ],
@@ -159,7 +189,10 @@
       "kind": "PersistentVolumeClaim",
       "apiVersion": "v1",
       "metadata": {
-        "name": "pvcname-130m-rwx-#NS#"
+        "name": "pvcname-130m-rwx-#NS#",
+        "labels": {
+            "usedFor": "tc522127"
+        }
       },
       "spec": {
         "accessModes": [ "ReadWriteMany" ],
@@ -174,7 +207,10 @@
       "kind": "PersistentVolumeClaim",
       "apiVersion": "v1",
       "metadata": {
-        "name": "pvcname-258m-rwx-#NS#"
+        "name": "pvcname-258m-rwx-#NS#",
+        "labels": {
+            "usedFor": "tc522127"
+        }
       },
       "spec": {
         "accessModes": [ "ReadWriteMany" ],

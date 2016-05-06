@@ -9,7 +9,10 @@
       "kind": "PersistentVolume",
       "apiVersion": "v1",
       "metadata": {
-        "name": "pvname-127m-rox-#NS#"
+        "name": "pvname-127m-rox-#NS#",
+        "labels": {
+            "usedFor": "tc522127"
+        }
       },
       "spec": {
         "capacity": {
@@ -27,7 +30,10 @@
       "kind": "PersistentVolume",
       "apiVersion": "v1",
       "metadata": {
-        "name": "pvname-128m-rox-#NS#"
+        "name": "pvname-128m-rox-#NS#",
+        "labels": {
+            "usedFor": "tc522127"
+        }
       },
       "spec": {
         "capacity": {
@@ -45,7 +51,10 @@
       "kind": "PersistentVolume",
       "apiVersion": "v1",
       "metadata": {
-        "name": "pvname-129m-rox-#NS#"
+        "name": "pvname-129m-rox-#NS#",
+        "labels": {
+            "usedFor": "tc522127"
+        }
       },
       "spec": {
         "capacity": {
@@ -63,7 +72,10 @@
       "kind": "PersistentVolume",
       "apiVersion": "v1",
       "metadata": {
-        "name": "pvname-255m-rox-#NS#"
+        "name": "pvname-255m-rox-#NS#",
+        "labels": {
+            "usedFor": "tc522127"
+        }
       },
       "spec": {
         "capacity": {
@@ -81,7 +93,10 @@
       "kind": "PersistentVolume",
       "apiVersion": "v1",
       "metadata": {
-        "name": "pvname-256m-rox-#NS#"
+        "name": "pvname-256m-rox-#NS#",
+        "labels": {
+            "usedFor": "tc522127"
+        }
       },
       "spec": {
         "capacity": {
@@ -99,7 +114,10 @@
       "kind": "PersistentVolume",
       "apiVersion": "v1",
       "metadata": {
-        "name": "pvname-257m-rox-#NS#"
+        "name": "pvname-257m-rox-#NS#",
+        "labels": {
+            "usedFor": "tc522127"
+        }
       },
       "spec": {
         "capacity": {
@@ -117,7 +135,10 @@
       "kind": "PersistentVolume",
       "apiVersion": "v1",
       "metadata": {
-        "name": "pvname-127m-rwo-#NS#"
+        "name": "pvname-127m-rwo-#NS#",
+        "labels": {
+            "usedFor": "tc522127"
+        }
       },
       "spec": {
         "capacity": {
@@ -135,7 +156,10 @@
       "kind": "PersistentVolume",
       "apiVersion": "v1",
       "metadata": {
-        "name": "pvname-128m-rwo-#NS#"
+        "name": "pvname-128m-rwo-#NS#",
+        "labels": {
+            "usedFor": "tc522127"
+        }
       },
       "spec": {
         "capacity": {
@@ -153,7 +177,10 @@
       "kind": "PersistentVolume",
       "apiVersion": "v1",
       "metadata": {
-        "name": "pvname-129m-rwo-#NS#"
+        "name": "pvname-129m-rwo-#NS#",
+        "labels": {
+            "usedFor": "tc522127"
+        }
       },
       "spec": {
         "capacity": {
@@ -171,7 +198,10 @@
       "kind": "PersistentVolume",
       "apiVersion": "v1",
       "metadata": {
-        "name": "pvname-255m-rwo-#NS#"
+        "name": "pvname-255m-rwo-#NS#",
+        "labels": {
+            "usedFor": "tc522127"
+        }
       },
       "spec": {
         "capacity": {
@@ -189,7 +219,10 @@
       "kind": "PersistentVolume",
       "apiVersion": "v1",
       "metadata": {
-        "name": "pvname-256m-rwo-#NS#"
+        "name": "pvname-256m-rwo-#NS#",
+        "labels": {
+            "usedFor": "tc522127"
+        }
       },
       "spec": {
         "capacity": {
@@ -207,7 +240,10 @@
       "kind": "PersistentVolume",
       "apiVersion": "v1",
       "metadata": {
-        "name": "pvname-257m-rwo-#NS#"
+        "name": "pvname-257m-rwo-#NS#",
+        "labels": {
+            "usedFor": "tc522127"
+        }
       },
       "spec": {
         "capacity": {
@@ -225,7 +261,10 @@
       "kind": "PersistentVolume",
       "apiVersion": "v1",
       "metadata": {
-        "name": "pvname-127m-rwx-#NS#"
+        "name": "pvname-127m-rwx-#NS#",
+        "labels": {
+            "usedFor": "tc522127"
+        }
       },
       "spec": {
         "capacity": {
@@ -243,7 +282,10 @@
       "kind": "PersistentVolume",
       "apiVersion": "v1",
       "metadata": {
-        "name": "pvname-128m-rwx-#NS#"
+        "name": "pvname-128m-rwx-#NS#",
+        "labels": {
+            "usedFor": "tc522127"
+        }
       },
       "spec": {
         "capacity": {
@@ -261,7 +303,10 @@
       "kind": "PersistentVolume",
       "apiVersion": "v1",
       "metadata": {
-        "name": "pvname-129m-rwx-#NS#"
+        "name": "pvname-129m-rwx-#NS#",
+        "labels": {
+            "usedFor": "tc522127"
+        }
       },
       "spec": {
         "capacity": {
@@ -279,7 +324,10 @@
       "kind": "PersistentVolume",
       "apiVersion": "v1",
       "metadata": {
-        "name": "pvname-255m-rwx-#NS#"
+        "name": "pvname-255m-rwx-#NS#",
+        "labels": {
+            "usedFor": "tc522127"
+        }
       },
       "spec": {
         "capacity": {
@@ -297,7 +345,10 @@
       "kind": "PersistentVolume",
       "apiVersion": "v1",
       "metadata": {
-        "name": "pvname-256m-rwx-#NS#"
+        "name": "pvname-256m-rwx-#NS#",
+        "labels": {
+            "usedFor": "tc522127"
+        }
       },
       "spec": {
         "capacity": {
@@ -315,7 +366,10 @@
       "kind": "PersistentVolume",
       "apiVersion": "v1",
       "metadata": {
-        "name": "pvname-257m-rwx-#NS#"
+        "name": "pvname-257m-rwx-#NS#",
+        "labels": {
+            "usedFor": "tc522127"
+        }
       },
       "spec": {
         "capacity": {
