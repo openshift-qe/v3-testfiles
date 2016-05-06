@@ -1,0 +1,189 @@
+{
+  "kind": "Template",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "pvc-template"
+  },
+  "objects": [
+    {
+      "kind": "PersistentVolumeClaim",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "pvcname-1m-rox-#NS#"
+      },
+      "spec": {
+        "accessModes": [ "ReadOnlyMany" ],
+        "resources": {
+          "requests": {
+            "storage": "1Mi"
+          }
+        }
+      }
+    },
+    {
+      "kind": "PersistentVolumeClaim",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "pvcname-128m-rox-#NS#"
+      },
+      "spec": {
+        "accessModes": [ "ReadOnlyMany" ],
+        "resources": {
+          "requests": {
+            "storage": "128Mi"
+          }
+        }
+      }
+    },
+    {
+      "kind": "PersistentVolumeClaim",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "pvcname-130m-rox-#NS#"
+      },
+      "spec": {
+        "accessModes": [ "ReadOnlyMany" ],
+        "resources": {
+          "requests": {
+            "storage": "130Mi"
+          }
+        }
+      }
+    },
+    {
+      "kind": "PersistentVolumeClaim",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "pvcname-258m-rox-#NS#"
+      },
+      "spec": {
+        "accessModes": [ "ReadOnlyMany" ],
+        "resources": {
+          "requests": {
+            "storage": "258Mi"
+          }
+        }
+      }
+    },
+    {
+      "kind": "PersistentVolumeClaim",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "pvcname-1m-rwo-#NS#"
+      },
+      "spec": {
+        "accessModes": [ "ReadWriteOnce" ],
+        "resources": {
+          "requests": {
+            "storage": "1Mi"
+          }
+        }
+      }
+    },
+    {
+      "kind": "PersistentVolumeClaim",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "pvcname-128m-rwo-#NS#"
+      },
+      "spec": {
+        "accessModes": [ "ReadWriteOnce" ],
+        "resources": {
+          "requests": {
+            "storage": "128Mi"
+          }
+        }
+      }
+    },
+    {
+      "kind": "PersistentVolumeClaim",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "pvcname-130m-rwo-#NS#"
+      },
+      "spec": {
+        "accessModes": [ "ReadWriteOnce" ],
+        "resources": {
+          "requests": {
+            "storage": "130Mi"
+          }
+        }
+      }
+    },
+    {
+      "kind": "PersistentVolumeClaim",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "pvcname-258m-rwo-#NS#"
+      },
+      "spec": {
+        "accessModes": [ "ReadWriteOnce" ],
+        "resources": {
+          "requests": {
+            "storage": "258Mi"
+          }
+        }
+      }
+    },
+    {
+      "kind": "PersistentVolumeClaim",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "pvcname-1m-rwx-#NS#"
+      },
+      "spec": {
+        "accessModes": [ "ReadWriteMany" ],
+        "resources": {
+          "requests": {
+            "storage": "1Mi"
+          }
+        }
+      }
+    },
+    {
+      "kind": "PersistentVolumeClaim",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "pvcname-128m-rwx-#NS#"
+      },
+      "spec": {
+        "accessModes": [ "ReadWriteMany" ],
+        "resources": {
+          "requests": {
+            "storage": "128Mi"
+          }
+        }
+      }
+    },
+    {
+      "kind": "PersistentVolumeClaim",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "pvcname-130m-rwx-#NS#"
+      },
+      "spec": {
+        "accessModes": [ "ReadWriteMany" ],
+        "resources": {
+          "requests": {
+            "storage": "130Mi"
+          }
+        }
+      }
+    },
+    {
+      "kind": "PersistentVolumeClaim",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "pvcname-258m-rwx-#NS#"
+      },
+      "spec": {
+        "accessModes": [ "ReadWriteMany" ],
+        "resources": {
+          "requests": {
+            "storage": "258Mi"
+          }
+        }
+      }
+    }
+  ]
+}

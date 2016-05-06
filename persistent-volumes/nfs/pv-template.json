@@ -1,0 +1,333 @@
+{
+  "kind": "Template",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "pv-template"
+  },
+  "objects": [
+    {
+      "kind": "PersistentVolume",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "pvname-127m-rox-#NS#"
+      },
+      "spec": {
+        "capacity": {
+          "storage": "127Mi"
+        },
+        "accessModes": [ "ReadOnlyMany" ],
+        "nfs": {
+          "path": "/",
+          "server": "#NFS-Service-IP#"
+        },
+        "persistentVolumeReclaimPolicy": "Recycle"
+      }
+    },
+    {
+      "kind": "PersistentVolume",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "pvname-128m-rox-#NS#"
+      },
+      "spec": {
+        "capacity": {
+          "storage": "128Mi"
+        },
+        "accessModes": [ "ReadOnlyMany" ],
+        "nfs": {
+          "path": "/",
+          "server": "#NFS-Service-IP#"
+        },
+        "persistentVolumeReclaimPolicy": "Recycle"
+      }
+    },
+    {
+      "kind": "PersistentVolume",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "pvname-129m-rox-#NS#"
+      },
+      "spec": {
+        "capacity": {
+          "storage": "129Mi"
+        },
+        "accessModes": [ "ReadOnlyMany" ],
+        "nfs": {
+          "path": "/",
+          "server": "#NFS-Service-IP#"
+        },
+        "persistentVolumeReclaimPolicy": "Recycle"
+      }
+    },
+    {
+      "kind": "PersistentVolume",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "pvname-255m-rox-#NS#"
+      },
+      "spec": {
+        "capacity": {
+          "storage": "255Mi"
+        },
+        "accessModes": [ "ReadOnlyMany" ],
+        "nfs": {
+          "path": "/",
+          "server": "#NFS-Service-IP#"
+        },
+        "persistentVolumeReclaimPolicy": "Recycle"
+      }
+    },
+    {
+      "kind": "PersistentVolume",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "pvname-256m-rox-#NS#"
+      },
+      "spec": {
+        "capacity": {
+          "storage": "256Mi"
+        },
+        "accessModes": [ "ReadOnlyMany" ],
+        "nfs": {
+          "path": "/",
+          "server": "#NFS-Service-IP#"
+        },
+        "persistentVolumeReclaimPolicy": "Recycle"
+      }
+    },
+    {
+      "kind": "PersistentVolume",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "pvname-257m-rox-#NS#"
+      },
+      "spec": {
+        "capacity": {
+          "storage": "257Mi"
+        },
+        "accessModes": [ "ReadOnlyMany" ],
+        "nfs": {
+          "path": "/",
+          "server": "#NFS-Service-IP#"
+        },
+        "persistentVolumeReclaimPolicy": "Recycle"
+      }
+    },
+    {
+      "kind": "PersistentVolume",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "pvname-127m-rwo-#NS#"
+      },
+      "spec": {
+        "capacity": {
+          "storage": "127Mi"
+        },
+        "accessModes": [ "ReadWriteOnce" ],
+        "nfs": {
+          "path": "/",
+          "server": "#NFS-Service-IP#"
+        },
+        "persistentVolumeReclaimPolicy": "Recycle"
+      }
+    },
+    {
+      "kind": "PersistentVolume",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "pvname-128m-rwo-#NS#"
+      },
+      "spec": {
+        "capacity": {
+          "storage": "128Mi"
+        },
+        "accessModes": [ "ReadWriteOnce" ],
+        "nfs": {
+          "path": "/",
+          "server": "#NFS-Service-IP#"
+        },
+        "persistentVolumeReclaimPolicy": "Recycle"
+      }
+    },
+    {
+      "kind": "PersistentVolume",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "pvname-129m-rwo-#NS#"
+      },
+      "spec": {
+        "capacity": {
+          "storage": "129Mi"
+        },
+        "accessModes": [ "ReadWriteOnce" ],
+        "nfs": {
+          "path": "/",
+          "server": "#NFS-Service-IP#"
+        },
+        "persistentVolumeReclaimPolicy": "Recycle"
+      }
+    },
+    {
+      "kind": "PersistentVolume",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "pvname-255m-rwo-#NS#"
+      },
+      "spec": {
+        "capacity": {
+          "storage": "255Mi"
+        },
+        "accessModes": [ "ReadWriteOnce" ],
+        "nfs": {
+          "path": "/",
+          "server": "#NFS-Service-IP#"
+        },
+        "persistentVolumeReclaimPolicy": "Recycle"
+      }
+    },
+    {
+      "kind": "PersistentVolume",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "pvname-256m-rwo-#NS#"
+      },
+      "spec": {
+        "capacity": {
+          "storage": "256Mi"
+        },
+        "accessModes": [ "ReadWriteOnce" ],
+        "nfs": {
+          "path": "/",
+          "server": "#NFS-Service-IP#"
+        },
+        "persistentVolumeReclaimPolicy": "Recycle"
+      }
+    },
+    {
+      "kind": "PersistentVolume",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "pvname-257m-rwo-#NS#"
+      },
+      "spec": {
+        "capacity": {
+          "storage": "257Mi"
+        },
+        "accessModes": [ "ReadWriteOnce" ],
+        "nfs": {
+          "path": "/",
+          "server": "#NFS-Service-IP#"
+        },
+        "persistentVolumeReclaimPolicy": "Recycle"
+      }
+    },
+    {
+      "kind": "PersistentVolume",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "pvname-127m-rwx-#NS#"
+      },
+      "spec": {
+        "capacity": {
+          "storage": "127Mi"
+        },
+        "accessModes": [ "ReadWriteMany" ],
+        "nfs": {
+          "path": "/",
+          "server": "#NFS-Service-IP#"
+        },
+        "persistentVolumeReclaimPolicy": "Recycle"
+      }
+    },
+    {
+      "kind": "PersistentVolume",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "pvname-128m-rwx-#NS#"
+      },
+      "spec": {
+        "capacity": {
+          "storage": "128Mi"
+        },
+        "accessModes": [ "ReadWriteMany" ],
+        "nfs": {
+          "path": "/",
+          "server": "#NFS-Service-IP#"
+        },
+        "persistentVolumeReclaimPolicy": "Recycle"
+      }
+    },
+    {
+      "kind": "PersistentVolume",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "pvname-129m-rwx-#NS#"
+      },
+      "spec": {
+        "capacity": {
+          "storage": "129Mi"
+        },
+        "accessModes": [ "ReadWriteMany" ],
+        "nfs": {
+          "path": "/",
+          "server": "#NFS-Service-IP#"
+        },
+        "persistentVolumeReclaimPolicy": "Recycle"
+      }
+    },
+    {
+      "kind": "PersistentVolume",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "pvname-255m-rwx-#NS#"
+      },
+      "spec": {
+        "capacity": {
+          "storage": "255Mi"
+        },
+        "accessModes": [ "ReadWriteMany" ],
+        "nfs": {
+          "path": "/",
+          "server": "#NFS-Service-IP#"
+        },
+        "persistentVolumeReclaimPolicy": "Recycle"
+      }
+    },
+    {
+      "kind": "PersistentVolume",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "pvname-256m-rwx-#NS#"
+      },
+      "spec": {
+        "capacity": {
+          "storage": "256Mi"
+        },
+        "accessModes": [ "ReadWriteMany" ],
+        "nfs": {
+          "path": "/",
+          "server": "#NFS-Service-IP#"
+        },
+        "persistentVolumeReclaimPolicy": "Recycle"
+      }
+    },
+    {
+      "kind": "PersistentVolume",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "pvname-257m-rwx-#NS#"
+      },
+      "spec": {
+        "capacity": {
+          "storage": "257Mi"
+        },
+        "accessModes": [ "ReadWriteMany" ],
+        "nfs": {
+          "path": "/",
+          "server": "#NFS-Service-IP#"
+        },
+        "persistentVolumeReclaimPolicy": "Recycle"
+      }
+    }
+  ]
+}
