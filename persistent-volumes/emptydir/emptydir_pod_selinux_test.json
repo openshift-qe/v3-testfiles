@@ -12,7 +12,7 @@
     "containers": [
       {
         "name": "c1",
-        "image": "aosqe/hello-openshift",
+        "image": "jhou/hello-openshift",
         "ports": [
           {
             "containerPort": 8080,
@@ -38,7 +38,7 @@
         "image": "jhou/hello-openshift-i",
         "ports": [
           {
-            "containerPort": 8081,
+            "containerPort": 9091,
             "protocol": "TCP"
           }
         ],
@@ -59,7 +59,10 @@
     ],
     "securityContext": {
          "fsGroup": 123456,
-         "supplementalGroups": [654321]
+         "supplementalGroups": [654321],
+         "seLinuxOptions": {
+            "level": "s0:c13,c2"
+         }
     },
     "volumes": [
       {
