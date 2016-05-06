@@ -38,7 +38,7 @@
         "image": "jhou/hello-openshift-i",
         "ports": [
           {
-            "containerPort": 8081,
+            "containerPort": 9091,
             "protocol": "TCP"
           }
         ],
