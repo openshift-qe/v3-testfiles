@@ -78,7 +78,8 @@
           "dockerStrategy": {
             "from": {
               "kind": "ImageStreamTag",
-              "name": "ruby-22-rhel7:latest"
+              "name": "ruby:2.2",
+              "namespace": "openshift"
             },
             "env": [
               {
