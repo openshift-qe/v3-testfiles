@@ -1,0 +1,13 @@
+{
+    "kind": "Route",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "service-unsecure"
+    },
+    "spec": {
+        "to": {
+            "kind": "Service",
+            "name": "service-unsecure"
+        }
+    }
+}
