@@ -3,15 +3,9 @@
     "apiVersion": "v1",
     "metadata": {
         "name": "nettest",
-        "selfLink": "/oapi/v1/namespaces/zhouy/deploymentconfigs/nettest",
-        "uid": "4ad59942-0153-11e6-b157-0e5fe4b85aff",
-        "resourceVersion": "1800",
-        "creationTimestamp": "2016-04-13T08:39:53Z",
+        "creationTimestamp": null,
         "labels": {
             "app": "nettest"
-        },
-        "annotations": {
-            "openshift.io/generated-by": "OpenShiftNewApp"
         }
     },
     "spec": {
