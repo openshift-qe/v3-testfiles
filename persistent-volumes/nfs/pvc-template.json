@@ -1,0 +1,225 @@
+{
+  "kind": "Template",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "pvc-template"
+  },
+  "objects": [
+    {
+      "kind": "PersistentVolumeClaim",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "pvcname-1m-rox-#NS#",
+        "labels": {
+            "usedFor": "tc522127"
+        }
+      },
+      "spec": {
+        "accessModes": [ "ReadOnlyMany" ],
+        "resources": {
+          "requests": {
+            "storage": "1Mi"
+          }
+        }
+      }
+    },
+    {
+      "kind": "PersistentVolumeClaim",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "pvcname-128m-rox-#NS#",
+        "labels": {
+            "usedFor": "tc522127"
+        }
+      },
+      "spec": {
+        "accessModes": [ "ReadOnlyMany" ],
+        "resources": {
+          "requests": {
+            "storage": "128Mi"
+          }
+        }
+      }
+    },
+    {
+      "kind": "PersistentVolumeClaim",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "pvcname-130m-rox-#NS#",
+        "labels": {
+            "usedFor": "tc522127"
+        }
+      },
+      "spec": {
+        "accessModes": [ "ReadOnlyMany" ],
+        "resources": {
+          "requests": {
+            "storage": "130Mi"
+          }
+        }
+      }
+    },
+    {
+      "kind": "PersistentVolumeClaim",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "pvcname-258m-rox-#NS#",
+        "labels": {
+            "usedFor": "tc522127"
+        }
+      },
+      "spec": {
+        "accessModes": [ "ReadOnlyMany" ],
+        "resources": {
+          "requests": {
+            "storage": "258Mi"
+          }
+        }
+      }
+    },
+    {
+      "kind": "PersistentVolumeClaim",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "pvcname-1m-rwo-#NS#",
+        "labels": {
+            "usedFor": "tc522127"
+        }
+      },
+      "spec": {
+        "accessModes": [ "ReadWriteOnce" ],
+        "resources": {
+          "requests": {
+            "storage": "1Mi"
+          }
+        }
+      }
+    },
+    {
+      "kind": "PersistentVolumeClaim",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "pvcname-128m-rwo-#NS#",
+        "labels": {
+            "usedFor": "tc522127"
+        }
+      },
+      "spec": {
+        "accessModes": [ "ReadWriteOnce" ],
+        "resources": {
+          "requests": {
+            "storage": "128Mi"
+          }
+        }
+      }
+    },
+    {
+      "kind": "PersistentVolumeClaim",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "pvcname-130m-rwo-#NS#",
+        "labels": {
+            "usedFor": "tc522127"
+        }
+      },
+      "spec": {
+        "accessModes": [ "ReadWriteOnce" ],
+        "resources": {
+          "requests": {
+            "storage": "130Mi"
+          }
+        }
+      }
+    },
+    {
+      "kind": "PersistentVolumeClaim",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "pvcname-258m-rwo-#NS#",
+        "labels": {
+            "usedFor": "tc522127"
+        }
+      },
+      "spec": {
+        "accessModes": [ "ReadWriteOnce" ],
+        "resources": {
+          "requests": {
+            "storage": "258Mi"
+          }
+        }
+      }
+    },
+    {
+      "kind": "PersistentVolumeClaim",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "pvcname-1m-rwx-#NS#",
+        "labels": {
+            "usedFor": "tc522127"
+        }
+      },
+      "spec": {
+        "accessModes": [ "ReadWriteMany" ],
+        "resources": {
+          "requests": {
+            "storage": "1Mi"
+          }
+        }
+      }
+    },
+    {
+      "kind": "PersistentVolumeClaim",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "pvcname-128m-rwx-#NS#",
+        "labels": {
+            "usedFor": "tc522127"
+        }
+      },
+      "spec": {
+        "accessModes": [ "ReadWriteMany" ],
+        "resources": {
+          "requests": {
+            "storage": "128Mi"
+          }
+        }
+      }
+    },
+    {
+      "kind": "PersistentVolumeClaim",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "pvcname-130m-rwx-#NS#",
+        "labels": {
+            "usedFor": "tc522127"
+        }
+      },
+      "spec": {
+        "accessModes": [ "ReadWriteMany" ],
+        "resources": {
+          "requests": {
+            "storage": "130Mi"
+          }
+        }
+      }
+    },
+    {
+      "kind": "PersistentVolumeClaim",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "pvcname-258m-rwx-#NS#",
+        "labels": {
+            "usedFor": "tc522127"
+        }
+      },
+      "spec": {
+        "accessModes": [ "ReadWriteMany" ],
+        "resources": {
+          "requests": {
+            "storage": "258Mi"
+          }
+        }
+      }
+    }
+  ]
+}
