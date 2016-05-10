@@ -1,0 +1,108 @@
+{
+    "kind": "DeploymentConfig",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "nettest",
+        "creationTimestamp": null,
+        "labels": {
+            "app": "nettest"
+        }
+    },
+    "spec": {
+        "strategy": {
+            "type": "Rolling",
+            "rollingParams": {
+                "updatePeriodSeconds": 1,
+                "intervalSeconds": 1,
+                "timeoutSeconds": 600,
+                "maxUnavailable": "25%",
+                "maxSurge": "25%"
+            },
+            "resources": {}
+        },
+        "triggers": [
+            {
+                "type": "ConfigChange"
+            },
+            {
+                "type": "ImageChange",
+                "imageChangeParams": {
+                    "automatic": true,
+                    "containerNames": [
+                        "nettest"
+                    ],
+                    "from": {
+                        "kind": "ImageStreamTag",
+                        "name": "nettest:1.8"
+                    },
+                    "lastTriggeredImage": "gcr.io/google_containers/nettest@sha256:2b3856c196b27a3def9b8dd65ce8e0d6e640727a48ec9b85147521e918f8ac27"
+                }
+            }
+        ],
+        "replicas": 1,
+        "test": false,
+        "selector": {
+            "app": "nettest",
+            "deploymentconfig": "nettest"
+        },
+        "template": {
+            "metadata": {
+                "creationTimestamp": null,
+                "labels": {
+                    "app": "nettest",
+                    "deploymentconfig": "nettest"
+                },
+                "annotations": {
+                    "openshift.io/container.nettest.image.entrypoint": "[\"/webserver\"]",
+                    "openshift.io/generated-by": "OpenShiftNewApp"
+                }
+            },
+            "spec": {
+                "containers": [
+                    {
+                        "name": "nettest",
+                        "image": "gcr.io/google_containers/nettest@sha256:2b3856c196b27a3def9b8dd65ce8e0d6e640727a48ec9b85147521e918f8ac27",
+                        "args": [
+                             "-delay-shutdown=120"
+                         ],
+                        "ports": [
+                            {
+                                "containerPort": 8080,
+                                "protocol": "TCP"
+                            }
+                        ],
+                        "env": [
+                            {
+                               "name": "delay_shutdown",
+                               "value": "600"
+                            }
+                        ],
+                        "resources": {},
+                        "terminationMessagePath": "/dev/termination-log",
+                        "imagePullPolicy": "IfNotPresent"
+                    }
+                ],
+                "restartPolicy": "Always",
+                "terminationGracePeriodSeconds": 30000,
+                "dnsPolicy": "ClusterFirst",
+                "securityContext": {}
+            }
+        }
+    },
+    "status": {
+        "latestVersion": 1,
+        "details": {
+            "causes": [
+                {
+                    "type": "ImageChange",
+                    "imageTrigger": {
+                        "from": {
+                            "kind": "ImageStreamTag",
+                            "name": "nettest:1.8"
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}
