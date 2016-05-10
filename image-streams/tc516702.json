@@ -1,0 +1,42 @@
+{
+  "kind": "ImageStream",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "nodejs",
+    "creationTimestamp": null
+  },
+  "spec": {
+    "tags": [
+      {
+        "name": "latest",
+        "annotations": {
+          "description": "Build and run NodeJS applications",
+          "iconClass": "icon-nodejs",
+          "tags": "builder,nodejs",
+          "supports":"nodejs",
+          "sampleRepo": "https://github.com/openshift/nodejs-ex.git"
+        },
+        "from": {
+          "kind": "ImageStreamTag",
+          "name": "0.10"
+        }
+      },
+      {
+        "name": "0.10",
+        "annotations": {
+          "description": "Build and run NodeJS 0.10 applications",
+          "iconClass": "icon-nodejs",
+          "tags": "builder,nodejs",
+          "supports":"nodejs:0.10,nodejs:0.1,nodejs",
+          "version": "0.10",
+          "sampleRepo": "https://github.com/openshift/nodejs-ex.git"
+        },
+        "from": {
+          "kind": "DockerImage",
+          "name": "aosqe/nodejs-multiple-ports:latest"
+        }
+      }
+    ]
+  }
+}
+
