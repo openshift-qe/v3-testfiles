@@ -1,0 +1,14 @@
+{
+    "apiVersion": "v1",
+    "kind": "Route",
+    "metadata": {
+        "name": "hello-route1"
+    },
+    "spec": {
+        "host": "www.hello1.com",
+        "to": {
+            "kind": "Service",
+            "name": "hello-service"
+        }
+    }
+}
