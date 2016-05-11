@@ -1,0 +1,153 @@
+{
+    "kind": "ImageStream",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "rails-ex",
+        "labels": {
+            "app": "rails-ex"
+        }
+    },
+    "spec": {},
+    "status": {
+    }
+}
+{
+    "kind": "BuildConfig",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "rails-ex",
+        "labels": {
+            "app": "rails-ex"
+        }
+    },
+    "spec": {
+        "triggers": [
+            {
+                "type": "GitHub",
+                "github": {
+                    "secret": "Ybt17lG8Dk8OpJ3-twTy"
+                }
+            },
+            {
+                "type": "Generic",
+                "generic": {
+                    "secret": "TPIJ1Na6MEKQM1dfhV43"
+                }
+            },
+            {
+                "type": "ConfigChange"
+            }
+        ],
+        "source": {
+            "type": "Git",
+            "git": {
+                "uri": "https://github.com/openshift/rails-ex"
+            },
+            "secrets": []
+        },
+        "strategy": {
+            "type": "Source",
+            "sourceStrategy": {
+                "from": {
+                    "kind": "ImageStreamTag",
+                    "namespace": "openshift",
+                    "name": "ruby:2.2"
+                }
+            }
+        },
+        "output": {
+            "to": {
+                "kind": "ImageStreamTag",
+                "name": "rails-ex:latest"
+            }
+        },
+        "resources": {},
+        "postCommit": {}
+    }
+}
+{
+  "kind": "DeploymentConfig",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "rails-ex",
+    "labels": {
+      "app": "rails-ex"
+    }
+  },
+  "spec": {
+    "strategy": {
+      "type": "Rolling",
+      "rollingParams": {
+        "updatePeriodSeconds": 1,
+        "intervalSeconds": 1,
+        "timeoutSeconds": 600,
+        "maxUnavailable": "25%",
+        "maxSurge": "25%"
+      },
+      "resources": {}
+    },
+    "triggers": [
+      {
+        "type": "ConfigChange"
+      },
+      {
+        "type": "ImageChange",
+        "imageChangeParams": {
+          "automatic": true,
+          "containerNames": [
+            "rails-ex"
+          ],
+          "from": {
+            "kind": "ImageStreamTag",
+            "name": "rails-ex:latest"
+          }
+        }
+      }
+    ],
+    "replicas": 1,
+    "selector": {
+      "app": "rails-ex",
+      "deploymentconfig": "rails-ex"
+    },
+    "template": {
+      "metadata": {
+        "creationTimestamp": null,
+        "labels": {
+          "app": "rails-ex",
+          "deploymentconfig": "rails-ex"
+        }
+      },
+      "spec": {
+        "containers": [
+          {
+            "name": "rails-ex",
+            "image": "rails-ex",
+            "ports": [
+              {
+                "containerPort": 8080,
+                "protocol": "TCP"
+              }
+            ],
+            "resources": {
+              "limits": {
+                "cpu": "800m",
+                "memory": "100Mi"
+              },
+              "requests": {
+                "cpu": "600m",
+                "memory": "100Mi"
+              }
+            },
+            "terminationMessagePath": "/dev/termination-log",
+            "imagePullPolicy": "Always"
+          }
+        ],
+        "restartPolicy": "Always",
+        "terminationGracePeriodSeconds": 30,
+        "dnsPolicy": "ClusterFirst",
+        "securityContext": {}
+      }
+    }
+  },
+  "status": {}
+}
