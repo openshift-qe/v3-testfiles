@@ -1,0 +1,144 @@
+{
+    "kind": "ImageStream",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "php-app",
+        "labels": {
+            "app": "php-app"
+        }
+    },
+    "spec": {},
+    "status": {
+    }
+}
+{
+    "kind": "BuildConfig",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "php-app",
+        "labels": {
+            "app": "php-app"
+        }
+    },
+    "spec": {
+        "triggers": [
+            {
+                "type": "GitHub",
+                "github": {
+                    "secret": "Ybt17lG8Dk8OpJ3-twTy"
+                }
+            },
+            {
+                "type": "Generic",
+                "generic": {
+                    "secret": "TPIJ1Na6MEKQM1dfhV43"
+                }
+            },
+            {
+                "type": "ConfigChange"
+            }
+        ],
+        "source": {
+            "type": "Git",
+            "git": {
+                "uri": "https://github.com/openshift-qe/php-example-app"
+            },
+            "secrets": []
+        },
+        "strategy": {
+            "type": "Source",
+            "sourceStrategy": {
+                "from": {
+                    "kind": "ImageStreamTag",
+                    "namespace": "openshift",
+                    "name": "php:5.5"
+                }
+            }
+        },
+        "output": {
+            "to": {
+                "kind": "ImageStreamTag",
+                "name": "php-app:latest"
+            }
+        },
+        "resources": {},
+        "postCommit": {}
+    }
+}
+{
+  "kind": "DeploymentConfig",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "php-app",
+    "labels": {
+      "app": "php-app"
+    }
+  },
+  "spec": {
+    "strategy": {
+      "type": "Rolling",
+      "rollingParams": {
+        "updatePeriodSeconds": 1,
+        "intervalSeconds": 1,
+        "timeoutSeconds": 600,
+        "maxUnavailable": "25%",
+        "maxSurge": "25%"
+      },
+      "resources": {}
+    },
+    "triggers": [
+      {
+        "type": "ConfigChange"
+      },
+      {
+        "type": "ImageChange",
+        "imageChangeParams": {
+          "automatic": true,
+          "containerNames": [
+            "php-app"
+          ],
+          "from": {
+            "kind": "ImageStreamTag",
+            "name": "php-app:latest"
+          }
+        }
+      }
+    ],
+    "replicas": 1,
+    "selector": {
+      "app": "php-app",
+      "deploymentconfig": "php-app"
+    },
+    "template": {
+      "metadata": {
+        "creationTimestamp": null,
+        "labels": {
+          "app": "php-app",
+          "deploymentconfig": "php-app"
+        }
+      },
+      "spec": {
+        "containers": [
+          {
+            "name": "php-app",
+            "image": "php-app",
+            "ports": [
+              {
+                "containerPort": 8080,
+                "protocol": "TCP"
+              }
+            ],
+            "resources": { },
+            "terminationMessagePath": "/dev/termination-log",
+            "imagePullPolicy": "Always"
+          }
+        ],
+        "restartPolicy": "Always",
+        "terminationGracePeriodSeconds": 30,
+        "dnsPolicy": "ClusterFirst",
+        "securityContext": {}
+      }
+    }
+  },
+  "status": {}
+}
