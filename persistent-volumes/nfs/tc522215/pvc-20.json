@@ -7,7 +7,10 @@
     "apiVersion": "v1",
     "kind": "PersistentVolumeClaim",
     "metadata": {
-        "name": "nfsc1"
+        "name": "nfsc1",
+        "labels": {
+            "usedFor": "tc522215"
+        }
     },
     "spec": {
         "accessModes": [ "ReadWriteMany" ],
@@ -22,7 +25,10 @@
     "apiVersion": "v1",
     "kind": "PersistentVolumeClaim",
     "metadata": {
-        "name": "nfsc2"
+        "name": "nfsc2",
+        "labels": {
+            "usedFor": "tc522215"
+        }
     },
     "spec": {
         "accessModes": [ "ReadWriteMany" ],
@@ -37,7 +43,10 @@
     "apiVersion": "v1",
     "kind": "PersistentVolumeClaim",
     "metadata": {
-        "name": "nfsc3"
+        "name": "nfsc3",
+        "labels": {
+            "usedFor": "tc522215"
+        }
     },
     "spec": {
         "accessModes": [ "ReadWriteMany" ],
@@ -52,7 +61,10 @@
     "apiVersion": "v1",
     "kind": "PersistentVolumeClaim",
     "metadata": {
-        "name": "nfsc4"
+        "name": "nfsc4",
+        "labels": {
+            "usedFor": "tc522215"
+        }
     },
     "spec": {
         "accessModes": [ "ReadWriteMany" ],
@@ -67,7 +79,10 @@
     "apiVersion": "v1",
     "kind": "PersistentVolumeClaim",
     "metadata": {
-        "name": "nfsc5"
+        "name": "nfsc5",
+        "labels": {
+            "usedFor": "tc522215"
+        }
     },
     "spec": {
         "accessModes": [ "ReadWriteMany" ],
@@ -82,7 +97,10 @@
     "apiVersion": "v1",
     "kind": "PersistentVolumeClaim",
     "metadata": {
-        "name": "nfsc6"
+        "name": "nfsc6",
+        "labels": {
+            "usedFor": "tc522215"
+        }
     },
     "spec": {
         "accessModes": [ "ReadWriteMany" ],
@@ -97,7 +115,10 @@
     "apiVersion": "v1",
     "kind": "PersistentVolumeClaim",
     "metadata": {
-        "name": "nfsc7"
+        "name": "nfsc7",
+        "labels": {
+            "usedFor": "tc522215"
+        }
     },
     "spec": {
         "accessModes": [ "ReadWriteMany" ],
@@ -112,7 +133,10 @@
     "apiVersion": "v1",
     "kind": "PersistentVolumeClaim",
     "metadata": {
-        "name": "nfsc8"
+        "name": "nfsc8",
+        "labels": {
+            "usedFor": "tc522215"
+        }
     },
     "spec": {
         "accessModes": [ "ReadWriteMany" ],
@@ -127,7 +151,10 @@
     "apiVersion": "v1",
     "kind": "PersistentVolumeClaim",
     "metadata": {
-        "name": "nfsc9"
+        "name": "nfsc9",
+        "labels": {
+            "usedFor": "tc522215"
+        }
     },
     "spec": {
         "accessModes": [ "ReadWriteMany" ],
@@ -142,7 +169,10 @@
     "apiVersion": "v1",
     "kind": "PersistentVolumeClaim",
     "metadata": {
-        "name": "nfsc10"
+        "name": "nfsc10",
+        "labels": {
+            "usedFor": "tc522215"
+        }
     },
     "spec": {
         "accessModes": [ "ReadWriteMany" ],
@@ -157,7 +187,10 @@
     "apiVersion": "v1",
     "kind": "PersistentVolumeClaim",
     "metadata": {
-        "name": "nfsc11"
+        "name": "nfsc11",
+        "labels": {
+            "usedFor": "tc522215"
+        }
     },
     "spec": {
         "accessModes": [ "ReadWriteMany" ],
@@ -172,7 +205,10 @@
     "apiVersion": "v1",
     "kind": "PersistentVolumeClaim",
     "metadata": {
-        "name": "nfsc12"
+        "name": "nfsc12",
+        "labels": {
+            "usedFor": "tc522215"
+        }
     },
     "spec": {
         "accessModes": [ "ReadWriteMany" ],
@@ -187,7 +223,10 @@
     "apiVersion": "v1",
     "kind": "PersistentVolumeClaim",
     "metadata": {
-        "name": "nfsc13"
+        "name": "nfsc13",
+        "labels": {
+            "usedFor": "tc522215"
+        }
     },
     "spec": {
         "accessModes": [ "ReadWriteMany" ],
@@ -202,7 +241,10 @@
     "apiVersion": "v1",
     "kind": "PersistentVolumeClaim",
     "metadata": {
-        "name": "nfsc14"
+        "name": "nfsc14",
+        "labels": {
+            "usedFor": "tc522215"
+        }
     },
     "spec": {
         "accessModes": [ "ReadWriteMany" ],
@@ -217,7 +259,10 @@
     "apiVersion": "v1",
     "kind": "PersistentVolumeClaim",
     "metadata": {
-        "name": "nfsc15"
+        "name": "nfsc15",
+        "labels": {
+            "usedFor": "tc522215"
+        }
     },
     "spec": {
         "accessModes": [ "ReadWriteMany" ],
@@ -232,7 +277,10 @@
     "apiVersion": "v1",
     "kind": "PersistentVolumeClaim",
     "metadata": {
-        "name": "nfsc16"
+        "name": "nfsc16",
+        "labels": {
+            "usedFor": "tc522215"
+        }
     },
     "spec": {
         "accessModes": [ "ReadWriteMany" ],
@@ -247,7 +295,10 @@
     "apiVersion": "v1",
     "kind": "PersistentVolumeClaim",
     "metadata": {
-        "name": "nfsc17"
+        "name": "nfsc17",
+        "labels": {
+            "usedFor": "tc522215"
+        }
     },
     "spec": {
         "accessModes": [ "ReadWriteMany" ],
@@ -262,7 +313,10 @@
     "apiVersion": "v1",
     "kind": "PersistentVolumeClaim",
     "metadata": {
-        "name": "nfsc18"
+        "name": "nfsc18",
+        "labels": {
+            "usedFor": "tc522215"
+        }
     },
     "spec": {
         "accessModes": [ "ReadWriteMany" ],
@@ -277,7 +331,10 @@
     "apiVersion": "v1",
     "kind": "PersistentVolumeClaim",
     "metadata": {
-        "name": "nfsc19"
+        "name": "nfsc19",
+        "labels": {
+            "usedFor": "tc522215"
+        }
     },
     "spec": {
         "accessModes": [ "ReadWriteMany" ],
@@ -292,7 +349,10 @@
     "apiVersion": "v1",
     "kind": "PersistentVolumeClaim",
     "metadata": {
-        "name": "nfsc20"
+        "name": "nfsc20",
+        "labels": {
+            "usedFor": "tc522215"
+        }
     },
     "spec": {
         "accessModes": [ "ReadWriteMany" ],
