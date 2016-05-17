@@ -166,7 +166,6 @@
       "spec": {
         "strategy": {
           "type": "Rolling",
-          },
           "resources": {}
         },
         "triggers": [
@@ -285,7 +284,6 @@
       "spec": {
         "strategy": {
           "type": "Recreate",
-          },
           "resources": {}
         },
         "triggers": [
