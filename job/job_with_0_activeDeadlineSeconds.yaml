@@ -3,6 +3,7 @@ kind: Job
 metadata:
   name: zero
 spec:
+  manualSelector: true
   selector:         
     matchLabels:
       app: pi
