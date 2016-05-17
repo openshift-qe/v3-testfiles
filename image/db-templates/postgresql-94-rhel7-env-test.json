@@ -14,38 +14,6 @@
             "name": "database"
         },
         "strategy": {
-            "recreateParams": {
-                "post": {
-                    "execNewPod": {
-                        "command": [
-                            "/bin/false"
-                        ],
-                        "containerName": "postgresql-helloworld-database",
-                        "env": [
-                            {
-                                "name": "CUSTOM_VAR2",
-                                "value": "custom_value2"
-                            }
-                        ]
-                    },
-                    "failurePolicy": "Ignore"
-                },
-                "pre": {
-                    "execNewPod": {
-                        "command": [
-                            "/bin/true"
-                        ],
-                        "containerName": "postgresql-helloworld-database",
-                        "env": [
-                            {
-                                "name": "CUSTOM_VAR1",
-                                "value": "custom_value1"
-                            }
-                        ]
-                    },
-                    "failurePolicy": "Abort"
-                }
-            },
             "resources": {},
             "type": "Recreate"
         },
@@ -92,12 +60,26 @@
                             }
                         ],
                         "resources": {},
+                        "volumeMounts": [
+                         {
+                           "name": "postgresql-data",
+                           "mountPath": "/var/lib/pgsql/data"
+                         }
+                         ],
                         "securityContext": {
                             "capabilities": {},
                             "privileged": false
                         },
                         "terminationMessagePath": "/dev/termination-log"
                     }
+                ],
+               "volumes": [
+                 {
+                "name": "postgresql-data",
+                "emptyDir": {
+                  "medium": ""
+                 }
+                }
                 ],
                 "dnsPolicy": "ClusterFirst",
                 "restartPolicy": "Always",
