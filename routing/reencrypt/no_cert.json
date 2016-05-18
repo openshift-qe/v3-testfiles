@@ -5,10 +5,10 @@
         "name": "route-reencrypt"
     },
     "spec": {
-        "host": "www.example2.com",
+        "host": "reen.example2.com",
         "to": {
             "kind": "Service",
-            "name": "hello-nginx"
+            "name": "service-secure"
         },
         "tls": {
         "termination": "reencrypt",
