@@ -110,7 +110,7 @@
                         "volumeMounts": [
                             {
                                 "name": "dataem",
-                                "mountPath": "/opt1empt"
+                                "mountPath": "/var/lib/origin"
                             }
                         ],
                         "terminationMessagePath": "/dev/termination-log",
