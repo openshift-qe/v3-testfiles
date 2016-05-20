@@ -43,3 +43,4 @@ volumes:
 - rbd
 - iscsi
 - glusterfs
+- gitrepo
