@@ -76,6 +76,8 @@ def clean_up
   puts "Run the following commands to clean up your test data:"
   puts "oc delete pv --all"
   puts "oc delete pvc --all"
+  puts "Deleting temporary test files"
+  `rm -rf #{$templates_path}/*`
 end
 
 # Verify Bound status
