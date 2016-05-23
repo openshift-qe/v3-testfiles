@@ -89,6 +89,7 @@ def verify
 
   if result.length == 0
     puts 'Test passed!'
+    puts
   else
     puts 'Test failed!'
     puts 'Please check your PVs and PVCs.'
