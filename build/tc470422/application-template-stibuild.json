@@ -165,7 +165,6 @@
       "spec": {
         "strategy": {
           "type": "Rolling",
-          },
           "resources": {}
         },
         "triggers": [
