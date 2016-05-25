@@ -8,7 +8,7 @@
 		    "name": "route-reencrypt"
 	    },
 	    "spec": {
-		    "host": "reen.example.com",
+		    "host": "sticky-reen.example.com",
 		    "to": {
 			    "kind": "Service",
 			    "name": "service-secure"
