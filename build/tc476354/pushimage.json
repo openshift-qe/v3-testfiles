@@ -26,20 +26,6 @@
       }
     },
     {
-      "kind": "ImageStream",
-      "apiVersion": "v1",
-      "metadata": {
-        "name": "ruby-22-rhel7",
-        "creationTimestamp": null
-      },
-      "spec": {
-        "dockerImageRepository": "registry.access.redhat.com/rhscl/ruby-22-rhel7"
-      },
-      "status": {
-        "dockerImageRepository": ""
-      }
-     },
-    {
       "kind": "BuildConfig",
       "apiVersion": "v1",
       "metadata": {
