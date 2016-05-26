@@ -2,11 +2,11 @@
   "kind": "BuildConfig",
   "apiVersion": "v1",
   "metadata": {
-    "name": "jboss-webserver-3-docker-ce-1.2-tomcat7-webserver-3.0-jdk-8-rhe-1",
+    "name": "ruby-sample-build-longename-morethan64characters-to-thebuildname-build",
     "creationTimestamp": null,
-    "labels": {
-      "name": "jboss-webserver-3-docker-ce-1.2-tomcat7-webserver-3.0-jdk-8-rhe-1"
-    }
+    "labels":{
+       "name": "ruby-sample-build-longename-morethan64characters-to-thebuildname-build"
+      }
   },
   "spec": {
     "triggers": [
