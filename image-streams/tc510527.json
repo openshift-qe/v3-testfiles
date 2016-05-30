@@ -1,0 +1,42 @@
+ {
+
+    "kind": "ImageStream",
+
+    "apiVersion": "v1",
+
+    "metadata": {
+
+      "name": "python33",
+
+      "creationTimestamp": null
+
+     },
+
+    "spec": {
+
+
+           "tags":[
+
+                      { "name": "3.3",
+
+                         "annotations":
+
+                              { "description": "wsun tests" },
+
+                          "from":
+
+                           {
+
+                               "kind": "ImageStreamTag",
+
+                                "name": "python:3.3"
+
+                           }
+
+                        }
+
+             ]
+
+       }
+
+ }
