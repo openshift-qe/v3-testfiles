@@ -1,0 +1,22 @@
+{
+    "kind": "ImageStream",
+    "apiVersion": "v1",
+    "metadata": {
+      "name": "python",
+      "creationTimestamp": null
+    },
+    "spec": {
+      "dockerImageRepository": "wsun/python-34-centos7",
+           "tags":[
+                      { "name": "3.3",
+                         "annotations":
+                              { "description": "wsun tests" },
+                          "from":
+                           {
+                               "kind": "DockerImage",
+                                "name": "wsun/python-33-centos:3.3"
+                           }
+                        }
+             ]
+       }
+}
