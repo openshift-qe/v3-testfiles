@@ -9,8 +9,6 @@
       "dockerImageRepository": "aosqe/hello-openshift",
            "tags":[
                       { "name": "3.3",
-                         "annotations":
-                              { "description": "wsun tests" },
                           "from":
                            {
                                "kind": "DockerImage",

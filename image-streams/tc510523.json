@@ -20,10 +20,6 @@
 
                        { "name": "3.3",
 
-                          "annotations":
-
-                               { "description": "wsun tests" },
-
                            "from":
 
                             { 
