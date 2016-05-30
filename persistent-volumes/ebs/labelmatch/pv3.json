@@ -1,0 +1,49 @@
+{
+  "kind": "Template",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "PVs"
+  },
+  "objects": [
+     {
+        "apiVersion": "v1",
+        "kind": "PersistentVolume",
+        "metadata": {
+           "name": "ebs-pv-3a",
+           "labels": {
+              "ebs-volume-type": "iops-ssd",
+              "aws-availability-zone": "us-west-1"
+        }
+        },
+        "spec": {
+           "capacity": {
+              "storage": "1Gi"
+           },
+           "accessModes": [ "ReadWriteOnce" ],
+           "awsElasticBlockStore": {
+               "volumeID": "vol-23456",
+               "fsType": "xfs"
+           },
+           "persistentVolumeReclaimPolicy": "Retain"
+        }
+     },
+     {
+        "apiVersion": "v1",
+        "kind": "PersistentVolume",
+        "metadata": {
+           "name": "ebs-pv-3b"
+        },
+        "spec": {
+           "capacity": {
+              "storage": "1Gi"
+           },
+           "accessModes": [ "ReadWriteOnce" ],
+           "awsElasticBlockStore": {
+               "volumeID": "vol-12345",
+               "fsType": "xfs"
+           },
+           "persistentVolumeReclaimPolicy": "Retain"
+        }
+     }
+  ]
+}
