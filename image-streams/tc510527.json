@@ -29,7 +29,7 @@
 
                                "kind": "ImageStreamTag",
 
-                                "name": "python:3.3"
+                                "name": "python:latest"
 
                            }
 

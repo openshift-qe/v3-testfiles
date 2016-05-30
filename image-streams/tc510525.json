@@ -14,7 +14,7 @@
 
     "spec": {
 
-      "dockerImageRepository": "wsun/python-33-centos"
+      "dockerImageRepository": "aosqe/ruby-20-centos7"
 
       }
 

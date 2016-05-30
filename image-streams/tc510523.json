@@ -14,7 +14,7 @@
 
     "spec": {
 
-       "dockerImageRepository": "wsun/python-33-centos",
+       "dockerImageRepository": "aosqe/ruby-20-centos7",
 
             "tags":[
 
@@ -30,7 +30,7 @@
 
                                 "kind": "DockerImage",
 
-                                 "name": "wsun/python-33-centos" 
+                                 "name": "aosqe/ruby-20-centos7" 
 
                             },
 

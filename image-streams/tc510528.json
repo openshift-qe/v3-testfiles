@@ -6,7 +6,7 @@
       "creationTimestamp": null
     },
     "spec": {
-      "dockerImageRepository": "wsun/python-34-centos7",
+      "dockerImageRepository": "aosqe/hello-openshift",
            "tags":[
                       { "name": "3.3",
                          "annotations":
@@ -14,7 +14,7 @@
                           "from":
                            {
                                "kind": "DockerImage",
-                                "name": "wsun/python-33-centos:3.3"
+                                "name": "aosqe/ruby-20-centos7:latest"
                            }
                         }
              ]
