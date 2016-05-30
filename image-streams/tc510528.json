@@ -2,7 +2,7 @@
     "kind": "ImageStream",
     "apiVersion": "v1",
     "metadata": {
-      "name": "python",
+      "name": "aosqeruby",
       "creationTimestamp": null
     },
     "spec": {
