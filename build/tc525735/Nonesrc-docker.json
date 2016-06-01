@@ -15,7 +15,7 @@
 	    },
 	    "spec": {
 		"triggers": [],
-		"source": {},
+		"source": {"type": "None"},
 		"strategy": {
 		    "type": "Custom",
 		    "customStrategy": {
@@ -46,7 +46,7 @@
 	    },
 	    "spec": {
 		"triggers": [],
-		"source": { "type": "None" },
+		"source": {},
 		"strategy": {
 		    "type": "Docker",
 		    "dockerStrategy": {
