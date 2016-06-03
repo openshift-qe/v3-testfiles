@@ -21,7 +21,7 @@
         ],
         "securityContext": {
             "supplementalGroups": [
-                1000030999
+                 <%= cb.scc_limit %>
             ]
         }
     }
