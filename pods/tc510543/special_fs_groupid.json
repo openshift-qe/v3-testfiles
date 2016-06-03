@@ -11,7 +11,7 @@
         "containers": [
             {
                 "name": "hello-pod",
-                "image": "bmeng/hello-openshift",
+                "image": "aosqe/hello-openshift",
                 "ports": [
                     {
                         "containerPort": 80
@@ -21,7 +21,7 @@
         ],
         "securityContext": {
             "supplementalGroups": [
-                1000
+                 <%= cb.supplemental_groups_id %>
             ],
             "fsGroup": <%= cb.supplemental_groups_id - 1000 %>
         }
