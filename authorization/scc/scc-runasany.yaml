@@ -7,10 +7,10 @@ groups:
 - system:authenticated
 metadata:
   labels:
-    name: scc-runasany-<%= cb.scc_name %>
-  name: scc-runasany-<%= cb.scc_name %>
+    name: scc-runasany
+  name: scc-runasany
 runAsUser:
-  type: MustRunAsRange
+  type: RunAsAny
 seLinuxContext:
   type: RunAsAny
 supplementalGroups:
