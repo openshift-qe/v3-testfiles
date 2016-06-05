@@ -1,22 +1,29 @@
 kind: SecurityContextConstraints
 apiVersion: v1
 fsGroup:
-  type: RunAsAny
+  ranges:
+  - max: 1001
+    min: 1001
+  type: MustRunAs
 groups:
 - system:serviceaccounts
 - system:authenticated
 metadata:
   labels:
-    name: scc-runasany
-  name: scc-runasany
+    name: scc-user-mustrunas
+  name: scc-user-mustrunas
 runAsUser:
-  type: RunAsAny
+  type: MustRunAs
+  uid: 1000
 seLinuxContext:
   type: RunAsAny
 supplementalGroups:
-  type: RunAsAny
+  ranges:
+  - max: 1000
+    min: 1000
+  type: MustRunAs
 allowHostDirVolumePlugin: false
-allowHostIPC: true
+allowHostIPC: false
 allowHostNetwork: false
 allowHostPID: false
 allowHostPorts: false
