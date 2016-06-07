@@ -21,9 +21,9 @@
         ],
         "securityContext": {
             "supplementalGroups": [
-                 <%= cb.supplemental_groups_id %>
+                 1000
             ],
-            "fsGroup": <%= cb.supplemental_groups_id - 1000 %>
+            "fsGroup": 1001
         }
     }
 }
