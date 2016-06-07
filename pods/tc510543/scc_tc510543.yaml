@@ -10,8 +10,8 @@ groups:
 - system:authenticated
 metadata:
   labels:
-    name: scc-user-mustrunas
-  name: scc-user-mustrunas
+    name: scc_tc510543
+  name: scc_tc510543
 runAsUser:
   type: MustRunAs
   uid: 1000
