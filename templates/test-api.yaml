@@ -1,0 +1,79 @@
+kind: Template
+apiVersion: v1
+metadata:
+  annotations:
+    description: This example shows create resources in multiple api versions
+    iconClass: icon-ruby
+    tags: hpa
+  creationTimestamp: null
+  name: test-api
+objects:
+- apiVersion: v1
+  kind: DeploymentConfig
+  metadata:
+    labels:
+      run: php-apache
+    name: php-apache
+  spec:
+    replicas: 1
+    selector:
+      run: php-apache
+    template:
+      metadata:
+        labels:
+          run: php-apache
+      spec:
+        containers:
+        - image: gcr.io/google_containers/hpa-example
+          imagePullPolicy: IfNotPresent
+          name: php-apache
+          resources:
+            requests:
+              cpu: 200m
+          securityContext:
+            privileged: true
+        restartPolicy: Always
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+    triggers:
+    - type: ConfigChange
+- apiVersion: extensions/v1beta1
+  kind: HorizontalPodAutoscaler
+  metadata:
+    name: php-apache
+  spec:
+    scaleRef:
+      kind: DeploymentConfig
+      name: php-apache
+      subresource: scale
+    minReplicas: 1
+    maxReplicas: 10
+    cpuUtilization:
+      targetPercentage: 50
+- apiVersion: autoscaling/v1
+  kind: HorizontalPodAutoscaler
+  metadata:
+    name: test-autoscaler 
+  spec:
+    scaleTargetRef:
+      kind: DeploymentConfig 
+      name: frontend 
+      apiVersion: v1
+    minReplicas: 1 
+    maxReplicas: 10
+- apiVersion: batch/v1
+  kind: Job
+  metadata:
+    name: simplev1
+  spec:
+    template:
+      metadata:
+        name: simplev1
+        labels:
+          app: simplev1
+      spec:
+        containers:
+        - name: simplev1
+          image: gcr.io/google_containers/busybox
+          command: ["/bin/sh", "-c", "exit 0"]
+        restartPolicy: Never
