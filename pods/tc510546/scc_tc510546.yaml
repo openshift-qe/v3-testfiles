@@ -10,8 +10,8 @@ groups:
 - system:authenticated
 metadata:
   labels:
-    name: scc-tc510543
-  name: scc-tc510543
+    name: scc-tc510546
+  name: scc-tc510546
 runAsUser:
   type: MustRunAs
   uid: 1000
