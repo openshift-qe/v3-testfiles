@@ -8,7 +8,7 @@
     "capacity": {
         "storage": "1Gi"
     },
-    "accessModes": [ "ReadWriteOnce" ],
+    "accessModes": [ "ReadWriteOnce,ReadWriteMany" ],
     "nfs": {
         "path": "/",
         "server": "#NFS-Service-IP"
