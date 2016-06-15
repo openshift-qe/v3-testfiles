@@ -77,11 +77,11 @@
       "kind": "ImageStream",
       "apiVersion": "v1",
       "metadata": {
-        "name": "python-33-centos7",
+        "name": "python-27-centos7",
         "creationTimestamp": null
       },
       "spec": {
-        "dockerImageRepository": "openshift/python-33-centos7"
+        "dockerImageRepository": "openshift/python-27-centos7"
       },
       "status": {
         "dockerImageRepository": ""
@@ -128,7 +128,7 @@
           "sourceStrategy": {
             "from": {
               "kind": "ImageStreamTag",
-              "name": "python-33-centos7:latest"
+              "name": "python-27-centos7:latest"
             },
             "env": [      
             {
