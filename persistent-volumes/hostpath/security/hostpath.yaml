@@ -5,6 +5,8 @@ metadata:
 spec:
   securityContext:
     fsGroup: 123456
+    seLinuxOptions:
+      level: s0:c13,c2
   containers:
   - name: a
     image: jhou/hello-openshift
