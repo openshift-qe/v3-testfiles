@@ -2,15 +2,15 @@
         "kind": "Pod",
         "apiVersion":"v1",
         "metadata": {
-                "name": "fail-pod",
+                "name": "completed-pod",
                 "labels": {
                         "name": "test-pods"
                 }
         },
         "spec": {
                 "containers": [{
-                        "command": [ "/bin/bash", "-c", "sleep 5 ; false" ],
-                        "name": "fail-pod",
+                        "command": [ "/bin/true" ],
+                        "name": "completed-pod",
                         "image": "bmeng/hello-openshift"
                 }],
                 "restartPolicy": "Never"
