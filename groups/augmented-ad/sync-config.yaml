@@ -2,6 +2,10 @@ kind: LDAPSyncConfig
 apiVersion: v1
 url: ldap://LDAP_SERVICE_IP:389
 insecure: true
+groupUIDNameMapping:
+  cn=group1,ou=groups,ou=adextended,dc=example,dc=com: tc509127group1
+  cn=group2,ou=groups,ou=adextended,dc=example,dc=com: tc509127group2
+  cn=group3,ou=groups,ou=adextended,dc=example,dc=com: tc509127group3
 augmentedActiveDirectory:
     usersQuery:
         baseDN: "ou=people,ou=adextended,dc=example,dc=com"
