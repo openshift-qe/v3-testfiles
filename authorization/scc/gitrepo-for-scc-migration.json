@@ -32,8 +32,8 @@
         "volumes": [{
             "name": "gitrepo",
             "gitRepo": {
-                "repository": "https://github.com/jhou1/gitrepoVolume.git",
-                "revision": "5ead1a2fba0bd6af433beb8064ef4493b63e368c"
+                "repository": "https://github.com/openshift/origin.git",
+                "revision": "3c15fd6dd7cee58393feb786fd7876b6f22fe9b5"
             }
         }],
         "restartPolicy": "Always",
