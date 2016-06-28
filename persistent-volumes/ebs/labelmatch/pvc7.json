@@ -1,0 +1,21 @@
+{
+  "apiVersion": "v1",
+  "kind": "PersistentVolumeClaim",
+  "metadata": {
+      "name": "ebsc-7"
+  },
+  "spec": {
+      "accessModes": [ "ReadWriteOnce" ],
+      "resources": {
+          "requests": {
+              "storage": "1Gi"
+          }
+      },
+      "selector":{
+          "matchLabels": {
+              "ebs-volume-type": "gp-ssd",
+              "aws-availability-zone": "us-west-1"
+          }
+      }
+  }
+}

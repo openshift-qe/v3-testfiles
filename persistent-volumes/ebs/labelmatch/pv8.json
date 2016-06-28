@@ -1,0 +1,87 @@
+{
+  "kind": "Template",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "PVs"
+  },
+  "objects": [
+     {
+        "apiVersion": "v1",
+        "kind": "PersistentVolume",
+        "metadata": {
+           "name": "ebs-pv-8a",
+           "labels": {
+              "ebs-volume-type": "iops-ssd",
+              "aws-availability-zone": "us-west-1"
+        }
+        },
+        "spec": {
+           "capacity": {
+              "storage": "1Gi"
+           },
+           "accessModes": [ 
+              "ReadWriteOnce"
+              "ReadWriteMany",
+              "ReadOnlyMany"
+           ],
+           "awsElasticBlockStore": {
+               "volumeID": "vol-23456",
+               "fsType": "xfs"
+           },
+           "persistentVolumeReclaimPolicy": "Retain"
+        }
+     },
+     {
+        "apiVersion": "v1",
+        "kind": "PersistentVolume",
+        "metadata": {
+           "name": "ebs-pv-8b",
+           "labels": {
+              "ebs-volume-type": "gp-ssd",
+              "aws-availability-zone": "us-west-1"
+        }
+        },
+        "spec": {
+           "capacity": {
+              "storage": "1Gi"
+           },
+           "accessModes": [ 
+              "ReadWriteOnce",
+              "ReadWriteMany",
+              "ReadOnlyMany"
+           ],
+           "awsElasticBlockStore": {
+               "volumeID": "vol-12345",
+               "fsType": "xfs"
+           },
+           "persistentVolumeReclaimPolicy": "Retain"
+        }
+     },
+     {
+        "apiVersion": "v1",
+        "kind": "PersistentVolume",
+        "metadata": {
+           "name": "ebs-pv-8c",
+           "labels": {
+              "ebs-volume-type": "gp-ssd",
+              "aws-availability-zone": "us-east-1"
+        }
+        },
+        "spec": {
+           "capacity": {
+              "storage": "1Gi"
+           },
+           "accessModes": [ 
+              "ReadWriteOnce", 
+              "ReadWriteMany", 
+              "ReadOnlyMany" 
+           ],
+           "awsElasticBlockStore": {
+               "volumeID": "vol-34567",
+               "fsType": "xfs"
+           },
+           "persistentVolumeReclaimPolicy": "Retain"
+        }
+     }
+  ]
+}
