@@ -141,6 +141,10 @@
               "value": "testapp:application"
              },
              {
+              "name": "APP_CONFIG",
+              "value": "2.7/test/setup-test-app"
+             },
+             {
               "name": "DISABLE_COLLECTSTATIC",
               "value": "false"
              },
