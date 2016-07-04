@@ -1,0 +1,90 @@
+{
+  "kind": "Template",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "ruby-helloworld-sample",
+    "creationTimestamp": null,
+    "annotations": {
+      "description": "This example shows how to create a simple ruby application in openshift origin v3"
+    }
+  },
+  "objects": [
+    {
+      "kind": "ImageStream",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "origin-custom-docker-builder",
+        "creationTimestamp": null
+      },
+      "spec": {
+        "dockerImageRepository": "openshift/origin-custom-docker-builder"
+      },
+      "status": {
+        "dockerImageRepository": ""
+      }
+    },
+    {
+      "kind": "BuildConfig",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "ruby-sample-build",
+        "creationTimestamp": null,
+        "labels": {
+          "name": "ruby-sample-build"
+        }
+      },
+      "spec": {
+        "triggers": [
+          {
+            "type": "github",
+            "github": {
+              "secret": "secret101"
+            }
+          },
+          {
+            "type": "generic",
+            "generic": {
+              "secret": "secret101"
+            }
+          },
+          {
+            "type": "imageChange",
+            "imageChange": {}
+          },
+          {
+            "type": "ConfigChange"
+          }
+        ],
+        "source": {
+          "type": "Git",
+          "git": {
+            "uri": "git://github.com/openshift/ruby-hello-world.git"
+          }
+        },
+        "strategy": {
+          "type": "Custom",
+          "customStrategy": {
+            "from": {
+              "kind": "ImageStreamTag",
+              "name": "origin-custom-docker-builder:latest"
+            },
+            "env": [
+              {
+                "name": "OPENSHIFT_CUSTOM_BUILD_BASE_IMAGE",
+                "value": "openshift/origin-custom-docker-builder"
+              }
+            ],
+            "exposeDockerSocket": true
+          }
+        },
+        "resources": {}
+      },
+      "status": {
+        "lastVersion": 0
+      }
+    }
+  ],
+  "labels": {
+    "template": "application-template-custombuild"
+  }
+}
