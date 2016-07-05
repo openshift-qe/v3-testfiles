@@ -3,9 +3,9 @@ apiVersion: v1
 url: ldap://LDAP_SERVICE_IP:389
 insecure: true
 groupUIDNameMapping:
-  "cn=group1,ou=groups,ou=rfc2307,dc=example,dc=com": firstgroup
-  "cn=group2,ou=groups,ou=rfc2307,dc=example,dc=com": secondgroup
-  "cn=group3,ou=groups,ou=rfc2307,dc=example,dc=com": thirdgroup
+  "cn=group1,ou=groups,ou=rfc2307,dc=example,dc=com": tc509128group1
+  "cn=group2,ou=groups,ou=rfc2307,dc=example,dc=com": tc509128group2
+  "cn=group3,ou=groups,ou=rfc2307,dc=example,dc=com": tc509128group3
 rfc2307:
   groupsQuery:
     baseDN: "ou=groups,ou=rfc2307,dc=example,dc=com"
