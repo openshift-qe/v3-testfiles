@@ -17,6 +17,8 @@
          "volumeID": "vol-56789",
          "fsType": "xfs"
       },
-      "persistentVolumeReclaimPolicy": "Retain"
-   }
-}
+      "claimRef": {
+         "namespace": "default",
+         "name": "ebsc-5"
+      }
+} 

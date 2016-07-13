@@ -12,7 +12,8 @@
            "name": "ebs-pv-4a",
            "labels": {
               "ebs-volume-type": "iops-ssd",
-              "aws-availability-zone": "us-west-1"
+              "aws-availability-zone": "us-west-1",
+              "usedFor": "tc531522"
         }
         },
         "spec": {
@@ -34,7 +35,8 @@
            "name": "ebs-pv-4b",
            "labels": {
               "ebs-volume-type": "iops-ssd",
-              "aws-availability-zone": "us-west-1"
+              "aws-availability-zone": "us-west-1",
+              "usedFor": "tc531522"
         }
         },
         "spec": {
