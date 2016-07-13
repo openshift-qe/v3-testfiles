@@ -12,7 +12,8 @@
            "name": "ebs-pv-6a",
            "labels": {
               "ebs-volume-type": "iops-ssd",
-              "aws-availability-zone": "us-west-1"
+              "aws-availability-zone": "us-west-1",
+              "usedFor": "tc531518"
         }
         },
         "spec": {
@@ -31,7 +32,10 @@
         "apiVersion": "v1",
         "kind": "PersistentVolume",
         "metadata": {
-           "name": "ebs-pv-6b"
+           "name": "ebs-pv-6b",
+           "labels": {
+              "usedFor": "tc531518"
+           }
         },
         "spec": {
            "capacity": {

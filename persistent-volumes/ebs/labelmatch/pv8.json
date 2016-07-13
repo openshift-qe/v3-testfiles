@@ -12,7 +12,8 @@
            "name": "ebs-pv-8a",
            "labels": {
               "ebs-volume-type": "iops-ssd",
-              "aws-availability-zone": "us-west-1"
+              "aws-availability-zone": "us-west-1",
+              "usedFor": "tc531524"
         }
         },
         "spec": {
@@ -38,7 +39,8 @@
            "name": "ebs-pv-8b",
            "labels": {
               "ebs-volume-type": "gp-ssd",
-              "aws-availability-zone": "us-west-1"
+              "aws-availability-zone": "us-west-1",
+              "usedFor": "tc531524"
         }
         },
         "spec": {
@@ -64,7 +66,8 @@
            "name": "ebs-pv-8c",
            "labels": {
               "ebs-volume-type": "gp-ssd",
-              "aws-availability-zone": "us-east-1"
+              "aws-availability-zone": "us-east-1",
+              "usedFor": "tc531524"
         }
         },
         "spec": {
