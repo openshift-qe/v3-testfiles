@@ -135,7 +135,7 @@
         "output": {
           "to": {
             "kind": "DockerImage",
-            "name": "docker.io/aosqe/python-sample-docker:latest"
+            "name": "docker.io/aosqe/pushimage-tc476356:latest"
           },
           "pushSecret":{
              "name":"sec-push"
