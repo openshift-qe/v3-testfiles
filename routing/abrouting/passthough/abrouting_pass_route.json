@@ -1,0 +1,27 @@
+{
+  "kind": "Route",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "pth-route",
+    "annotations": {
+            "router.openshift.io/haproxy.balance": "roundrobin"
+    }
+  },
+  "spec": {
+    "host": "abtest-pass.example.com",
+    "to": {
+      "kind": "Service",
+      "name": "service-secure",
+      "weight": 10
+    },
+    "alternateBackends": [{
+      "kind": "Service",
+      "name": "service-secure-2",
+      "weight": 90
+    }],
+   "tls": {
+      "termination": "passthrough"
+    }
+  },
+  "status": {}
+}

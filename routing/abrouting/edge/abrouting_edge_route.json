@@ -1,0 +1,27 @@
+{
+  "kind": "Route",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "edge-route",
+    "annotations": {
+       "router.openshift.io/haproxy.balance": "roundrobin"
+    }
+  },
+  "spec": {
+    "host": "abtest-edge.example.com",
+    "to": {
+      "kind": "Service",
+      "name": "service-unsecure",
+      "weight": 70
+    },
+    "alternateBackends": [{
+      "kind": "Service",
+      "name": "service-unsecure-2",
+      "weight": 30
+    }],
+   "tls": {
+      "termination": "edge"
+    }
+  },
+  "status": {}
+}
