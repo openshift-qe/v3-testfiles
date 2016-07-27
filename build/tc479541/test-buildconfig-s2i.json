@@ -41,7 +41,7 @@
       "sourceStrategy": {
         "from": {
           "kind": "DockerImage",
-          "name": "qeopenshift/ruby-22-centos7"
+          "name": "docker.io/qeopenshift/ruby-22-centos7"
         },
         "pullSecret": {"name" : "pull"}
       }
