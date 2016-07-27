@@ -39,7 +39,7 @@
         "securityContext": {
             "runAsUser": 1010,
             "supplementalGroups": [1,2,3,4,5,6],
-            "fsGroup": 123456
+            "fsGroup": 123456,
             "seLinuxOptions": {
                  "level": "s0:c1,c5"
              }
