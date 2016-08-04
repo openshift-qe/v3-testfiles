@@ -5,7 +5,7 @@
         "labels": {
             "name": "hello-nginx-docker"
         },
-        "name": "hello-nginx-docker"
+        "name": "hello-nginx-docker-1"
     },
     "spec": {
         "containers": [
