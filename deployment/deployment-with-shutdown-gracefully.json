@@ -23,20 +23,6 @@
         "triggers": [
             {
                 "type": "ConfigChange"
-            },
-            {
-                "type": "ImageChange",
-                "imageChangeParams": {
-                    "automatic": true,
-                    "containerNames": [
-                        "nettest"
-                    ],
-                    "from": {
-                        "kind": "ImageStreamTag",
-                        "name": "nettest:1.8"
-                    },
-                    "lastTriggeredImage": "gcr.io/google_containers/nettest@sha256:2b3856c196b27a3def9b8dd65ce8e0d6e640727a48ec9b85147521e918f8ac27"
-                }
             }
         ],
         "replicas": 1,
@@ -90,19 +76,5 @@
         }
     },
     "status": {
-        "latestVersion": 1,
-        "details": {
-            "causes": [
-                {
-                    "type": "ImageChange",
-                    "imageTrigger": {
-                        "from": {
-                            "kind": "ImageStreamTag",
-                            "name": "nettest:1.8"
-                        }
-                    }
-                }
-            ]
-        }
     }
 }
