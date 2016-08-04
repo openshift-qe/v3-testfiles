@@ -9,7 +9,7 @@
         "apiVersion": "v1",
         "kind": "PersistentVolume",
         "metadata": {
-           "name": "ebs-pv-4a",
+           "name": "nfs-pv-4a",
            "labels": {
               "ebs-volume-type": "iops-ssd",
               "aws-availability-zone": "us-west-1",
@@ -21,9 +21,9 @@
               "storage": "513Mi"
            },
            "accessModes": [ "ReadWriteOnce" ],
-           "awsElasticBlockStore": {
-               "volumeID": "vol-23456",
-               "fsType": "xfs"
+           "nfs": {
+              "path": "/home/data/pv01",
+              "server": "localhost"
            },
            "persistentVolumeReclaimPolicy": "Retain"
         }
@@ -32,7 +32,7 @@
         "apiVersion": "v1",
         "kind": "PersistentVolume",
         "metadata": {
-           "name": "ebs-pv-4b",
+           "name": "nfs-pv-4b",
            "labels": {
               "ebs-volume-type": "iops-ssd",
               "aws-availability-zone": "us-west-1",
@@ -41,12 +41,12 @@
         },
         "spec": {
            "capacity": {
-              "storage": "514i"
+              "storage": "514Mi"
            },
            "accessModes": [ "ReadWriteOnce" ],
-           "awsElasticBlockStore": {
-               "volumeID": "vol-12345",
-               "fsType": "xfs"
+           "nfs": {
+              "path": "/home/data/pv02",
+              "server": "localhost"
            },
            "persistentVolumeReclaimPolicy": "Retain"
         }

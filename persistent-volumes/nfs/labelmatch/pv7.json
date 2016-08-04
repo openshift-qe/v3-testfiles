@@ -2,7 +2,7 @@
    "apiVersion": "v1",
    "kind": "PersistentVolume",
    "metadata": {
-      "name": "ebs-pv-7",
+      "name": "nfs-pv-7",
       "labels": {
         "ebs-volume-type": "gp-ssd",
         "aws-availability-zone": "us-west-1"
@@ -13,9 +13,9 @@
          "storage": "1Gi"
       },
       "accessModes": [ "ReadWriteOnce" ],
-      "awsElasticBlockStore": {
-         "volumeID": "vol-56789",
-         "fsType": "xfs"
+      "nfs": {
+         "path": "/home/data/pv01",
+         "server": "localhost"
       },
       "persistentVolumeReclaimPolicy": "Retain"
    }
