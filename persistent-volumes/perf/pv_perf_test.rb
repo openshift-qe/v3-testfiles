@@ -33,9 +33,9 @@ spec:
     storage: 1Gi
   accessModes:
     - ReadWriteOnce
-  awsElasticBlockStore:
-    volumeID: "aws://us-east-1d/#{gen_uuid}"
-    fsType: "ext4"
+  nfs:
+    path: "/"
+    server: "10.1.1.1"
   persistentVolumeReclaimPolicy: "Retain"
 PV
   end
