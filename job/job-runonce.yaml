@@ -4,7 +4,7 @@ metadata:
   name: pi-runonce
 spec:
   completions: 2
-  activeDeadlineSeconds: 1
+  activeDeadlineSeconds: 30
   parallelism: 5
   template:
     metadata:
