@@ -43,7 +43,7 @@
     ],
     "restartPolicy": "Always",
     "dnsPolicy": "ClusterFirst",
-    "hostIPC": true,
+    "hostIPC": false,
     "serviceAccount": ""
   },
   "status": {}
