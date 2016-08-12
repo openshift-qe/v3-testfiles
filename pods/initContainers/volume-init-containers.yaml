@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hello-pod
+  annotations:
+    pod.alpha.kubernetes.io/init-containers: '[
+        {
+            "name": "install",
+            "image": "busybox",
+            "command": ["wget", "-O", "/work-dir/index.html", "http://kubernetes.io/index.html"],
+            "volumeMounts": [
+                {
+                    "name": "workdir",
+                    "mountPath": "/work-dir"
+                }
+            ]
+        }
+    ]'
+spec:
+  containers:
+    - image: "docker.io/deshuai/hello-pod:latest"
+      imagePullPolicy: IfNotPresent
+      name: hello-pod
+      ports:
+        - containerPort: 8080
+          protocol: TCP
+      resources: {}
+      securityContext:
+        capabilities: {}
+        privileged: false
+      terminationMessagePath: /dev/termination-log
+      volumeMounts:
+        - mountPath: /tmp
+          name: workdir
+  dnsPolicy: ClusterFirst
+  serviceAccount: ""
+  volumes:
+    - emptyDir: {}
+      name: workdir
