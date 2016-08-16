@@ -9,8 +9,8 @@ groups:
 - system:serviceaccounts:default
 metadata:
   labels:
-    name: scc-tc521575_b
-  name: scc-tc521575_b
+    name: scc-tc521575-b
+  name: scc-tc521575-b
 volumes:
 - configMap
 - downwardAPI

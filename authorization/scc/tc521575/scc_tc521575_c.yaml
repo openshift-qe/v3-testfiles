@@ -9,7 +9,7 @@ groups:
 - system:serviceaccounts:default
 metadata:
   labels:
-    name: scc-tc521575_c
-  name: scc-tc521575_c
+    name: scc-tc521575-c
+  name: scc-tc521575-c
 volumes:
 - '*'
