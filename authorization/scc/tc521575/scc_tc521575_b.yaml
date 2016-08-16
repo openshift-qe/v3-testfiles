@@ -1,0 +1,19 @@
+kind: SecurityContextConstraints
+apiVersion: v1
+allowHostDirVolumePlugin: false
+runAsUser:
+  type: RunAsAny
+seLinuxContext:
+  type: RunAsAny
+groups:
+- system:serviceaccounts:default
+metadata:
+  labels:
+    name: scc-tc521575_b
+  name: scc-tc521575_b
+volumes:
+- configMap
+- downwardAPI
+- emptyDir
+- secret
+- hostPath
