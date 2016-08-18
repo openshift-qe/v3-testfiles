@@ -4,7 +4,7 @@
   "metadata": {
     "name": "pth-route",
     "annotations": {
-            "router.openshift.io/haproxy.balance": "roundrobin"
+            "haproxy.router.openshift.io/balance": "roundrobin"
     }
   },
   "spec": {
