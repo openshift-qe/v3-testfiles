@@ -1,0 +1,23 @@
+{
+    "kind": "EgressNetworkPolicy",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "default"
+    },
+    "spec": {
+        "egress": [
+            {
+                "type": "Allow",
+                "to": {
+                    "cidrSelector": "10.66.128.0/24"
+                }
+            },
+            {
+                "type": "Deny",
+                "to": {
+                    "cidrSelector": "10.66.140.0/24"
+                }
+            }
+        ]
+    }
+}

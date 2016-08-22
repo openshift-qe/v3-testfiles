@@ -1,0 +1,45 @@
+{
+    "kind": "List",
+    "apiVersion": "v1",
+    "items": [
+        {
+            "apiVersion": "v1",
+            "kind": "Service",
+            "id": "selector-less",
+            "metadata": {
+                "name": "selector-less-service"
+            },
+            "spec": {
+                "ports": [
+                    {
+                        "port": 10086,
+                        "protocol": "TCP",
+                        "targetPort": 2015
+                    }
+                ]
+            }
+        },
+        {
+            "kind": "Endpoints",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "selector-less-service"
+            },
+            "subsets": [
+                {
+                    "addresses": [
+                        {
+                            "ip": "10.3.11.3"
+                        }
+                    ],
+                    "ports": [
+                        {
+                            "port": 2015,
+                            "protocol": "TCP"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
