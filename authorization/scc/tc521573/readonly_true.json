@@ -2,14 +2,14 @@
 "apiVersion": "v1",
     "kind": "Pod",
     "metadata": {
-        "name": "disk-pod",
+        "name": "disk-pod-true",
         "labels": {
-            "name": "disk-pod"
+            "name": "disk-pod-true"
         }
     },
     "spec": {
         "containers": [{
-            "name": "disk-pod",
+            "name": "disk-pod-true",
             "image": "aosqe/hello-openshift",
             "securityContext":{
 "readOnlyRootFilesystem": true
