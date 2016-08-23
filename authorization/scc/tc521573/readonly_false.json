@@ -10,7 +10,7 @@
     "spec": {
         "containers": [{
             "name": "disk-pod",
-            "image": "asoqe/hello-openshift",
+            "image": "aosqe/hello-openshift",
             "securityContext":{
 "readOnlyRootFilesystem": false
             }
