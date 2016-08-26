@@ -17,10 +17,17 @@
                 "name": "gluster"
             }]
         }],
+       "securityContext": {
+            "fsGroup": 123456,
+            "supplementalGroups": [111,112,113],
+            "seLinuxOptions": {
+                 "level": "s0"
+            }
+       },
         "volumes": [{
             "name": "gluster",
             "persistentVolumeClaim": {
-                "claimName": "claim2"
+                "claimName": "glusterc"
             }
         }]
     }

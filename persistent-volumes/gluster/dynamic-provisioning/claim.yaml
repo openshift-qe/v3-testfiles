@@ -2,9 +2,9 @@
    "kind": "PersistentVolumeClaim",
    "apiVersion": "v1",
    "metadata": {
-     "name": "claim2",
+     "name": "glusterc",
      "annotations": {
-     "volume.beta.kubernetes.io/storage-class": "fast"
+     "volume.beta.kubernetes.io/storage-class": "GlusterProvisioner"
      }
    },
    "spec": {

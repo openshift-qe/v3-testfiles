@@ -1,11 +1,11 @@
 apiVersion: extensions/v1beta1
 kind: StorageClass
 metadata:
-  name: fast
+  name: GlusterProvisioner
 provisioner: kubernetes.io/glusterfs
 parameters:
   endpoint: "glusterfs-cluster"
   resturl: "http://172.18.4.122:9991"
-  restauthenabled: "false"
+  restauthenabled: "true"
   restuser: "admin"
-  restuserkey: "password"
+  restuserkey: "test"
