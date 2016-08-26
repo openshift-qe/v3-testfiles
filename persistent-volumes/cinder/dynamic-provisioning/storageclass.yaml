@@ -1,0 +1,7 @@
+apiVersion: extensions/v1beta1
+kind: StorageClass
+metadata:
+  name: cinderprovisioner
+provisioner: kubernetes.io/cinder
+parameters:
+   availability: nova
