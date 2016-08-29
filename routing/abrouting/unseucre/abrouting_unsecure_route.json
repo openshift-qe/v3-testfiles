@@ -2,7 +2,7 @@
   "kind": "Route",
   "apiVersion": "v1",
   "metadata": {
-    "name": "unseucre-route",
+    "name": "unsecure-route",
     "annotations": {
        "haproxy.router.openshift.io/balance": "roundrobin"
     }
