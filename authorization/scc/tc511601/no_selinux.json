@@ -38,9 +38,7 @@
         "serviceAccount": "",
         "securityContext":{
             "seLinuxOptions":{
-
-                  "level": "s9:z0,z1"  # (this should match with the project)
-
+                  "level": <%= cb.proj_selinux_options %>  # (this should match with the project)
              }
         }
     },
