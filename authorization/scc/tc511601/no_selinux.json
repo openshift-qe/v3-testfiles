@@ -38,7 +38,7 @@
         "serviceAccount": "",
         "securityContext":{
             "seLinuxOptions":{
-                  "level": <%= cb.proj_selinux_options %>
+                  "level": "<%= cb.proj_selinux_options %>"
              }
         }
     },
