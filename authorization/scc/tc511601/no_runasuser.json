@@ -37,7 +37,7 @@
         "dnsPolicy": "ClusterFirst",
         "serviceAccount": "",
         "securityContext":{
-            "runAsUser": <% cb.uid_range %>
+            "runAsUser": <%= cb.uid_range %>
         }
     },
     "status": {}
