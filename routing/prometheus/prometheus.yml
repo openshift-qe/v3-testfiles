@@ -3,6 +3,6 @@
  
  scrape_configs:
    - job_name: "haproxy"
-     target_groups:
+     static_configs:
      - targets:
          - "nodeip:9101"
