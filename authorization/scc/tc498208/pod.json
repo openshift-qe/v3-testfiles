@@ -1,5 +1,3 @@
-
-oc create -f pod.json
 {
  "kind": "Pod",
  "apiVersion": "v1",
