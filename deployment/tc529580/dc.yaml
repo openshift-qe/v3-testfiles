@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: DeploymentConfig
+metadata:
+  creationTimestamp: null
+  labels:
+    run: hello
+  name: hello
+spec:
+  replicas: 1
+  selector:
+    run: hello
+  strategy:
+    resources: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        run: hello
+    spec:
+      containers:
+      - args:
+        - --conf
+        - /etc/caddy/config/caddyfile.conf
+        image: aosqe/caddy-docker
+        name: hello
+        resources: {}
+  test: false
+  triggers: null
+status: {}

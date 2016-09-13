@@ -124,11 +124,11 @@
          "images": [{
            "from": {
            "kind": "ImageStreamTag",
-           "name": "jenkins:latest",
+           "name": "python:latest",
            "namespace": "openshift"
            },
            "paths": [{
-             "sourcePath": "/opt/openshift",
+             "sourcePath": "/tmp",
              "destinationDir": "xiuwangtest"
            }]
          }]

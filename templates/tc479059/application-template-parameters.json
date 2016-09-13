@@ -2,7 +2,7 @@
   "kind": "Template",
   "apiVersion": "v1",
   "metadata": {
-    "name": "${TEMPLATE_NAME}",
+    "name": "ruby-helloworld-sample",
     "creationTimestamp": null,
     "annotations": {
       "description": "This example shows how to create a simple ruby application in openshift origin v3",
@@ -278,11 +278,6 @@
       "description": "imagestream spec repository",
       "name": "IMAGESTREAM_SPEC_REPO",
       "value": "openshift/ruby-20-centos7"
-    },
-   {
-      "description": "template name",
-      "name": "TEMPLATE_NAME",
-      "value": "ruby-helloworld-sample"
     }
   ],
   "labels": {

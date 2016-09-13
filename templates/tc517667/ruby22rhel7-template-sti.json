@@ -127,28 +127,27 @@
           {
           "from": {
           "kind": "ImageStreamTag",
-          "name": "jenkins:latest",
-          "namespace": "openshift"
-          },
-          "paths": [
-          {
-          "sourcePath": "/opt/openshift",
-          "destinationDir": "xiuwangs2i"
-          }
-          ]
-          }
-          ],
-
-          "images": [
-          {
-          "from": {
-          "kind": "ImageStreamTag",
           "name": "mysql:latest",
           "namespace": "openshift"
           },
           "paths": [
           {
           "sourcePath": "/opt/rh/rh-mysql56/",
+          "destinationDir": "xiuwangs2i-1"
+          }
+          ]
+          }
+          ],
+          "images": [
+          {
+          "from": {
+          "kind": "ImageStreamTag",
+          "name": "python:latest",
+          "namespace": "openshift"
+          },
+          "paths": [
+          {
+          "sourcePath": "/tmp",
           "destinationDir": "xiuwangs2i-2"
           }
           ]

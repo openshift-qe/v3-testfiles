@@ -1,0 +1,34 @@
+version: 0.1
+log:
+  level: debug
+http:
+  addr: :5000
+storage:
+  cache:
+    layerinfo: inmemory
+version: 0.1
+log:
+  level: debug
+http:
+  addr: :5000
+storage:
+  cache:
+    layerinfo: inmemory
+  s3:
+    accesskey: xxx
+    secretkey: xxx
+    region: us-east-1
+    bucket: openshift-qe-registry-testing-bucket1
+    encrypt: true
+    secure: true
+    v4auth: false
+    rootdirectory: /registry
+auth:
+  openshift:
+    realm: openshift
+middleware:
+  repository:
+    - name: openshift
+      options:
+
+        pullthrough: true

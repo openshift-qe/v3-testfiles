@@ -3,7 +3,7 @@
   "kind": "ImageStreamList",
   "items": [
     {
-      "apiVersion": "v1beta1",
+      "apiVersion": "v1",
       "kind": "ImageStream",
       "metadata": {
         "name": "hello-world"

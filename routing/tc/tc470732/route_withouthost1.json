@@ -2,7 +2,7 @@
     "kind": "Route",
     "apiVersion": "v1",
     "metadata": {
-        "name": "service-unsecure"
+        "name": "service-unsecure1"
     },
     "spec": {
         "host": "",       

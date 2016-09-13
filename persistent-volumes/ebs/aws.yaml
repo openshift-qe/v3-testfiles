@@ -1,21 +1,19 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: aws-web
+  name: awspd
 spec:
   containers:
-    - name: web
-      image: nginx
+    - name: myfrontend
+      image: aosqe/hello-openshift
       ports:
-        - name: web
-          containerPort: 80
-          protocol: TCP
+        - containerPort: 80
+          name: "http-server"
       volumeMounts:
-        - name: html-volume
-          mountPath: "/usr/share/nginx/html"
+        - name: ebs
+          mountPath: "/mnt/aws"
   volumes:
-    - name: html-volume
+    - name: ebs
       awsElasticBlockStore:
-#{region}/{volume Id} should be in the same region with aws instance
         volumeID: aws://us-east-1c/vol-943fcc74
         fsType: ext4

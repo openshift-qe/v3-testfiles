@@ -1,0 +1,32 @@
+{
+    "kind": "Service",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "multi-portsvc",
+        "creationTimestamp": null
+    },
+    "spec": {
+        "ports": [
+            {
+                "name": "https",
+                "protocol": "TCP",
+                "port": 27443,
+                "targetPort": 443
+            },
+            {
+                "name": "http",
+                "protocol": "TCP",
+                "port": 27017,
+                "targetPort": 80
+            }
+        ],
+        "selector": {
+            "name": "caddy-docker"
+        },
+        "type": "ClusterIP",
+        "sessionAffinity": "None"
+    },
+    "status": {
+        "loadBalancer": {}
+    }
+}

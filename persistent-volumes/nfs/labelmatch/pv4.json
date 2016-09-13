@@ -1,0 +1,55 @@
+{
+  "kind": "Template",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "PVs"
+  },
+  "objects": [
+     {
+        "apiVersion": "v1",
+        "kind": "PersistentVolume",
+        "metadata": {
+           "name": "nfs-pv-4a",
+           "labels": {
+              "ebs-volume-type": "iops-ssd",
+              "aws-availability-zone": "us-west-1",
+              "usedFor": "tc531522"
+        }
+        },
+        "spec": {
+           "capacity": {
+              "storage": "513Mi"
+           },
+           "accessModes": [ "ReadWriteOnce" ],
+           "nfs": {
+              "path": "/home/data/pv01",
+              "server": "localhost"
+           },
+           "persistentVolumeReclaimPolicy": "Retain"
+        }
+     },
+     {
+        "apiVersion": "v1",
+        "kind": "PersistentVolume",
+        "metadata": {
+           "name": "nfs-pv-4b",
+           "labels": {
+              "ebs-volume-type": "iops-ssd",
+              "aws-availability-zone": "us-west-1",
+              "usedFor": "tc531522"
+        }
+        },
+        "spec": {
+           "capacity": {
+              "storage": "514Mi"
+           },
+           "accessModes": [ "ReadWriteOnce" ],
+           "nfs": {
+              "path": "/home/data/pv02",
+              "server": "localhost"
+           },
+           "persistentVolumeReclaimPolicy": "Retain"
+        }
+     }
+  ]
+}

@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-same-configmap
+spec:
+  containers:
+    - name: test-container
+      image: gcr.io/google_containers/mounttest:0.6
+      command: [ "/mt", "--break_on_expected_content=false", "--retry_time=10", "--file_content_in_loop=/etc/storage-volume/data-1"]
+      volumeMounts:
+      - name: storage-volume
+        mountPath: /etc/storage-volume
+  volumes:
+    - name: storage-volume
+      configMap:
+        name: configmap-test-multi 
+  restartPolicy: Never

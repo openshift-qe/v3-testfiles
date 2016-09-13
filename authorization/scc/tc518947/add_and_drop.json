@@ -1,0 +1,19 @@
+{
+  "kind": "Pod",
+  "apiVersion":"v1",
+  "metadata": {
+        "name": "pod-add-chown",
+        "labels": {
+                "name": "pod-add-chown"
+        }
+  },
+  "spec": {
+      "containers": [{
+        "name": "pod-add-chown",
+        "image": "aosqe/hello-openshift",
+        "securityContext": {
+                "capabilities": {"add":["NET_RAW"],"drop":["NET_RAW"]}
+        }
+      }]
+  }
+}
