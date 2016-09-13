@@ -1,0 +1,67 @@
+{
+  "kind": "BuildConfig",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "ruby-sample-build",
+    "creationTimestamp": null,
+    "labels": {
+      "name": "ruby-sample-build"
+    }
+  },
+  "spec": {
+    "triggers": [
+      {
+        "type": "GitHub",
+        "github": {
+          "secret": "secret101"
+        }
+      },
+      {
+        "type": "Generic",
+        "generic": {
+          "secret": "secret101"
+        }
+      },
+      {
+        "type": "ImageChange",
+        "imageChange": {}
+      },
+      {
+        "type": "ConfigChange"
+      }
+    ],
+    "source": {
+      "type": "Git",
+      "git": {
+        "uri": "https://github.com/openshift-qe/incremental-app.git"
+      }
+    },
+    "strategy": {
+      "type": "Source",
+      "sourceStrategy": {
+        "from": {
+          "kind": "ImageStreamTag",
+          "name": "ruby:2.0",
+          "namespace": "openshift"
+        },
+        "incremental": true,
+        "env": [
+          {
+            "name": "BUILD_LOGLEVEL",
+            "value": "5"
+          }
+        ]
+      }
+    },
+    "output": {
+      "to": {
+        "kind": "ImageStreamTag",
+        "name": "origin-ruby-sample:latest"
+      }
+    },
+    "resources": {}
+  },
+  "status": {
+    "lastVersion": 0
+  }
+}
