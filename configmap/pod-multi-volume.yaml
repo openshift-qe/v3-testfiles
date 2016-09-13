@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-configmapd
+spec:
+  containers:
+    - name: configvolume-test
+      image: gcr.io/google_containers/mounttest:0.6
+      args: ["--file_content=/etc/configmap-volume/data-1"]
+      volumeMounts:
+      - name: qe-storage-map
+        mountPath: /etc/configmap-volume
+        readOnly: true
+      - name: volume-config-map
+        mountPath: /opt/qe-storage
+        readOnly: true
+  volumes:
+    - name: qe-storage-map
+      configMap:
+        name: configmap-test-multi
+    - name: volume-config-map
+      configMap:
+        name: configmap-test-multi
+  restartPolicy: Never

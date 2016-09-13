@@ -1,0 +1,90 @@
+{
+  "kind": "Template",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "PVs"
+  },
+  "objects": [
+     {
+        "apiVersion": "v1",
+        "kind": "PersistentVolume",
+        "metadata": {
+           "name": "nfs-pv-8a",
+           "labels": {
+              "ebs-volume-type": "iops-ssd",
+              "aws-availability-zone": "us-west-1",
+              "usedFor": "tc531524"
+        }
+        },
+        "spec": {
+           "capacity": {
+              "storage": "1Gi"
+           },
+           "accessModes": [ 
+              "ReadWriteOnce",
+              "ReadWriteMany",
+              "ReadOnlyMany"
+           ],
+           "nfs": {
+              "path": "/home/data/pv01",
+              "server": "localhost"
+           },
+           "persistentVolumeReclaimPolicy": "Retain"
+        }
+     },
+     {
+        "apiVersion": "v1",
+        "kind": "PersistentVolume",
+        "metadata": {
+           "name": "nfs-pv-8b",
+           "labels": {
+              "ebs-volume-type": "gp-ssd",
+              "aws-availability-zone": "us-west-1",
+              "usedFor": "tc531524"
+        }
+        },
+        "spec": {
+           "capacity": {
+              "storage": "1Gi"
+           },
+           "accessModes": [ 
+              "ReadWriteOnce",
+              "ReadWriteMany",
+              "ReadOnlyMany"
+           ],
+           "nfs": {
+              "path": "/home/data/pv02",
+              "server": "localhost"
+           },
+           "persistentVolumeReclaimPolicy": "Retain"
+        }
+     },
+     {
+        "apiVersion": "v1",
+        "kind": "PersistentVolume",
+        "metadata": {
+           "name": "nfs-pv-8c",
+           "labels": {
+              "ebs-volume-type": "gp-ssd",
+              "aws-availability-zone": "us-east-1",
+              "usedFor": "tc531524"
+        }
+        },
+        "spec": {
+           "capacity": {
+              "storage": "1Gi"
+           },
+           "accessModes": [ 
+              "ReadWriteOnce", 
+              "ReadWriteMany", 
+              "ReadOnlyMany" 
+           ],
+           "nfs": {
+              "path": "/home/data/pv03",
+              "server": "localhost"
+           },
+           "persistentVolumeReclaimPolicy": "Retain"
+        }
+     }
+  ]
+}

@@ -1,0 +1,245 @@
+{
+    "kind": "Template",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "dotnet-sqlite-example",
+        "creationTimestamp": null,
+        "annotations": {
+            "description": "An example .NET Core application",
+            "iconClass": "fa fa-code",
+            "tags": "quickstart,dotnet,.net"
+        }
+    },
+    "objects": [
+        {
+            "kind": "Service",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "dotnet-sqlite-example",
+                "annotations": {
+                    "description": "Exposes and load balances the application pods"
+                }
+            },
+            "spec": {
+                "ports": [
+                    {
+                        "name": "8080-tcp",
+                        "port": 8080,
+                        "targetPort": 8080
+                    }
+                ],
+                "selector": {
+                    "name": "dotnet-sqlite-example"
+                }
+            }
+        },
+        {
+            "kind": "Route",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "dotnet-sqlite-example"
+            },
+            "spec": {
+                "host": "${APPLICATION_HOSTNAME}",
+                "to": {
+                    "kind": "Service",
+                    "name": "dotnet-sqlite-example"
+                }
+            }
+        },
+        {
+            "kind": "ImageStream",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "dotnet-sqlite-example",
+                "annotations": {
+                    "description": "Keeps track of changes in the application image"
+                }
+            }
+        },
+        {
+            "kind": "BuildConfig",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "dotnet-sqlite-example",
+                "annotations": {
+                    "description": "Defines how to build the application"
+                }
+            },
+            "spec": {
+                "source": {
+                    "type": "Git",
+                    "git": {
+                        "uri": "${SOURCE_REPOSITORY_URL}",
+                        "ref": "${SOURCE_REPOSITORY_REF}"
+                    },
+                    "contextDir": "${CONTEXT_DIR}"
+                },
+                "strategy": {
+                    "type": "Source",
+                    "sourceStrategy": {
+                        "from": {
+                            "kind": "ImageStreamTag",
+                            "namespace": "openshift",
+                            "name": "dotnet:1.0"
+                        }
+                    }
+                },
+                "output": {
+                    "to": {
+                        "kind": "ImageStreamTag",
+                        "name": "dotnet-sqlite-example:latest"
+                    }
+                },
+                "triggers": [
+                    {
+                        "type": "ConfigChange"
+                    },
+                    {
+                        "type": "ImageChange"
+                    },
+                    {
+                        "type": "GitHub",
+                        "github": {
+                            "secret": "${GITHUB_WEBHOOK_SECRET}"
+                        }
+                    },
+                    {
+                        "type": "Generic",
+                        "generic": {
+                            "secret": "${GENERIC_WEBHOOK_SECRET}"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "kind": "DeploymentConfig",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "dotnet-sqlite-example",
+                "annotations": {
+                    "description": "Defines how to deploy the application server"
+                }
+            },
+            "spec": {
+                "strategy": {
+                    "type": "Rolling"
+                },
+                "triggers": [
+                    {
+                        "type": "ConfigChange"
+                    },
+                    {
+                        "type": "ImageChange",
+                        "imageChangeParams": {
+                            "automatic": true,
+                            "containerNames": [
+                                "dotnet-sqlite-example"
+                            ],
+                            "from": {
+                                "kind": "ImageStreamTag",
+                                "name": "dotnet-sqlite-example:latest"
+                            }
+                        }
+                    }
+                ],
+                "replicas": 1,
+                "selector": {
+                    "name": "dotnet-sqlite-example"
+                },
+                "template": {
+                    "metadata": {
+                        "name": "dotnet-sqlite-example",
+                        "labels": {
+                            "name": "dotnet-sqlite-example"
+                        }
+                    },
+                    "spec": {
+                        "containers": [
+                            {
+                                "name": "dotnet-sqlite-example",
+                                "image": "dotnet-sqlite-example",
+                                "ports": [
+                                    {
+                                        "containerPort": 8080
+                                    }
+                                ],
+                                "readinessProbe": {
+                                    "timeoutSeconds": 3,
+                                    "initialDelaySeconds": 3,
+                                    "httpGet": {
+                                        "path": "/",
+                                        "port": 8080
+                                    }
+                                },
+                                "livenessProbe": {
+                                    "timeoutSeconds": 3,
+                                    "initialDelaySeconds": 30,
+                                    "httpGet": {
+                                        "path": "/",
+                                        "port": 8080
+                                    }
+                                },
+                                "resources": {
+                                    "limits": {
+                                        "memory": "${MEMORY_LIMIT}"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    ],
+    "parameters": [
+        {
+            "name": "MEMORY_LIMIT",
+            "displayName": "Memory Limit",
+            "description": "Maximum amount of memory the .NET Core container can use.",
+            "value": "512Mi",
+            "required": true
+        },
+        {
+            "name": "SOURCE_REPOSITORY_URL",
+            "displayName": "Git Repository URL",
+            "description": "The URL of the repository with your application source code.",
+            "value": "https://github.com/openshift-s2i/s2i-aspnet-example.git",
+            "required": true
+        },
+        {
+            "name": "SOURCE_REPOSITORY_REF",
+            "displayName": "Git Reference",
+            "description": "Set this to a branch name, tag or other ref of your repository if you are not using the default branch."
+        },
+        {
+            "name": "CONTEXT_DIR",
+            "displayName": "Context Directory",
+            "description": "Set this to the relative path to your project if it is not in the root of your repository.",
+            "value": "app"
+        },
+        {
+            "name": "APPLICATION_HOSTNAME",
+            "displayName": "Application hostname",
+            "description": "The exposed hostname that will route to the Node.js service, if left blank a value will be defaulted."
+        },
+        {
+            "name": "GITHUB_WEBHOOK_SECRET",
+            "displayName": "GitHub Webhook Secret",
+            "description": "A secret string used to configure the GitHub webhook.",
+            "generate": "expression",
+            "from": "[a-zA-Z0-9]{40}"
+        },
+        {
+            "name": "GENERIC_WEBHOOK_SECRET",
+            "displayName": "Generic Webhook Secret",
+            "description": "A secret string used to configure the Generic webhook.",
+            "generate": "expression",
+            "from": "[a-zA-Z0-9]{40}"
+        }
+    ],
+    "labels": {
+        "template": "dotnet-sqlite-example"
+    }
+}

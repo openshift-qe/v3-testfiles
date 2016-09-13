@@ -19,7 +19,7 @@
           }
         ],
         "securityContext": {
-            "runAsUser": 1000029999
+            "runAsUser": <%= cb.scc_uid_inrange %>
         }
       }]
   }

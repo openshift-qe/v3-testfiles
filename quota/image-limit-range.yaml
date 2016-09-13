@@ -1,0 +1,15 @@
+apiVersion: "v1"
+kind: "LimitRange"
+metadata:
+  name: "openshift-resource-limits"
+spec:
+  limits:
+    - type: openshift.io/Image
+      max:
+        storage: 1Gi
+    - type: openshift.io/ImageStream
+      max:
+        openshift.io/image-tags: 20
+        openshift.io/images: 30
+
+

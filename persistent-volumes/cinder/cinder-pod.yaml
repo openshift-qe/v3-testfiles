@@ -9,7 +9,7 @@ spec:
     - resources:
         limits :
           cpu: 0.5
-      image: aosqe/hello-openshift
+      image: jhou/hello-openshift
       name: cinder
       ports: 
         - containerPort: 3306
@@ -18,8 +18,13 @@ spec:
           # name must match the volume name below
         - name: cinder-volume
           mountPath: /mnt
+  securityContext:
+    runAsUser: 101010
+    fsGroup: 123456
+    seLinuxOptions:
+      level: "s0:c13,c2"
   volumes:
     - name: cinder-volume
       cinder:
-        volumeID: 614ac6ef-423d-490b-be4a-16fa829f20cc
+        volumeID: d60454f9-cf7e-45a9-8cc9-a9c479726d64
         fsType: ext4

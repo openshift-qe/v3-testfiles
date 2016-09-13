@@ -1,0 +1,18 @@
+{
+        "kind": "Pod",
+        "apiVersion":"v1",
+        "metadata": {
+                "name": "completed-pod",
+                "labels": {
+                        "name": "test-pods"
+                }
+        },
+        "spec": {
+                "containers": [{
+                        "command": [ "/bin/true" ],
+                        "name": "completed-pod",
+                        "image": "bmeng/hello-openshift"
+                }],
+                "restartPolicy": "Never"
+        }
+}

@@ -1,0 +1,50 @@
+{
+  "kind": "Pod",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "client-cert",
+    "creationTimestamp": null,
+    "labels": {
+      "name": "client-cert"
+    }
+  },
+  "spec": {
+    "containers": [
+      {
+        "name": "client-cert",
+        "image": "liggitt/client-cert",
+        "ports": [
+          {
+            "containerPort": 9443,
+            "protocol": "TCP"
+          }
+        ],
+        "resources": {},
+        "volumeMounts": [
+          {
+            "name":"tmp",
+            "mountPath":"/tmp"
+          }
+        ],
+        "terminationMessagePath": "/dev/termination-log",
+        "imagePullPolicy": "IfNotPresent",
+        "capabilities": {},
+        "securityContext": {
+          "capabilities": {},
+          "privileged": false
+        }
+      }
+    ],
+    "volumes": [
+      {
+        "name":"tmp",
+        "emptyDir": {}
+      }
+    ],
+    "restartPolicy": "Always",
+    "dnsPolicy": "ClusterFirst",
+    "hostPID": true,
+    "serviceAccount": ""
+  },
+  "status": {}
+}

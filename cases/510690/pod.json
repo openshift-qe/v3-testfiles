@@ -16,17 +16,14 @@
                 "containerPort": 80,
                 "name": "http-server"
             }],
-            "securityContext": {
-                "privileged": false
-            },
             "volumeMounts": [{
                 "mountPath": "/mnt/nfs",
                 "name": "pvol"
             }]
         }],
         "securityContext": {
-            "runAsUser": #USER_ID#,
-            "supplementalGroups": [#GROUP#]
+            "runAsUser": "#USER_ID#",
+            "supplementalGroups": ["#GROUP#"]
         },
         "volumes": [{
             "name": "pvol",

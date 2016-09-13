@@ -1,0 +1,9 @@
+dn: cn=group2,ou=groups,ou=rfc2307,dc=example,dc=com
+changetype: modify
+add: member
+member: cn=Person4,ou=people,ou=rfc2307,dc=example,dc=com
+
+dn: cn=group3,ou=groups,ou=rfc2307,dc=example,dc=com
+changetype: modify
+add: member
+member: cn=Person4,ou=people,ou=rfc2307,dc=example,dc=com

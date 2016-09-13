@@ -1,0 +1,24 @@
+{
+  "kind": "Route",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "unsecure-route",
+    "annotations": {
+       "haproxy.router.openshift.io/balance": "roundrobin"
+    }
+  },
+  "spec": {
+    "host": "",
+    "to": {
+      "kind": "Service",
+      "name": "service-unsecure",
+      "weight": 20
+    },
+    "alternateBackends": [{
+      "kind": "Service",
+      "name": "service-unsecure-2",
+      "weight": 80
+    }]
+  },
+  "status": {}
+}

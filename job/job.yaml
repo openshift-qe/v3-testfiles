@@ -3,6 +3,7 @@ kind: Job
 metadata:
   name: pi
 spec:
+  manualSelector: true
   parallelism: 5
   selector:
     matchLabels:

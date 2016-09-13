@@ -1,0 +1,26 @@
+{
+    "kind": "Service",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "nodeport-svc1",
+        "creationTimestamp": null
+    },
+    "spec": {
+        "ports": [
+            {
+                "name": "http",
+                "protocol": "TCP",
+                "port": 27017,
+                "targetPort": 80
+            }
+        ],
+        "selector": {
+            "name": "caddy-docker"
+        },
+        "type": "NodePort",
+        "sessionAffinity": "None"
+    },
+    "status": {
+        "loadBalancer": {}
+    }
+}

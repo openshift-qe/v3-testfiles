@@ -1,0 +1,54 @@
+{
+    "kind": "List",
+    "apiVersion": "v1",
+    "metadata": {},
+    "items": [
+	{
+    
+	    "kind": "ImageStream",
+	    "apiVersion": "v1",
+	    "metadata": {
+		"name": "nosrc-extended-test-builder",
+		"creationTimestamp": null
+	    },
+	    "spec": {},
+	    "status": {
+		"dockerImageRepository": ""
+	    }
+    
+	},
+	{
+	    "kind": "BuildConfig",
+	    "apiVersion": "v1",
+	    "metadata": {
+		"name": "nosrc-bldr",
+		"creationTimestamp": null,
+		"labels": {
+		    "name": "nosrc-bldr"
+		}
+	    },
+	    "spec": {
+		"triggers": [
+		],
+		"source": {
+		    "type": "Git",
+		    "git": {
+			"uri": "https://github.com/gabemontero/nosrc-extended-test-bldr.git"
+		    }
+		},
+		"strategy": {
+		    "type": "Docker",
+		    "dockerStrategy": {
+		    }
+		},
+		"output":{
+		    "to":{
+			"kind":"ImageStreamTag",
+			"name":"nosrc-extended-test-builder:latest"
+		    }
+		}
+	    }
+	}
+    ]
+}
+

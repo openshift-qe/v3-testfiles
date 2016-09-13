@@ -1,0 +1,91 @@
+{
+    "kind": "DeploymentConfig",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "psql",
+        "creationTimestamp": null,
+        "labels": {
+            "run": "psql"
+        },
+        "annotations": {
+            "openshift.io/deployment.cancelled": "2"
+        }
+    },
+    "spec": {
+        "strategy": {
+            "type": "Rolling",
+            "rollingParams": {
+                "updatePeriodSeconds": 1,
+                "intervalSeconds": 1,
+                "timeoutSeconds": 600,
+                "maxUnavailable": "25%",
+                "maxSurge": "25%"
+            },
+            "resources": {}
+        },
+        "triggers": [
+            {
+                "type": "ConfigChange"
+            }
+        ],
+        "replicas": 1,
+        "test": false,
+        "selector": {
+            "run": "psql"
+        },
+        "template": {
+            "metadata": {
+                "creationTimestamp": null,
+                "labels": {
+                    "run": "psql"
+                }
+            },
+            "spec": {
+                "volumes": [
+                    {
+                        "name": "psqlemptydir",
+                        "emptyDir": {}
+                    }
+                ],
+                "containers": [
+                    {
+                        "name": "psql",
+                        "image": "registry.access.redhat.com/rhscl/postgresql-95-rhel7",
+                        "env": [
+                            {
+                                "name": "POSTGRESQL_USER",
+                                "value": "user"
+                            },
+                            {
+                                "name": "POSTGRESQL_DATABASE",
+                                "value": "sampledb"
+                            },
+                            {
+                                "name": "POSTGRESQL_PASSWORD",
+                                "value": "redhat"
+                            }
+                        ],
+                        "resources": {
+                            "limits": {
+                                "memory": "256Mi"
+                            }
+                        },
+                        "volumeMounts": [
+                            {
+                                "name": "psqlemptydir",
+                                "mountPath": "/var/lib/pgsql/data"
+                            }
+                        ],
+                        "terminationMessagePath": "/dev/termination-log",
+                        "imagePullPolicy": "Always"
+                    }
+                ],
+                "restartPolicy": "Always",
+                "terminationGracePeriodSeconds": 30,
+                "dnsPolicy": "ClusterFirst",
+                "securityContext": {}
+            }
+        }
+    },
+    "status": {}
+}

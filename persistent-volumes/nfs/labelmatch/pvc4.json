@@ -1,0 +1,21 @@
+{
+  "apiVersion": "v1",
+  "kind": "PersistentVolumeClaim",
+  "metadata": {
+      "name": "nfsc-4"
+  },
+  "spec": {
+      "accessModes": [ "ReadWriteOnce" ],
+      "resources": {
+          "requests": {
+              "storage": "512Mi"
+          }
+      },
+      "selector":{
+          "matchLabels": {
+              "ebs-volume-type": "iops-ssd",
+              "aws-availability-zone": "us-west-1"
+          }
+      }
+  }
+}

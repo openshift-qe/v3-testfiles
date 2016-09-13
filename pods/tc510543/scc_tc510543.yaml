@@ -1,0 +1,31 @@
+kind: SecurityContextConstraints
+apiVersion: v1
+fsGroup:
+  ranges:
+  - max: 1001
+    min: 1001
+  type: MustRunAs
+groups:
+- system:serviceaccounts
+- system:authenticated
+metadata:
+  labels:
+    name: scc-tc510543
+  name: scc-tc510543
+runAsUser:
+  type: MustRunAs
+  uid: 1000
+seLinuxContext:
+  type: RunAsAny
+supplementalGroups:
+  ranges:
+  - max: 1000
+    min: 1000
+  type: MustRunAs
+allowHostDirVolumePlugin: false
+allowHostIPC: false
+allowHostNetwork: false
+allowHostPID: false
+allowHostPorts: false
+allowPrivilegedContainer: false
+allowedCapabilities: null
