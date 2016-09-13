@@ -53,12 +53,6 @@
         ]
       }
     },
-    "output": {
-      "to": {
-        "kind": "ImageStreamTag",
-        "name": "origin-ruby-sample:latest"
-      }
-    },
     "resources": {}
   },
   "status": {
