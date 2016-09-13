@@ -53,9 +53,27 @@
         ]
       }
     },
+    "output": {
+      "to": {
+        "kind": "ImageStreamTag",
+        "name": "origin-ruby-sample:latest"
+      }
+    },
     "resources": {}
   },
   "status": {
     "lastVersion": 0
+  }
+}
+{
+  "kind": "ImageStream",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "origin-ruby-sample",
+    "creationTimestamp": null
+  },
+  "spec": {},
+  "status": {
+    "dockerImageRepository": ""
   }
 }
