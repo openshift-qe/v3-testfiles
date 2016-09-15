@@ -1,0 +1,9 @@
+kind: SecurityContextConstraints
+apiVersion: v1
+metadata:
+  name: invalid-scc
+allowPrivilegedContainer_BadName: true
+runAsUser:
+  type: RunAsAny
+seLinuxContext:
+  type: RunAsAny
