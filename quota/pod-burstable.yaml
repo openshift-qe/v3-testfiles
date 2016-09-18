@@ -1,13 +1,10 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: pod-besteffort-terminating
-  labels:
-    name: pod-besteffort-terminating
+  name: pod-burstable
 spec:
-  activeDeadlineSeconds: 60
   containers:
-  - name: pod-besteffort-terminating
+  - name: burstable
     image: openshift/mysql-55-centos7:latest
     env:
     - name: MYSQL_USER
@@ -19,9 +16,6 @@ spec:
       name: MYSQL_ROOT_PASSWORD
       value: W5J6s8wf
     resources:
-      limits:
-        cpu: 0
-        memory: 0
       requests:
-        cpu: 0
-        memory: 0
+        cpu: "200m"
+        memory: "256Mi"
