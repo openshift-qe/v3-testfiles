@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: DeploymentConfig
+metadata:
+  labels:
+    run: hello-hpa
+  name: hello-hpa
+spec:
+  replicas: 2
+  selector:
+    run: hello-hpa
+  template:
+    metadata:
+      labels:
+        run: hello-hpa
+    spec:
+      containers:
+      - image: docker.io/deshuai/hello-hpa:latest
+        imagePullPolicy: IfNotPresent
+        name: hello-hpa
+        resources:
+          requests:
+            cpu: 200m
+      restartPolicy: Always
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+  triggers:
+  - type: ConfigChange
