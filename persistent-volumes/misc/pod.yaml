@@ -10,7 +10,7 @@ spec:
         - containerPort: 80
           name: "http-server"
       volumeMounts:
-      - mountPath: "/tmp"
+      - mountPath: "/mnt/ocp_pv"
         name: dynamic
   volumes:
     - name: dynamic
