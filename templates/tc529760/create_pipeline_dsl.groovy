@@ -1,6 +1,6 @@
 node{
   stage 'build'
-	openshiftCreateResource apiURL: 'https://ec2-54-89-88-34.compute-1.amazonaws.com:8443', authToken: '', jsonyaml: '''{
+	openshiftCreateResource apiURL: '<apiurl>', authToken: '', jsonyaml: '''{
 		"kind": "Pod",
 		"apiVersion": "v1",
 		"metadata": {
@@ -49,5 +49,5 @@ node{
 		},
 		"status": {}
 	}
-	''', namespace: 'test1', verbose: 'false'
+	''', namespace: '<namespace>', verbose: 'false'
 	}
