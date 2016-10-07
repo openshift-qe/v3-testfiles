@@ -5,7 +5,7 @@ metadata:
 spec:
   hard:
     cpu: "-20"
-    memory: “-1Gi“
+    memory: "-1Gi"
     persistentvolumeclaims: "-10"
     pods: "-10"
     replicationcontrollers: "-20"
