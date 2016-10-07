@@ -1,0 +1,14 @@
+piVersion: v1
+kind: ResourceQuota
+metadata:
+  name: quota-2
+spec:
+  hard:
+    cpu: "2/10"
+    memory: "1/5Gi"
+    persistentvolumeclaims: "1/10"
+    pods: "1/10"
+    replicationcontrollers: "2/10"
+    resourcequotas: "3/10"
+    secrets: "5/10"
+    services: "5/10"
