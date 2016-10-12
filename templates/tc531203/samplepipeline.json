@@ -43,7 +43,7 @@
         "source": {
           "type": "Git",
           "git": {
-            "uri": "https://github.com/xiuwang/ruby-hello-world"
+            "uri": "https://github.com/openshift-qe/jenkins-pipeline-ruby-test.git"
           }
         },
         "strategy": {
