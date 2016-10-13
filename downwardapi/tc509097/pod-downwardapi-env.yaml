@@ -6,7 +6,7 @@ metadata:
     name: downwardapi-env
 spec:
   containers:
-    - image: openshift/ruby-20-centos7
+    - image: docker.io/ocpqe/hello-pod:latest
       name: downwardapi-env
       env:
         - name: MYSQL_ROOT_PASSWORD
