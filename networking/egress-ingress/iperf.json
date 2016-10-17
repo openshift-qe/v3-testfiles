@@ -1,0 +1,17 @@
+{
+  "kind": "Pod",
+  "apiVersion":"v1",
+  "metadata": {
+        "name": "iperf",
+        "annotations": {
+            "kubernetes.io/egress-bandwidth": "3M",
+            "kubernetes.io/ingress-bandwidth": "2M"
+        }
+  },
+  "spec": {
+      "containers": [{
+        "name": "iperf",
+        "image": "yadu/hello-openshift-iperf"
+      }]
+  }
+}
