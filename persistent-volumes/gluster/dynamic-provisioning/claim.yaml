@@ -4,7 +4,7 @@
    "metadata": {
      "name": "glusterc",
      "annotations": {
-     "volume.beta.kubernetes.io/storage-class": "GlusterProvisioner"
+     "volume.beta.kubernetes.io/storage-class": "glusterprovisioner"
      }
    },
    "spec": {
