@@ -17,4 +17,4 @@ spec:
   volumes:
     - name: aws
       persistentVolumeClaim:
-        claimName: ebs
+        claimName: ebsc
