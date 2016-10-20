@@ -4,4 +4,7 @@ metadata:
   name: slow
   annotations:
     storageclass.beta.kubernetes.io/is-default-class: "false"
-provisioner: kubernetes.io/#PROVISIONER#
+provisioner: kubernetes.io/gce-pd
+parameters:
+  type: pd-ssd
+  zone: us-central1-b
