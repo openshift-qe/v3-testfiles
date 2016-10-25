@@ -30,4 +30,4 @@ spec:
         - "100"
   triggers:
   - type: ConfigChange
-  revisionHistoryLimit: 3
+  revisionHistoryLimit: 2
