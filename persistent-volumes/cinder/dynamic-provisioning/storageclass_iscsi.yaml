@@ -4,4 +4,5 @@ metadata:
   name: cinderprovisioner
 provisioner: kubernetes.io/cinder
 parameters:
+  type: iscsi
   availability: nova
