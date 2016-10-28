@@ -23,7 +23,7 @@ items:
             name: hello-idle
             ports:
             - containerPort: 8080
-              protocol: tcp
+              protocol: TCP
             resources:
               limits:
                 cpu: 500m
