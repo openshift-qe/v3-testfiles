@@ -8,7 +8,7 @@
                 "ports": [
                 {   
                         "name": "sni",
-                        "protocol": "tcp",
+                        "protocol": "TCP",
                         "port": 2999,
                         "targetPort": 9999
                 }
