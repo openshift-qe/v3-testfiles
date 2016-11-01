@@ -11,6 +11,13 @@ spec:
     run: hello
   strategy:
     resources: {}
+    rollingParams:
+      intervalSeconds: 1
+      maxSurge: 25%
+      maxUnavailable: 25%
+      timeoutSeconds: 600
+      updatePeriodSeconds: 1
+    type: Rolling
   template:
     metadata:
       creationTimestamp: null
@@ -22,8 +29,23 @@ spec:
         - --conf
         - /etc/caddy/config/caddyfile.conf
         image: aosqe/caddy-docker
+        imagePullPolicy: Always
         name: hello
         resources: {}
+        terminationMessagePath: /dev/termination-log
+        volumeMounts:
+        - mountPath: /etc/serving-cert
+          name: volume-xfqr1
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: volume-xfqr1
+        secret:
+          secretName: ssl-key
   test: false
-  triggers: null
+  triggers:
+  - type: ConfigChange
 status: {}
+
