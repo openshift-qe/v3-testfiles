@@ -26,6 +26,9 @@
                                 "value": "pre-deployment"
                             }
                         ],
+                        "volumes": [
+                            "mysql-volume-1"
+                        ],
                         "containerName": "mysql-55-centos7"
                     }
                 },
@@ -42,6 +45,9 @@
                                 "name": "VAR",
                                 "value": "post-deployment"
                             }
+                        ],
+                        "volumes": [
+                            "mysql-volume-1"
                         ],
                         "containerName": "mysql-55-centos7"
                     }
@@ -67,6 +73,12 @@
                 }
             },
             "spec": {
+                "volumes": [
+                    {
+                        "name": "mysql-volume-1",
+                        "emptyDir": {}
+                    }
+                ],
                 "containers": [
                     {
                         "name": "mysql-55-centos7",
@@ -92,6 +104,12 @@
                             }
                         ],
                         "resources": {},
+                        "volumeMounts": [
+                            {
+                                "name": "mysql-volume-1",
+                                "mountPath": "/var/lib/mysql/data"
+                            }
+                        ],
                         "terminationMessagePath": "/dev/termination-log",
                         "imagePullPolicy": "Always",
                         "securityContext": {
