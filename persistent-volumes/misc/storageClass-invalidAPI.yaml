@@ -1,0 +1,7 @@
+apiVersion: storage.k8s.io/invalid
+kind: StorageClass
+metadata:
+  name: slow
+  annotations:
+    storageclass.beta.kubernetes.io/is-default-class: "false"
+provisioner: kubernetes.io/gce-pd
