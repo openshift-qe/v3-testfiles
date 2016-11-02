@@ -1,5 +1,5 @@
 {
-    "Kind": "Pod",
+    "kind": "Pod",
     "apiVersion": "v1",
     "metadata": {
         "labels": {
