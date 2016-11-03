@@ -349,36 +349,6 @@
         "strategy": {
           "type": "Recreate",
           "recreateParams": {
-            "pre": {
-              "failurePolicy": "Abort",
-              "execNewPod": {
-                "command": [
-                  "/bin/true"
-                ],
-                "env": [
-                  {
-                    "name": "CUSTOM_VAR1",
-                    "value": "custom_value1"
-                  }
-                ],
-                "containerName": "php-helloworld-database"
-              }
-            },
-            "post": {
-              "failurePolicy": "Ignore",
-              "execNewPod": {
-                "command": [
-                  "/bin/false"
-                ],
-                "env": [
-                  {
-                    "name": "CUSTOM_VAR2",
-                    "value": "custom_value2"
-                  }
-                ],
-                "containerName": "php-helloworld-database"
-              }
-            }
           },
           "resources": {}
         },
@@ -409,6 +379,12 @@
                     "protocol": "TCP"
                   }
                 ],
+                "volumeMounts": [
+                  {
+                    "mountPath": "/var/lib/mysql/data",
+                    "name": "database-mysql-pvol"
+                  }
+                ],
                 "env": [
                   {
                     "name": "MYSQL_USER",
@@ -432,13 +408,41 @@
                 }
               }
             ],
+            "volumes": [
+              {
+                "name": "database-mysql-pvol",
+                "persistentVolumeClaim": {
+                  "claimName": "database-mysql-claim"
+                }
+              }
+            ],
             "restartPolicy": "Always",
             "dnsPolicy": "ClusterFirst"
           }
         }
       },
       "status": {}
-    }
+    },
+    {
+          "apiVersion": "v1",
+          "kind": "PersistentVolumeClaim",
+          "metadata": {
+              "name": "database-mysql-claim",
+              "labels": {
+                  "application": "database"
+              }
+          },
+          "spec": {
+              "accessModes": [
+                  "ReadWriteOnce"
+              ],
+              "resources": {
+                  "requests": {
+                      "storage": "${VOLUME_CAPACITY}"
+                  }
+              }
+          }
+  }
   ],
   "parameters": [
     {
@@ -472,6 +476,13 @@
       "description": "database name",
       "value": "root",
       "required": true
+    },
+    {
+            "description": "Size of persistent storage for database volume.",
+            "displayName": "Volume Capacity",
+            "name": "VOLUME_CAPACITY",
+            "value": "1Gi",
+            "required": true
     }
   ],
   "labels": {
