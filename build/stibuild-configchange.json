@@ -483,7 +483,7 @@
             "name": "VOLUME_CAPACITY",
             "value": "1Gi",
             "required": true
-	  }
+    }
   ],
   "labels": {
     "template": "application-template-stibuild"
