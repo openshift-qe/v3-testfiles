@@ -12,14 +12,20 @@
             "name": "gluster",
             "image": "aosqe/hello-openshift",
             "imagePullPolicy": "IfNotPresent",
+            "securityContext": {
+                "privileged": true
+            },
             "volumeMounts": [{
                 "mountPath": "/mnt/gluster",
                 "name": "gluster"
             }]
         }],
-       "securityContext": {
-            "privileged": true
-       },
+        "securityContext": {
+            "fsGroup": 123456,
+            "seLinuxContext": {
+                 "level": "s0:c13,c12"
+            }
+        },
         "volumes": [{
             "name": "gluster",
             "persistentVolumeClaim": {
