@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+ name: azntfs
+spec:
+ containers:
+  - image: aosqe/hello-openshift
+    name: azure
+    volumeMounts:
+      - name: azure
+        mountPath: /mnt/azure
+ securityContext:
+   runAsUser: 1000060001
+   fsGroup: 123456
+   seLinuxOptions:
+     level: "s0:c8,c2"
+ volumes:
+   - name: azure
+     azureDisk:
+       diskName: ntfs.vhd 
+       diskURI: https://openshiftqestorage.blob.core.windows.net/vhds/ntfs.vhd
+       fsType: ntfs-3g 
