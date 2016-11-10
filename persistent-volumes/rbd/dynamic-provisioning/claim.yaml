@@ -11,9 +11,6 @@
      "accessModes": [
        "ReadWriteOnce"
      ],
-    "proivisionerselector": [
-       "something"
-     ],
      "resources": {
        "requests": {
          "storage": "5Gi"
