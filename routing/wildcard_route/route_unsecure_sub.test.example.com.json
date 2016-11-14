@@ -1,0 +1,16 @@
+{
+        "kind": "Route",
+        "apiVersion": "v1",
+        "metadata": {
+                "name": "wildcard-route-sub"
+        },
+        "spec": {
+                "host": "www.sub.test.example.com",
+                "wildcardPolicy": "Subdomain",
+                "to": {
+                        "kind": "Service",
+                        "name": "service-unsecure"
+                }
+        }
+}
+
