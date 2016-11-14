@@ -4,7 +4,6 @@ metadata:
   name: glusterprovisioner
 provisioner: kubernetes.io/glusterfs
 parameters:
-  endpoint: "glusterfs-cluster"
-  resturl: "http://ec2-52-91-208-229.compute-1.amazonaws.com:9991"
+  resturl: "http://ec2-54-157-33-85.compute-1.amazonaws.com:9991"
   restuser: "admin"
   restuserkey: "test"
