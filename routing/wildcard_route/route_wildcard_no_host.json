@@ -1,0 +1,14 @@
+{
+        "kind": "Route",
+        "apiVersion": "v1",
+        "metadata": {
+                "name": "route-wildcard-invalid"
+        },
+        "spec": {
+                "wildcardPolicy": "Subdomain",
+                "to": { 
+                        "kind": "Service",
+                        "name": "service-unsecure"
+                }
+        }
+}
