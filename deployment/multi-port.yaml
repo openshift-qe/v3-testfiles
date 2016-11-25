@@ -1,20 +1,41 @@
-{
-    "kind": "Pod",
-    "apiVersion": "v1",
-    "metadata": {
-        "name": "hello-openshift",
-        "labels": {
-            "app": "hello-openshift"
-        }
-    },
-    "spec": {
-        "containers": [
-            {
-                "name": "hello-openshift",
-                "image": "aosqe/caddy-docker"
-            }
-        ]
-    }
-}
-
+apiVersion: v1
+kind: DeploymentConfig
+metadata:
+  generation: 1
+  labels:
+    app: hello
+  name: hello
+spec:
+  replicas: 1
+  selector:
+    app: hello
+  strategy:
+    resources: {}
+    rollingParams:
+      intervalSeconds: 1
+      maxSurge: 25%
+      maxUnavailable: 25%
+      timeoutSeconds: 600
+      updatePeriodSeconds: 1
+    type: Rolling
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: hello
+    spec:
+      containers:
+      - image: aosqe/caddy-docker
+        imagePullPolicy: Always
+        name: hello
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+  test: false
+  triggers:
+  - type: ConfigChange
+status: {}
 
