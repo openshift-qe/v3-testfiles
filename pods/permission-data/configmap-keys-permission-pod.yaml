@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: configmap-keys-permission-pod
+spec:
+  containers:
+  - name: configmap-keys-permission-pod
+    image: redis
+    volumeMounts:
+    - name: config-volume
+      mountPath: "/etc/config"
+  volumes:
+  - name: config-volume
+    configMap:
+      name: special-config
+      items:
+      - key: special.how
+        path: myconfigmap/share
+        mode: 0755
+      - key: special.type
+        path: myconfigmap/private
+        mode: 0700
