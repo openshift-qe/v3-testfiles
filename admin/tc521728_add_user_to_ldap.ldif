@@ -1,0 +1,7 @@
+dn: uid=user,ou=people,ou=rfc2307,dc=example,dc=com
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+cn: openshift user
+sn: openshift
+userPassword: password

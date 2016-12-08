@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: configmap-permission-pod
+spec:
+  containers:
+  - name: configmap-permission-pod
+    image: redis
+    volumeMounts:
+    - name: config-volume
+      mountPath: "/etc/config"
+  volumes:
+  - name: config-volume
+    configMap:
+      name: special-config
+      defaultMode: 0400

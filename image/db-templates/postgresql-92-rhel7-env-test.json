@@ -59,7 +59,7 @@
                                 "protocol": "TCP"
                             }
                         ],
-                        "resources": {		    
+                        "resources": {
                          "limits": {
 			"memory": "512Mi"
 		         }

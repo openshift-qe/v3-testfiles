@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: dapi-permission-pod
+  labels:
+    region: r1
+    zone: z11
+    rack: a111
+  annotations:
+    build: one
+    builder: qe-one
+spec:
+  containers:
+    - name: client-container
+      image: redis
+      securityContext:
+        privileged: false
+      volumeMounts:
+        - name: podinfo
+          mountPath: /var/tmp/podinfo
+          readOnly: false
+  volumes:
+    - name: podinfo
+      downwardAPI:
+        defaultMode: 0400
+        items:
+          - path: "labels"
+            fieldRef:
+              fieldPath: metadata.labels
+          - path: "annotations"
+            fieldRef:
+              fieldPath: metadata.annotations
+          - path: "name"
+            fieldRef:
+              fieldPath: metadata.name
+          - path: "namespace"
+            fieldRef:
+              fieldPath: metadata.namespace
+

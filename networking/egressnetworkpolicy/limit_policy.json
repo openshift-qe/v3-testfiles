@@ -2,7 +2,7 @@
     "kind": "EgressNetworkPolicy",
     "apiVersion": "v1",
     "metadata": {
-        "name": "policy1",
+        "name": "policy1"
     },
     "spec": {
         "egress": [

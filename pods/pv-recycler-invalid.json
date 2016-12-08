@@ -1,0 +1,33 @@
+{
+    "kind": "Pod",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "recycler",
+        "namespace": "default"
+    },
+    "spec": {
+        "containers": [
+            {
+                "name": "pv-recycler",
+                "image": "docker.io/aosqe/recycler",
+                "command": [
+                    "/bin/sh"
+                ],
+                "args": [],
+                "resources": {},
+                "volumeMounts": [
+                    {
+                        "name": "vol",
+                        "mountPath": "/scrub"
+                    }
+                ],
+                "terminationMessagePath": "/dev/termination-log",
+                "imagePullPolicy": "IfNotPresent"
+            }
+        ],
+        "restartPolicy": "Never",
+        "terminationGracePeriodSeconds": 30,
+        "activeDeadlineSeconds": 300,
+        "securityContext": {}
+    }
+}
