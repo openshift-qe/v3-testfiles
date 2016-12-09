@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ImageSignature
 metadata:
- name: sha256:29f5d56d12684887bdfa50dcd29fc31eea4aaf4ad3bec43daf19026a7ce69912@imagesignaturetest2
+ name: ["metadata"]["name"]
 type: valid
 content:
 - 25
