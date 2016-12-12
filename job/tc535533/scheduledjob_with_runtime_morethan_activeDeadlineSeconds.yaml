@@ -1,0 +1,31 @@
+apiVersion: batch/v2alpha1
+kind: ScheduledJob
+metadata:
+  labels:
+    run: sj3
+  name: sj3
+spec:
+  concurrencyPolicy: Allow
+  jobTemplate:
+    metadata:
+    spec:
+      completion: 5
+      Parallelism: 1
+      activeDeadlineSeconds: 10
+      template:
+        metadata:
+          labels:
+            run: sj3
+        spec:
+          containers:
+          - args:
+            - sleep
+            - "15"
+            image: busybox
+            imagePullPolicy: Always
+            name: sj3
+            resources: {}
+          restartPolicy: Never
+  schedule: '*/1 * * * *'
+  suspend: false
+
