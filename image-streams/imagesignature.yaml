@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ImageSignature
+metadata:
+ name: <%= imageName %>@<%= signatureName %>
+type: valid
+content:
+- 25
+imageIdentity: "registry.company.ltd/app/core:v1.2"
