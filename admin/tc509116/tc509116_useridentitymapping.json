@@ -1,0 +1,7 @@
+{
+    "kind": "UserIdentityMapping",
+    "apiVersion": "v1",
+    "metadata": {"name": "anypassword:509116_user"},
+    "identity": {"name": "anypassword:509116_user"},
+    "user": {"name": "509116_user"}
+}
