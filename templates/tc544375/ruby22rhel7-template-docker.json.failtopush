@@ -41,7 +41,7 @@
       "kind": "Route",
       "apiVersion": "v1",
       "metadata": {
-        "name": "HE3GW5-route-edge",
+        "name": "testcase-example-route-edge",
         "creationTimestamp": null
       },
       "spec": {
