@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ImageSignature
 metadata:
- name: <%= imageName %>@<%= signatureName %>
+ name: ["metadata"]["name"]
 type: valid
 content:
 - 25
