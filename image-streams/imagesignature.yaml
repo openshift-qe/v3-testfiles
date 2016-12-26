@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ImageSignature
 metadata:
- name: ["metadata"]["name"]
+ name: ["metadata"]@["name"]
 type: valid
 content:
 - 25
