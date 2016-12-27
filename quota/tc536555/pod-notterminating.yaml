@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-notterminating
+  labels:
+    name: pod-notterminating
+spec:
+  containers:
+  - name: pod-notterminating
+    image: openshift/hello-openshift:latest
+    resources:
+      limits:
+        cpu: "500m"
+        memory: "256Mi"
+      requests:
+        cpu: "200m"
+        memory: "256Mi"
