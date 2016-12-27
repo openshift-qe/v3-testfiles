@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-besteffort
+  labels:
+    name: pod-besteffort
+spec:
+  containers:
+  - name: pod-besteffort
+    image: openshift/hello-openshift:latest
+    resources:
+      requests:
+        cpu: 0
+        memory: 0

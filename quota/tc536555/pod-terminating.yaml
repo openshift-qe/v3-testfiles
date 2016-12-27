@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-terminating
+  labels:
+    name: pod-terminating
+spec:
+  activeDeadlineSeconds: 300
+  containers:
+  - name: pod-terminating
+    image: openshift/hello-openshift:latest
+    resources:
+      limits:
+        cpu: "500m"
+        memory: "256Mi"
+      requests:
+        cpu: "200m"
+        memory: "256Mi"
