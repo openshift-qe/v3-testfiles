@@ -1,9 +1,0 @@
-apiVersion: policy/v1alpha1
-kind: PodDisruptionBudget
-metadata:
-  name: foo2
-spec:
-  selector:
-    matchLabels:
-      foo: bar
-  minAvailable: 5
