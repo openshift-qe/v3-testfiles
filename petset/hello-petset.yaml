@@ -1,0 +1,52 @@
+# A headless service to create DNS records
+apiVersion: v1
+kind: Service
+metadata:
+  name: foo
+  labels:
+    app: hello-pod
+spec:
+  ports:
+  - port: 80
+    name: web
+  # petset domain *.${svc-name}.${ns-name}.svc.cluster.local
+  clusterIP: None
+  selector:
+    app: hello-pod
+---
+apiVersion: apps/v1alpha1
+kind: PetSet
+metadata:
+  name: hello-petset
+spec:
+  serviceName: "foo"
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: hello-pod
+      annotations:
+        pod.alpha.kubernetes.io/initialized: "true"
+    spec:
+      terminationGracePeriodSeconds: 0
+      containers:
+        - image: "openshift/hello-openshift:latest"
+          imagePullPolicy: IfNotPresent
+          name: hello-pod
+          ports:
+            - containerPort: 8080
+              protocol: TCP 
+          resources: {}
+          securityContext:
+            capabilities: {}
+            privileged: false
+          terminationMessagePath: /dev/termination-log
+          volumeMounts:
+            - mountPath: /tmp
+              name: tmp 
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      serviceAccount: ""
+      volumes:
+        - emptyDir: {}
+          name: tmp 
