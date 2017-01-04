@@ -1,0 +1,8 @@
+{
+    "apiVersion": "policy/v1alpha1",
+    "kind": "Eviction",
+    "metadata": {
+        "name": "",
+        "namespace": ""
+    }
+}
