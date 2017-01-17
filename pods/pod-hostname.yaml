@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-hostname
+  labels:
+    app: pod-hostname
+spec:
+  containers:
+  - name: hello-pod
+    image: docker.io/deshuai/hello-pod:latest
+    ports:
+    - containerPort: 80
+  nodeName: HOSTNAME
