@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: quota-pvc-storage
+spec:
+  hard:
+    persistentvolumeclaims: "50"
+    requests.storage: "2Gi"
