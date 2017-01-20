@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: hello-openshift
-        image: openshift/hello-openshift
+        image: yapei/hello-openshift
         resources:
           requests:
             cpu: 100m
@@ -28,7 +28,7 @@ spec:
         ports:
         - containerPort: 80
       - name: hello-openshift-fedora
-        image: openshift/hello-openshift-fedora
+        image: yapei/hello-openshift-fedora
         resources:
           requests:
             cpu: 100m
