@@ -1,6 +1,6 @@
 node{
 	stage 'build'
-	openshiftCreateResource apiURL: 'https://192.168.4.73:8443', authToken: '', jsonyaml: '''{
+	openshiftCreateResource apiURL: '<repl_env>', authToken: '', jsonyaml: '''{
   "kind": "Pod",
   "apiVersion": "v1",
   "metadata": {
@@ -48,5 +48,5 @@ node{
     "serviceAccount": ""
   },
   "status": {}
-}''', namespace: 'ue0dk', verbose: 'false'
+}''', namespace: '<repl_ns>', verbose: 'false'
 }
