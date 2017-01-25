@@ -67,5 +67,5 @@ node{
 	}
 }''', namespace: '<repl_ns>' )
     openshiftDeleteResourceByLabels( apiURL: '<repl_env>', authToken: '', keys: 'name', namespace: '<repl_ns>', types: 'build', values: 'nodejs-sample-build', verbose: 'false' )
-    openshiftDeleteResourceByKey( apiURL: '<repl_env>', authToken: '', keys: 'resource name', namespace: '<repl_ns>', types: 'is' )
+    openshiftDeleteResourceByKey( apiURL: '<repl_env>', authToken: '', keys: 'origin-nodejs-sample', namespace: '<repl_ns>', types: 'is' )
 }
