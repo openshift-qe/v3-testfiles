@@ -1,0 +1,33 @@
+{
+    "apiVersion": "extensions/v1beta1",
+    "kind": "Ingress",
+    "metadata": {
+        "name": "tls-ingress"
+    },
+    "spec": {
+        "rules": [
+            {
+                "host": "tls.ingress.com",
+                "http": {
+                    "paths": [
+                        {
+                            "backend": {
+                                "serviceName": "service-unsecure",
+                                "servicePort": 8080
+                            },
+                            "path": "/"
+                        }
+                    ]
+                }
+            }
+        ],
+        "tls": [
+            {
+                "hosts": [
+                    "tls.ingress.com"
+                ],
+                "secretName": "mysecret"
+            }
+        ]
+    }
+}
