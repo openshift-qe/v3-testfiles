@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-svc-withIP
+spec:
+  clusterIP: 172.30.162.30
+  type: ExternalName
+  externalName: www.baidu.com
+
