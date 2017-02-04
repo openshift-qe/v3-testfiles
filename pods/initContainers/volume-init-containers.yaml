@@ -6,8 +6,8 @@ metadata:
     pod.alpha.kubernetes.io/init-containers: '[
         {
             "name": "install",
-            "image": "busybox",
-            "command": ["wget", "-O", "/work-dir/index.html", "http://kubernetes.io/index.html"],
+            "image": "docker.io/ocpqe/hello-pod:latest",
+            "command": ["/bin/sh", "-c","echo hello init-containers > /work-dir/hello.txt"],
             "volumeMounts": [
                 {
                     "name": "workdir",
@@ -18,9 +18,10 @@ metadata:
     ]'
 spec:
   containers:
-    - image: "docker.io/deshuai/hello-pod:latest"
+    - image: "docker.io/ocpqe/hello-pod:latest"
       imagePullPolicy: IfNotPresent
       name: hello-pod
+      command: ["/bin/sh", "-c", "while true; do cat /tmp/hello.txt; sleep 5; done"]
       ports:
         - containerPort: 8080
           protocol: TCP
