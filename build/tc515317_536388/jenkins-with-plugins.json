@@ -44,6 +44,12 @@
       "displayName": "Jenkins ImageStreamTag",
       "description": "Name of the ImageStreamTag to be used for the Jenkins image.",
       "value": "jenkins:latest"
+    },
+    {
+        "name": "ENABLE_OAUTH",
+        "displayName": "Enable OAuth in Jenkins",
+        "description": "Whether to enable OAuth OpenShift integration. If false, the static account 'admin' will be initialized with the password 'password'.",
+        "value": "true"
     }
   ],
   "objects": [
