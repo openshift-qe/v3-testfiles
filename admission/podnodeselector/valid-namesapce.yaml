@@ -1,0 +1,13 @@
+{
+    "kind": "Namespace",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "ns1",
+        "creationTimestamp": null,
+        "annotations": {
+            "scheduler.alpha.kubernetes.io/node-selector": "region=east,country=china"
+        }
+    },
+    "spec": {},
+    "status": {}
+}
