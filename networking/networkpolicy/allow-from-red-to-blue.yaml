@@ -1,0 +1,13 @@
+kind: NetworkPolicy
+apiVersion: extensions/v1beta1
+metadata:
+  name: allow-from-red-to-blue
+spec:
+  podSelector:
+    matchLabels:
+      type: blue
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          type: red
