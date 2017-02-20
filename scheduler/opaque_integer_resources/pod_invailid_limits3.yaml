@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: invailidfoo3
+spec:
+  containers:
+  - name: my-container3
+    image: "docker.io/deshuai/hello-pod:latest"
+    resources:
+      limits:
+        cpu: 2
+        pod.alpha.kubernetes.io/opaque-int-resource-foo: 2100m
