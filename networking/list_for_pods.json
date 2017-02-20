@@ -22,7 +22,7 @@
                     "spec": {
                         "containers": [
                             {
-                                "image": "bmeng/hello-openshift",
+                                "image": "aosqe/pod-for-ping",
                                 "name": "test-pod"
                             }
                         ]
