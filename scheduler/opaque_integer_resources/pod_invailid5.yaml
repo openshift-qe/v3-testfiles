@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: invailid5
+spec:
+  containers:
+  - name: my-container5
+    image: "docker.io/deshuai/hello-pod:latest"
+    resources:
+      requests:
+        cpu: 0.1
+        pod.alpha.kubernetes.io/opaque-int-resource-foo: 4
+      limits:
+        cpu: 1.2
+        pod.alpha.kubernetes.io/opaque-int-resource-foo: 3

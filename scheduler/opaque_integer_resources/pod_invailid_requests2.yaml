@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: invailidfoo2
+spec:
+  containers:
+  - name: my-container2
+    image: "docker.io/deshuai/hello-pod:latest"
+    resources:
+      requests:
+        cpu: 0.1
+        pod.alpha.kubernetes.io/opaque-int-resource-foo: -1
