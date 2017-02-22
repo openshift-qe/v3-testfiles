@@ -132,6 +132,16 @@
             "imagePullPolicy": "Always"
           }
         ],
+        "resources": {
+          "limits": {
+            "cpu": "800m",
+            "memory": "204Mi"
+          },
+          "requests": {
+            "cpu": "600m",
+            "memory": "204Mi"
+          }
+        },
         "restartPolicy": "Always",
         "terminationGracePeriodSeconds": 30,
         "dnsPolicy": "ClusterFirst",
