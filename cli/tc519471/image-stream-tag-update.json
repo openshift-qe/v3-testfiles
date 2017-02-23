@@ -9,7 +9,7 @@
         "repository": {
             "from": {
                 "kind": "DockerImage",
-                "name": "<%= product_docker_repo %>rhel7.1"
+                "name": "registry.access.redhat.com/rhel7.1"
             },
             "importPolicy": {
                 "insecure": true
