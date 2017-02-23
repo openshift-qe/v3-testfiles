@@ -13,7 +13,7 @@
             "type": "Recreate",
             "recreateParams": {
                 "pre": {
-                    "failurePolicy": "Retry",
+                    "failurePolicy": "Abort",
                     "execNewPod": {
                         "command": [
                              "/bin/true"
