@@ -1,0 +1,59 @@
+# A headless service to create DNS records
+apiVersion: v1
+kind: Service
+metadata:
+  name: foo
+  labels:
+    app: hello-pod
+spec:
+  ports:
+  - port: 80
+    name: web
+  # statefulset domain *.${svc-name}.${ns-name}.svc.cluster.local
+  clusterIP: None
+  selector:
+    app: hello-pod
+---
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: hello-statefulset
+spec:
+  serviceName: "foo"
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: hello-pod
+      annotations:
+        pod.alpha.kubernetes.io/initialized: "true"
+    spec:
+      terminationGracePeriodSeconds: 0
+      containers:
+        - image: "docker.io/ocpqe/hello-pod:v1"
+          imagePullPolicy: IfNotPresent
+          name: hello-pod
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          resources: {}
+          securityContext:
+            capabilities: {}
+            privileged: false
+          terminationMessagePath: /dev/termination-log
+          volumeMounts:
+            - mountPath: /tmp
+              name: www
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      serviceAccount: ""
+  volumeClaimTemplates:
+  - metadata:
+      name: www
+      annotations:
+        volume.alpha.kubernetes.io/storage-class: anything
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi
