@@ -129,16 +129,6 @@
                 "protocol": "TCP"
               }
             ],
-            "resources": {
-              "limits": {
-                "cpu": "800m",
-                "memory": "100Mi"
-              },
-              "requests": {
-                "cpu": "600m",
-                "memory": "100Mi"
-              }
-            },
             "terminationMessagePath": "/dev/termination-log",
             "imagePullPolicy": "Always"
           }
