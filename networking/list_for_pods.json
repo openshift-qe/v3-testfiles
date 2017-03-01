@@ -23,7 +23,8 @@
                         "containers": [
                             {
                                 "image": "aosqe/pod-for-ping",
-                                "name": "test-pod"
+                                "name": "test-pod",
+                                "imagePullPolicy": "IfNotPresent"
                             }
                         ]
                     }
