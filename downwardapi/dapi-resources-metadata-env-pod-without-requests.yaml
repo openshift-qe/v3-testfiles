@@ -10,7 +10,7 @@ spec:
       resources:
         limits:
           memory: "64Mi"
-          cpu: "2500m"
+          cpu: "500m"
       env:
         - name: MY_POD_IP
           valueFrom:
