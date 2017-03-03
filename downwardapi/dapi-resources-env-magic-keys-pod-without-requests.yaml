@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: dapi-resources-env-magic-keys-pod-without-requests
+spec:
+  containers:
+    - name: dapi-resources-env-magic-keys-pod-without-requests
+      image: gcr.io/google_containers/busybox
+      command: [ "/bin/sh", "-c", "env" ]
+      resources:
+        limits:
+          memory: "64Mi"
+          cpu: "1250m"
+      env:
+        - name: MY_CPU_REQUEST
+          valueFrom:
+            resourceFieldRef:
+              resource: requests.cpu
+        - name: MY_CPU_LIMIT
+          valueFrom:
+            resourceFieldRef:
+              resource: limits.cpu
+        - name: MY_MEM_REQUEST
+          valueFrom:
+            resourceFieldRef:
+              resource: requests.memory
+              divisor: "1Mi"
+        - name: MY_MEM_LIMIT
+          valueFrom:
+            resourceFieldRef:
+              resource: limits.memory
+  restartPolicy: Never
