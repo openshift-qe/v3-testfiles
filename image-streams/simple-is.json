@@ -1,0 +1,12 @@
+{
+  "kind": "ImageStream",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "hello-openshift",
+    "creationTimestamp": null
+  },
+  "spec": {},
+  "status": {
+    "dockerImageRepository": ""
+  }
+}
