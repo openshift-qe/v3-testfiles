@@ -1,0 +1,79 @@
+apiVersion: v1
+kind: List
+items:
+- apiVersion: v1
+  kind: ConfigMap
+  metadata:
+    name: cfg1
+  data:
+    special.how: very
+    special.type: charm
+- apiVersion: v1
+  kind: ConfigMap
+  metadata:
+    name: cfg2
+  data:
+    special.how: very
+    special.type: charm
+  #Succeeded pod
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    labels:
+      name: hello-pod-1
+    name: hello-pod-1
+  spec:
+    containers:
+      - image: "docker.io/ocpqe/hello-pod:latest"
+        command: ["sh", "-c", "cat /etc/configmap/special.how /etc/configmap/special.type; exit 0"]
+        imagePullPolicy: IfNotPresent
+        name: hello-pod-1
+        ports:
+          - containerPort: 8080
+            protocol: TCP
+        resources: {}
+        securityContext:
+          capabilities: {}
+          privileged: false
+        terminationMessagePath: /dev/termination-log
+        volumeMounts:
+          - mountPath: /etc/configmap
+            name: configmap-volume
+    dnsPolicy: ClusterFirst
+    restartPolicy: Never
+    serviceAccount: ""
+    volumes:
+      - configMap:
+         name: cfg1
+        name:  configmap-volume
+  #Failed pod
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    labels:
+      name: hello-pod-2
+    name: hello-pod-2
+  spec:
+    containers:
+      - image: "docker.io/ocpqe/hello-pod:latest"
+        command: ["sh", "-c", "cat /etc/configmap/special.how /etc/configmap/special.type; exit 1"]
+        imagePullPolicy: IfNotPresent
+        name: hello-pod-2
+        ports:
+          - containerPort: 8080
+            protocol: TCP
+        resources: {}
+        securityContext:
+          capabilities: {}
+          privileged: false
+        terminationMessagePath: /dev/termination-log
+        volumeMounts:
+          - mountPath: /etc/configmap
+            name: configmap-volume
+    dnsPolicy: ClusterFirst
+    restartPolicy: Never
+    serviceAccount: ""
+    volumes:
+      - configMap:
+         name: cfg2
+        name:  configmap-volume
