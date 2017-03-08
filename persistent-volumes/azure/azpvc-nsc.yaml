@@ -1,0 +1,12 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: azpvcnoex
+  annotations:        
+    volume.beta.kubernetes.io/storage-class: noexist 
+spec:
+  accessModes:
+    - ReadWriteOnce 
+  resources:
+    requests:
+      storage: 1Gi

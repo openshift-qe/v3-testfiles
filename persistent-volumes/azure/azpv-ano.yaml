@@ -1,0 +1,18 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: azd
+  labels:
+    type: local
+  annotations: 
+    kubernetes.io/createdby: azure-disk-dynamic-provisioner
+    volume.beta.kubernetes.io/storage-class: zrs
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  azureDisk:
+    diskName: test1.vhd
+    diskURI: https://openshiftqestorage.blob.core.windows.net/vhds/test1.vhd
+  persistentVolumeReclaimPolicy: Delete
