@@ -2,10 +2,7 @@
         "kind": "Pod",
         "apiVersion":"v1",
         "metadata": {
-                "name": "udp4789-pod",
-                "labels": {
-                        "name": "test-pods"
-                }
+                "name": "udp4789-pod"
         },
         "spec": {
                 "containers": [{
