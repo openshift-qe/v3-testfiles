@@ -1,0 +1,18 @@
+{
+        "kind": "Pod",
+        "apiVersion":"v1",
+        "metadata": {
+                "name": "udp-pod",
+                "labels": {
+                        "name": "test-pods"
+                }
+        },
+        "spec": {
+                "containers": [{
+                        "command": [ "/usr/bin/ncat", "-u", "-l", "8888" ],
+                        "name": "udp-pod",
+                        "image": "bmeng/hello-openshift"
+                }],
+                "restartPolicy": "Always"                                                                                                                             
+        }
+}
