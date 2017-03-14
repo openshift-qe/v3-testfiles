@@ -1,0 +1,71 @@
+{
+  "kind": "BuildConfig",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "extended-build-from-repo"
+  },
+  "spec": {
+    "source": {
+      "git": {
+        "uri": "https://github.com/wanghaoran1988/test-for-s2i-extendbuild",
+        "ref": "extendbuild-repo"
+      }
+    },
+    "strategy": {
+      "sourceStrategy": {
+        "from": {
+          "kind": "DockerImage",
+          "name": "docker.io/uptoknow/extendedbuild_builder:latest"
+        },
+        "runtimeImage": {
+          "kind": "DockerImage",
+          "name": "docker.io/uptoknow/extendedbuild_runtime:latest"
+        },
+        "runtimeArtifacts": [
+          {
+            "sourcePath": "/tmp123/i-am-runtime-artifact1.txt",
+            "destinationDir": "app"
+          },
+          {
+            "sourcePath": "/tmp/i-am-runtime-artifact2",
+            "destinationDir": "app"
+          },
+          {
+            "sourcePath": "/tmp/.i-am-runtime-artifact3.txt",
+            "destinationDir": "app"
+          },
+          {
+            "sourcePath": "/tmp/run-me"
+          },
+          {
+            "sourcePath": "/tmp/data-dir"
+          }
+        ],
+        "env": [
+          {
+            "name": "USING_ENV_FROM_BUILD_CONFIG",
+            "value": "yes"
+          }
+        ]
+      }
+    },
+    "output": {
+      "to": {
+        "kind": "ImageStreamTag",
+        "name": "extended-repo:latest"
+      }
+    }
+  }
+}
+{
+  "kind": "ImageStream",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "extended-repo",
+    "creationTimestamp": null
+  },
+  "spec": {},
+  "status": {
+    "dockerImageRepository": ""
+  }
+}
