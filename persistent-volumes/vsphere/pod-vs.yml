@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: vs
+spec:
+  containers:
+  - name: vs
+    image: aosqe/hello-openshift
+    command: ["sleep", "600000"]
+    securityContext:
+      privileged: true
+    volumeMounts:
+    - name: volume
+      mountPath: /mnt/vsphere
+  volumes:
+  - name: volume
+    persistentVolumeClaim:
+      claimName: pvc
