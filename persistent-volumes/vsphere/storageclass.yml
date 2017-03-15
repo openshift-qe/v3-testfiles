@@ -4,4 +4,4 @@ metadata:
   name: vsphere
 provisioner: kubernetes.io/vsphere-volume
 parameters:
-  diskformat: default
+  diskformat: xxx
