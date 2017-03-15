@@ -10,7 +10,7 @@
   "spec": {
     "containers": [{
       "name": "disk-pod",
-      "image": "bmeng/hello-openshift",
+      "image": "aos/hello-openshift",
       "volumeMounts" : [
                 {
                 "name":"testvol",
