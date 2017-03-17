@@ -1,0 +1,20 @@
+{
+  "kind": "PersistentVolumeClaim",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "pvc-zeroedthick",
+    "annotations": {
+        "volume.beta.kubernetes.io/storage-class": "vsphere-zeroedthick"
+    }
+  },
+  "spec": {
+    "accessModes": [
+      "ReadWriteOnce"
+    ],
+    "resources": {
+      "requests": {
+        "storage": "1Gi"
+      }
+    }
+  }
+}

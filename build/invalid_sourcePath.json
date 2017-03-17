@@ -7,7 +7,7 @@
   "spec": {
     "source": {
       "git": {
-        "uri": "https://github.com/wanghaoran1988/test-for-s2i-extendbuild",
+        "uri": "https://github.com/openshift-qe/test-for-s2i-extendbuild",
         "ref": "extendbuild-repo"
       }
     },

@@ -77,7 +77,7 @@ objects:
             value: /var/lib/git-hooks
           - name: GENERATE_ARTIFACTS
             value: "true"
-            The strategy to use when creating build artifacts from a repository.
+            #The strategy to use when creating build artifacts from a repository.
           - name: BUILD_STRATEGY
             value: ""
           - name: DETECTION_SCRIP
@@ -91,7 +91,8 @@ objects:
           # If 'true', clients may set hooks via the API. However, unless
           # the Git home is backed by a persistent volume, any deployment
           # will result in the hooks being lost.
-          - name:             value: "true"
+          - name: ALLOW_GIT_HOOKS
+            value: "true"
           # If 'true', clients can create new git repositories on demand
           # by pushing. If the data on disk is not backed by a persistent
           # volume, the Git repo will be deleted if the deployment is
@@ -194,7 +195,7 @@ objects:
     labels:
       app: git
   spec:
-    host: git.${ROUTE_SUFFIX}
+    host: git-${ROUTE_SUFFIX}
     tls:
       termination: edge
     to:
