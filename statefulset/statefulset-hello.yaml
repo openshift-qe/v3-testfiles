@@ -1,0 +1,28 @@
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  annotations:
+    note: this is my example annotation, happy boy
+  labels:
+    app: hello
+    name: hello
+  name: hello
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello
+  serviceName: hello
+  template:
+    metadata:
+      labels:
+        app: hello
+    spec:
+      containers:
+      - image: aosqe/hello-openshift
+        name: hello
+        ports:
+        - containerPort: 8080
+          name: web
+          protocol: TCP
+      restartPolicy: Always

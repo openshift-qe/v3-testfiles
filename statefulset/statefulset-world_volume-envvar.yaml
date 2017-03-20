@@ -1,0 +1,37 @@
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  labels:
+    app: world
+    name: world
+  name: world
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: world
+  serviceName: world
+  template:
+    metadata:
+      labels:
+        app: world
+    spec:
+      containers:
+      - image: aosqe/hello-openshift
+        name: world
+        ports:
+        - containerPort: 8080
+          name: web
+          protocol: TCP
+        env:
+        - name: MYSQL_USER
+          value: userJJLLLL
+        - name: MYSQL_PASSWORD
+          value: userJJKKKK
+        volumeMounts:
+        - mountPath: /var/lib/volume-test
+          name: volume1
+      restartPolicy: Always
+      volumes:
+      - name: volume1
+        emptyDir: {}
