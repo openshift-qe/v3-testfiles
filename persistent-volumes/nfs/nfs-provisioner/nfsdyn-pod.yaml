@@ -1,0 +1,18 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: nfsdynpod
+spec:
+  containers:
+    - name: nfscontainer
+      image: aosqe/hello-openshift
+      ports:
+        - containerPort: 80
+          name: "http-server"
+      volumeMounts:
+      - mountPath: "/mnt/nfs"
+        name: nfsdyn
+  volumes:
+    - name: nfsdyn
+      persistentVolumeClaim:
+        claimName: nfsdynpvc
