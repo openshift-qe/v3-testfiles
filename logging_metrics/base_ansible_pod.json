@@ -10,7 +10,7 @@
     "spec": {
         "containers": [{
             "name": "base-ansible-pod",
-            "image": "aosqe/fedora-ansible"
+            "image": "aosqe/openshift-ansible"
         }]
     }
 }
