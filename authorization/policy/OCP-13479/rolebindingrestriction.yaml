@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: RoleBindingRestriction
+metadata:
+  name: match-groups
+spec:
+  grouprestriction:
+    groups: ["groups-rolebindingrestriction"]
