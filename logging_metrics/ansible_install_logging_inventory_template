@@ -12,9 +12,9 @@ openshift_logging_kibana_ops_hostname=logs-ops.$SUBDOMAIN
 public_master_url=https://$SUB_WITH_MASTER_URL:8443
 
 openshift_logging_image_prefix=registry.ops.openshift.com/openshift3/
-openshift_logging_image_version=$MASTER_VERSION
+openshift_logging_image_version=v$MASTER_VERSION
 openshift_metrics_image_prefix=registry.ops.openshift.com/openshift3/
-openshift_metrics_image_version=$MASTER_VERSION
+openshift_metrics_image_version=v$MASTER_VERSION
 
 
 openshift_logging_namespace=logging
@@ -29,6 +29,6 @@ openshift_logging_es_ops_memory_limit=10240M
 
 openshift_metrics_install_metrics=true
 
-openshift_metrics_hawkular_hostname=hawkular-metrics.$SUBDOMAIN
+openshift_metrics_hawkular_hostname=metrics.$SUBDOMAIN
 openshift_metrics_project=openshift-infra
 
