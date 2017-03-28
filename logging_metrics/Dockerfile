@@ -6,8 +6,7 @@ RUN yum -y install ed iproute python-dbus PyYAML yum-utils pyOpenSSL python-cryp
 RUN chmod 770 /etc
 RUN adduser --system -s /bin/bash -u 1234321 -g 0 ansible
 RUN chmod 664 /etc/passwd /etc/group
-# add /etc/ansible/ansible.cfg to disable ssh-key check
-RUN mkdir -p /etc/ansible
-RUN echo "[default]\nhost_key_checking = False" > /etc/ansible/ansible.cfg
+# set ansible to ignore ssh-key check
+ENV ANSIBLE_HOST_KEY_CHECKING=False
 #USER ansible
 CMD sleep infinity
