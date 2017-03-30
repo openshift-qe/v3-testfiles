@@ -1,0 +1,16 @@
+[oo_first_master]
+$SUB_WITH_MASTER_URL ansible_user=root ansible_ssh_user=root ansible_ssh_private_key_file="/tmp/tmp/libra.pem" openshift_public_hostname=$SUB_WITH_MASTER_URL
+
+[oo_first_master:vars]
+openshift_deployment_type=openshift-enterprise
+openshift_release=v$MASTER_VERSION
+public_master_url=https://$SUB_WITH_MASTER_URL:8443
+
+openshift_metrics_image_prefix=registry.ops.openshift.com/openshift3/
+openshift_metrics_image_version=v$MASTER_VERSION
+
+openshift_metrics_install_metrics=true
+
+openshift_metrics_hawkular_hostname=metrics.$SUBDOMAIN
+openshift_metrics_project=openshift-infra
+
