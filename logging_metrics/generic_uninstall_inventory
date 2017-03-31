@@ -1,0 +1,8 @@
+[oo_first_master]
+$SUB_WITH_MASTER_URL ansible_user=root ansible_ssh_user=root ansible_ssh_private_key_file="/tmp/tmp/libra.pem" openshift_public_hostname=$SUB_WITH_MASTER_URL
+
+[oo_first_master:vars]
+openshift_logging_install_logging=false
+openshift_logging_install_metrics=false
+openshift_logging_namespace=$LOGGING_NAMESPACE
+
