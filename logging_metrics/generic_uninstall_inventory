@@ -1,10 +1,10 @@
 [oo_first_master]
-$SUB_WITH_MASTER_URL ansible_user=root ansible_ssh_user=root ansible_ssh_private_key_file="/tmp/tmp/libra.pem" openshift_public_hostname=$SUB_WITH_MASTER_URL
+<%= cb.master_url %> ansible_user=root ansible_ssh_user=root ansible_ssh_private_key_file="/tmp/tmp/libra.pem" openshift_public_hostname=<%= cb.master_url %>
 
 [oo_first_master:vars]
 openshift_deployment_type=openshift-enterprise
 openshift_logging_install_logging=false
 openshift_metrics_install_metrics=false
-openshift_logging_namespace=$LOGGING_NAMESPACE
-openshift_metrics_namespace=$METRICS_NAMESPACE
+openshift_logging_namespace=<%= cb.logging_namespace %>
+openshift_metrics_namespace=<%= cb.metrics_namespace %>
 
