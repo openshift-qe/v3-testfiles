@@ -5,6 +5,6 @@
 openshift_deployment_type=openshift-enterprise
 openshift_logging_install_logging=false
 openshift_metrics_install_metrics=false
-openshift_logging_namespace=<%= cb.logging_namespace %>
-openshift_metrics_namespace=<%= cb.metrics_namespace %>
+openshift_logging_namespace=<%= cb.target_proj %>
+openshift_metrics_namespace=<%= cb.target_proj %>
 
