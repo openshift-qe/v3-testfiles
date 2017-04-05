@@ -8,5 +8,8 @@ RUN adduser --system -s /bin/bash -u 1234321 -g 0 ansible
 RUN chmod 664 /etc/passwd /etc/group
 # set ansible to ignore ssh-key check
 ENV ANSIBLE_HOST_KEY_CHECKING=False
+# enable anisble color output
+ENV ANSIBLE_FORCE_COLOR=True
+ENV ANSIBLE_CALLBACK_WHITELIST=profile_tasks
 #USER ansible
 CMD sleep infinity
