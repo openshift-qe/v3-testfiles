@@ -2,6 +2,15 @@ spec:
   strategy:
     type: Recreate
     recreateParams:
+      pre:
+        execNewPod: ~
+        tagImages:
+        - containerName: ruby-helloworld-database
+          to:
+            apiVersion: v1
+            kind: ImageStreamTag
+            name: myis:tag1
+        failurePolicy: Abort
       post:
         execNewPod:
           command:
@@ -18,4 +27,4 @@ spec:
             value: custom_value3
           volumes:
           - ruby-helloworld-data
-          failurePolicy: Ignore
+        failurePolicy: Ignore
