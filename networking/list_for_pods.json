@@ -24,7 +24,13 @@
                             {
                                 "image": "aosqe/pod-for-ping",
                                 "name": "test-pod",
-                                "imagePullPolicy": "IfNotPresent"
+                                "imagePullPolicy": "IfNotPresent",
+                                "resources":{
+                                  "limits":{
+                                    "cpu":"0.2",
+                                    "memory":"100Mi"
+                                  }
+                                }   
                             }
                         ]
                     }
