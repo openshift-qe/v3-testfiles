@@ -8,11 +8,11 @@ openshift_logging_install_logging=true
 
 openshift_logging_kibana_hostname=logs.<%= cb.subdomain %>
 openshift_logging_kibana_ops_hostname=logs-ops.<%= cb.subdomain %>
-public_master_url=https://<%= cb.master_url %>:8443
+public_master_url=https://<%= cb.master_url %>:<%= cb.api_port %>
 
-openshift_logging_image_prefix=registry.ops.openshift.com/openshift3/
+openshift_logging_image_prefix=<%= product_docker_repo %>openshift3/
 openshift_logging_image_version=v<%= cb.master_version %>
-openshift_metrics_image_prefix=registry.ops.openshift.com/openshift3/
+openshift_metrics_image_prefix=<%= product_docker_repo %>openshift3/
 openshift_metrics_image_version=v<%= cb.master_version %>
 
 openshift_logging_namespace=<%= cb.target_proj %>
