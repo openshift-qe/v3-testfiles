@@ -31,7 +31,9 @@ spec:
           -
             containerPort: 8080
             protocol: TCP
-        resources: {}
+        resources:
+          limits:
+            memory: 256Mi
         terminationMessagePath: /dev/termination-log
       - image: yapei/hello-openshift-fedora
         imagePullPolicy: IfNotPresent
@@ -40,7 +42,9 @@ spec:
           -
             containerPort: 8081
             protocol: TCP
-        resources: {}
+        resources:
+          limits:
+            memory: 256Mi
         terminationMessagePath: /dev/termination-log
       dnsPolicy: ClusterFirst
       restartPolicy: Always
@@ -49,4 +53,3 @@ spec:
   triggers:
   - type: ConfigChange
 status:
-
