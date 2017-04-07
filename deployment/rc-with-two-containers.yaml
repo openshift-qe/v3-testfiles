@@ -18,9 +18,15 @@ spec:
         ports:
         - containerPort: 8080
           protocol: TCP
+        resources:
+          limits:
+            memory: 256Mi
       - image: yapei/hello-openshift-fedora
         imagePullPolicy: IfNotPresent
         name: hello-openshift-fedora
         ports:
         - containerPort: 8081
           protocol: TCP
+        resources:
+          limits:
+            memory: 256Mi
