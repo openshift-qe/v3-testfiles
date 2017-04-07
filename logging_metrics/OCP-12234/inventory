@@ -4,9 +4,9 @@
 [oo_first_master:vars]
 openshift_deployment_type=openshift-enterprise
 openshift_release=v<%= cb.master_version %>
-public_master_url=https://<%= cb.master_url %>:8443
+public_master_url=https://<%= cb.master_url %>:<%= cb.api_port %>
 
-openshift_metrics_image_prefix=registry.ops.openshift.com/openshift3/
+openshift_metrics_image_prefix=<%= product_docker_repo %>openshift3/
 openshift_metrics_image_version=v<%= cb.master_version %>
 
 openshift_metrics_install_metrics=true
