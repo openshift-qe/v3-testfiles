@@ -13,8 +13,8 @@
         "image": "aosqe/pod-for-ping",
         "resources":{
           "limits":{
-            "cpu":"0.2",
-            "memory":"100Mi"
+            "cpu":"100m",
+            "memory":"200Mi"
           }
         }
       }]
