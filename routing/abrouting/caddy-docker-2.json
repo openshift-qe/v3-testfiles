@@ -19,7 +19,13 @@
           {
             "containerPort": 8443
           }
-        ]
+        ],
+        "resources":{
+          "limits":{
+            "cpu":"300m",
+            "memory":"250Mi"
+          }
+        }
       }]
   }
 }
