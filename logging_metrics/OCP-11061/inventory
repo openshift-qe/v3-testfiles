@@ -17,7 +17,7 @@ openshift_metrics_image_version=v<%= cb.master_version %>
 
 openshift_logging_namespace=<%= cb.target_proj %>
 
-openshift_logging_use_ops=false
+openshift_logging_use_ops=true
 openshift_logging_es_cluster_size=1
 openshift_logging_es_memory_limit=10240M
 openshift_logging_es_cpu_limit=200m
