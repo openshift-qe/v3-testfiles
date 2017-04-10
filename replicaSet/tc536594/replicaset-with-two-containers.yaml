@@ -22,6 +22,8 @@ spec:
           requests:
             cpu: 100m
             memory: 100Mi
+          limits:
+            memory: 256Mi
         env:
         - name: GET_HOSTS_FROM
           value: dns
@@ -33,6 +35,8 @@ spec:
           requests:
             cpu: 100m
             memory: 100Mi
+          limits:
+            memory: 256Mi
         env:
         - name: GET_HOSTS_FROM
           value: dns
