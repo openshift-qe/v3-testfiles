@@ -1,0 +1,75 @@
+{
+    "kind": "Template",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "project-request",
+        "creationTimestamp": null
+    },
+    "objects": [
+        {
+            "apiVersion": "v1",
+            "kind": "RoleBindingRestriction",
+            "metadata": {
+                "creationTimestamp": null,
+                "name": "match-project-admin-user",
+                "namespace": "${PROJECT_NAME}"
+            },
+            "spec": {
+                "userrestriction": {
+                    "users": [
+                        "${PROJECT_ADMIN_USER}"
+                    ]
+                }
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "RoleBindingRestriction",
+            "metadata": {
+                "creationTimestamp": null,
+                "name": "match-own-service-account-group",
+                "namespace": "${PROJECT_NAME}"
+            },
+            "spec": {
+                "grouprestriction": {
+                    "groups": [
+                        "system:serviceaccounts:${PROJECT_NAME}"
+                    ]
+                }
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "RoleBindingRestriction",
+            "metadata": {
+                "creationTimestamp": null,
+                "name": "match-own-service-accounts",
+                "namespace": "${PROJECT_NAME}"
+            },
+            "spec": {
+                "serviceaccountrestriction": {
+                    "namespaces": [
+                        "${PROJECT_NAME}"
+                    ]
+                }
+            }
+        }
+    ],
+    "parameters": [
+        {
+            "name": "PROJECT_NAME"
+        },
+        {
+            "name": "PROJECT_DISPLAYNAME"
+        },
+        {
+            "name": "PROJECT_DESCRIPTION"
+        },
+        {
+            "name": "PROJECT_ADMIN_USER"
+        },
+        {
+            "name": "PROJECT_REQUESTING_USER"
+        }
+    ]
+}
