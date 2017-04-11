@@ -25,4 +25,7 @@ spec:
         - containerPort: 8080
           name: web
           protocol: TCP
+        resources:
+          limits:
+            memory: 256Mi
       restartPolicy: Always
