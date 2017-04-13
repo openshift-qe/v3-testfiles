@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: Pod
+metadata:
+ name: azdsecprv 
+ creationTimestamp: null
+ labels:
+   name: volume-test
+spec:
+ containers:
+  - image: jhou/hello-openshift
+    name: azure
+    ports: 
+      - containerPort: 8080
+        protocol: TCP
+        resources:
+    terminationMessagePath: /dev/termination-log,
+    imagePullPolicy: IfNotPresent
+    securityContext:
+      privileged: true
+    volumeMounts:
+      - name: azure
+        mountPath: /mnt/azure
+ securityContext:
+   fsGroup: 123456
+   seLinuxOptions:
+     level: "s0:c8,c2"
+ volumes:
+   - name: azure
+     azureDisk:
+       diskName: test1.vhd 
+       diskURI: https://openshiftqestorage.blob.core.windows.net/vhds/test1.vhd
+ restartPolicy: Always
+ dnsPolicy: ClusterFirst
+ serviceAccount: ""
+status: 
