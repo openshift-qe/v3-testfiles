@@ -4,7 +4,7 @@ metadata:
   name: hello-openshift
 spec:
   progressDeadlineSeconds: 30
-  replicas: 3
+  replicas: 2
   template:
     metadata:
       labels:
@@ -13,5 +13,12 @@ spec:
       containers:
       - name: hello-openshift
         image: openshift/hello-openshift
+        resources:
+          limits:
+            cpu: 120m
+            memory: 250Mi
+          requests:
+            cpu: 60m
+            memory: 250Mi
         ports:
         - containerPort: 80

@@ -19,9 +19,10 @@ spec:
       - name: hello-openshift
         image: openshift/hello-openshift
         resources:
+          limits:
+            memory: 250Mi
           requests:
-            cpu: 100m
-            memory: 100Mi
+            memory: 250Mi
         env:
         - name: GET_HOSTS_FROM
           value: dns
