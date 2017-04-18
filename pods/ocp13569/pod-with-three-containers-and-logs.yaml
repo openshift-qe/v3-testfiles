@@ -18,18 +18,27 @@ spec:
         i=$((i+1));
         sleep 1;
       done
+    resources:
+      limits:
+        memory: 256Mi
     volumeMounts:
     - name: varlog
       mountPath: /var/log
   - name: count-log-1
     image: busybox
     args: [/bin/sh, -c, 'tail -n+1 -f /var/log/1.log']
+    resources:
+      limits:
+        memory: 256Mi
     volumeMounts:
     - name: varlog
       mountPath: /var/log
   - name: count-log-2
     image: busybox
     args: [/bin/sh, -c, 'tail -n+1 -f /var/log/2.log']
+    resources:
+      limits:
+        memory: 256Mi
     volumeMounts:
     - name: varlog
       mountPath: /var/log
