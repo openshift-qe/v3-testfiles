@@ -2,7 +2,7 @@
   "kind": "PersistentVolumeClaim",
   "apiVersion": "v1",
   "metadata": {
-    "name": "pvc-ebs",
+    "name": "pvc-annotation-ebs",
     "annotations": {
        "volume.beta.kubernetes.io/storage-class": "ebs"
     }

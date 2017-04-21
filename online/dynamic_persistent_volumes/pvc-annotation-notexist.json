@@ -2,7 +2,7 @@
   "kind": "PersistentVolumeClaim",
   "apiVersion": "v1",
   "metadata": {
-    "name": "pvc-notexist",
+    "name": "pvc-annotation-notexist",
     "annotations": {
        "volume.beta.kubernetes.io/storage-class": "yasun-test-class-not-exist"
     }

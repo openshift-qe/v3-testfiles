@@ -2,7 +2,7 @@
   "kind": "PersistentVolumeClaim",
   "apiVersion": "v1",
   "metadata": {
-    "name": "pvc-default"
+    "name": "pvc-annotation-default"
   },
   "spec": {
     "accessModes": [
