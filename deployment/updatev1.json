@@ -56,9 +56,14 @@
                             }
                         ],
                         "resources": {
-                          "limits": {
-                            "memory": "256Mi"
-                          }
+                            "limits": {
+                                "cpu": "120m",
+                                "memory": "250Mi"
+                            },
+                            "requests": {
+                                "cpu": "60m",
+                                "memory": "250Mi"
+                            }
                         },
                         "env": [
                             {
@@ -74,7 +79,6 @@
                                 "value": "root"
                             }
                         ],
-                        "resources": {},
                         "terminationMessagePath": "/dev/termination-log",
                         "imagePullPolicy": "Always",
                         "securityContext": {
