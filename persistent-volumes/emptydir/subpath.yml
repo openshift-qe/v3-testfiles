@@ -1,0 +1,20 @@
+kind: Pod
+apiVersion: v1
+metadata: { name: "subpath" }
+spec:
+  volumes:
+    - { name: "direct",  emptyDir: {}}
+    - { name: "subpath", emptyDir: {}}
+  securityContext:
+    fsGroup: 100
+    # games(35) is member in group users(100)
+    runAsUser: 35
+  containers:
+    - image: aosqe/hello-openshift
+      name: show
+      volumeMounts:
+        - name: "direct"
+          mountPath: "/mnt/direct"
+        - name: "subpath"
+          mountPath: "/mnt/subpath"
+          subPath: a/b/c
