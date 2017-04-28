@@ -29,4 +29,4 @@ openshift_metrics_image_version=<%= cb.master_version %>
 
 # Extra_Metrics
 openshift_metrics_cassandra_storage_type=pv
-openshift_metrics_cassandra_pvc_size=5GB
+openshift_metrics_cassandra_pvc_size=5Gi
