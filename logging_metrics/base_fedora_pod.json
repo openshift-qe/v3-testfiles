@@ -1,0 +1,16 @@
+{
+    "apiVersion": "v1",
+    "kind": "Pod",
+    "metadata": {
+        "name": "base-ansible-pod",
+        "labels": {
+            "name": "base-ansible-pod"
+        }
+    },
+    "spec": {
+        "containers": [{
+            "name": "base-ansible-pod",
+            "image": "aosqe/fedora_base"
+        }]
+    }
+}
