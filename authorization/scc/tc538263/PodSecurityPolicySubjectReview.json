@@ -27,7 +27,7 @@
                         }
                     ],
                     "terminationMessagePath": "/dev/termination-log",
-                    "terminationMessagePolicy": "FallbackToLogsOnError",
+                    "terminationMessagePolicy": "file",
                     "imagePullPolicy": "IfNotPresent",
                     "securityContext": {
                         "capabilities": {
