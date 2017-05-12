@@ -14,7 +14,7 @@
         "resources":{
           "limits":{
             "cpu":"300m",
-            "memory":"250Mi"
+            "memory":"300Mi"
           }
         }
       }]
