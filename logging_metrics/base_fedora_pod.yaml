@@ -11,4 +11,3 @@ spec:
     image: aosqe/fedora_base
     securityContext:
       privileged: true
-        
