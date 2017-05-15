@@ -451,7 +451,7 @@
     {
       "name": "MYSQL_RESOURCES_LIMITS_MEMORY",
       "description": "database memory limit",
-      "value": "250Mi"
+      "value": "256Mi"
     },
     {
       "name": "MYSQL_RESOURCES_LIMITS_CPU",
@@ -461,7 +461,7 @@
     {
       "name": "DEPLOY_MYSQL_RESOURCES_LIMITS_MEMORY",
       "description": "deploy database memory limit",
-      "value": "250Mi"
+      "value": "256Mi"
     },
     {
       "name": "DEPLOY_MYSQL_RESOURCES_LIMITS_CPU",
@@ -471,7 +471,7 @@
     {
       "name": "FRONTEND_RESOURCES_LIMITS_MEMORY",
       "description": "frontend memory limit",
-      "value": "250Mi"
+      "value": "256Mi"
     },
     {
       "name": "FRONTEND_RESOURCES_LIMITS_CPU",
@@ -481,7 +481,7 @@
     {
       "name": "DEPLOY_FRONTEND_RESOURCES_LIMITS_MEMORY",
       "description": "deploy frontend memory limit",
-      "value": "250Mi"
+      "value": "256Mi"
     },
     {
       "name": "DEPLOY_FRONTEND_RESOURCES_LIMITS_CPU",
@@ -491,7 +491,7 @@
     {
       "name": "BUILD_RUBY_RESOURCES_LIMITS_MEMORY",
       "description": "build ruby memory limit",
-      "value": "250Mi"
+      "value": "256Mi"
     },
     {
       "name": "BUILD_RUBY_RESOURCES_LIMITS_CPU",
