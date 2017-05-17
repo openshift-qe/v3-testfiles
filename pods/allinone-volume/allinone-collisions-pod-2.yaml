@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: allinone-collisions-2
+spec:
+  containers:
+  - name: allinone-collisions-2
+    image: redis
+    volumeMounts:
+    - name: all-in-one
+      mountPath: "/all-in-one"
+      readOnly: true
+  volumes:
+  - name: all-in-one
+    projected:
+      sources:
+      - configMap:
+          name: special-config
+          items:
+            - key: special.how
+              path: data-1
+            - key: special.type
+              path: myconfigmap/private-config
+      - secret:
+          name: test-secret

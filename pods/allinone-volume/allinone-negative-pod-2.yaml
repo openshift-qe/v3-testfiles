@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: allinone-negative-2
+spec:
+  containers:
+  - name: allinone-negative
+    image: redis
+    volumeMounts:
+    - name: all-in-one!@$#$%^&
+      mountPath: "/all-in-one"
+      readOnly: true
+  volumes:
+  - name: all-in-one!@$#$%^&
+    projected:
+      sources:
+      - secret:
+          name: test-secret
+          items:
+            - key: data-1
+              path: mysecret/my-username
+            - key: data-2
+              path: mysecret/my-passwd
+      - configMap:
+          name: special-config
+          items:
+            - key: special.how
+              path: myconfigmap/shared-config
+            - key: special.type
+              path: myconfigmap/private-config
