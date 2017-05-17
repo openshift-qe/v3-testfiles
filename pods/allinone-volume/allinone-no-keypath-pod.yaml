@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: allinone-no-keypath
+spec:
+  containers:
+  - name: allinone-no-keypath
+    image: redis
+    volumeMounts:
+    - name: all-in-one
+      mountPath: "/all-in-one"
+      readOnly: true
+  volumes:
+  - name: all-in-one
+    projected:
+      sources:
+      - secret:
+          name: test-secret
+      - configMap:
+          name: special-config
