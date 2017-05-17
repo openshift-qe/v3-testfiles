@@ -13,7 +13,7 @@ ENV ANSIBLE_HOST_KEY_CHECKING=False
 ENV ANSIBLE_FORCE_COLOR=True
 ENV ANSIBLE_CALLBACK_WHITELIST=profile_tasks
 # set plugins search path
-ENV ANSIBLE_FILTER_PLUGINS=/tmp/tmp/ansible_plugins
-ENV ANSIBLE_CALLBACK_PLUGINS=/tmp/tmp/ansible_plugins
-ENV ANSIBLE_LOOKUP_PLUGINS=/tmp/tmp/ansible_plugins
+ENV ANSIBLE_FILTER_PLUGINS=/usr/share/ansible_plugins
+ENV ANSIBLE_CALLBACK_PLUGINS=/usr/share/ansible_plugins
+ENV ANSIBLE_LOOKUP_PLUGINS=/usr/share/ansible_plugins
 CMD sleep infinity
