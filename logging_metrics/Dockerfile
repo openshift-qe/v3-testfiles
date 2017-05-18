@@ -1,8 +1,10 @@
-FROM openshift/openshift-ansible
+FROM fedora
+MAINTAINER Peter Ruan (pruan@redhat.com)
 ENV DEFAULT_LOCAL_TMP /tmp
 ENV ANSIBLE_LOCAL_TEMP /tmp
 USER root
-RUN yum -y install ed iproute python-dbus PyYAML yum-utils pyOpenSSL python-cryptography python-lxml openjdk-8-jre java-1.8.0-openjdk java-1.8.0-openjdk-devel httpd-tools python-passlib
+RUN yum -y install ed iproute python-dbus PyYAML yum-utils pyOpenSSL python-cryptography python-lxml java-1.8.0-openjdk java-1.8.0-openjdk-devel httpd-tools libselinux-python python-httplib2 python-jinja2 python-keyczar python-paramiko python-passlib python-setuptools sshpass rsync git
+RUN mkdir -p /usr/share/ansible
 RUN chmod 770 /etc
 RUN adduser --system -s /bin/bash -u 1234321 -g 0 ansible
 RUN chmod 664 /etc/passwd /etc/group
@@ -12,8 +14,7 @@ ENV ANSIBLE_HOST_KEY_CHECKING=False
 ENV ANSIBLE_FORCE_COLOR=True
 ENV ANSIBLE_CALLBACK_WHITELIST=profile_tasks
 # set plugins search path
-ENV ANSIBLE_FILTER_PLUGINS=/tmp/tmp/ansible_plugins
-ENV ANSIBLE_CALLBACK_PLUGINS=/tmp/tmp/ansible_plugins
-ENV ANSIBLE_LOOKUP_PLUGINS=/tmp/tmp/ansible_plugins
-#USER ansible
+ENV ANSIBLE_FILTER_PLUGINS=/usr/share/ansible_plugins
+ENV ANSIBLE_CALLBACK_PLUGINS=/usr/share/ansible_plugins
+ENV ANSIBLE_LOOKUP_PLUGINS=/usr/share/ansible_plugins
 CMD sleep infinity
