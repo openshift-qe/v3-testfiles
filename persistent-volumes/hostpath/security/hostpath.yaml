@@ -19,7 +19,7 @@ spec:
       - mountPath: "/example/hostpath/a"
         name: host-vol
   - name: b
-    image: jhou/hello-openshift-fedora
+    image: jhou/hello-openshift-i
     ports:
       - containerPort: 8081
         protocol: "TCP"
