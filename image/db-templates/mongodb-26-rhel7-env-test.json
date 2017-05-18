@@ -78,8 +78,8 @@
                                 "value": "r00t"
                             },
                             {
-                                "name": "MONGODB_NOPREALLOC",
-                                "value": "false"
+                                "name": "MONGODB_PREALLOC",
+                                "value": "true"
                             },
                             {
                                 "name": "MONGODB_SMALLFILES",
