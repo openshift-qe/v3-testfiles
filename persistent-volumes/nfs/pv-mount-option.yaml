@@ -3,12 +3,12 @@ apiVersion: v1
 metadata:
   name: pvmountopt 
   annotations:
-    volume.beta.kubernetes.io/mount-options: ro,nfsvers=3 
+    volume.beta.kubernetes.io/mount-options: ro,nfsvers=3
 spec:
   capacity:
     storage: 1Gi
   accessModes:
      - ReadWriteOnce
   nfs:
-    path: / 
-    server: localhost 
+    path: /
+    server: localhost

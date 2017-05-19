@@ -13,8 +13,8 @@
     },
     "accessModes": [ "ReadWriteOnce" ],
     "nfs": {
-        "path": "/mnt/nfs",
-        "server": "127.0.0.1"
+        "path": "/nfs",
+        "server": "10.66.147.137"
     }
   }
 }

@@ -4,7 +4,7 @@
   "metadata": {
     "name": "pvc",
     "annotations": {
-        "volume.beta.kubernetes.io/storage-class": "default"
+        "volume.beta.kubernetes.io/storage-class": "vsphere"
     }
   },
   "spec": {

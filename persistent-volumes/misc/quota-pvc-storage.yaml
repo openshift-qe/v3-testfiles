@@ -4,5 +4,5 @@ metadata:
   name: quota-pvc-storage
 spec:
   hard:
-    persistentvolumeclaims: "10"
-    requests.storage: "100Gi"
+    persistentvolumeclaims: "1"
+    requests.storage: "1Gi"

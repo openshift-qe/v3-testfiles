@@ -27,7 +27,7 @@
         "volumes": [{
             "name": "vsphere",
             "persistentVolumeClaim": {
-                "claimName": "pvc-vsphere"
+                "claimName": "pvc"
             }
         }]
     }
