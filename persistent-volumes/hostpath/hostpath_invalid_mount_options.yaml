@@ -1,7 +1,7 @@
 kind: PersistentVolume
 apiVersion: v1
 metadata:
-  name: local
+  name: localinvalidmountopts
   annotations:
     volume.beta.kubernetes.io/mount-options: "backupvolfile-server=volfile_server2,fetch-attempts=2,log-level=WARNING,log-file=/var/log/gluster.log"
   labels:
