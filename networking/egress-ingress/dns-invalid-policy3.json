@@ -1,0 +1,23 @@
+ {
+    "kind": "EgressNetworkPolicy",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "policy1"
+    },
+    "spec": {
+        "egress": [
+            {
+                "type": "Allow",
+                "to": {
+                    "dnsName": "www.redhat.com"
+                }
+            },
+            {
+                "type": "Deny",
+                "to": {
+                    "dnsName": "*.baidu.com"
+                }
+            }
+        ]
+    }
+}
