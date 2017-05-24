@@ -27,8 +27,7 @@
                                 "imagePullPolicy": "IfNotPresent",
                                 "resources":{
                                   "limits":{
-                                    "cpu":"300m",
-                                    "memory":"300Mi"
+                                    "memory":"340Mi"
                                   }
                                 }   
                             }
