@@ -7,7 +7,7 @@ metadata:
 spec:
   containers:
   - name: c1
-    image: jhou/hello-openshift
+    image: docker.io/ocpqe/hello-pod
     ports:
     - containerPort: 8080
       protocol: TCP
