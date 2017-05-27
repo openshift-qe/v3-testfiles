@@ -1,0 +1,13 @@
+{
+    "kind": "Namespace",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "projectlable",
+        "creationTimestamp": null,
+        "annotations": {
+            "scheduler.alpha.kubernetes.io/node-selector": "region#=xyz%|=|country=china||"
+        }
+    },
+    "spec": {},
+    "status": {}
+}
