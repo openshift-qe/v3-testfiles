@@ -8,7 +8,7 @@ metadata:
     security.alpha.kubernetes.io/sysctls: kernel.shm_rmid_forced=1,net.ipv4.ip_local_port_range=33768 61000
 spec:
   containers:
-    - image: "docker.io/deshuai/hello-pod:latest"
+    - image: "docker.io/ocpqe/hello-pod:latest"
       imagePullPolicy: IfNotPresent
       name: hello-pod
       ports:
