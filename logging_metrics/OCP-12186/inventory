@@ -28,6 +28,6 @@ openshift_metrics_image_prefix=<%= product_docker_repo %>openshift3/
 openshift_metrics_image_version=v<%= cb.master_version %>
 
 # Extra_Metrics
-openshift_metrics_hawkular_cert=<%= cb.cert_name %>
-openshift_metrics_hawkular_key=<%= cb.key_name %>
-openshift_metrics_hawkular_ca=<%= cb.ca_crt %>
+openshift_metrics_hawkular_cert=<%= cb.cert_path %>
+openshift_metrics_hawkular_key=<%= cb.key_path %>
+openshift_metrics_hawkular_ca=<%= cb.ca_crt_path %>
