@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: toleration-fail-second-prefer
+spec:
+  containers:
+  - image: "docker.io/ocpqe/hello-pod"
+    name: hello-pod
+  tolerations:
+  - key: dedicated
+    operator: Exists
+    effect: PreferNoSchedule
+    tolerationSeconds: 365
