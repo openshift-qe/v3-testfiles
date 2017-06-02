@@ -1,0 +1,59 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: init-qos
+spec:
+  containers:
+  - name: hello-pod
+    image: docker.io/ocpqe/hello-pod
+    ports:
+    - containerPort: 80
+    resources: 
+      limits: 
+        cpu: "150m"
+        memory: "120Mi"
+      requests: 
+        cpu: "100m"
+        memory: "100Mi"
+    volumeMounts:
+    - name: workdir
+      mountPath: /usr/share/nginx/html
+  - image: "docker.io/deshuai/hello-pod:latest"
+    imagePullPolicy: IfNotPresent
+    name: hello-pod-qos
+    ports:
+      - containerPort: 8080
+        protocol: TCP
+    resources: 
+      limits: 
+        cpu: "150m"
+        memory: "120Mi"
+      requests: 
+        cpu: "100m"
+        memory: "100Mi"
+  initContainers:
+  - name: init1
+    image: centos:centos7
+    command:
+    - /bin/true
+    resources:  
+      limits:  
+        cpu: "100m"
+        memory: "100Mi"
+      requests:  
+        cpu: "50m"
+        memory: "50Mi"
+  - name: init2
+    image: centos:centos7
+    command:
+    - /bin/true
+    resources:
+      limits:
+        cpu: "100m"
+        memory: "50Mi"
+      requests:
+        cpu: "100m"
+        memory: "50Mi"
+  volumes:
+  - name: workdir
+    emptyDir: {}

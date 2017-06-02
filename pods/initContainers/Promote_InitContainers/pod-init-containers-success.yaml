@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: init-success
+spec:
+  containers:
+  - name: hello-pod
+    image: docker.io/ocpqe/hello-pod
+    ports:
+    - containerPort: 80
+    volumeMounts:
+    - name: workdir
+      mountPath: /usr/share/nginx/html
+  initContainers:
+  - name: init
+    image: centos:centos7
+    command:
+    - /bin/true
+  volumes:
+  - name: workdir
+    emptyDir: {}
