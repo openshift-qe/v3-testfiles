@@ -13,4 +13,4 @@ spec:
     secrets: "15"
     services: "10"
     configmaps: "15"
-    openshift.io/imagestreams: "40"
+#    openshift.io/imagestreams: "40"

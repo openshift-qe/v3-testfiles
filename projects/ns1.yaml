@@ -1,0 +1,12 @@
+{
+    "kind": "Namespace",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "ns1",
+        "annotations": {
+            "scheduler.alpha.kubernetes.io/node-selector": "env=test,infra=fedora"
+        }
+    },
+    "spec": {},
+    "status": {}
+}

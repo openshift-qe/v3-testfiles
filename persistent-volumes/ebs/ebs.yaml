@@ -2,11 +2,9 @@ kind: PersistentVolume
 apiVersion: v1
 metadata:
   name: ebs
-  labels:
-    type: local
 spec:
   capacity:
-    storage: 10Gi
+    storage: 1Gi
   accessModes:
     - ReadWriteOnce
   awsElasticBlockStore:

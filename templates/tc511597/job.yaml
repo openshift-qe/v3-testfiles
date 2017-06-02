@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: batch/v1
 kind: Job
 metadata:
   name: pi
@@ -7,6 +7,7 @@ spec:
   selector:
     matchLabels:
       app: pi
+  manualSelector: true
   template:
     metadata:
       name: pi

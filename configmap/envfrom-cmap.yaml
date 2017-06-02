@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: config-env-example
+spec:
+  containers:
+  - name: hello-pod
+    image: docker.io/ocpqe/hello-pod:latest
+    ports:
+    - containerPort: 8080
+      protocol: TCP
+    env:
+    - name: duplicate_key
+      value: FROM_ENV
+    - name: expansion
+      value: $(REPLACE_ME)
+    envFrom:
+    - configMapRef:
+        name: env-config
