@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+ name: hello-openshift
+labels:
+ name: hello-openshift
+spec:
+ nodeName: thehostnameofanode
+ containers:
+ - name: hello-openshift
+   image: openshift/hello-openshift
+   imagePullPolicy: Always
+   ports:
+   - containerPort: 8080
+   resources: 
+     limits: 
+       cpu: "1"
+       memory: "512Mi"
