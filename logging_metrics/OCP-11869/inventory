@@ -19,7 +19,6 @@ openshift_logging_image_version=v<%= cb.master_version %>
 openshift_logging_namespace=<%= cb.target_proj %>
 
 # Extra_Logging
-openshift_logging_fluentd_use_journal=false
 openshift_logging_fluentd_journal_read_from_head=false
 
 # Metrics
