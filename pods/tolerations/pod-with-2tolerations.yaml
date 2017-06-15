@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-2tolerations
+spec:
+  containers:
+    - image: "docker.io/ocpqe/hello-pod"
+      name: hello-pod
+  tolerations:
+  - key: dedicated
+    value: special-user
+    operator: Equal
+    effect: NoSchedule
+  - key: color
+    value: red
+    operator: Equal
+    effect: NoSchedule
