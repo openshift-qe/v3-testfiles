@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-toleration
+spec:
+  containers:
+    - image: "docker.io/ocpqe/hello-pod"
+      imagePullPolicy: IfNotPresent
+      name: hello-pod
+  tolerations:
+  - key: dedicated
+    value: special-user
+    operator: Equal
+    effect: NoSchedule
