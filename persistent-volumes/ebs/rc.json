@@ -1,0 +1,42 @@
+{
+    "apiVersion": "v1",
+    "kind": "ReplicationController",
+    "metadata": {
+        "name": "ebs"
+    },
+    "spec": {
+        "replicas": 1,
+        "selector": {
+            "app": "ebs"
+        },
+        "template":{
+            "metadata": {
+                "name": "ebs",
+                "labels": {
+                    "app": "ebs"
+                }
+            },
+            "spec": {
+                "containers": [{
+                    "name": "myfrontend",
+                    "image": "aosqe/hello-openshift",
+                    "imagePullPolicy": "IfNotPresent",
+                    "ports": [{
+                        "containerPort": 80,
+                        "name": "http-server"
+                    }],
+                    "volumeMounts": [{
+                        "mountPath": "/mnt/rbd",
+                        "name": "pvol"
+                    }]
+                }],
+                "volumes": [{
+                    "name": "pvol",
+                    "persistentVolumeClaim": {
+                        "claimName": "ebsc"
+                    }
+                }]
+            }
+        }
+    }
+}
