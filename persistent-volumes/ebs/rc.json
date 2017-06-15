@@ -26,7 +26,7 @@
                         "name": "http-server"
                     }],
                     "volumeMounts": [{
-                        "mountPath": "/mnt/rbd",
+                        "mountPath": "/mnt/ebs",
                         "name": "pvol"
                     }]
                 }],
