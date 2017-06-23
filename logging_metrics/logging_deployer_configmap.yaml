@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+data:
+  curator-nodeselector: logging-infra-fluentd=true
+  enable-ops-cluster: "true"
+  es-cluster-size: "1"
+  es-instance-ram: 1G
+  es-nodeselector: logging-infra-fluentd=true
+  kibana-hostname: kibana.0612-f9c.qe.rhcloud.com
+  kibana-nodeselector: logging-infra-fluentd=true
+  kibana-ops-hostname: kibana-ops.0612-f9c.qe.rhcloud.com
+  public-master-url: https://<%= cb.public_master_url %>
+  use-journal: "true"
+metadata:
+  name: logging-deployer
