@@ -10,6 +10,6 @@ data:
   kibana-nodeselector:  <%= cb.deployer_config['logging']['node_selector_config'] %>
   kibana-ops-hostname: <%= cb.deployer_config['logging']['kibana_ops_appname'] + "." + cb.subdomain %>
   public-master-url: https://<%= cb.master_url %>
-  use-journal: <%= cb.deployer_config['logging']['use_journal'] %>
+  use-journal: "<%= cb.deployer_config['logging']['use_journal'] %>"
 metadata:
   name: logging-deployer
