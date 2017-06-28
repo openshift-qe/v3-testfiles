@@ -13,21 +13,19 @@ items:
       name: hello-pod
     template:
       metadata:
-        creationTimestamp: null
         labels:
           name: hello-pod
       spec:
           containers:
-          - image: docker.io/deshuai/hello-pod:latest
-            imagePullPolicy: Always
+          - image: docker.io/ocpqe/hello-pod
             name: hello-pod
             ports:
             - containerPort: 8080
               protocol: TCP
             resources:
               limits:
-                cpu: 500m
-                memory: 512Mi
+                cpu: 200m
+                memory: 256Mi
               requests:
                 cpu: 100m
                 memory: 256Mi
