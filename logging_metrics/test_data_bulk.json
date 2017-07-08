@@ -9,8 +9,8 @@
   {
     "id": "used_memory",
     "data": [
-      {"timestamp": 1460111065369, "value": 2048},
-      {"timestamp": 1460151065369, "value": 2075}
+      {"timestamp": 1234567890123, "value": 1234},
+      {"timestamp": 1321098211412, "value": 5678}
     ]
   }
 ]
