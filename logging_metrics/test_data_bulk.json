@@ -1,11 +1,16 @@
 [
-    {
-        "id": "datastore",
-        "data": [
-            {"timestamp":1460413065369,"value":3.14},
-            {"timestamp":1460413025569,"value":4.57},
-            {"timestamp":1460111065369,"value":5.056}
-        ]
-    }
+  {
+    "id": "free_memory",
+    "data": [
+      {"timestamp": 1460111065369, "value": 2048},
+      {"timestamp": 1460151065369, "value": 2012}
+    ]
+  },
+  {
+    "id": "used_memory",
+    "data": [
+      {"timestamp": 1460111065369, "value": 2048},
+      {"timestamp": 1460151065369, "value": 2075}
+    ]
+  }
 ]
-
