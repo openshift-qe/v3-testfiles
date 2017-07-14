@@ -1,0 +1,23 @@
+{
+    "kind": "Pod",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "skopeo",
+        "labels": {
+            "name": "skopeo"
+        }
+    },
+    "spec": {
+        "containers": [
+            {
+                "name": "skopeo",
+                "image": "aosqe/skopeo",
+                "command": [
+                    "bash",
+                    "-c",
+                    "while : ; do sleep 15m ; done"
+                ]
+            }
+        ]
+    }
+}
