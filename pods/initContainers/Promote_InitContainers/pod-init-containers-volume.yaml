@@ -4,21 +4,18 @@ metadata:
   name: init-volume
 spec:
   containers:
-  - name: nginx
-    image: nginx
-    ports:
-    - containerPort: 80
+  - name: app
+    image: docker.io/ocpqe/hello-pod
     volumeMounts:
     - name: workdir
-      mountPath: /usr/share/nginx/html
+      mountPath: /init-test
   initContainers:
   - name: install
     image: busybox
     command:
-    - wget
-    - "-O"
-    - "/work-dir/index.html"
-    - http://kubernetes.io/index.html
+    - /bin/sh
+    - -c
+    - "echo This is OCP test wmeng > /work-dir/volume-test"
     volumeMounts:
     - name: workdir
       mountPath: "/work-dir"
