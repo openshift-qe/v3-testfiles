@@ -4,7 +4,7 @@ data:
   dynamically_provision_storage: <%= cb.deployer_config['metrics']['dynamically_provision_storage'] %>
   hawkular_metrics_appname: "<%= cb.deployer_config['metrics']['hawkular_metrics_appname'] %>"
   serviceaccount_metrics_deployer: "<%= cb.deployer_config['metrics']['serviceaccount_metrics_deployer'] %>"
-  hch_stack: <%= cb.deployer_config['metrics']['hch_stack'] %>
+  hch_stack: "<%= cb.deployer_config['metrics']['hch_stack'] %>"
   cassandra_nodes: 1
   user_write_access: false
 metadata:
