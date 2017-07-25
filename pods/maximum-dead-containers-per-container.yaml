@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    name: dead-containers
+  name: dead-containers
+spec:
+  containers:
+    - image: "docker.io/centos:centos7"
+      name: max-dead-containers-per-container
+      imagePullPolicy: IfNotPresent
+      command: ["sh", "-c", "echo hello max-dead-containers-per-container"]
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
