@@ -1,0 +1,48 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: init-qos-burstable
+spec:
+  containers:
+  - name: container1
+    image: kubernetes/pause
+    resources:
+      limits:
+        cpu: "150m"
+        memory: "120Mi"
+      requests:
+        cpu: "100m"
+        memory: "100Mi"
+  - name: container2
+    image: kubernetes/pause
+    resources:
+      limits:
+        cpu: "150m"
+        memory: "120Mi"
+      requests:
+        cpu: "100m"
+        memory: "100Mi"
+  initContainers:
+  - name: init1
+    image: centos:centos7
+    command:
+    - /bin/true
+    resources:
+      limits:
+        cpu: "100m"
+        memory: "100Mi"
+      requests:
+        cpu: "50m"
+        memory: "50Mi"
+  - name: init2
+    image: centos:centos7
+    command:
+    - /bin/true
+    resources:
+      limits:
+        cpu: "100m"
+        memory: "50Mi"
+      requests:
+        cpu: "100m"
+        memory: "50Mi"
+
