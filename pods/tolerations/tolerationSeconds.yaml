@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    name: tolerationseconds-1
+  name: tolerationseconds-1
+spec:
+  containers:
+    - image: "docker.io/ocpqe/hello-pod:latest"
+      imagePullPolicy: IfNotPresent
+      name: tolerationseconds-1
+      ports:
+        - containerPort: 8080
+          protocol: TCP
+      resources: {}
+      securityContext:
+        capabilities: {}
+        privileged: false
+      terminationMessagePath: /dev/termination-log
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+  serviceAccount: ""
+  tolerations: 
+    - key: "key1"
+      operator: "Equal"
+      value: "value1"
+      effect: "NoExecute"
+      tolerationSeconds: 120
