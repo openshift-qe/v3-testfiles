@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  labels:
+    name: example-rc
+  name: example-rc
+spec:
+  replicas: 1
+  selector:
+    name: example-rc
+  template:
+    metadata:
+      labels:
+        name: example-rc
+    spec:
+      containers:
+      - image: app:v1
+        imagePullPolicy: Always
+        name: example-rc
+        ports:
+        - containerPort: 8080
+          protocol: TCP
