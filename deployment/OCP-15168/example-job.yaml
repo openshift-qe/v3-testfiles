@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: example-job
+spec:
+  manualSelector: true
+  parallelism: 1
+  selector:
+    matchLabels:
+      app: example-job
+  template:
+    metadata:
+      name: example-job
+      labels:
+        app: example-job
+    spec:
+      containers:
+      - name: example-job
+        image: app:v1
+      restartPolicy: Never
