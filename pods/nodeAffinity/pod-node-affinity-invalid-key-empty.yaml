@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: node-affinity-invalid-key-empty
+spec:
+  containers:
+    - image: "docker.io/ocpqe/hello-pod"
+      name: hello-pod
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - operator: In
+            values:
+              - us
+
