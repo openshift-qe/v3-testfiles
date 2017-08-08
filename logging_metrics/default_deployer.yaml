@@ -29,8 +29,6 @@ component_shared:
   image_version: <%= cb.master_version %>
   enable_pv: false
   pvc_size: 10
-  token_user: <%= user.token %>
   deploy_mode: <%= cb.deploy_mode %>
-  token_user_email: <%= user.email %>
 
 
