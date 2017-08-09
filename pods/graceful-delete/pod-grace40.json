@@ -21,12 +21,12 @@
                 ],
                 "resources": {
                     "limits": {
-                        "cpu": "600m",
-                        "memory": "1Gi"
+                        "cpu": "200m",
+                        "memory": "200Mi"
                     },
                     "requests": {
-                        "cpu": "600m",
-                        "memory": "1Gi"
+                        "cpu": "200m",
+                        "memory": "200Mi"
                     }
                 },
                 "volumeMounts": [
