@@ -8,7 +8,7 @@ metadata:
     seccomp.security.alpha.kubernetes.io/pod: localhost/profile1.json
 spec:
   containers:
-    - image: "docker.io/deshuai/hello-pod:latest"
+    - image: "docker.io/ocpqe/hello-pod:latest"
       imagePullPolicy: IfNotPresent
       name: hello1
       env:
@@ -27,7 +27,7 @@ spec:
       volumeMounts:
         - mountPath: /tmp
           name: tmp
-    - image: "docker.io/deshuai/hello-pod:latest"
+    - image: "docker.io/ocpqe/hello-pod:latest"
       imagePullPolicy: IfNotPresent
       name: hello2
       env:
