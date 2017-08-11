@@ -9,7 +9,7 @@ metadata:
     container.seccomp.security.alpha.kubernetes.io/hello2: unconfined
 spec:
   containers:
-    - image: "docker.io/deshuai/hello-pod:latest"
+    - image: "docker.io/ocpqe/hello-pod:latest"
       imagePullPolicy: IfNotPresent
       name: hello1
       env:
@@ -28,7 +28,7 @@ spec:
       volumeMounts:
         - mountPath: /tmp
           name: tmp
-    - image: "docker.io/deshuai/hello-pod:latest"
+    - image: "docker.io/ocpqe/hello-pod:latest"
       imagePullPolicy: IfNotPresent
       name: hello2
       env:

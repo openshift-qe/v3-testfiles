@@ -1,0 +1,8 @@
+kind: ClusterRole
+apiVersion: v1
+metadata:
+  name: cluster-capacity-role
+rules:
+- apiGroups: [""]
+  resources: ["pods", "nodes", "persistentvolumeclaims", "persistentvolumes", "services"]
+  verbs: ["get", "watch", "list"]
