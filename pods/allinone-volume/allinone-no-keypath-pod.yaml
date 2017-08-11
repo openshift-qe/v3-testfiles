@@ -5,7 +5,7 @@ metadata:
 spec:
   containers:
   - name: allinone-no-keypath
-    image: redis
+    image: docker.io/ocpqe/hello-pod:latest
     volumeMounts:
     - name: all-in-one
       mountPath: "/all-in-one"
