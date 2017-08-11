@@ -10,7 +10,7 @@ spec:
       resources:
         limits:
           memory: "64Mi"
-          cpu: "1250m"
+          cpu: "250m"
       env:
         - name: MY_CPU_REQUEST
           valueFrom:

@@ -1,0 +1,31 @@
+[OSEv3:children]
+masters
+
+[masters]
+<%= cb.master_url %> openshift_public_hostname=<%= cb.master_url %>
+
+[OSEv3:vars]
+ansible_ssh_user=root
+ansible_ssh_private_key_file="/tmp/tmp/libra.pem"
+deployment_type=openshift-enterprise
+
+# Logging
+openshift_logging_install_logging=true
+openshift_logging_kibana_hostname=kibana.<%= cb.subdomain %>
+openshift_logging_kibana_ops_hostname=kibana-ops.<%= cb.subdomain %>
+public_master_url=https://<%= cb.master_url %>:<%= cb.api_port %>
+openshift_logging_image_prefix=<%= product_docker_repo %>openshift3/
+openshift_logging_image_version=v<%= cb.master_version %>
+openshift_logging_namespace=<%= cb.target_proj %>
+
+# Extra_Logging
+
+# Metrics
+openshift_metrics_install_metrics=true
+openshift_metrics_hawkular_hostname=hawkular-metrics.<%= cb.subdomain %>
+openshift_metrics_project=<%= cb.target_proj %>
+openshift_metrics_image_prefix=<%= product_docker_repo %>openshift3/
+openshift_metrics_image_version=v<%= cb.master_version %>
+
+# Extra_Metrics
+openshift_metrics_hawkular_user_write_access=true

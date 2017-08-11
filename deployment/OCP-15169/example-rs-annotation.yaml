@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: ReplicaSet
+metadata:
+  name: example-rs
+  annotations:
+    alpha.image.policy.openshift.io/resolve-names: '*'
+spec:
+  template:
+    metadata:
+      labels:
+        app: example-rs
+    spec:
+      containers:
+      - name: example-rs
+        image: app:v1
+        ports:
+        - containerPort: 8080

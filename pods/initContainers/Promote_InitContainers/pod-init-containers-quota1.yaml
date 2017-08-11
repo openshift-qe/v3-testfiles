@@ -4,10 +4,8 @@ metadata:
   name: init-quota1
 spec:
   containers:
-  - name: hello-pod2
-    image: docker.io/ocpqe/hello-pod
-    ports:
-    - containerPort: 80
+  - name: container1
+    image: kubernetes/pause
     resources: 
       limits: 
         cpu: "150m"
@@ -15,15 +13,8 @@ spec:
       requests: 
         cpu: "100m"
         memory: "100Mi"
-    volumeMounts:
-    - name: workdir
-      mountPath: /usr/share/nginx/html
-  - image: "docker.io/deshuai/hello-pod:latest"
-    imagePullPolicy: IfNotPresent
-    name: hello-pod
-    ports:
-      - containerPort: 8080
-        protocol: TCP
+  - name: container2
+    image: kubernetes/pause
     resources: 
       limits: 
         cpu: "150m"
@@ -54,6 +45,3 @@ spec:
       requests:
         cpu: "200m"
         memory: "100Mi"
-  volumes:
-  - name: workdir
-    emptyDir: {}

@@ -7,7 +7,7 @@ metadata:
 spec:
   containers:
   - name: allinone-permission-mode
-    image: redis
+    image: docker.io/ocpqe/hello-pod:latest
     resources:
       limits:
         cpu: "500m"
