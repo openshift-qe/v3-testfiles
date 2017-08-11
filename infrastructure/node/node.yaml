@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Node
+metadata:
+  annotations:
+    volumes.kubernetes.io/controller-managed-attach-detach: "true"
+  labels:
+    role: node
+  name: test-node
+spec:
+  unschedulable: true
