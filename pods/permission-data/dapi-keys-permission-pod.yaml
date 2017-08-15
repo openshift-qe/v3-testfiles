@@ -12,7 +12,7 @@ metadata:
 spec:
   containers:
     - name: client-container
-      image: redis
+      image: docker.io/ocpqe/hello-pod:latest
       securityContext:
         privileged: false
       volumeMounts:
