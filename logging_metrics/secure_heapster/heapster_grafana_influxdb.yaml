@@ -96,12 +96,9 @@ spec:
         - --bind-address=0.0.0.0
         - --secure-port=8443
         - --requestheader-client-ca-file=/var/run/kubernetes/request-header-ca.crt
-        - --tls-ca-file=/var/run/kubernetes/client-ca.crt
+        - --client-ca-file=/var/run/kubernetes/client-ca.crt
         - --source=kubernetes:https://kubernetes.default.svc?kubeletPort=10250&kubeletHttps=true
         - --sink=influxdb:http://monitoring-influxdb.kube-system.svc:8086
-        - --requestheader-username-headers=X-Remote-User
-        - --requestheader-group-headers=X-Remote-Group
-        - --requestheader-extra-headers-prefix=X-Remote-Extra-
         volumeMounts:
         - mountPath: /var/run/kubernetes
           name: ca
