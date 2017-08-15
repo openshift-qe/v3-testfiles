@@ -1,0 +1,25 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: heapster-client
+spec:
+  containers:
+  - name: heapster-client
+    image: aosqe/pod-for-ping
+    volumeMounts:
+    - mountPath: /var/run/kubernetes
+      name: certs
+  volumes:
+  - name: certs
+    configMap:
+      name: cert-configmap
+      items:
+      - key: admin-crt
+        path: admin.crt
+      - key: admin-key
+        path: admin.key
+      - key: request-header-client-crt
+        path: request-header-client.crt
+      - key: request-header-client-key
+        path: request-header-client.key
+      
