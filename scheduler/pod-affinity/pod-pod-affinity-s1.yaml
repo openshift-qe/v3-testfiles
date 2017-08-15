@@ -14,5 +14,5 @@ spec:
             - s1
         topologyKey: kubernetes.io/hostname
   containers:
-  - name: pod-affinity
+  - name: rhel7
     image: registry.access.redhat.com/openshift3/container-engine

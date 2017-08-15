@@ -6,5 +6,5 @@ metadata:
     security: s1
 spec:
   containers:
-  - name: security-s1
+  - name: rhel7
     image: registry.access.redhat.com/openshift3/container-engine
