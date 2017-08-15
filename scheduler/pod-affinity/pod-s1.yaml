@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: security-s1
+  labels:
+    security: s1
+spec:
+  containers:
+  - name: security-s1
+    image: registry.access.redhat.com/openshift3/container-engine
