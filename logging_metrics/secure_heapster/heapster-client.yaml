@@ -5,7 +5,7 @@ metadata:
 spec:
   containers:
   - name: heapster-client
-    image: aosqe/pod-for-ping
+    image: bmeng/hello-openshift
     volumeMounts:
     - mountPath: /var/run/kubernetes
       name: certs
