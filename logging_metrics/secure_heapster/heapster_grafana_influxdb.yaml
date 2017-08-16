@@ -88,10 +88,10 @@ spec:
       serviceAccountName: heapster
       containers:
       - name: heapster
-        image: gcr.io/google_containers/heapster-amd64:v1.3.0
+        image: openshift3/metrics-heapster:latest
         imagePullPolicy: IfNotPresent
         command:
-        - /heapster
+        - heapster-wrapper.sh
         - --api-server
         - --bind-address=0.0.0.0
         - --secure-port=8443
