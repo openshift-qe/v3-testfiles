@@ -1,0 +1,19 @@
+# Delete pod containerGC will clean container too, so need keep pod complete to test maximum-dead-containers on node
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: pi
+spec:
+  completions: 5
+  parallelism: 1
+  template:
+    metadata:
+      name: pi
+      labels:
+        app: pi
+    spec:
+      containers:
+      - name: pi
+        image: openshift/perl-516-centos7
+        command: ["perl",  "-Mbignum=bpi", "-wle", "print bpi(2000)"]
+      restartPolicy: Never
