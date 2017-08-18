@@ -1,0 +1,28 @@
+apiVersion: "v1"
+kind: "LimitRange"
+metadata:
+  name: "resource-limits" 
+spec:
+  limits:
+    -
+      type: "Pod"
+      max:
+        cpu: "2" 
+        memory: "1Gi" 
+      min:
+        cpu: "30m" 
+        memory: "150Mi" 
+    -
+      type: "Container"
+      max:
+        cpu: "2" 
+        memory: "1Gi" 
+      min:
+        cpu: "30m" 
+        memory: "150Mi" 
+      default:
+        cpu: "1" 
+        memory: "512Mi" 
+      defaultRequest:
+        cpu: "60m" 
+        memory: "307Mi"
