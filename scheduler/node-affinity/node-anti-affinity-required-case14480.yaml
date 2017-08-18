@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: node-anti-affinity-required-case14480
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: beta.kubernetes.io/arch
+            operator: NotIn
+            values:
+            - amd64
+  containers:
+  - name: rhel7
+    image: registry.access.redhat.com/openshift3/container-engine
