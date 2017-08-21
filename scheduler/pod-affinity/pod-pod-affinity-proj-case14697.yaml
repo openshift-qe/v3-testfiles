@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-affinity-proj-case14697
+spec:
+  affinity:
+    podAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchExpressions:
+          - key: security
+            operator: In
+            values:
+            - s1
+        namespaces:
+        - case14697
+        topologyKey: kubernetes.io/hostname
+  containers:
+  - name: rhel7
+    image: registry.access.redhat.com/openshift3/container-engine
