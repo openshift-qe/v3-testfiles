@@ -6,7 +6,7 @@ global:
 
 metrics:
   USE_PERSISTENT_STORAGE: false
-  USER_WRITE_ACCESSS: true
+  USER_WRITE_ACCESS: true
   serviceaccount_metrics_deployer: https://raw.githubusercontent.com/openshift/origin-metrics/master/metrics-deployer-setup.yaml
   # the metrics deployer template json file =
   hch_stack: https://raw.githubusercontent.com/openshift/origin-metrics/master/metrics.yaml
