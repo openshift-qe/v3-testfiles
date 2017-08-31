@@ -13,7 +13,7 @@ spec:
             values:
             - s1
         namespaces:
-        - case14697
+        - project1
         topologyKey: kubernetes.io/hostname
   containers:
   - name: rhel7
