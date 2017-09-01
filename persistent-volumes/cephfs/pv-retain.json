@@ -18,7 +18,8 @@
          ],
         "user": "admin",
         "secretRef": {
-            "name": "ceph-secret"
+            "name": "ceph-secret",
+            "namespace": "default"
         },
         "secretFile": "/etc/ceph/admin.secret",
         "readOnly": false
