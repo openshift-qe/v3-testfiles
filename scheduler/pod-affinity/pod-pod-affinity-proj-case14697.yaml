@@ -13,7 +13,7 @@ spec:
             values:
             - s1
         namespaces:
-        - project1
+        - <%= cb.proj_name %>
         topologyKey: kubernetes.io/hostname
   containers:
   - name: rhel7
