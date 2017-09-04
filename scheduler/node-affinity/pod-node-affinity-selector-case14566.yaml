@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: node-affinity-selector-case14566
+spec:
+  nodeSelector:
+    case14566: case14566
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+            - key: zone14566
+              operator: In
+              values:
+              - case14566
+  containers:
+  - image: registry.access.redhat.com/openshift3/container-engine
+    name: rhel7
