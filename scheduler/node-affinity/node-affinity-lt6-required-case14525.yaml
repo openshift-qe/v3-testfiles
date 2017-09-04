@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: node-affinity-lt4-required-case14525
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: key14525
+            operator: Lt
+            values:
+            - "6"
+  containers:
+  - name: rhel7
+    image: registry.access.redhat.com/openshift3/container-engine
