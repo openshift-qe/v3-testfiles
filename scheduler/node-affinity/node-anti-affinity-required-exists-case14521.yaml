@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: node-anti-affinity-required-exists-case14521
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: case14521
+            operator: DoesNotExist
+  containers:
+  - name: rhel7
+    image: registry.access.redhat.com/openshift3/container-engine
