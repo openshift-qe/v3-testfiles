@@ -54,13 +54,13 @@ objects:
 - apiVersion: autoscaling/v1
   kind: HorizontalPodAutoscaler
   metadata:
-    name: test-autoscaler 
+    name: test-autoscaler
   spec:
     scaleTargetRef:
-      kind: DeploymentConfig 
-      name: frontend 
+      kind: DeploymentConfig
+      name: frontend
       apiVersion: v1
-    minReplicas: 1 
+    minReplicas: 1
     maxReplicas: 10
 - apiVersion: batch/v1
   kind: Job
