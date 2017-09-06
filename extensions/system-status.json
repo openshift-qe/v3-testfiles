@@ -1,0 +1,202 @@
+{
+  "page": {
+    "id": "m0sg3q4t415n",
+    "name": "OpenShift Online",
+    "url": "https://status.openshift.com",
+    "updated_at": "2017-09-05T21:36:04.276-04:00"
+  },
+  "components": [
+    {
+      "status": "operational",
+      "name": "www.openshift.com",
+      "created_at": "2015-08-17T08:47:49.334-04:00",
+      "updated_at": "2015-08-24T09:48:09.575-04:00",
+      "position": 1,
+      "description": null,
+      "showcase": false,
+      "id": "vptv93jn41gr",
+      "group_id": "2mmmd6bc02gw",
+      "page_id": "m0sg3q4t415n",
+      "group": false,
+      "only_show_if_degraded": false
+    },
+    {
+      "status": "operational",
+      "name": "API Service",
+      "created_at": "2015-08-17T08:47:16.295-04:00",
+      "updated_at": "2017-06-27T09:29:59.729-04:00",
+      "position": 2,
+      "description": null,
+      "showcase": false,
+      "id": "8lrsylvwz8nr",
+      "group_id": null,
+      "page_id": "m0sg3q4t415n",
+      "group": false,
+      "only_show_if_degraded": false
+    },
+    {
+      "status": "operational",
+      "name": "hub.openshift.com",
+      "created_at": "2015-08-18T12:39:23.899-04:00",
+      "updated_at": "2015-08-24T09:48:18.510-04:00",
+      "position": 2,
+      "description": null,
+      "showcase": false,
+      "id": "cndp4grfq8j7",
+      "group_id": "2mmmd6bc02gw",
+      "page_id": "m0sg3q4t415n",
+      "group": false,
+      "only_show_if_degraded": false
+    },
+    {
+      "status": "operational",
+      "name": "developers.openshift.com",
+      "created_at": "2015-08-18T12:39:39.457-04:00",
+      "updated_at": "2015-08-24T09:48:24.798-04:00",
+      "position": 3,
+      "description": null,
+      "showcase": false,
+      "id": "l7gnxb1fxdtv",
+      "group_id": "2mmmd6bc02gw",
+      "page_id": "m0sg3q4t415n",
+      "group": false,
+      "only_show_if_degraded": false
+    },
+    {
+      "status": "operational",
+      "name": "DNS Service",
+      "created_at": "2015-08-17T08:47:26.391-04:00",
+      "updated_at": "2017-06-19T08:21:14.000-04:00",
+      "position": 3,
+      "description": null,
+      "showcase": false,
+      "id": "zts926j0fvvc",
+      "group_id": null,
+      "page_id": "m0sg3q4t415n",
+      "group": false,
+      "only_show_if_degraded": false
+    },
+    {
+      "status": "operational",
+      "name": "Authentication Service",
+      "created_at": "2015-08-17T08:47:06.134-04:00",
+      "updated_at": "2017-04-25T09:39:56.041-04:00",
+      "position": 4,
+      "description": null,
+      "showcase": false,
+      "id": "9blj2bgdccdm",
+      "group_id": null,
+      "page_id": "m0sg3q4t415n",
+      "group": false,
+      "only_show_if_degraded": false
+    },
+    {
+      "status": "operational",
+      "name": "enterprise.openshift.com",
+      "created_at": "2015-08-18T12:40:34.502-04:00",
+      "updated_at": "2015-08-24T09:48:30.369-04:00",
+      "position": 4,
+      "description": null,
+      "showcase": false,
+      "id": "2lgl9v40hl8w",
+      "group_id": "2mmmd6bc02gw",
+      "page_id": "m0sg3q4t415n",
+      "group": false,
+      "only_show_if_degraded": false
+    },
+    {
+      "status": "operational",
+      "name": "Payment Service",
+      "created_at": "2015-08-17T08:47:37.123-04:00",
+      "updated_at": "2016-11-09T18:02:32.213-05:00",
+      "position": 5,
+      "description": null,
+      "showcase": false,
+      "id": "hd4b83tr62lk",
+      "group_id": null,
+      "page_id": "m0sg3q4t415n",
+      "group": false,
+      "only_show_if_degraded": false
+    },
+    {
+      "status": "operational",
+      "name": "Web Console",
+      "created_at": "2015-08-17T08:48:10.830-04:00",
+      "updated_at": "2017-06-27T09:30:01.455-04:00",
+      "position": 6,
+      "description": null,
+      "showcase": false,
+      "id": "hk752kkg20qg",
+      "group_id": null,
+      "page_id": "m0sg3q4t415n",
+      "group": false,
+      "only_show_if_degraded": false
+    },
+    {
+      "status": "operational",
+      "name": "Node Service",
+      "created_at": "2015-08-18T12:38:29.697-04:00",
+      "updated_at": "2017-06-19T08:21:14.070-04:00",
+      "position": 7,
+      "description": null,
+      "showcase": false,
+      "id": "1zyd2vmgml4b",
+      "group_id": null,
+      "page_id": "m0sg3q4t415n",
+      "group": false,
+      "only_show_if_degraded": false
+    },
+    {
+      "status": "operational",
+      "name": "Web Sites",
+      "created_at": "2015-08-24T09:48:09.564-04:00",
+      "updated_at": "2015-08-24T09:48:09.564-04:00",
+      "position": 14,
+      "description": null,
+      "showcase": false,
+      "id": "2mmmd6bc02gw",
+      "group_id": null,
+      "page_id": "m0sg3q4t415n",
+      "group": true,
+      "only_show_if_degraded": false
+    }
+  ],
+  "incidents": [],
+  "scheduled_maintenances": [
+    {
+      "name": "Sunset of OpenShift Online 2",
+      "status": "scheduled",
+      "created_at": "2017-08-25T03:58:12.944-04:00",
+      "updated_at": "2017-08-25T03:58:12.944-04:00",
+      "monitoring_at": null,
+      "resolved_at": null,
+      "shortlink": "http://stspg.io/2c0b0841b",
+      "scheduled_for": "2017-08-25T04:00:00.000-04:00",
+      "scheduled_until": "2017-09-30T00:00:00.000-04:00",
+      "id": "gq6fsqzsvqxd",
+      "page_id": "m0sg3q4t415n",
+      "incident_updates": [
+        {
+          "status": "scheduled",
+          "body": "We have announced the sunset of the previous generation OpenShift Online 2 platform. After September 30th, 2017, Red Hat OpenShift Online 2 (our Free, Bronze, and Silver offerings in v2) will no longer be available.\r\n\r\nRead our announcement at https://blog.openshift.com/migrate-to-v3-v2-eol/",
+          "created_at": "2017-08-25T03:58:12.991-04:00",
+          "updated_at": "2017-08-25T03:58:12.991-04:00",
+          "display_at": "2017-08-25T03:58:12.991-04:00",
+          "affected_components": [
+            {
+              "name": "No components were affected by this update."
+            }
+          ],
+          "custom_tweet": null,
+          "id": "lvwkj6pn9s8s",
+          "incident_id": "gq6fsqzsvqxd"
+        }
+      ],
+      "impact": "maintenance"
+    }
+  ],
+  "status": {
+    "indicator": "none",
+    "description": "All Systems Operational"
+  }
+}
