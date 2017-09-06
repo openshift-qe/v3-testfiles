@@ -38,18 +38,19 @@ objects:
     triggers:
     - type: ConfigChange
 - apiVersion: extensions/v1beta1
-  kind: HorizontalPodAutoscaler
+  kind: Deployment
   metadata:
-    name: php-apache
+    name: hello-openshift
   spec:
-    scaleRef:
-      kind: DeploymentConfig
-      name: php-apache
-      subresource: scale
-    minReplicas: 1
-    maxReplicas: 10
-    cpuUtilization:
-      targetPercentage: 50
+    replicas: 1
+    template:
+      metadata:
+        labels:
+          name: hello-openshift
+      spec:
+        containers:
+        - name: hello-openshift
+          image: openshift/hello-openshift
 - apiVersion: autoscaling/v1
   kind: HorizontalPodAutoscaler
   metadata:
