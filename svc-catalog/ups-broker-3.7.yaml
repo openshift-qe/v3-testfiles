@@ -1,0 +1,6 @@
+apiVersion: servicecatalog.k8s.io/v1alpha1
+kind: ServiceBroker
+metadata:
+  name: ups-broker
+spec:
+  url: http://ups-broker.kube-service-catalog.svc.cluster.local
