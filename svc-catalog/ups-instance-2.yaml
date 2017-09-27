@@ -1,0 +1,7 @@
+kind: ServiceInstance
+metadata:
+  name: ups-instance-2
+  namespace: test-ns
+spec:
+  serviceClassName: user-provided-service
+  planName: default
