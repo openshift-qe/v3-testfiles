@@ -22,6 +22,10 @@ openshift_logging_image_version=v<%= cb.master_version %>
 openshift_logging_namespace=<%= cb.target_proj %>
 
 # Extra_Logging
+openshift_logging_elasticsearch_cpu_limit=300m
+openshift_logging_elasticsearch_memory_limit=512Mi
+openshift_logging_es_ops_cpu_limit=300m
+openshift_logging_es_ops_memory_limit=512Mi
 
 # Metrics
 openshift_metrics_install_metrics=true
