@@ -88,7 +88,7 @@ if ! command -v jq >/dev/null 2>&1; then
 fi
 
 if [ "$op" = "init" ]; then
-	log '{"status": "Success", "capabilities": {"attach": false}}'
+	log '{"status": "Success", "capabilities": {"attach": false, "selinuxRelabel": false}}'
 	exit 0
 fi
 
