@@ -38,5 +38,4 @@ openshift_metrics_image_version=v<%= cb.master_version %>
 openshift_hosted_metrics_deploy=true
 openshift_hosted_metrics_storage_kind=dynamic
 openshift_master_dynamic_provisioning_enabled=true
-#openshift_cloudprovider_kind=<%= cb[:installation_inventory]['openshift_cloudprovider_kind'] %>
-openshift_cloudprovider_kind=openstack
+openshift_cloudprovider_kind=<%= cb[:installation_inventory]['openshift_cloudprovider_kind'] %>
