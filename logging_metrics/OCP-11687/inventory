@@ -25,6 +25,14 @@ openshift_logging_namespace=<%= cb.target_proj %>
 openshift_logging_kibana_cert=<%= cb.cert_path %>
 openshift_logging_kibana_key=<%= cb.key_path %>
 openshift_logging_kibana_ca=<%= cb.ca_crt_path %>
+openshift_logging_elasticsearch_cpu_limit=300m
+openshift_logging_elasticsearch_memory_limit=512Mi
+openshift_logging_es_cpu_limit=300m
+openshift_logging_es_ops_cpu_limit=300m
+openshift_logging_es_memory_limit=512Mi
+openshift_logging_es_ops_memory_limit=512Mi
+openshift_logging_kibana_memory_limit=512Mi
+openshift_logging_kibana_ops_memory_limit=512Mi
 
 # Metrics
 openshift_metrics_install_metrics=true
