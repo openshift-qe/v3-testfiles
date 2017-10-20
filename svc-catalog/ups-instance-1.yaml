@@ -1,8 +1,8 @@
-apiVersion: servicecatalog.k8s.io/v1alpha1
+apiVersion: servicecatalog.k8s.io/v1beta1
 kind: ServiceInstance
 metadata:
   name: ups-instance-1
   namespace: test-ns
 spec:
-  serviceClassName: user-provided-service
-  planName: default
+  externalClusterServiceClassName: user-provided-service
+  externalClusterServicePlanName: default
