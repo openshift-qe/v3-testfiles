@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-affinity-gt-3
+spec:
+  affinity:
+    podAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchExpressions:
+          - key: team
+            operator: Gt
+            values:
+            - "3"
+        topologyKey: kubernetes.io/hostname
+  containers:
+  - name: pod-affinity
+    image: docker.io/ocpqe/hello-pod

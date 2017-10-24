@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: team4
+  labels:
+     team: "4"
+spec:
+  containers:
+  - name: ocp
+    image: docker.io/ocpqe/hello-pod
