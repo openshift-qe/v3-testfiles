@@ -18,5 +18,5 @@ spec:
             - redhat
         topologyKey: kubernetes.io/hostname
   containers:
-  - name: rhel7
-    image: registry.access.redhat.com/openshift3/container-engine
+  - name: hello-pod
+    image: docker.io/ocpqe/hello-pod
