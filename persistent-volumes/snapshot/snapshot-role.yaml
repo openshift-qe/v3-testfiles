@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ClusterRole
+metadata:
+  annotations:
+    openshift.io/description: A user that can work with VolumeSnapshots
+    openshift.io/reconcile-protect: "false"
+  name: volumesnapshot-admin
+rules:
+- apiGroups:
+  - "volume-snapshot-data.external-storage.k8s.io"
+  attributeRestrictions: null
+  resources:
+  - volumesnapshots
+  verbs:
+  - create
+  - delete
+  - deletecollection
+  - get
+  - list
+  - patch
+  - update
+  - watch
