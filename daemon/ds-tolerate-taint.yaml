@@ -1,0 +1,26 @@
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  name: ds-tolerate-taint
+spec:
+  template:
+    metadata:
+      labels:
+        name: ds-tolerate-taint
+    spec:
+      containers:
+      - image: docker.io/ocpqe/hello-pod:latest
+        imagePullPolicy: Always
+        name: registry
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+      serviceAccount: default
+      terminationGracePeriodSeconds: 10
+      tolerations:
+      - key: role
+        value: master
+        operator: Equal
+        effect: NoSchedule
