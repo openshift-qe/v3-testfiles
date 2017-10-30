@@ -8,7 +8,7 @@ metadata:
     security.alpha.kubernetes.io/sysctls: net.ipv4.tcp_max_syn_backlog=2048
 spec:
   containers:
-    - image: "docker.io/deshuai/hello-pod:latest"
+    - image: "docker.io/ocpqe/hello-pod:latest"
       imagePullPolicy: IfNotPresent
       name: hello-pod
       ports:
