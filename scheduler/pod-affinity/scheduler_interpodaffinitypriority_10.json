@@ -48,7 +48,7 @@
     ], 
     "priorities": [
         {
-            "name": "InnerPodAffinityPriority", 
+            "name": "InterPodAffinityPriority", 
             "weight": 10
         }
     ]
