@@ -5,3 +5,4 @@ metadata:
 provisioner: kubernetes.io/vsphere-volume
 parameters:
   diskformat: thin
+  datastore: datastore1
