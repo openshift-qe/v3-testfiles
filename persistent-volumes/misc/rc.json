@@ -1,0 +1,42 @@
+{
+    "apiVersion": "v1",
+    "kind": "ReplicationController",
+    "metadata": {
+        "name": "rcpod"
+    },
+    "spec": {
+        "replicas": 2,
+        "selector": {
+            "app": "rcpod"
+        },
+        "template":{
+            "metadata": {
+                "name": "rcpod",
+                "labels": {
+                    "app": "rcpod"
+                }
+            },
+            "spec": {
+                "containers": [{
+                    "name": "myfrontend",
+                    "image": "aosqe/hello-openshift",
+                    "imagePullPolicy": "IfNotPresent",
+                    "ports": [{
+                        "containerPort": 80,
+                        "name": "http-server"
+                    }],
+                    "volumeMounts": [{
+                        "mountPath": "/mnt/rc",
+                        "name": "pvol"
+                    }]
+                }],
+                "volumes": [{
+                    "name": "pvol",
+                    "persistentVolumeClaim": {
+                        "claimName": "pvcrc"
+                    }
+                }]
+            }
+        }
+    }
+}
