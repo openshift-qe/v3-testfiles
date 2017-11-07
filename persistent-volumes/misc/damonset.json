@@ -27,14 +27,14 @@
                         "name": "http-server"
                     }],
                     "volumeMounts": [{
-                        "mountPath": "/mnt/vsphere",
+                        "mountPath": "/mnt/ds",
                         "name": "pvol"
                     }]
                 }],
                 "volumes": [{
                     "name": "pvol",
                     "persistentVolumeClaim": {
-                        "claimName": "vspherec"
+                        "claimName": "ds"
                     }
                 }]
             }
