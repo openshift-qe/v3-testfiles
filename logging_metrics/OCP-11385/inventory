@@ -35,6 +35,7 @@ openshift_logging_kibana_memory_limit=512Mi
 openshift_logging_kibana_ops_memory_limit=512Mi
 ### testcase specific parameters
 use_journal=true
+openshift_logging_use_ops=true
 openshift_logging_kibana_replica_count=2
 openshift_logging_es_cluster_size=2
 
