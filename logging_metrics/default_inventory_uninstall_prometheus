@@ -12,8 +12,10 @@ ansible_ssh_user=root
 ansible_ssh_private_key_file="/tmp/tmp/libra.pem"
 deployment_type=openshift-enterprise
 
+
+
 # Extra_Metrics
-openshift_prometheus_state=present
+openshift_prometheus_state=absent
 # uncomment the follow and set the appropriate clipboard value, by default it's expected there a node
 # with a label 'region=infra'
 #openshift_prometheus_node_selector={"region" : "<%= cb.node_label %>"}
