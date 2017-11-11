@@ -17,5 +17,10 @@ openshift_logging_install_logging=false
 openshift_logging_namespace=<%= cb.target_proj %>
 
 # Metrics
+### hawkular
 openshift_metrics_install_metrics=false
 openshift_metrics_project=<%= cb.target_proj %>
+
+### prometheus
+openshift_prometheus_state=absent
+
