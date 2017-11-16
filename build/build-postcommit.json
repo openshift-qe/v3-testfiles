@@ -1,0 +1,35 @@
+{
+"kind": "BuildConfig",
+"apiVersion": "v1",
+"metadata": {
+  "name": "ruby-ex",
+  "labels": {
+    "app": "ruby-ex"
+  }
+},
+"spec": {
+  "postCommit":
+    {
+      "args": ["sleep","50s"]
+    },
+  "runPolicy": "Parallel",
+  "source": {
+    "type": "Git",
+    "git": {
+      "uri": "https://github.com/openshift/ruby-ex.git"
+    },
+    "secrets": []
+  },
+  "strategy": {
+    "type": "Source",
+    "sourceStrategy": {
+      "from": {
+        "kind": "ImageStreamTag",
+        "namespace": "openshift",
+        "name": "ruby:2.2"
+      }
+    }
+  }
+}
+}
+
