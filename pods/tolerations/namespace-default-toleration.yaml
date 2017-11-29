@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    openshift.io/description: ""
+    openshift.io/display-name: ""
+    openshift.io/sa.scc.mcs: s0:c8,c7
+    openshift.io/sa.scc.supplemental-groups: 1000070000/10000
+    openshift.io/sa.scc.uid-range: 1000070000/10000
+    scheduler.alpha.kubernetes.io/defaultTolerations: '[ { "key": "key1", "value":"value1" }]'
+    scheduler.alpha.kubernetes.io/tolerationsWhitelist: '[ { "key": "key1", "value":
+      "value1" }, { "key": "key2", "value": "value2" } ]'
+  name: ns1
+spec:
+  finalizers:
+  - openshift.io/origin
+  - kubernetes
