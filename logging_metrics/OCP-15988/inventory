@@ -33,7 +33,8 @@ openshift_logging_es_memory_limit=512Mi
 openshift_logging_es_ops_memory_limit=512Mi
 openshift_logging_kibana_memory_limit=512Mi
 openshift_logging_kibana_ops_memory_limit=512Mi
-openshift_logging_fluentd_cpu_request=1m
+# request to use 1 dedicate CPU core
+openshift_logging_fluentd_cpu_request=1
 openshift_logging_install_eventrouter=true
 
 # Metrics
