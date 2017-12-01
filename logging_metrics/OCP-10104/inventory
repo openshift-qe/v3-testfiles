@@ -36,6 +36,7 @@ openshift_logging_kibana_ops_memory_limit=512Mi
 
 # case specific parameter
 openshift_hosted_logging_storage_kind=dynamic
+openshift_master_dynamic_provisioning_enabled=true
 
 # Metrics
 openshift_metrics_install_metrics=true
