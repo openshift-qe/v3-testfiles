@@ -1,0 +1,86 @@
+{
+  "kind": "Template",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "origin-extended-test",
+    "annotations": {
+      "description": "This template shows how to run a origin extended tests against a existed openshift cluster",
+      "tags": "origin-e2e"
+    }
+  },
+  "objects": [
+    {
+      "apiVersion": "v1",
+      "kind": "Pod",
+      "metadata": {
+        "name": "origin-e2e"
+      },
+      "spec": {
+        "containers": [
+          {
+            "command": [
+              "/usr/bin/extended"
+            ],
+            "args": [
+              "$(GINKGO_ARGS)"
+            ],
+            "env": [
+              {
+                "name": "GINKGO_ARGS",
+                "value": "${GINKGO_PARAM}"
+              },
+              {
+                "name": "KUBECONFIG",
+                "value": "${KUBECONFIG_FILE}"
+              }
+            ],
+            "image": "${IMAGE}",
+            "imagePullPolicy": "Always",
+            "name": "origin-e2e",
+            "resources": {},
+            "volumeMounts": [
+              {
+                "mountPath": "/config/",
+                "name": "kubeconfig",
+                "readOnly": true
+              }
+            ]
+          }
+        ],
+        "dnsPolicy": "ClusterFirst",
+        "restartPolicy": "Never",
+        "schedulerName": "default-scheduler",
+        "serviceAccount": "default",
+        "serviceAccountName": "default",
+        "volumes": [
+          {
+            "name": "kubeconfig",
+            "secret": {
+              "secretName": "admin-kubeconfig"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "parameters": [
+    {
+      "name": "GINKGO_PARAM",
+      "displayName": "GinkGo Args",
+      "description": "Ginkgo args you used to run the e2e tests",
+      "value": "-ginkgo.focus=deployment reaping should cascade to its replica sets and pods"
+    },
+    {
+      "name": "KUBECONFIG_FILE",
+      "displayName": "Admin kubeconfig file location",
+      "description": "Admin kubeconfig file location that you mounted in the container",
+      "value": "/config/admin.kubeconfig"
+    },
+    {
+      "name": "IMAGE",
+      "displayName": "Image",
+      "description": "The image that consists the origin extended binary file",
+      "value": "docker-registry.engineering.redhat.com/haowang/origin-e2e:v3.6"
+    }
+  ]
+}
