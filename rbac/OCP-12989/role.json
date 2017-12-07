@@ -1,0 +1,17 @@
+{
+    "kind": "Role",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "deleteservices"
+    },
+    "rules": [
+        {
+        "verbs": [
+            "delete"
+        ],
+        "resources": [
+            "services"
+        ]
+        }
+    ]
+}

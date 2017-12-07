@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: RoleBinding
+metadata:
+  name: test
+  namespace: #NS#
+userNames:
+  - testuser
+groupNames: null
+subjects:
+  - kind: User
+    name: testuser
+roleRef:
+  name: admin
