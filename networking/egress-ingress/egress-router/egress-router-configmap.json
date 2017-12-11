@@ -49,7 +49,7 @@
             "containers": [
               {
                 "name": "egress-wait",
-                "image": "openshift3/ose-pod"
+                "image": "aosqe/pod-for-ping"
               }
             ]
           },
