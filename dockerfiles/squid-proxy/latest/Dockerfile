@@ -6,7 +6,9 @@ ENV SQUID_CACHE_DIR=/var/spool/squid \
     SQUID_USER=proxy
 
 RUN yum install -y squid
-RUN chmod -R 777 /var/spool/squid /var/log/squid /var/run /etc/squid/squid.conf
+RUN chgrp root /var/spool/squid /var/log/squid /var/run /etc/squid/squid.conf
+RUN chmod g+rwx /var/spool/squid /var/log/squid /var/run
+RUN chmod g+r /etc/squid/squid.conf
 ADD htpasswd squid_auth.conf /etc/squid/
 ADD entrypoint.sh /sbin/
 

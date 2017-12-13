@@ -27,7 +27,7 @@ set -e
 # default behaviour is to launch squid
 CONFIG=/etc/squid/squid.conf # default is no authentication
 if [ "1" == "$USE_AUTH" ]; then 
-  CONFIG=/etc/squid/squid_auth.conf # auth is tester:redhat, specified in /etc/squid/htpasswd
+  CONFIG=/etc/squid/squid_auth.conf
 fi
 if [[ -z ${1} ]]; then
   if [[ ! -d ${SQUID_CACHE_DIR}/00 ]]; then
