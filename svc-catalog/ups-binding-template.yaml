@@ -11,7 +11,7 @@ objects:
   spec:
     instanceRef:
       name: ${INSTANCE_NAME}
-    secretName: my-secret
+    secretName: ${SECRET_NAME}
 
 parameters:
 - description: Binding name
@@ -28,3 +28,8 @@ parameters:
   displayname: Instance name
   name: INSTANCE_NAME
   value: ups-instance
+
+- description: Secret name
+  displayname: Secret name
+  name: SECRET_NAME
+  value: my-secret
