@@ -1,0 +1,10 @@
+name: "test"                      # REQUIRE
+shortDesc: "this is plugin test"  # REQUIRED
+longDesc: "this is the long description field"
+example: "oc plugin test"
+command: "ls"                  # REQUIRED: the command
+flags:
+- name: "all"                  # REQUIRED
+  shorthand: "a"
+  desc: "this is my flag"      # REQUIRED
+  defValue: "all"
