@@ -34,7 +34,7 @@
                     "user": "admin",
                     "keyring": "/etc/ceph/keyring",
                     "secretRef": {
-                        "name": "cephrbd-secret",
+                        "name": "cephrbd-user-secret",
                         "namespace": "default"
                     },
                     "fsType": "ext4",
