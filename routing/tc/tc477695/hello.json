@@ -31,7 +31,6 @@
                 "name": "hello-route"
             },
             "spec": {
-                "host": "www.hello.com",
                 "path": "/testpath1",
                 "to": {
                     "kind": "Service",
