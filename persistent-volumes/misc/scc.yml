@@ -13,6 +13,8 @@ fsGroup:
   type: RunAsAny
 users:
 - jhou@redhat.com
+- jhou
+- lxia
 kind: SecurityContextConstraints
 metadata:
   annotations:

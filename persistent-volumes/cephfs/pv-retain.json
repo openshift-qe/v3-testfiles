@@ -6,20 +6,15 @@
   },
   "spec": {
     "capacity": {
-        "storage": "5Gi"
+        "storage": "1Gi"
     },
     "accessModes": [ "ReadWriteOnce" ],
     "cephfs": {
-        "monitors": [
-                    "192.168.0.130:6789",
-                    "192.168.0.131:6789",
-                    "192.168.0.132:6789",
-                    "192.168.0.147:6789"
-         ],
+        "monitors": ["10.66.145.205:6789"],
         "user": "admin",
         "secretRef": {
-            "name": "ceph-secret",
-            "namespace": "default"
+            "name": "cephrbd-user-secret",
+            "namespace": "ceph"
         },
         "secretFile": "/etc/ceph/admin.secret",
         "readOnly": false

@@ -4,7 +4,7 @@
   "metadata": {
     "name": "ebsc",
     "annotations": {
-        "volume.beta.kubernetes.io/storage-class": "foo"
+        "volume.beta.kubernetes.io/storage-class": "gp2"
     }
   },
   "spec": {

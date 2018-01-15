@@ -28,17 +28,15 @@
             {
                 "name": "rbdpd",
                 "rbd": {
-                    "monitors": ["172.16.120.89:6789"],
+                    "monitors": ["10.66.145.205:6789"],
                     "pool": "rbd",
-                    "image": "foo",
+                    "image": "kubernetes-dynamic-pvc-0263fd0a-f531-11e7-bb57-0050569f5abb",
                     "user": "admin",
-                    "keyring": "/etc/ceph/keyring",
                     "secretRef": {
-                        "name": "cephrbd-user-secret",
-                        "namespace": "default"
+                        "name": "cephrbd-user-secret"
                     },
                     "fsType": "ext4",
-                    "readOnly": false
+                    "readOnly": true
                 }
             }
         ]

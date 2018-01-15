@@ -10,7 +10,10 @@
     },
     "accessModes": [ "ReadWriteOnce" ],
     "glusterfs": {
-        "endpoints": "glusterfs-cluster",
+        "secretRef": {
+            "namespace": "gluster",
+            "endpoints": "glusterfs-cluster"
+        },
         "path": "testvol"
     }
   }

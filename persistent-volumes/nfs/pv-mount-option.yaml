@@ -1,7 +1,7 @@
 kind: PersistentVolume
 apiVersion: v1
 metadata:
-  name: pvmountopt 
+  name: pvmountopt
   annotations:
     volume.beta.kubernetes.io/mount-options: ro,nfsvers=3
 spec:
@@ -11,4 +11,4 @@ spec:
      - ReadWriteOnce
   nfs:
     path: /
-    server: localhost
+    server: 10.66.147.137

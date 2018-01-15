@@ -2,7 +2,10 @@
     "apiVersion": "v1",
     "kind": "PersistentVolumeClaim",
     "metadata": {
-        "name": "glusterc"
+        "name": "glusterc",
+        "annotations": {
+            "volume.beta.kubernetes.io/storage-class": ""
+        }
     },
     "spec": {
         "accessModes": [ "ReadWriteOnce" ],

@@ -2,7 +2,7 @@
     "apiVersion": "v1",
     "kind": "Pod",
     "metadata": {
-        "name": "cinderpd"
+        "name": "cinderpd1"
     },
     "spec": {
         "containers": [{
@@ -27,7 +27,7 @@
         "volumes": [{
             "name": "pvol",
             "persistentVolumeClaim": {
-                "claimName": "cinderc"
+                "claimName": "cinderc1"
             }
         }]
     }

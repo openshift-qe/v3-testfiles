@@ -18,7 +18,8 @@
             }],
             "volumeMounts": [{
                 "mountPath": "/mnt/nfs",
-                "name": "pvol"
+                "name": "pvol",
+                "readOnly": true
             }]
         }],
         "volumes": [{

@@ -2,13 +2,16 @@
     "apiVersion": "v1",
     "kind": "PersistentVolumeClaim",
     "metadata": {
-        "name": "rbdc"
+        "name": "rbdc",
+        "annotations": {
+            "volume.beta.kubernetes.io/storage-class": ""
+        }
     },
     "spec": {
         "accessModes": [ "ReadWriteOnce" ],
         "resources": {
             "requests": {
-                "storage": "5Gi"
+                "storage": "1Gi"
             }
         }
     }

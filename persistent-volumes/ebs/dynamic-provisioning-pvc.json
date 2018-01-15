@@ -2,7 +2,7 @@
   "kind": "PersistentVolumeClaim",
   "apiVersion": "v1",
   "metadata": {
-    "name": "ebsc",
+    "name": "ebsc1",
     "labels": {
          "name": "testing"
      },

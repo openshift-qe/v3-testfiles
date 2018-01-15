@@ -27,7 +27,7 @@
         "volumes": [{
             "name": "cinder",
             "persistentVolumeClaim": {
-                "claimName": "cinderc"
+                "claimName": "cinderc1"
             }
         }]
     }
