@@ -1,0 +1,15 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: ebs
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  awsElasticBlockStore:
+    volumeID: "aws://us-east-1d/vol-e69f0b1c"
+    fsType: "ext4"
+mountOptions:
+  - "discard"
+  - "noatime"
