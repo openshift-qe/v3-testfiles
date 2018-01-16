@@ -4,5 +4,5 @@ metadata:
   name: my-svc
 spec:
   type: ExternalName
-  externalName: www.baidu.com
+  externalName: www.example.com
 
