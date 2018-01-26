@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: block-volume-pod
+spec:
+  containers:
+  - name: nfs-web
+    image: aosqe/nfs-web
+    ports:
+    - containerPort: 80
+    volumeDevices:
+    - name: workdir
+      devicePath: /dev/xvda
+  initContainers:
+  - name: init
+    image: aosqe/hello-openshift
+    ports:
+    - containerPort: 8080
+    volumeDevices:
+    - name: workdir
+      devicePath: /dev/xvda
+    command: ["/bin/sh", "-c", "sleep 30"]
+  volumes:
+  - name: workdir
+    persistentVolumeClaim:
+      claimName: claim-nfs

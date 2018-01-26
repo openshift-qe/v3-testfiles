@@ -105,18 +105,15 @@ objects:
   spec:
     strategy:
       jenkinsPipelineStrategy:
-        env:
-        - name: VAR1
-          value: value1
         jenkinsfile: |-
           try {
              timeout(time: 20, unit: 'MINUTES') {
                 node {
-                    stage('echo env') {
-                      echo "VAR1 = ${env.VAR1}"
-                      echo "VAR2 = ${env.VAR2}"
-                      echo "VAR3 = ${env.VAR3}"
-                      echo "VAR4 = ${env.VAR4}"
+                    stage('build') {
+                      openshiftBuild(buildConfig: '${NAME}', showBuildLogs: 'true')
+                    }
+                    stage('deploy') {
+                      openshiftDeploy(deploymentConfig: '${NAME}')
                     }
                   }
              }

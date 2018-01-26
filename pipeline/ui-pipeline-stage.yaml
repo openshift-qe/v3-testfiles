@@ -1,0 +1,59 @@
+apiVersion: v1
+kind: Template
+labels:
+  template: application-template-sample-pipeline
+message: |-
+  A Jenkins server will be automatically instantiated in this project to manage
+  the Pipeline BuildConfig created by this template.  You will be able to log in to
+  it using your OpenShift user credentials.
+metadata:
+  annotations:
+    openshift.io/display-name: Pipeline Build Example
+    description: |-
+      This example showcases the new Jenkins Pipeline integration in OpenShift,
+      which performs continuous integration and deployment right on the platform.
+      The template contains a Jenkinsfile - a definition of a multi-stage CI/CD process - that
+      leverages the underlying OpenShift platform for dynamic and scalable
+      builds. OpenShift integrates the status of your pipeline builds into the web
+      console allowing you to see your entire application lifecycle in a single view.
+    iconClass: icon-jenkins
+    tags: instant-app,jenkins
+  name: jenkins-pipeline-example
+objects:
+- apiVersion: v1
+  kind: BuildConfig
+  metadata:
+    annotations:
+      pipeline.alpha.openshift.io/uses: '[{"name": "${NAME}", "namespace": "", "kind": "DeploymentConfig"}]'
+    labels:
+      name: sample-pipeline
+    name: sample-pipeline
+  spec:
+    strategy:
+      jenkinsPipelineStrategy:
+        jenkinsfile: |-
+          try {
+             timeout(time: 20, unit: 'MINUTES') {
+                node('') {
+                    stage('stageone') {
+                      sh 'echo "test one"'
+                    }
+                    stage('stagetwo') {
+                      sh 'echo "test two"'
+                    }
+                  }
+             }
+          } catch (err) {
+             echo "in catch block"
+             echo "Caught: ${err}"
+             currentBuild.result = 'FAILURE'
+             throw err
+          }          
+      type: JenkinsPipeline
+    triggers:
+    - github:
+        secret: secret101
+      type: GitHub
+    - generic:
+        secret: secret101
+      type: Generic

@@ -1,0 +1,21 @@
+kind: Pod
+apiVersion: v1 
+metadata:
+  name: propaslave
+spec:
+  containers:
+    - name: privileged
+      image: aosqe/hello-openshift
+      securityContext:
+        privileged: true
+      ports:
+        - containerPort: 80
+          name: "http-server"
+      volumeMounts:
+        - mountPath: "/mnt/local"
+          name: local
+          mountPropagation: "" 
+  volumes:
+    - name: local
+      hostPath:
+        path: "/mnt/disk"
