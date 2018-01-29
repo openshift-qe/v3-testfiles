@@ -1,0 +1,13 @@
+.navbar-header {
+	background-color: maroon;
+	border-bottom: 1px solid white;
+}
+
+.btn-primary {
+	background-color: green;
+	background-image: none;
+}
+
+a {
+    color: orange;
+}
