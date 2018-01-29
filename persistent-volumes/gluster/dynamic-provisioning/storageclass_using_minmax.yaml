@@ -1,0 +1,11 @@
+apiVersion: storage.k8s.io/v1beta1
+kind: StorageClass
+metadata:
+  name: sc1
+provisioner: kubernetes.io/glusterfs
+parameters:
+  resturl: "http://ec2-54-174-131-118.compute-1.amazonaws.com:9991"
+  restuser: "admin"
+  restuserkey: "test"
+  gidMin: "3333"
+  gidMax: "3433"
