@@ -43,10 +43,10 @@
       "apiVersion": "v1",
       "metadata": {
         "name": "route-edge",
-	"annotations": {
-        }
+        "creationTimestamp": null
       },
       "spec": {
+        "host": "www.example.com",
         "to": {
           "kind": "Service",
           "name": "frontend"
@@ -207,7 +207,7 @@
           {
             "type": "ImageChange",
             "imageChangeParams": {
-              "automatic": false,
+              "automatic": true,
               "containerNames": [
                 "ruby-helloworld"
               ],
