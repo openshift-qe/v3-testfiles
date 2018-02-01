@@ -23,7 +23,7 @@ objects:
         while true; do
           loops=$( expr $loops + 1 )
           for ii in $( seq 1 ${TEST_ITERATIONS} ) ; do
-            echo "${TEST_POD_MESSAGE} $loops $ii"
+            logger  --tag deadbeef[123] ${TEST_POD_MESSAGE}
           done
           sleep ${TEST_POD_SLEEP_TIME}
         done
