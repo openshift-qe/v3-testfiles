@@ -36,9 +36,9 @@ openshift_logging_kibana_ops_memory_limit=512Mi
 
 # test specific settings
 openshift_logging_use_ops=true
-openshift_logging_es_pvc_dynamic=True
+openshift_logging_es_pvc_dynamic=true
 openshift_logging_es_cluster_size=3
-openshift_logging_es_ops_pvc_dynamic=True
+openshift_logging_es_ops_pvc_dynamic=true
 openshift_logging_es_ops_cluster_size=3
 
 # Metrics
