@@ -9,9 +9,9 @@ spec:
   containers:
   - env:
     - name: http_proxy
-      value: "http://file.rdu.redhat.com:3128"
+      value: to_be_replaced
     - name: https_proxy
-      value: "http://file.rdu.redhat.com:3128"
+      value: to_be_replaced
     name: base-ansible-pod
     image: aosqe/fedora_base
     securityContext:
