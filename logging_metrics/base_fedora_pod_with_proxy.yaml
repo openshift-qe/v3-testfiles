@@ -8,11 +8,12 @@ metadata:
 spec:
   containers:
   - env:
-    - name: "HTTP_PROXY"
+    - name: HTTP_PROXY
       value: "http://file.rdu.redhat.com:3128"
-    - name: "HTTPS_PROXY"
+    - name: HTTPS_PROXY
       value: "http://file.rdu.redhat.com:3128"
-  - name: base-ansible-pod
+    name: base-ansible-pod
     image: aosqe/fedora_base
     securityContext:
       privileged: true
+
