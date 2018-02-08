@@ -5,6 +5,7 @@ metadata:
   name: base-ansible-pod
   labels:
     name: base-ansible-pod
+  namespace: to_be_replaced
 spec:
   containers:
   - env:
