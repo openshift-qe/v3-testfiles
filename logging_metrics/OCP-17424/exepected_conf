@@ -1,7 +1,0 @@
-<match journal.system.** audit.log** **_default_** **_openshift_** **_openshift-*_** system.var.log**>
-  @type rewrite_tag_filter
-  @label @OUTPUT
-  rewriterule1 message .+ output_ops_tag
-  rewriterule2 message !.+ output_ops_tag
-</match>
-
