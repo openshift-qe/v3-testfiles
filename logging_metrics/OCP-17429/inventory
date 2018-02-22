@@ -23,13 +23,23 @@ openshift_logging_namespace=<%= cb.target_proj %>
 
 # Extra_Logging
 openshift_logging_elasticsearch_cpu_limit=300m
+openshift_logging_elasticsearch_cpu_request=300m
 openshift_logging_elasticsearch_memory_limit=512Mi
+openshift_logging_es_cpu_limit=300m
+openshift_logging_es_cpu_request=300m
 openshift_logging_es_ops_cpu_limit=300m
-openshift_logging_es_ops_memory_limit=512Mi
-openshift_logging_es_ops_cpu_limit=300m
+openshift_logging_es_ops_cpu_request=300m
 openshift_logging_es_memory_limit=512Mi
+openshift_logging_es_ops_memory_limit=512Mi
 openshift_logging_kibana_memory_limit=512Mi
 openshift_logging_kibana_ops_memory_limit=512Mi
+
+# test specific settings
+openshift_logging_use_ops=true
+openshift_logging_es_pvc_dynamic=true
+openshift_logging_es_cluster_size=3
+openshift_logging_es_ops_pvc_dynamic=true
+openshift_logging_es_ops_cluster_size=3
 
 # Metrics
 openshift_metrics_install_metrics=true
@@ -39,6 +49,4 @@ openshift_metrics_image_prefix=<%= product_docker_repo %>openshift3/
 openshift_metrics_image_version=v<%= cb.master_version %>
 
 # Extra_Metrics
-openshift_hosted_metrics_deploy=true
-openshift_hosted_metrics_storage_kind=dynamic
-openshift_master_dynamic_provisioning_enabled=true
+

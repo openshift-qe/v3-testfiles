@@ -1,0 +1,18 @@
+{
+  "kind": "Pod",
+  "apiVersion":"v1",
+  "metadata": {   
+    "name": "udp-pod",
+    "labels": {     
+      "name": "udp-pod"
+    }
+  },
+  "spec": {       
+    "containers": [{
+      "command": [ "/usr/bin/ncat", "-u", "-l", "8080" ],
+      "name": "udp-pod",
+      "image": "aosqe/pod-for-ping"
+    }],     
+    "restartPolicy": "Always"
+  }
+}
