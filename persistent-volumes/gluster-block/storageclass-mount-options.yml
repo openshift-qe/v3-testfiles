@@ -5,8 +5,9 @@ metadata:
 provisioner: gluster.org/glusterblock
 parameters:
   resturl: "http://172.30.102.160:8080"
+  restauthenabled: "true"
   restuser: "admin"
-  restauthenabled: "false"
-  chapauthenabled: "true"
+  restsecretname: "heketi-block-secret"
+  restsecretnamespace: "default"
 mountOptions:
   - "ro"
