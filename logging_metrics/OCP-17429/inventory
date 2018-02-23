@@ -4,6 +4,9 @@ masters
 [masters]
 <%= cb.master_url %> openshift_public_hostname=<%= cb.master_url %>
 
+[nodes]
+<%= cb.schedulable_nodes %>
+
 [etcd]
 <%= env.etcd_hosts.first.hostname %> openshift_public_hostname=<%= env.etcd_hosts.first.hostname %>
 
@@ -37,9 +40,9 @@ openshift_logging_kibana_ops_memory_limit=512Mi
 # test specific settings
 openshift_logging_use_ops=true
 openshift_logging_es_pvc_dynamic=true
-openshift_logging_es_cluster_size=3
+openshift_logging_es_cluster_size=1
 openshift_logging_es_ops_pvc_dynamic=true
-openshift_logging_es_ops_cluster_size=3
+openshift_logging_es_ops_cluster_size=1
 
 # Metrics
 openshift_metrics_install_metrics=true
