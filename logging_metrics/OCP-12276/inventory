@@ -1,5 +1,7 @@
 [OSEv3:children]
 masters
+etcd
+nodes
 
 [masters]
 <%= cb.master_url %> openshift_public_hostname=<%= cb.master_url %>
