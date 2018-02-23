@@ -46,3 +46,5 @@ openshift_metrics_image_version=v<%= cb.master_version %>
 
 # Extra_Metrics
 
+# place holder for test specific parameters
+<%= cb.testcase_specific_parameters %>
