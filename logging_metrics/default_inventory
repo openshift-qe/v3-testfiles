@@ -3,8 +3,9 @@ masters
 
 [masters]
 <%= cb.master_url %> openshift_public_hostname=<%= cb.master_url %>
+
 [nodes]
-<%= cb.master_url %> openshift_public_hostname=<%= cb.master_url %>
+<%= cb.schedulable_nodes %>
 
 [etcd]
 <%= env.etcd_hosts.first.hostname %> openshift_public_hostname=<%= env.etcd_hosts.first.hostname %>
