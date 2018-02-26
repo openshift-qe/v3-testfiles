@@ -20,3 +20,4 @@ deployment_type=openshift-enterprise
 # Logging
 openshift_logging_install_logging=false
 openshift_logging_use_ops=true
+openshift_logging_namespace=<%= cb.target_proj %>
