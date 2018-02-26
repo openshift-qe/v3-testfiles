@@ -102,6 +102,7 @@ spec:
         - --requestheader-username-headers=X-Remote-User
         - --requestheader-group-headers=X-Remote-Group
         - --requestheader-extra-headers-prefix=X-Remote-Extra-
+        - --cert-dir=/tmp
         volumeMounts:
         - mountPath: /var/run/kubernetes
           name: ca
