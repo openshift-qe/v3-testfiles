@@ -27,7 +27,7 @@
       "kind": "ImageStream",
       "apiVersion": "v1",
       "metadata": {
-        "name": "ruby-22-centos7",
+        "name": "ruby-23-centos7",
         "creationTimestamp": null
       },
       "spec": {
@@ -80,7 +80,7 @@
           "sourceStrategy": {
             "from": {
               "kind": "ImageStreamTag",
-              "name": "ruby-22-centos7:latest"
+              "name": "ruby-23-centos7:latest"
             },
             "env": [
               {
@@ -277,7 +277,7 @@
     {
       "description": "imagestream spec repository",
       "name": "IMAGESTREAM_SPEC_REPO",
-      "value": "openshift/ruby-20-centos7"
+      "value": "centos/ruby-23-centos7"
     }
   ],
   "labels": {
