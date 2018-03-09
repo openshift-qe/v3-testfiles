@@ -9,7 +9,7 @@
   },
   "spec": {       
     "containers": [{
-      "command": [ "/usr/bin/ncat", "-u", "-l", "8080" ],
+      "command": [ "/usr/bin/ncat", "-u", "-l", "8080","--keep-open", "--exec", "/bin/cat"],
       "name": "udp-pod",
       "image": "aosqe/pod-for-ping"
     }],     
