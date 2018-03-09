@@ -1,0 +1,18 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: azfpod
+spec:
+  containers:
+    - name: azfcontainer
+      image: aosqe/hello-openshift
+      ports:
+        - containerPort: 80
+          name: "http-server"
+      volumeMounts:
+      - mountPath: "/mnt/azure"
+        name: azfile
+  volumes:
+    - name: azfile
+      persistentVolumeClaim:
+        claimName: azpvc
