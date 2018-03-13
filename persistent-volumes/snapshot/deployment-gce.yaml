@@ -1,0 +1,23 @@
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: snapshot-controller
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: snapshot-controller
+    spec:
+      serviceAccountName: snapshot-controller-runner
+      containers:
+        - name: snapshot-controller
+          image: "registry.access.redhat.com/openshift3/snapshot-controller:latest"
+          imagePullPolicy: "IfNotPresent"
+          args: ["-cloudprovider", "gce"]
+        - name: snapshot-provisioner
+          image: "registry.access.redhat.com/openshift3/snapshot-provisioner:latest"
+          imagePullPolicy: "IfNotPresent"
+          args: ["-cloudprovider", "gce"]
