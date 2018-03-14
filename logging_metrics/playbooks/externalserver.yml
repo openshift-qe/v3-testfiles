@@ -1,0 +1,266 @@
+---
+- name : Config rsyslog Server
+  hosts: rsyslogs
+  gather_facts: yes
+  roles:
+    - role: vm_type
+  tasks:
+    - fail: msg="This playbook couldn't deploy rsyslog on atomic at current phase"
+      when:  os_type == "atomic" 
+
+    - name: make sure rsyslog installed
+      yum:
+        name: rsyslog
+        state: present
+
+    - name: Deploy rsyslog configure file
+      template:
+        src: rsyslog.conf.j2
+        dest: /etc/rsyslog.conf
+        force: true
+
+    - name: make sure rsyslog restarted
+      systemd: 
+        name: rsyslog
+        state: restarted 
+
+    - name: Get firealld status 
+      command: systemctl is-active firewalld
+      register: firewalld_status
+      ignore_errors: True
+
+    - name: Open port when use firewalld
+      block:
+        - name: make sure firewalld open 514
+          firewalld:
+            port: 514/udp
+            permanent: true
+            state: enabled
+
+        - name: make sure firewalld open 514
+          firewalld:
+            port: 514/tcp
+            permanent: true
+            state: enabled
+
+        - name: reload firewalld
+          command: firewall-cmd --reload
+      when: firewalld_status.stdout == "active"
+
+    - name: Get iptables status
+      command: systemctl is-active iptables
+      register: iptables_status
+      ignore_errors: True
+
+    - name: Open port when use iptables
+      block:
+        - name: iptables allow tcp 514
+          command: iptables -A OS_FIREWALL_ALLOW -p tcp -m state --state NEW --dport 514 -j ACCEPT
+
+        - name: iptables allow upd 514
+          command: iptables -A OS_FIREWALL_ALLOW -p udp -m state --state NEW --dport 514 -j ACCEPT
+      when: iptables_status.stdout == "active"
+   
+
+- name: Create elasticsearch server
+  gather_facts: yes
+  hosts: elasticsearches
+  roles:
+    - role: vm_type
+  tasks:
+    - set_fact:
+        elasticsearch: "elasticsearch-5.2.2"
+        nfsdir: "/var/lib/exports"
+        esuser: "elasticsearch"
+        esgroup: "daemon" 
+        clustername: "externalcluster" 
+        nodename: "{{ansible_hostname}}" 
+
+    - fail: msg="This playbook couldn't deploy rsyslog on atomic at current phase"
+      when:  os_type == "atomic"
+
+    - name: make sure java is installed
+      yum:
+        name: java-1.8.0-openjdk
+        state: present
+
+
+    - name: create user elasticsearch
+      user:
+        name: "{{esuser}}"
+        group: "{{esgroup}}"
+
+    - name: Download elasticsearch packages
+      get_url:
+        url: "https://artifacts.elastic.co/downloads/elasticsearch/{{elasticsearch}}.tar.gz"
+        dest: "/tmp/{{elasticsearch}}.tar.gz"
+        force_basic_auth: yes
+
+    - name: Extract elasticsearch
+      unarchive:
+        src: "/tmp/{{elasticsearch}}.tar.gz"
+        dest: "/home/{{esuser}}"
+        owner: "{{esuser}}"
+        group: "{{esgroup}}"
+        remote_src: yes
+
+    - name: create elasticsearch configure file
+      template: 
+        src: elasticsearch.yml.j2
+        dest: /home/{{esuser}}/elasticsearch.yml
+        owner: "{{esuser}}"
+        group: "{{esgroup}}"
+        force: true
+
+    - name: create elasticsearch service
+      template:
+        src: elasticsearch.service.j2
+        dest: /etc/systemd/system/elasticsearch.service
+        force: true
+
+    - name: Get firealld status
+      command: systemctl is-active firewalld
+      register: firewalld_status
+      ignore_errors: True
+
+    - name: Open port when use firewalld
+      block:
+        - name: make sure firewalld open 9200-9300
+          firewalld:
+            port: 9200:9300/tcp
+            permanent: true
+            state: enabled
+
+        - name: reload firewalld
+          command: firewall-cmd --reload
+      when: firewalld_status.stdout == "active"
+
+    - name: Get iptables status
+      command: systemctl is-active iptables
+      register: iptables_status
+      ignore_errors: True
+
+    - name: Open port when use iptables
+      block:
+        - name: iptables allow tcp 9200
+          command: iptables -A OS_FIREWALL_ALLOW -p tcp -m state --state NEW --dport 9200 -j ACCEPT
+
+        - name: iptables allow tcp 9300
+          command: iptables -A OS_FIREWALL_ALLOW -p tcp -m state --state NEW --dport 9300 -j ACCEPT
+      when: iptables_status.stdout == "active"
+
+
+
+- name: Create fluentd server
+  gather_facts: yes
+  hosts: fluentds
+  roles:
+    - role: vm_type
+  tasks:
+    - set_fact:
+        hostname: "{{ansible_hostname}}"
+        hostip: "{{ansible_default_ipv4.address}}"
+        secretname: "secure-forward-secret"
+        certname: "cert"
+        certmountpath: "/etc/fluentd/forward/"
+
+
+    - fail: msg="This playbook couldn't deploy rsyslog on atomic at current phase"
+      when:  os_type == "atomic"
+
+    - name: install fluentd packages
+      shell: curl -L https://toolbelt.treasuredata.com/sh/install-redhat-td-agent3.sh | sh
+
+    - name: install security forward plugin
+      command: td-agent-gem install fluent-plugin-secure-forward
+
+    - name: configure security forward keys
+      command: /opt/td-agent/embedded/lib/ruby/gems/2.4.0/bin/secure-forward-ca-generate /etc/td-agent passphrase
+
+    - name: configure td-agent.conf 
+      template:
+        src: td-agent.conf.j2
+        dest: /etc/td-agent/td-agent.conf
+        force: true
+
+    - name: make sure td-agent restarted
+      systemd: 
+         name: td-agent
+         state: restarted 
+         enabled: True
+
+    - name: Get firealld status
+      command: systemctl is-active firewalld
+      register: firewalld_status
+      ignore_errors: True
+
+    - name: Open port when use firewalld
+      block:
+        - name: make sure firewalld open 24284
+          firewalld:
+            port: 24284/tcp
+            permanent: true
+            state: enabled
+
+        - name: reload firewalld
+          command: firewall-cmd --reload
+      when: firewalld_status.stdout == "active"
+
+    - name: Get iptables status
+      command: systemctl is-active iptables
+      register: iptables_status
+      ignore_errors: True
+
+    - name: Open port when use iptables
+      block:
+        - name: iptables allow tcp 24284
+          command: iptables -A OS_FIREWALL_ALLOW -p tcp -m state --state NEW --dport 24284 -j ACCEPT
+
+      when: iptables_status.stdout == "active"
+
+    - name: echo cert key
+      command:  cat /etc/td-agent/ca_cert.pem
+      register: forward_cert
+
+    - name: encode the cert key to base64 
+      set_fact:
+        cert_code: "{{ forward_cert.stdout| b64encode }}"
+
+    - name: Create Secret yaml file
+      template:
+        src: forwardsecret.yml.j2
+        dest: /root/forwardsecret.yml
+        force: true
+
+    - name: Create configure map change scripts
+      template:
+        src: patchfluentdsecuryforward.sh.j2
+        dest: /root/patchfluentdsecuryforward.sh
+        force: true
+
+    - name: fetch  secret yaml to localhost
+      fetch:
+        src: /root/forwardsecret.yml
+        dest: "{{ansible_env.PWD}}/forwardsecret.yml"
+        flat: yes
+
+    - name:  Fetch file to localhost
+      fetch:
+        src: /root/patchfluentdsecuryforward.sh
+        dest: "{{ansible_env.PWD}}/patchfluentdsecuryforward.sh"
+        flat: yes
+
+    - name: Transter file to the first Master 
+      copy:
+        src: "{{ansible_env.PWD}}/forwardsecret.yml"
+        dest: /root/forwardsecret.yml
+      delegate_to: "{{ groups.masters.0 }}"
+
+    - name: Transter file to the first Master 
+      copy:
+        src: "{{ansible_env.PWD}}/patchfluentdsecuryforward.sh"
+        dest: /root/patchfluentdsecuryforward.sh
+      delegate_to: "{{ groups.masters.0 }}"
+
+    - debug:
+        msg: " Please run shell /root/patchfluentdsecuryforward.sh on your first master to enable security forward !! \n sh /root/patchfluentdsecuryforward.sh"

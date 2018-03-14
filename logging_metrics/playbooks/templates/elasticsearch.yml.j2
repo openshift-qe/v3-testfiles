@@ -1,0 +1,9 @@
+path:
+    data: /home/{{esuser}}/data/elasticsearch
+    logs: /home/{{esuser}}/log/elasticsearch
+
+node.name:  {{nodename}}
+cluster.name: {{clustername}}
+network.host: {{ansible_all_ipv4_addresses}}
+http.port: 9200
+

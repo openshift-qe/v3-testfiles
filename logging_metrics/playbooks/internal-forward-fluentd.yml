@@ -1,0 +1,86 @@
+---
+- name: Create fluentd server
+  gather_facts: yes
+  hosts: masters[0]
+  tasks:
+    - set_fact:
+        hostname: "{{ansible_hostname}}"
+        hostip: "{{ansible_default_ipv4.address}}"
+        secretname: "secure-forward-secret"
+        certname: "cert"
+        certmountpath: "/etc/fluentd/forward/"
+        shared_key: "aggregated_logging_ci_testing"
+        image_prefix: "{{ openshift_logging_image_prefix | default('registry.access.redhat.com/openshift3/') }}"
+        image_version: "{{ openshift_logging_image_version | default('v3.9') }}"
+        logging_namespace: "{{ openshift_logging_namespace | default('logging') }}"
+        configmap: "{{ 'logging-mux' if (openshift_logging_use_mux|default(False)|bool) else 'logging-fluentd'}}"
+        test_clear: "{{ test_clear | default('false') }}"
+    - name: Install internal forward fluentd
+      block:
+        - name: Copy Configmap template
+          template:
+            src: internal-forward-fluent.conf.j2
+            dest: /tmp/internal-forward-fluent.conf
+            force: true
+
+        - name: Copy deployment configure template
+          template:
+            src: internal-dc-forward-fluentd.yaml.j2
+            dest: /tmp/internal-dc-forward-fluentd.yaml
+            force: true
+
+        - name: Create configmap
+          command: oc create configmap logging-forward-fluentd --from-file=fluent.conf=/tmp/internal-forward-fluent.conf
+
+        - name: Create deployment configuire controller
+          command: "oc create -f /tmp/internal-dc-forward-fluentd.yaml -n {{logging_namespace}}"
+
+        - name: expose dc as service
+          command: "oc expose dc logging-forward-fluentd -n  {{logging_namespace}}"
+    
+        - name:  Get Service IP
+          command: "oc get service logging-forward-fluentd -o custom-columns=IP:.spec.clusterIP -n  {{logging_namespace}}"
+          register: serviceip_result
+
+        - set_fact:
+             serviceip: "{{ serviceip_result.stdout_lines[1] }}" 
+
+        - name: Copy fluentd/mux configmap patch template
+          template:
+            src: internal-forward-patch.sh.j2
+            dest: /tmp/internal-forward-patch.sh
+            mode: 0774
+            force: true
+        - name: Patch fluentd/mux to enable forward
+          shell: /tmp/internal-forward-patch.sh
+      when: not test_clear
+
+    - name: Uninstall internal forward fluentd
+      block:
+        - name: delete deployment controllers
+          command: "oc delete dc logging-forward-fluentd -n {{logging_namespace}}"
+          ignore_errors: True
+        - name: delete service
+          command: "oc delete service logging-forward-fluentd -n {{logging_namespace}}"
+          ignore_errors: True
+        - name: delete configure map
+          command: "oc delete configmap logging-forward-fluentd -n {{logging_namespace}}"
+          ignore_errors: True
+        - name: Copy recover patch command
+          template:
+            src: internal-forward-patch-recover.sh.j2
+            dest: /tmp/internal-forward-patch-recover.sh
+            mode: 0774
+            force: true
+        - name: Patch fluentd
+          shell: /tmp/internal-forward-patch-recover.sh
+          ignore_errors: True
+      when: test_clear
+
+    - name: refresh fluentd pod
+      command: "oc delete pod --selector component=fluentd -n  {{logging_namespace}}"
+      when: configmap == 'logging-fluentd'
+
+    - name: refresh mux pod
+      command: "oc delete pod --selector component=mux -n  {{logging_namespace}}"
+      when: configmap == 'logging-mux'
