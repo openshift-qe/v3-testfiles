@@ -30,7 +30,7 @@
             force: true
 
         - name: Create configmap
-          command: oc create configmap logging-forward-fluentd --from-file=fluent.conf=/tmp/internal-forward-fluent.conf
+          command: "oc create configmap logging-forward-fluentd --from-file=fluent.conf=/tmp/internal-forward-fluent.conf -n {{logging_namespace}}"
 
         - name: Create deployment configuire controller
           command: "oc create -f /tmp/internal-dc-forward-fluentd.yaml -n {{logging_namespace}}"
