@@ -1,0 +1,8 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: pvc-expand
+parameters:
+  fstype: xfs
+provisioner: kubernetes.io/cinder
+allowVolumeExpansion: true
