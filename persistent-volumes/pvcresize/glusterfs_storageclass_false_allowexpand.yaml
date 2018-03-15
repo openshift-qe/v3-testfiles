@@ -1,0 +1,8 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: sc-pvcexpand
+provisioner: kubernetes.io/glusterfs
+parameters:
+  resturl: "http://172.30.18.228:8080"
+allowVolumeExpansion: false
