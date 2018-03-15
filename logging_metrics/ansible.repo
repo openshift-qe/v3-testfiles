@@ -1,0 +1,6 @@
+[ansible-2.4]
+baseurl = http://pulp.dist.prod.ext.phx2.redhat.com/content/dist/rhel/server/7/7Server/x86_64/ansible/2.4/os/
+enabled = 1
+gpgcheck = 0
+name = ansible-2.4
+sslverify = 1
