@@ -1,0 +1,29 @@
+{
+    "apiVersion": "v1",
+    "kind": "Pod",
+    "metadata": {
+        "name": "nfs"
+    },
+    "spec": {
+        "containers": [{
+            "name": "myfrontend",
+            "image": "aosqe/nfs-web",
+            "imagePullPolicy": "IfNotPresent",
+            "ports": [{
+                "containerPort": 80,
+                "name": "http-server"
+            }],
+            "volumeMounts": [{
+                "mountPath": "/mnt",
+                "name": "nfs",
+                "subPath": "subpath"
+            }]
+        }],
+        "volumes": [{
+            "name": "nfs",
+            "persistentVolumeClaim": {
+                "claimName": "nfsc"
+            }
+        }]
+    }
+}
