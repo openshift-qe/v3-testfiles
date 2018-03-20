@@ -37,7 +37,7 @@ openshift_logging_es_ops_memory_limit=512Mi
 openshift_logging_kibana_memory_limit=512Mi
 openshift_logging_kibana_ops_memory_limit=512Mi
 # for debugging, install logging into system project 'loggingg'
-openshift_logging_project=logging
+openshift_logging_namespace=logging
 <%= cb.extra_logging_params_str %>
 
 # Metrics
