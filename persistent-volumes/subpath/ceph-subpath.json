@@ -1,0 +1,28 @@
+{
+    "apiVersion": "v1",
+    "kind": "Pod",
+    "metadata": {
+        "name": "gluster",
+        "labels": {
+            "name": "gluster"
+        }
+    },
+    "spec": {
+        "containers": [{
+            "name": "gluster",
+            "image": "aosqe/hello-openshift",
+            "imagePullPolicy": "IfNotPresent",
+            "volumeMounts": [{
+                "mountPath": "/mnt/rbd",
+                "subpath": "subpath",
+                "name": "rbd"
+            }]
+        }],
+        "volumes": [{
+            "name": "rbd",
+            "persistentVolumeClaim": {
+                "claimName": "rbdc"
+            }
+        }]
+    }
+}
