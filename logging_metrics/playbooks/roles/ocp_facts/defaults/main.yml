@@ -1,0 +1,4 @@
+---
+openshift_example_dir: /usr/share/openshift/examples/
+update_is_images_url: registry.access.redhat.com
+install_type: "rpm"
