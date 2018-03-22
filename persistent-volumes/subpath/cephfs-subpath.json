@@ -24,6 +24,9 @@
                 "name": "cephfs"
             }]
         }],
+        "securityContext": {
+            "privileged": true
+        },
         "volumes": [{
             "name": "cephfs",
             "persistentVolumeClaim": {
