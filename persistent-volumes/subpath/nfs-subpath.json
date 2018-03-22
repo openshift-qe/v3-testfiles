@@ -5,6 +5,15 @@
         "name": "nfs"
     },
     "spec": {
+		"initContainers": [{}
+			"name": "init",
+			"image": "aosqe/hello-openshift",
+			"command": ["sh", "-c", "mkdir /mnt/iaas/subpath; cp /hello /mnt/iaas/subpath/hello"],
+			"volumeMounts": [{
+				"name": "nfs",
+				"mountPath": "/mnt"
+			}]
+		}],
         "containers": [{
             "name": "myfrontend",
             "image": "aosqe/nfs-web",
