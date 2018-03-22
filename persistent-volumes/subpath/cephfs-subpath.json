@@ -20,7 +20,7 @@
             "imagePullPolicy": "IfNotPresent",
             "volumeMounts": [{
                 "mountPath": "/mnt/cephfs",
-                "subpath": "subpath",
+                "subPath": "subpath",
                 "name": "cephfs"
             }]
         }],
