@@ -16,7 +16,7 @@
 		}],
         "containers": [{
             "name": "myfrontend",
-            "image": "aosqe/nfs-web",
+            "image": "aosqe/hello-openshift",
             "imagePullPolicy": "IfNotPresent",
             "ports": [{
                 "containerPort": 80,
