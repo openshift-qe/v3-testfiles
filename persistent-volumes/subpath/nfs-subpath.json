@@ -5,7 +5,7 @@
         "name": "nfs"
     },
     "spec": {
-		"initContainers": [{}
+		"initContainers": [{
 			"name": "init",
 			"image": "aosqe/hello-openshift",
 			"command": ["sh", "-c", "mkdir /mnt/subpath; cp /hello /mnt/subpath/hello"],
