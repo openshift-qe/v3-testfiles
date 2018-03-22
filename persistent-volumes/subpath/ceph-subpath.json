@@ -2,14 +2,20 @@
     "apiVersion": "v1",
     "kind": "Pod",
     "metadata": {
-        "name": "gluster",
-        "labels": {
-            "name": "gluster"
-        }
+        "name": "ceph"
     },
     "spec": {
+		"initContainers": [{
+			"name": "init",
+			"image": "aosqe/hello-openshift",
+			"command": ["sh", "-c", "mkdir /mnt/rbd/subpath; cp /hello /mnt/rbd/subpath/hello"],
+			"volumeMounts": [{
+				"name": "rbd",
+				"mountPath": "/mnt/rbd"
+			}]
+		}],
         "containers": [{
-            "name": "gluster",
+            "name": "ceph",
             "image": "aosqe/hello-openshift",
             "imagePullPolicy": "IfNotPresent",
             "volumeMounts": [{
