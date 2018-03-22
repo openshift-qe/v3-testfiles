@@ -8,7 +8,7 @@
 		"initContainers": [{}
 			"name": "init",
 			"image": "aosqe/hello-openshift",
-			"command": ["sh", "-c", "mkdir /mnt/iaas/subpath; cp /hello /mnt/iaas/subpath/hello"],
+			"command": ["sh", "-c", "mkdir /mnt/subpath; cp /hello /mnt/subpath/hello"],
 			"volumeMounts": [{
 				"name": "nfs",
 				"mountPath": "/mnt"
