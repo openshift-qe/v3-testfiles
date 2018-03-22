@@ -8,11 +8,14 @@
 		"initContainers": [{
 			"name": "init",
 			"image": "aosqe/hello-openshift",
-			"command": ["sh", "-c", "mkdir /mnt/cephfs/subpath; cp /hello /mnt/cephfs/subpath/hello"],
+            "command": ["sh", "-c", "mkdir /mnt/cephfs/subpath; cp /hello /mnt/cephfs/subpath/hello"],
 			"volumeMounts": [{
 				"name": "cephfs",
 				"mountPath": "/mnt/cephfs"
-			}]
+			}],
+            "securityContext": {
+                "privileged": true
+            }
 		}],
         "containers": [{
             "name": "ceph",
@@ -22,11 +25,11 @@
                 "mountPath": "/mnt/cephfs",
                 "subPath": "subpath",
                 "name": "cephfs"
-            }]
+            }],
+            "securityContext": {
+                "privileged": true
+            }
         }],
-        "securityContext": {
-            "privileged": true
-        },
         "volumes": [{
             "name": "cephfs",
             "persistentVolumeClaim": {
