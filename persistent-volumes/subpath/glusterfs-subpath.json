@@ -23,7 +23,7 @@
             "imagePullPolicy": "IfNotPresent",
             "volumeMounts": [{
                 "mountPath": "/mnt/gluster",
-                "subpath": "subpath",
+                "subPath": "subpath",
                 "name": "gluster"
             }]
         }],
