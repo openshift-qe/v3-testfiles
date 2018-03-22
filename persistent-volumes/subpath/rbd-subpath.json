@@ -20,7 +20,7 @@
             "imagePullPolicy": "IfNotPresent",
             "volumeMounts": [{
                 "mountPath": "/mnt/rbd",
-                "subpath": "subpath",
+                "subPath": "subpath",
                 "name": "rbd"
             }]
         }],
