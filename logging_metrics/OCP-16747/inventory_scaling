@@ -48,7 +48,7 @@ openshift_logging_es_number_of_replicas=1
 openshift_logging_es_number_of_shards=3
 openshift_logging_es_ops_number_of_replicas=1
 openshift_logging_es_ops_number_of_shards=3
-
+openshift_logging_use_ops=true
 
 # Metrics
 openshift_metrics_install_metrics=true

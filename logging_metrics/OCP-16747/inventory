@@ -44,7 +44,7 @@ openshift_logging_kibana_replica_count=1
 openshift_logging_kibana_ops_replica_count=1
 openshift_logging_es_cluster_size=1
 openshift_logging_es_ops_cluster_size=1
-
+openshift_logging_use_ops=true
 
 # Metrics
 openshift_metrics_install_metrics=true
