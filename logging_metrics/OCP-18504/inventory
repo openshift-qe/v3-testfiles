@@ -43,11 +43,6 @@ openshift_logging_use_ops=true
 openshift_logging_install_eventrouter=true
 
 # Metrics
-openshift_metrics_install_metrics=true
-openshift_metrics_hawkular_hostname=<%= cb.metrics_route_prefix %>.<%= cb.subdomain %>
-openshift_metrics_project=<%= cb.target_proj %>
-openshift_metrics_image_prefix=<%= product_docker_repo %>openshift3/
-openshift_metrics_image_version=v<%= cb.master_version %>
 
 # Extra_Metrics
 <%= cb.extra_metrics_params_str %>
