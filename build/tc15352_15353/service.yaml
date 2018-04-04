@@ -1,0 +1,35 @@
+  kind: Template
+  apiVersion: v1
+  metadata:
+    name: test
+    creationTimestamp: null
+    annotations:
+      description: Template for container creation
+      iconClass: icon-generic
+      tags: generic
+  objects:
+    -
+      kind: Service
+      apiVersion: v1
+      metadata:
+        name: ${NODE_TEMPLATE_NAME}
+      spec:
+        ports:
+          - name: web
+            protocol: ${PROTOCOL}
+            port: ${{EXT_PORT}}
+            targetPort: ${{CONTAINER_PORT}}
+        selector:
+          name: ${NODE_TEMPLATE_NAME}
+        type: ClusterIP
+        sessionAffinity: None
+  parameters:
+    - name: PROTOCOL
+      description: protocol application uses
+    - name: CONTAINER_PORT
+      description: Container port number
+    - name: EXT_PORT
+      description: external port to be exposed
+    - name: NODE_TEMPLATE_NAME
+      description: Template name
+
