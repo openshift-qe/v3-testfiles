@@ -1,0 +1,6 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: test-userpass
+data:
+  htpasswd: testuser:{SHA}PHZ8Qa+xKtoUAZDtgts/2TDi76M=
