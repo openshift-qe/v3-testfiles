@@ -1,0 +1,3 @@
+name: "myKUBECTL_PLUGINS_PATH"
+shortDesc: "My plugin's short description"
+command: "echo hello KUBECTL_PLUGINS_PATH!"
