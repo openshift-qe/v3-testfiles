@@ -1,0 +1,3 @@
+name: "myXDG_DATA_DIRS"
+shortDesc: "My plugin's short description"
+command: "echo hello XDG_DATA_DIRS!"
