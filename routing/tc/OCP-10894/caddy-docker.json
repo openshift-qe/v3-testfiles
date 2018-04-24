@@ -1,0 +1,25 @@
+{
+"kind": "Pod",
+"apiVersion":"v1",
+
+"metadata": {
+"name": "caddy-docker",
+"labels": {
+"name": "caddy-docker"
+}
+},
+"spec": {
+"containers": [{
+"name": "caddy-docker-pod",
+"image": "bmeng/caddy-docker",
+"ports": [
+{
+"containerPort": 8080
+},
+{
+"containerPort": 8443
+}
+]
+}]
+}
+} 
