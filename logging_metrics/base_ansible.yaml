@@ -1,4 +1,3 @@
----
 apiVersion: v1
 kind: Pod
 metadata:
@@ -8,4 +7,5 @@ metadata:
 spec:
   containers:
   - name: base-ansible-pod
-    image: openshift3/ose-ansible:latest
+    image: openshift3/ose-ansible:v<%= cb.master_version %>
+    command: ['sh', '-c', 'echo "${USER_NAME:-default}:x:$(id -u):0:${USER_NAME:-default} user:${HOME}:/sbin/nologin" >> /etc/passwd && sleep inf']
