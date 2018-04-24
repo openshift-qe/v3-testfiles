@@ -25,5 +25,5 @@ openshift_prometheus_state=present
 openshift_prometheus_image_prefix=<%= product_docker_repo %>openshift3/
 
 # set non-default project where prometheus pod will be installed
-openshift_prometheus_namespace=<%= project.name %>
+openshift_prometheus_namespace=<%= cb.target_proj %>
 
