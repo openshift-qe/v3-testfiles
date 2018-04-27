@@ -6,6 +6,11 @@ metadata:
     name: base-ansible-pod
 spec:
   containers:
+  - env:
+    - name: http_proxy
+      value: <%= cb.proxy_value %>
+    - name: https_proxy
+      value: <%= cb.proxy_value %>
   - name: base-ansible-pod
     image: openshift3/ose-ansible:<%= cb.ansible_version %>
     command: ['sh', '-c', 'echo "${USER_NAME:-default}:x:$(id -u):0:${USER_NAME:-default} user:${HOME}:/sbin/nologin" >> /etc/passwd && sleep inf']
