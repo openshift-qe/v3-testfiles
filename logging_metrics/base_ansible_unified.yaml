@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: base-ansible-pod
+  labels:
+    name: base-ansible-pod
+spec:
+  containers:
+  <% if cb.proxy_value %>
+  - env:
+    - name: http_proxy
+      value: <%= cb.proxy_value %>
+    - name: https_proxy
+      value: <%= cb.proxy_value %>
+  <% end %>
+    name: base-ansible-pod
+    image: openshift3/ose-ansible:<%= cb.base_ansible_image_tag %>
+    command: ['sh', '-c', 'echo "${USER_NAME:-default}:x:$(id -u):0:${USER_NAME:-default} user:${HOME}:/sbin/nologin" >> /etc/passwd && sleep inf']
