@@ -1,7 +1,5 @@
 [OSEv3:children]
-<%= cb.inventory_ose_children_masters %>
-<%= cb.inventory_ose_children_etcd %>
-<%= cb.inventory_ose_children_nodes %>
+children=to_be_replaced
 
 [masters]
 <%= cb.master_url %>
