@@ -1,5 +1,5 @@
 [OSEv3:children]
-<% ose_children %>
+<% cb.ose_children %>
 
 [masters]
 <%= cb.master_url %> openshift_public_hostname=<%= cb.master_url %>
