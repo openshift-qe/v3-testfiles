@@ -1,8 +1,11 @@
 [OSEv3:children]
-<%= cb.ose_children %>
+<%= cb.inventory_ose_children_masters %>
+<%= cb.inventory_ose_children_etcd %>
+<%= cb.inventory_ose_children_nodes %>
 
 [masters]
-<%= cb.master_url %> openshift_public_hostname=<%= cb.master_url %>
+<%= cb.master_url %>
+openshift_public_hostname=<%= cb.master_url %>
 
 [nodes]
 <%= cb.schedulable_nodes %>
