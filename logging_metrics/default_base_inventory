@@ -2,7 +2,7 @@
 children=to_be_replaced
 
 [masters]
-<%= cb.master_url %> openshift_public_hostname=<%= cb.master_url %>
+<%= env.api_hostname %> openshift_public_hostname=<%= env.api_hostname %>
 
 [nodes]
 <%= cb.schedulable_nodes %>
