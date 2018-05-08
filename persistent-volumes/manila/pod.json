@@ -2,7 +2,7 @@
     "apiVersion": "v1",
     "kind": "Pod",
     "metadata": {
-        "name": "cephfs"
+        "name": "nfs"
     },
     "spec": {
         "containers": [{
@@ -14,14 +14,14 @@
                 "name": "http-server"
             }],
             "volumeMounts": [{
-                "mountPath": "/mnt/cephfs",
+                "mountPath": "/mnt/nfs",
                 "name": "pvol"
             }]
         }],
         "volumes": [{
             "name": "pvol",
             "persistentVolumeClaim": {
-                "claimName": "cephfsc1"
+                "claimName": "claim1"
             }
         }]
     }

@@ -22,17 +22,13 @@
             {
                 "name": "cephfs",
                 "cephfs": {
-                    "monitors": [
-                                "192.168.0.130:6789",
-                                "192.168.0.131:6789",
-                                "192.168.0.132:6789",
-                                "192.168.0.147:6789"
-                     ],
+                    "monitors": ["10.73.131.192:6789"],
                     "user": "admin",
                     "secretRef": {
-                          "name": "ceph-secret"
+                          "name": "cephrbd-secret",
+                          "namespace": "default"
                      },
-                    "readOnly": true
+                    "readOnly": false
                 }
             }
         ]

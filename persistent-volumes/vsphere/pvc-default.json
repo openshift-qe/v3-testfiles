@@ -2,7 +2,7 @@
   "kind": "PersistentVolumeClaim",
   "apiVersion": "v1",
   "metadata": {
-    "name": "vspherec"
+    "name": "vspherec1"
   },
   "spec": {
     "accessModes": [
