@@ -36,7 +36,7 @@
                         "name": "cephrbd-user-secret"
                     },
                     "fsType": "ext4",
-                    "readOnly": true
+                    "readOnly": false
                 }
             }
         ]

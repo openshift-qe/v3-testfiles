@@ -12,3 +12,4 @@ parameters:
   userId: "admin"
   userSecretName: "cephrbd-secret"
   fstype: "xfs"
+  imageFormat: 1
