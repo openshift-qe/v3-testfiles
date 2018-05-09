@@ -2,7 +2,7 @@
     "apiVersion": "v1",
     "kind": "Pod",
     "metadata": {
-        "name": "rbd2",
+        "name": "rbdpd",
         "labels": {
             "name": "frontendhttp"
         }
@@ -27,7 +27,7 @@
         "volumes": [{
             "name": "pvol",
             "persistentVolumeClaim": {
-                "claimName": "rbdc2"
+                "claimName": "rbdc"
             }
         }]
     }
