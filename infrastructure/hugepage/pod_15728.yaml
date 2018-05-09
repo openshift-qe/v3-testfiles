@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-15728
+spec:
+  securityContext:
+    supplementalGroups:
+    - 0
+  containers:
+  - image: bmeng/hello-openshift:latest
+    name: hello
+    volumeMounts:
+    - mountPath: /hugepages
+      name: hugepage
+    resources:
+      requests:
+        cpu: 100m
+        memory: 100Mi
+        hugepages-3Mi: 20Mi
+      limits:
+        hugepages-3Mi: 20Mi
+  volumes:
+  - name: hugepage
+    emptyDir:
+      medium: HugePages
