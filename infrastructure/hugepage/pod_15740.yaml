@@ -7,8 +7,8 @@ spec:
     supplementalGroups:
     - 0
   containers:
-  - image: bmeng/hello-openshift:latest
-    name: hello
+  - image: aosqe/hugepage-test:latest
+    name: hp
     volumeMounts:
     - mountPath: /hugepages
       name: hugepage
