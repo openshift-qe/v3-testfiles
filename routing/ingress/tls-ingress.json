@@ -13,7 +13,7 @@
                         {
                             "backend": {
                                 "serviceName": "service-unsecure",
-                                "servicePort": 27017
+                                "servicePort": 8080
                             },
                             "path": "/"
                         }
