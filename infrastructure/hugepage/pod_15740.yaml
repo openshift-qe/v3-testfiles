@@ -16,9 +16,9 @@ spec:
       requests:
         cpu: 100m
         memory: 100Mi
-        hugepages-2Mi: 20Mi
+        hugepages-2Mi: 21Mi
       limits:
-        hugepages-2Mi: 20Mi
+        hugepages-2Mi: 21Mi
   volumes:
   - name: hugepage
     emptyDir:
