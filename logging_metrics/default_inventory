@@ -1,8 +1,13 @@
 [OSEv3:children]
 masters
+etcd
+nodes
 
 [masters]
 <%= cb.master_url %> openshift_public_hostname=<%= cb.master_url %>
+
+[nodes]
+<%= cb.schedulable_nodes %>
 
 [etcd]
 <%= env.etcd_hosts.first.hostname %> openshift_public_hostname=<%= env.etcd_hosts.first.hostname %>
@@ -43,3 +48,5 @@ openshift_metrics_image_version=v<%= cb.master_version %>
 
 # Extra_Metrics
 
+# place holder for test specific parameters
+<%= cb.testcase_specific_parameters %>

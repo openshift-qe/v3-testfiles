@@ -1,0 +1,7 @@
+oc patch configmap {{configmap}} -n {{logging_namespace}} -p '
+{"data": 
+   {"secure-forward.conf": 
+      "<store>\n@type secure_forward\nshared_key {{shared_key}}\nself_hostname ocp_fluentd\nsecure no\nflush_interval 5s\nmax_retry_wait 30\nbuffer_type memory\nbuffer_queue_limit 32\nbuffer_chunk_limit 1m\n<server>\nhost {{serviceip}}\nport 24284\n</server>\n</store>\n"
+}}
+'
+

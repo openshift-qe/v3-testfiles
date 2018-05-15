@@ -1,0 +1,21 @@
+# put any extra logging related parameters that are not default here
+[OSEv3:vars]
+openshift_logging_install_logging=true
+openshift_logging_kibana_hostname=<%= cb.logging_route_prefix %>.<%= cb.subdomain %>
+openshift_logging_kibana_ops_hostname=<%= cb.logging_route_prefix %>-ops.<%= cb.subdomain %>
+public_master_url=https://<%= env.api_hostname %>:<%= env.api_port %>
+openshift_logging_image_prefix=<%= product_docker_repo %>openshift3/
+openshift_logging_image_version=v<%= cb.master_version %>
+openshift_logging_namespace=<%= cb.target_proj %>
+
+openshift_logging_elasticsearch_cpu_limit=300m
+openshift_logging_elasticsearch_cpu_request=300m
+openshift_logging_elasticsearch_memory_limit=512Mi
+openshift_logging_es_cpu_limit=300m
+openshift_logging_es_cpu_request=300m
+openshift_logging_es_ops_cpu_limit=300m
+openshift_logging_es_ops_cpu_request=300m
+openshift_logging_es_memory_limit=512Mi
+openshift_logging_es_ops_memory_limit=512Mi
+openshift_logging_kibana_memory_limit=512Mi
+openshift_logging_kibana_ops_memory_limit=512Mi

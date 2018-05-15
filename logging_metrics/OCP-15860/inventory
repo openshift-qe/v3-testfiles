@@ -1,0 +1,4 @@
+[OSEv3:vars]
+# Extra_Metrics
+openshift_metrics_install_hawkular_agent=true
+

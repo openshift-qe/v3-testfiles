@@ -1,0 +1,12 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+ name: gluster-block1
+provisioner: gluster.org/glusterblock
+parameters:
+  resturl: "http://10.73.131.132:9991"
+  restauthenabled: "true"
+  restuser: "admin"
+  restsecretname: "heketi-block-secret"
+  restsecretnamespace: "default"
+reclaimPolicy: Retain

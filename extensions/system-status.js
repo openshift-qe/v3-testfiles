@@ -8,7 +8,7 @@ angular
       var system_status_elem_mobile = $('<div row flex class="navbar-flex-btn system-status-mobile">');
 
 
-      $.getJSON("https://m0sg3q4t415n.statuspage.io/api/v2/summary.json", function (data) {
+      $.getJSON("https://raw.githubusercontent.com/openshift-qe/v3-testfiles/master/extensions/system-status.json", function (data) {
         //var n = (data.incidents || [ ]).length;
         var n = 2;
         if (n > 0) {

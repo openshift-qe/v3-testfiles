@@ -30,7 +30,7 @@
         "volumes": [{
             "name": "pvol",
             "persistentVolumeClaim": {
-                "claimName": "rbdc1"
+                "claimName": "rbdc"
             }
         }]
     }

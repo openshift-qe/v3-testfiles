@@ -1,0 +1,7 @@
+oc patch configmap {{configmap}} -n {{logging_namespace}} -p '
+{"data": 
+   {"secure-forward.conf": 
+      "#<store>\n#@type secure_forward\n#shared_key shared_key\n#self_hostname ocp_fluentd\n#secure no\n#<server>\n#host serviceip\n#port 24284\n#</server>\n#</store>\n"
+}}
+'
+

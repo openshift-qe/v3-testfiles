@@ -1,0 +1,40 @@
+{
+    "apiVersion": "v1",
+    "kind": "Pod",
+    "metadata": {
+        "name": "ceph"
+    },
+    "spec": {
+		"initContainers": [{
+			"name": "init",
+			"image": "aosqe/hello-openshift",
+            "command": ["sh", "-c", "mkdir /mnt/cephfs/subpath; cp /hello /mnt/cephfs/subpath/hello"],
+			"volumeMounts": [{
+				"name": "cephfs",
+				"mountPath": "/mnt/cephfs"
+			}],
+            "securityContext": {
+                "privileged": true
+            }
+		}],
+        "containers": [{
+            "name": "ceph",
+            "image": "aosqe/hello-openshift",
+            "imagePullPolicy": "IfNotPresent",
+            "volumeMounts": [{
+                "mountPath": "/mnt/cephfs",
+                "subPath": "subpath",
+                "name": "cephfs"
+            }],
+            "securityContext": {
+                "privileged": true
+            }
+        }],
+        "volumes": [{
+            "name": "cephfs",
+            "persistentVolumeClaim": {
+                "claimName": "cephfsc"
+            }
+        }]
+    }
+}

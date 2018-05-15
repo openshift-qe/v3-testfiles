@@ -1,0 +1,10 @@
+[OSEv3:vars]
+openshift_logging_fluentd_buffer_size_limit=4m
+openshift_logging_fluentd_file_buffer_limit=1Gi
+openshift_logging_fluentd_buffer_queue_limit=64
+openshift_logging_mux_buffer_size_limit=8m
+openshift_logging_mux_file_buffer_limit=512Mi
+openshift_logging_mux_buffer_queue_limit=32
+openshift_logging_use_ops=true
+openshift_logging_use_mux=true
+openshift_logging_mux_client_mode=maximal

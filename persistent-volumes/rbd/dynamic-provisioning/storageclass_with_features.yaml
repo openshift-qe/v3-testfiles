@@ -11,4 +11,5 @@ parameters:
   pool: "rbd"
   userId: "admin"
   userSecretName: "cephrbd-secret"
-  features: "abc,layering, exclusive-lock"
+  imageFormat: 2
+  imageFeatures: "layering"

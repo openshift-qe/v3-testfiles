@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: hello-openshift
 spec:
-  replicas: 4
+  replicas: 1
   template:
     metadata:
       labels:

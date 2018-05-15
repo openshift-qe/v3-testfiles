@@ -1,0 +1,42 @@
+- set_fact:
+    vm_type: gce
+  when: '"Google" in ansible_bios_version'
+
+- set_fact:
+    vm_type: aws
+  when: '"amazon" in ansible_bios_version'
+
+- set_fact:
+    vm_type: aws
+  when: ("090006" in ansible_bios_version)
+    or ("centralus.cloudapp.azure.com" in ansible_fqdn)
+
+- set_fact:
+    vm_type: openstack
+  when: '"seabios" in ansible_bios_version'
+
+- set_fact:
+    vm_type: openstack_mtv
+  when: ("lab.sjc.redhat.com" in inventory_hostname)
+     or ("lab.sjc.redhat.com" in ansible_fqdn)
+ 
+- set_fact:
+    vm_type: openstack_qeos7
+  when: ("centralci.eng.rdu2.redhat.com" in inventory_hostname)
+    or ("centralci.eng.rdu2.redhat.com" in ansible_fqdn)
+ 
+- set_fact:
+    vm_type: openstack_bj
+  when: ("lab.eng.nay.redhat.com" in inventory_hostname)
+    or ("10.66" in inventory_hostname)
+    or ("lab.eng.nay.redhat.com" in ansible_fqdn)
+    or ("10.66" in ansible_fqdn)
+    or (openshift_public_hostname is defined and "lab.eng.nay.redhat.com" in openshift_public_hostname)
+    or (openshift_hostname is defined and "lab.eng.nay.redhat.com" in openshift_hostname)
+
+- set_fact:
+    os_type: "rhel"
+
+- set_fact:
+    os_type: "atomic"
+  when: '"ostree" in ansible_cmdline.BOOT_IMAGE'

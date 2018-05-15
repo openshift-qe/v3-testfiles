@@ -39,7 +39,7 @@ items:
         - /usr/bin/caddy
       args:
         - --conf
-        - /etc/Caddyfile
+        - /etc/caddy/Caddyfile
       ports:
       - containerPort: 8080
       - containerPort: 8443
@@ -47,7 +47,7 @@ items:
         - name: cert
           mountPath: /etc/serving-cert
         - name: conf
-          mountPath: /etc
+          mountPath: /etc/caddy
     volumes:
       - name: conf
         configMap:

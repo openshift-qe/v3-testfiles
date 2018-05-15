@@ -1,0 +1,8 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: "manila-share"
+provisioner: "externalstorage.k8s.io/manila"
+parameters:
+  type: "lvmsharetype"
+  zones: "nova"

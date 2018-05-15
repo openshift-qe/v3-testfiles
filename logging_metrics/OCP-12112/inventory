@@ -1,0 +1,6 @@
+[OSEv3:vars]
+# Extra_Metrics
+openshift_metrics_duration=14
+openshift_metrics_resolution=15s
+openshift_metrics_cassandra_storage_group=65531
+# place holder for test specific parameters

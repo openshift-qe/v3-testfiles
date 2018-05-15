@@ -1,0 +1,16 @@
+[OSEv3:children]
+children=to_be_replaced
+
+[masters]
+<%= env.api_hostname %> openshift_public_hostname=<%= env.api_hostname %>
+
+[nodes]
+<%= cb.schedulable_nodes %>
+
+[etcd]
+<%= env.etcd_hosts.first.hostname %> openshift_public_hostname=<%= env.etcd_hosts.first.hostname %>
+
+[OSEv3:vars]
+ansible_ssh_user=root
+ansible_ssh_private_key_file="/tmp/tmp/libra.pem"
+deployment_type=openshift-enterprise

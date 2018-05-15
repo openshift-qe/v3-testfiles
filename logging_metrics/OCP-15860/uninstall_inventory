@@ -1,0 +1,8 @@
+[OSEv3:vars]
+# Metrics
+### hawkular
+openshift_metrics_install_metrics=false
+openshift_metrics_project=<%= cb.target_proj %>
+openshift_metrics_install_hawkular_agent=false
+
+

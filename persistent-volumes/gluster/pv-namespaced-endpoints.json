@@ -1,0 +1,19 @@
+{
+  "apiVersion": "v1",
+  "kind": "PersistentVolume",
+  "metadata": {
+    "name": "gluster"
+  },
+  "spec": {
+    "capacity": {
+        "storage": "5Gi"
+    },
+    "accessModes": [ "ReadWriteOnce" ],
+    "glusterfs": {
+        "endpoints": "glusterfs-cluster",
+        "endpointsNamespace": "a",
+        "path": "testvol"
+    },
+    "persistentVolumeReclaimPolicy": "Retain"
+  }
+}

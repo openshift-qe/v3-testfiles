@@ -1,0 +1,4 @@
+[OSEv3:vars]
+# Logging
+openshift_logging_install_logging=false
+openshift_logging_use_ops=true

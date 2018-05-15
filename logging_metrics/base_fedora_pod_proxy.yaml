@@ -1,0 +1,20 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: base-ansible-pod
+  labels:
+    name: base-ansible-pod
+  namespace: to_be_replaced
+spec:
+  containers:
+  - env:
+    - name: http_proxy
+      value: to_be_replaced
+    - name: https_proxy
+      value: to_be_replaced
+    name: base-ansible-pod
+    image: aosqe/fedora_base
+    securityContext:
+      privileged: true
+

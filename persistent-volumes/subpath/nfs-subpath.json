@@ -1,0 +1,38 @@
+{
+    "apiVersion": "v1",
+    "kind": "Pod",
+    "metadata": {
+        "name": "nfs"
+    },
+    "spec": {
+		"initContainers": [{
+			"name": "init",
+			"image": "aosqe/hello-openshift",
+			"command": ["sh", "-c", "mkdir /mnt/subpath; cp /hello /mnt/subpath/hello"],
+			"volumeMounts": [{
+				"name": "nfs",
+				"mountPath": "/mnt"
+			}]
+		}],
+        "containers": [{
+            "name": "myfrontend",
+            "image": "aosqe/hello-openshift",
+            "imagePullPolicy": "IfNotPresent",
+            "ports": [{
+                "containerPort": 80,
+                "name": "http-server"
+            }],
+            "volumeMounts": [{
+                "mountPath": "/mnt",
+                "name": "nfs",
+                "subPath": "subpath"
+            }]
+        }],
+        "volumes": [{
+            "name": "nfs",
+            "persistentVolumeClaim": {
+                "claimName": "nfsc"
+            }
+        }]
+    }
+}

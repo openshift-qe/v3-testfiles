@@ -1,0 +1,24 @@
+[Unit]
+Description=ElasticSearch
+
+[Service]
+Type=notify
+Environment=ES_PATH_CONF=/home/{{esuser}}/elasticsearch.yml
+User={{esuser}}
+Group={{esgroup}}
+WorkingDirectory=/home/{{esuser}}/{{elasticsearch}}
+PIDFile=/home/{{esuser}}/elasticsearch.pid
+ExecStart=/home/{{esuser}}/{{elasticsearch}}/bin/elasticsearch -d -p /home/{{esuser}}/elasticsearch.pid
+#ExecReload=/usr/bin/kill -s HUP $MAINPID
+#ExecStop=/usr/bin/kill -s QUIT $MAINPID
+SyslogIdentifier=elasticsearch
+PrivateTmp=true
+Restart=always
+RestartSec=5s
+LimitNOFILE=65536
+LimitCORE=infinity
+TimeoutStartSec=300
+OOMScoreAdjust=-999
+
+[Install]
+WantedBy=multi-user.target

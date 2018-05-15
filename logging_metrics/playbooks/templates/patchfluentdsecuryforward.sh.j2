@@ -1,0 +1,15 @@
+# Patch the fluentd to support security forward to external fluentd by the following scripts
+oc create -f forwardsecret.yml 
+oc patch configmap logging-fluentd -p'{"data": {"secure-forward.conf": "\u003cstore\u003e\n@type secure_forward\nshared_key sharedkey\nself_hostname ${HOSTNAME}\nca_cert_path {{certmountpath}}{{certname}}\nca_private_key_passphrase passphrase\nenable_strict_verification yes\nsecure yes\n\n\u003cserver\u003e\nhost {{hostip}}\nport 24284\n\u003c/server\u003e\n\n\n\u003c/store\u003e\n"'}}
+oc patch ds logging-fluentd -p '{"spec":{"template":{"spec":{"volumes": [{"name":"forwardcert","secret":{"secretName":"{{secretname}}","defaultMode":420}}]}}}}'
+oc patch ds logging-fluentd -p '{"spec":{"template":{"spec":{"containers": [ {"name": "fluentd-elasticsearch","volumeMounts":[{"mountPath":"{{certmountpath}}","name":"forwardcert","readOnly":true}]}]}}}}'
+
+# In the future, We can deploy logging with the following inventroy variables
+#openshift_logging_fluentd_shared_key: "sharedkey"
+#openshift_logging_fluentd_aggregating_port: 24284
+#openshift_logging_fluentd_aggregating_host: "${hostip}"
+#openshift_logging_fluentd_aggregating_secure: "yes"
+#openshift_logging_fluentd_aggregating_strict: "yes"
+#openshift_logging_fluentd_aggregating_cert_path: /tmp/forward_ca_cert.pem
+#openshift_logging_fluentd_aggregating_key_path: none
+#openshift_logging_fluentd_aggregating_passphrase: passphrase

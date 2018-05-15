@@ -27,8 +27,8 @@
         "volumes": [{
             "name": "pvol",
             "nfs": {
-                "server": "10.66.79.133",
-                "path": "/jhou",
+                "server": "ip-172-18-5-33.ec2.internal",
+                "path": "/nfs",
                 "readOnly": false
             }
         }]

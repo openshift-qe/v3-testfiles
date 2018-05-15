@@ -1,0 +1,62 @@
+<system>
+    log_level debug
+</system>
+
+# In each section below, pre- and post- includes don't include anything initially;
+# they exist to enable future additions to openshift conf as needed.
+
+## sources
+<source>
+  @type secure_forward
+  @label @INGRESS
+
+  self_hostname internal_secure_forward
+  bind 0.0.0.0
+  port 24284
+
+  shared_key  {{shared_key}}
+
+  secure no
+</source>
+
+<match **>
+   @type file
+   time_slice_format %Y%m%d%H%M
+   time_slice_wait 1m
+   time_format %Y%m%dT%H%M%S%z
+   path /var/log/fluentd/all
+   format json
+   append false
+   buffer_type file
+   log_level debug
+   buffer_queue_limit 2
+   buffer_chunk_limit 1k
+   flush_interval 15s
+</match>
+
+<label @INGRESS>
+   <match **>
+     @type file
+     time_slice_format %Y%m%d%H
+     time_slice_wait 1m
+     time_format %Y%m%dT%H%M%S%z
+     path /var/log/fluentd/INGRESS
+     format json
+     append false
+     buffer_type file
+     log_level debug
+     buffer_queue_limit 2
+     buffer_chunk_limit 1k
+     flush_interval 15s
+   </match>
+</label>
+
+
+
+<label @INGRESS>
+   <match **>
+     @type file
+     path /var/log/fluentd/apps
+   </match>
+
+</label>

@@ -10,11 +10,11 @@
     },
     "accessModes": [ "ReadWriteOnce" ],
     "cephfs": {
-        "monitors": ["10.66.145.205:6789"],
+        "monitors": ["10.73.131.192:6789"],
         "user": "admin",
         "secretRef": {
             "name": "cephrbd-user-secret",
-            "namespace": "ceph"
+            "namespace": "default"
         },
         "secretFile": "/etc/ceph/admin.secret",
         "readOnly": false

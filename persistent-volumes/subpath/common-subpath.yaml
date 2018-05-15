@@ -1,0 +1,26 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: testpod
+spec:
+  initContainers:
+    - name: init
+      image: aosqe/hello-openshift
+      command: ["sh", "-c", "mkdir /mnt/iaas/subpath; cp /hello /mnt/iaas/subpath/hello"]
+      volumeMounts:
+        - mountPath: "/mnt/iaas"
+          name: dynamic
+  containers:
+    - name: testpod
+      image: aosqe/hello-openshift
+      ports:
+        - containerPort: 80
+          name: "http-server"
+      volumeMounts:
+      - mountPath: "/mnt/iaas"
+        subPath: "subpath"
+        name: dynamic
+  volumes:
+    - name: dynamic
+      persistentVolumeClaim:
+        claimName: vspherec

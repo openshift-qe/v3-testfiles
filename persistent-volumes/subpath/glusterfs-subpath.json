@@ -1,0 +1,37 @@
+{
+    "apiVersion": "v1",
+    "kind": "Pod",
+    "metadata": {
+        "name": "gluster",
+        "labels": {
+            "name": "gluster"
+        }
+    },
+    "spec": {
+		"initContainers": [{
+			"name": "init",
+			"image": "aosqe/hello-openshift",
+			"command": ["sh", "-c", "mkdir /mnt/gluster/subpath; cp /hello /mnt/gluster/subpath/hello"],
+			"volumeMounts": [{
+				"name": "gluster",
+				"mountPath": "/mnt/gluster"
+			}]
+		}],
+        "containers": [{
+            "name": "gluster",
+            "image": "aosqe/hello-openshift",
+            "imagePullPolicy": "IfNotPresent",
+            "volumeMounts": [{
+                "mountPath": "/mnt/gluster",
+                "subPath": "subpath",
+                "name": "gluster"
+            }]
+        }],
+        "volumes": [{
+            "name": "gluster",
+            "persistentVolumeClaim": {
+                "claimName": "glusterc"
+            }
+        }]
+    }
+}

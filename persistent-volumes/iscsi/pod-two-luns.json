@@ -24,10 +24,10 @@
             },
             {
                 "name": "iscsi-ro",
-                "image": "jhou/hello-openshift",
+                "image": "aosqe/nfs-web",
                 "imagePullPolicy": "IfNotPresent",
                  "ports": [{
-                    "containerPort": 6793
+                    "containerPort": 80
                 }],
                 "volumeMounts": [{
                     "mountPath": "/mnt/iscsi",

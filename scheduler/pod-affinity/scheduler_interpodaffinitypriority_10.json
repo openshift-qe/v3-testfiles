@@ -33,9 +33,6 @@
             "name": "CheckNodeDiskPressure"
         }, 
         {
-            "name": "NoVolumeNodeConflict"
-        }, 
-        {
             "argument": {
                 "serviceAffinity": {
                     "labels": [

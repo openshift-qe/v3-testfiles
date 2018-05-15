@@ -1,0 +1,44 @@
+{
+    "apiVersion": "v1",
+    "kind": "Pod",
+    "metadata": {
+        "name": "iscsi",
+        "labels": {
+            "name": "iscsi"
+        }
+    },
+    "spec": {
+		"initContainers": [{
+			"name": "init",
+			"image": "aosqe/hello-openshift",
+			"command": ["sh", "-c", "mkdir /mnt/iscsi/subpath; cp /hello /mnt/iscsi/subpath/hello"],
+			"volumeMounts": [{
+				"name": "iscsi",
+				"mountPath": "/mnt/iscsi"
+			}]
+		}],
+        "containers": [{
+            "name": "iscsi",
+            "image": "jhou/hello-openshift",
+            "imagePullPolicy": "IfNotPresent",
+            "volumeMounts": [{
+                "name": "iscsi",
+                "mountPath": "/mnt/iscsi",
+                "subPath": "subpath"
+            }]
+        }],
+        "securityContext": {
+            "runAsUser": 101010,
+            "fsGroup": 123456,
+            "seLinuxOptions": {
+                "level": "s0:c13,c2"
+            }
+        },
+        "volumes": [{
+            "name": "iscsi",
+            "persistentVolumeClaim": {
+                "claimName": "pvc-iscsi"
+            }
+        }]
+    }
+}

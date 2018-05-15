@@ -1,0 +1,5 @@
+[OSEv3:vars]
+# for v3.6
+openshift_logging_use_mux_client=true
+# for OCP >= 3.7
+openshift_logging_mux_client_mode=maximal
