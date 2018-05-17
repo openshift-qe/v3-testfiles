@@ -1,0 +1,4 @@
+[OSEv3:vars]
+openshift_logging_es_allow_external=true
+openshift_logging_use_ops=true
+openshift_logging_es_ops_allow_external=true
