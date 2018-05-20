@@ -1,0 +1,9 @@
+[OSEv3:vars]
+openshift_logging_install_logging=true
+openshift_logging_use_ops=false
+openshift_logging_es_cluster_size=1
+openshift_logging_curator_default_days=1
+openshift_logging_curator_run_hour='date +%H --date="10 minutes hence"'
+openshift_logging_curator_run_minute= `date +%M --date="10 minutes hence"`
+openshift_logging_curator_run_timezone=UTC
+openshift_logging_curator_script_log_level=INFO
