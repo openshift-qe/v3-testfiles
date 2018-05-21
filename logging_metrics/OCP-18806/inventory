@@ -1,0 +1,4 @@
+[OSEv3:vars]
+openshift_logging_es_number_of_shards=1
+openshift_logging_es_number_of_replicas=1
+openshift_logging_es_cluster_size=3
