@@ -7,3 +7,8 @@ metadata:
     snapshot.alpha.kubernetes.io/snapshot: snapshot-1
 spec:
   storageClassName: snapshot-promoter
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
