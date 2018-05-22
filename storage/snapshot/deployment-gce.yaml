@@ -14,10 +14,10 @@ spec:
       serviceAccountName: snapshot-controller-runner
       containers:
         - name: snapshot-controller
-          image: "registry.access.redhat.com/openshift3/snapshot-controller:latest"
+          image: "openshift3/snapshot-controller:latest"
           imagePullPolicy: "IfNotPresent"
           args: ["-cloudprovider", "gce"]
         - name: snapshot-provisioner
-          image: "registry.access.redhat.com/openshift3/snapshot-provisioner:latest"
+          image: "openshift3/snapshot-provisioner:latest"
           imagePullPolicy: "IfNotPresent"
           args: ["-cloudprovider", "gce"]
