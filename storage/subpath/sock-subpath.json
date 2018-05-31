@@ -1,0 +1,19 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: sock-pod
+spec:
+  containers:
+    - name: sockfile
+      image: aosqe/hello-openshift
+      ports:
+        - containerPort: 80
+          name: "http-server"
+      volumeMounts:
+      - mountPath: "/mnt/run/docker.sock"
+        subPath: "run/docker.sock"
+        name: file
+  volumes:
+    - name: file
+      hostPath:
+        path: "/"
