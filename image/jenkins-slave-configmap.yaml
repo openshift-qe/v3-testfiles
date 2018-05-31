@@ -1,0 +1,89 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  data:
+    asdf: |-
+      <org.csanchez.jenkins.plugins.kubernetes.PodTemplate>
+        <inheritFrom></inheritFrom>
+        <name>asdf</name>
+        <instanceCap>2147483647</instanceCap>
+        <idleMinutes>0</idleMinutes>
+        <label>asdf</label>
+        <serviceAccount>jenkins</serviceAccount>
+        <nodeSelector></nodeSelector>
+        <volumes/>
+        <containers>
+          <org.csanchez.jenkins.plugins.kubernetes.ContainerTemplate>
+            <name>jnlp</name>
+            <image>openshift3/jenkins-slave-base-rhel7:v3.9</image>
+            <privileged>false</privileged>
+            <alwaysPullImage>true</alwaysPullImage>
+            <workingDir>/tmp</workingDir>
+            <command></command>
+            <args>${computer.jnlpmac} ${computer.name}</args>
+            <ttyEnabled>false</ttyEnabled>
+            <resourceRequestCpu></resourceRequestCpu>
+            <resourceRequestMemory></resourceRequestMemory>
+            <resourceLimitCpu></resourceLimitCpu>
+            <resourceLimitMemory></resourceLimitMemory>
+            <envVars/>
+          </org.csanchez.jenkins.plugins.kubernetes.ContainerTemplate>
+        </containers>
+        <envVars>
+          <org.csanchez.jenkins.plugins.kubernetes.PodEnvVar>
+            <key>a</key>
+            <value>b</value>
+          </org.csanchez.jenkins.plugins.kubernetes.PodEnvVar>
+          <org.csanchez.jenkins.plugins.kubernetes.PodEnvVar>
+            <key>c</key>
+            <value>d</value>
+          </org.csanchez.jenkins.plugins.kubernetes.PodEnvVar>
+        </envVars>
+        <annotations/>
+        <imagePullSecrets/>
+        <nodeProperties/>
+      </org.csanchez.jenkins.plugins.kubernetes.PodTemplate>
+    fdsa: |-
+      <org.csanchez.jenkins.plugins.kubernetes.PodTemplate>
+        <inheritFrom></inheritFrom>
+        <name>fdsa</name>
+        <instanceCap>2147483647</instanceCap>
+        <idleMinutes>0</idleMinutes>
+        <label>fdsa</label>
+        <serviceAccount>jenkins</serviceAccount>
+        <nodeSelector></nodeSelector>
+        <volumes/>
+        <containers>
+          <org.csanchez.jenkins.plugins.kubernetes.ContainerTemplate>
+            <name>jnlp</name>
+            <image>openshift/jenkins-slave-maven-centos7</image>
+            <privileged>false</privileged>
+            <alwaysPullImage>false</alwaysPullImage>
+            <workingDir>/tmp</workingDir>
+            <command></command>
+            <args>${computer.jnlpmac} ${computer.name}</args>
+            <ttyEnabled>false</ttyEnabled>
+            <resourceRequestCpu></resourceRequestCpu>
+            <resourceRequestMemory></resourceRequestMemory>
+            <resourceLimitCpu></resourceLimitCpu>
+            <resourceLimitMemory></resourceLimitMemory>
+            <envVars/>
+          </org.csanchez.jenkins.plugins.kubernetes.ContainerTemplate>
+        </containers>
+        <envVars/>
+        <annotations/>
+        <imagePullSecrets/>
+        <nodeProperties/>
+      </org.csanchez.jenkins.plugins.kubernetes.PodTemplate>
+  kind: ConfigMap
+  metadata:
+    annotations:
+      openshift.io/generated-by: OpenShiftNewApp
+    labels:
+      role: jenkins-slave
+    name: jenkins-slave
+    resourceVersion: "2277"
+kind: List
+metadata: {}
+resourceVersion: ""
+selfLink: ""
