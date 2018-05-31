@@ -1,0 +1,3 @@
+[OSEv3:vars]
+# request to use 1 dedicate CPU core
+openshift_logging_install_eventrouter=true
