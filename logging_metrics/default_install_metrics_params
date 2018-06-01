@@ -6,5 +6,5 @@ openshift_metrics_project=<%= cb.target_proj %>
 openshift_metrics_image_prefix=<%= product_docker_repo %>openshift3/
 openshift_metrics_image_version=v<%= cb.master_version %>
 # for OCP > 3.10.53
-oreg_url=<%= product_docker_repo %>oopenshift3/ose-${component}:${version}
+oreg_url=<%= product_docker_repo %>openshift3/ose-${component}:${version}
 
