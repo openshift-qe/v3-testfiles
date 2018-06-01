@@ -7,3 +7,6 @@ openshift_prometheus_namespace=openshift-metrics
 # with a label 'region=infra'
 #openshift_prometheus_node_selector={"region" : "<%= cb.node_label %>"}
 openshift_prometheus_image_prefix=<%= product_docker_repo %>openshift3/
+# for OCP > 3.10.53
+oreg_url=<%= product_docker_repo %>oopenshift3/ose-${component}:${version}
+
