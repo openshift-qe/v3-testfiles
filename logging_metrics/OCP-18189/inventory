@@ -5,4 +5,4 @@ openshift_logging_es_cluster_size=2
 openshift_logging_es_pvc_dynamic=true
 openshift_logging_es_number_of_shards=1
 openshift_logging_es_number_of_replicas=1
-openshift_logging_es_memory_limit=2Gi
+openshift_logging_es_memory_limit=500Mi
