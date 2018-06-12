@@ -51,6 +51,7 @@ objects:
       spec:
         containers:
         - args:
+          - -alsologtostderr          
           - --port
           - "8080"
           image: quay.io/kubernetes-service-catalog/user-broker:latest
