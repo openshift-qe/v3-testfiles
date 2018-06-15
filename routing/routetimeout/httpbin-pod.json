@@ -1,7 +1,6 @@
 {
   "kind": "Pod",
   "apiVersion":"v1",
-
   "metadata": {
         "name": "httpbin-pod",
         "labels": {
@@ -10,12 +9,18 @@
   },
   "spec": {
       "containers": [{
-        "name": "httpbin-pod",
+        "name": "httpbin-http",
         "image": "yadu/httpbin80",
         "ports": [
           {
             "containerPort": 8080
-          },
+          }
+        ]
+      },
+      {
+        "name": "httpbin-https",
+        "image": "yadu/httpbin",
+        "ports": [
           {
             "containerPort": 8443
           }
