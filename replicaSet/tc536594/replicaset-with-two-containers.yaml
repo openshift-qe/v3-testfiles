@@ -19,9 +19,6 @@ spec:
       - name: hello-openshift
         image: yapei/hello-openshift
         resources:
-          requests:
-            cpu: 100m
-            memory: 100Mi
           limits:
             memory: 256Mi
         env:
@@ -32,9 +29,6 @@ spec:
       - name: hello-openshift-fedora
         image: yapei/hello-openshift-fedora
         resources:
-          requests:
-            cpu: 100m
-            memory: 100Mi
           limits:
             memory: 256Mi
         env:
