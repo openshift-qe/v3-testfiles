@@ -2,9 +2,9 @@ apiVersion: v1
 kind: Pod
 metadata:
   annotations:
+  generateName: test-pod-
   labels:
     name: hello-openshift
-  name: hello-openshift
 spec:
   containers:
   - image: aosqe/hello-openshift
