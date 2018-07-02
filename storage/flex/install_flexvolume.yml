@@ -1,0 +1,36 @@
+---
+- name: Install NFS flexVolume
+  hosts:
+    - hosts
+  gather_facts: no
+
+  tasks:
+
+  - name: Install epel
+    yum:
+      name: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+      state: installed
+
+  - name: Install jq
+    yum:
+      name: jq
+      state: installed
+
+  - name: Create NFS flexVolume directory
+    file:
+      path: /usr/libexec/kubernetes/kubelet-plugins/volume/exec/openshift.com~nfs/
+      state: directory
+      mode: 0755
+      owner: root
+
+  - name: Install NFS flexVolume
+    copy:
+      src: nfs
+      dest: /usr/libexec/kubernetes/kubelet-plugins/volume/exec/openshift.com~nfs/nfs
+      mode: 0777
+      owner: root
+
+    #- name: Restart node service
+    #systemd:
+    #name: atomic-openshift-node
+    #state: restarted
