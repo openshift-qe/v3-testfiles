@@ -16,6 +16,13 @@ items:
             containerPort: 2049
         securityContext:
           privileged: true
+        volumeMounts:
+        - mountPath: "/mnt/data"
+          name: local
+    volumes:
+      - name: local
+        hostPath:
+         path: /var/mnt
 - apiVersion: v1
   kind: Service
   metadata:
