@@ -1,0 +1,12 @@
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: allow-8080-from-same-netspace
+spec:
+  podSelecter:
+  ingress:
+  - ports:
+    - protocol: TCP
+      port: 8080
+    - from:
+      - podSelector: {}

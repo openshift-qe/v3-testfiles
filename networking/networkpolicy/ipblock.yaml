@@ -1,0 +1,13 @@
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: test-podselector-and-ipblock
+spec:
+  podSelector: {}
+  ingress:
+  - from:
+    - ipBlock:
+        cidr: 192.168.1.0/24
+    - podSelector:
+        matchLabels:
+          type: red

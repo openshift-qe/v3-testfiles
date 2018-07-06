@@ -1,0 +1,4 @@
+[OSEv3:vars]
+# case specific parameter
+openshift_logging_install_logging=true
+openshift_logging_fluentd_audit_container_engine=false
