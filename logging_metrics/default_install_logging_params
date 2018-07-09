@@ -1,6 +1,7 @@
 # put any extra logging related parameters that are not default here
 [OSEv3:vars]
 openshift_logging_install_logging=true
+openshift_logging_es_allow_external=true
 openshift_logging_kibana_hostname=<%= cb.logging_route_prefix %>.<%= cb.subdomain %>
 openshift_logging_kibana_ops_hostname=<%= cb.logging_route_prefix %>-ops.<%= cb.subdomain %>
 openshift_logging_es_hostname=es.<%= cb.subdomain %>
