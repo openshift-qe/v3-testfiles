@@ -4,7 +4,7 @@
   hosts: masters[0]
   tasks:
     - set_fact:
-        logging_namespace: "{{ openshift_logging_namespace | default('logging') }}"
+        logging_namespace: "{{ openshift_logging_namespace | default('openshift-logging') }}"
         use_mux: "{{ openshift_logging_use_mux|default(False)}}"
         deployname1: "rsyslog"
         deployname2: "rsyslogback"
@@ -53,11 +53,11 @@
              serviceip2: "{{ serviceip2_result.stdout_lines[1] }}" 
 
         - name: Change fluentd DS
-          command: "oc set env ds/logging-fluentd USE_REMOTE_SYSLOG=true REMOTE_SYSLOG_HOST={{serviceip1}} REMOTE_SYSLOG_HOST_BACKUP={{serviceip2}} REMOTE_SYSLOG_PORT_BACKUP=514"
+          command: "oc set env ds/logging-fluentd USE_REMOTE_SYSLOG=true REMOTE_SYSLOG_HOST={{serviceip1}} REMOTE_SYSLOG_HOST_BACKUP={{serviceip2}} REMOTE_SYSLOG_PORT_BACKUP=514  -n {{logging_namespace}}"
           when: not use_mux
 
         - name: Change mux DC
-          command: "oc set env dc/logging-mux USE_REMOTE_SYSLOG=true REMOTE_SYSLOG_HOST={{serviceip1}} REMOTE_SYSLOG_HOST_BACKUP={{serviceip2}} REMOTE_SYSLOG_PORT_BACKUP=514"
+          command: "oc set env dc/logging-mux USE_REMOTE_SYSLOG=true REMOTE_SYSLOG_HOST={{serviceip1}} REMOTE_SYSLOG_HOST_BACKUP={{serviceip2}} REMOTE_SYSLOG_PORT_BACKUP=514  -n {{logging_namespace}}"
           when: use_mux
       when: not test_clear
 
@@ -76,11 +76,11 @@
           command: "oc delete service {{deployname2}}  -n {{logging_namespace}}"
           ignore_errors: True
         - name: Change fluentd DS Env back
-          command: "oc set env ds/logging-fluentd  USE_REMOTE_SYSLOG- REMOTE_SYSLOG_HOST- REMOTE_SYSLOG_HOST_BACKUP- REMOTE_SYSLOG_PORT_BACKUP-"
+          command: "oc set env ds/logging-fluentd  USE_REMOTE_SYSLOG- REMOTE_SYSLOG_HOST- REMOTE_SYSLOG_HOST_BACKUP- REMOTE_SYSLOG_PORT_BACKUP- -n {{logging_namespace}}"
           ignore_errors: True
           when: not use_mux
         - name: Change mux DC Env back
-          command: "oc set env dc/logging-mux  USE_REMOTE_SYSLOG- REMOTE_SYSLOG_HOST- REMOTE_SYSLOG_HOST_BACKUP- REMOTE_SYSLOG_PORT_BACKUP-"
+          command: "oc set env dc/logging-mux  USE_REMOTE_SYSLOG- REMOTE_SYSLOG_HOST- REMOTE_SYSLOG_HOST_BACKUP- REMOTE_SYSLOG_PORT_BACKUP-  -n {{logging_namespace}}"
           when: use_mux
       when: test_clear
 

@@ -1,0 +1,138 @@
+---
+- name: Create fluentd server
+  gather_facts: yes
+  hosts: fluentds
+  tasks:
+    - set_fact:
+        image_url: "docker.io/anli/secure-forward-fluentd"
+        data_path:  "/var/fluentd"
+        hostname: "{{ansible_hostname}}"
+        hostip: "{{ansible_default_ipv4.address}}"
+        sharedkey: "sharedkey"
+        key_passphrase: "secure-forward-secret"
+
+    - name: make sure docker is installed
+      yum:
+        name: docker
+        state: present
+
+    - name: make sure docker is started
+      systemd:
+        name: docker
+        state: started
+        enabled: True
+
+    - name: Get the security forward container list 
+      command: docker ps -a -q -f label=Name=loging-fluentd:test
+      register: container_list
+
+    - name: force remove the existing container
+      command: "docker rm -f {{item}}"
+      with_items:
+        - "{{container_list.stdout_lines}}"
+
+    - name: Clear data path
+      file:
+        state: absent
+        path: "{{data_path}}"
+
+    - name: Create fluentd data house
+      file: 
+        path: "{{data_path}}"
+        state: directory
+        mode: 0777
+
+    - name: Create fluentd data house
+      file:
+        path: "{{data_path}}/etc"
+        state: directory
+        mode: 0777
+
+
+    - name: Create fluentd log house
+      file:
+        path: "{{data_path}}/log"
+        state: directory
+        mode: 0777
+
+    - name: Create fluentd plugin house
+      file:
+        path: "{{data_path}}/plugins"
+        state: directory
+        mode: 0777
+
+    - name: generate fluentd Cert
+      command: "docker run -i --entrypoint secure-forward-ca-generate -v {{data_path}}:/fluentd:Z {{image_url}} fluentd/etc {{key_passphrase}}"
+
+    - name: get ca_cert.pem
+      slurp:
+        src: '{{data_path}}/etc/ca_cert.pem'
+      register: security_ca_cert
+
+    - name: get ca_key.pem
+      slurp:
+        src: '{{data_path}}/etc/ca_key.pem'
+      register: security_ca_key
+
+    - name: Create fluentd configure files
+      template:
+        src: fluentd.conf.j2
+        dest: "{{data_path}}/etc/fluent.conf"
+        force: true
+
+    - name: Open port 24224
+      command: iptables -A INPUT -p tcp --dport 24224 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+
+    - name: Open port 24224
+      command: iptables -A INPUT -p udp --dport 24224 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+
+    - name: Open port 24284
+      command: iptables -A INPUT -p tcp --dport 24284 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+
+    - name: Open port 24284
+      command: iptables -A INPUT -p udp --dport 24284 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+
+    - name: run the fluentd service
+      command: "docker run -d -p 24224:24224 -p 24284:24284 -v {{data_path}}:/fluentd:Z {{image_url}}"
+
+- name: configure Logging fluentd
+  gather_facts: yes
+  hosts: masters[0]
+  tasks:
+    - debug:  var=groups.fluentds.0
+
+    - set_fact:
+        project_name: "{{ openshift_logging_namespace | default('openshift-logging') }}"
+        security_ca_cert: "{{ hostvars[groups.fluentds.0].security_ca_cert['content']}}"
+        security_ca_key: "{{ hostvars[ groups.fluentds.0].security_ca_key['content'] }}"
+        sharedkey: "{{ hostvars[groups.fluentds.0].sharedkey }}"
+        key_passphrase: "{{ hostvars[groups.fluentds.0].key_passphrase }}"
+        server: "{{ hostvars[groups.fluentds.0].hostip }}"
+        port: "24284"
+
+    - name: get fluentd status
+      command: "oc get configmap logging-fluentd -o name -n {{project_name}} "
+      register: fluentd_status
+
+    - name: patch secrets/logging-fluentd
+      command: oc patch secrets/logging-fluentd --type=json -n {{project_name}} --patch "[{'op':'add','path':'/data/forward_ca_cert','value':'{{ security_ca_cert }}'}]"
+
+    - name: patch secrets/logging-fluentd
+      command: oc patch secrets/logging-fluentd --type=json -n {{project_name}}  --patch "[{'op':'add','path':'/data/forward_private_key','value':'{{security_ca_key }}'}]"
+
+    - name: copy security patch file to master
+      template:
+        src: security-fluentd-patch.yml.j2
+        dest: /tmp/fluentd/security-fluentd-patch.yml
+        force: true
+
+    - name: Slurp hosts file
+      slurp:
+        src: /tmp/fluentd/security-fluentd-patch.yml
+      register: slurpfile
+
+    - name: patch configmap logging-fluentd
+      command: oc patch configmap/logging-fluentd -p "{{ slurpfile['content'] | b64decode }}" -n {{project_name}}
+
+    - name: redeploy pods
+      command: oc delete pods --selector logging-infra=fluentd -n {{project_name}} 

@@ -1,0 +1,56 @@
+---
+- name: get Openshift info from the first masters
+  hosts: masters[0]
+  gather_facts: false
+  tasks:
+  - set_fact:
+      namespace: "{{ openshift_logging_namespace | default('logging') }}"
+      essecret: "logging-elasticsearch"
+
+  - name: get logging-elasticsearch secret 
+    shell: oc get -n {{namespace}} secret {{essecret}} -o json
+    register: secret
+
+  - name: get openshift elasticsearch service ip 
+    shell: oc get service logging-es -o json -n {{namespace}}
+    register: service_output
+
+  - set_fact:
+      es_secret: "{{secret.stdout|from_json}}"
+      es_service: "{{service_output.stdout|from_json}}"
+
+  - set_fact:
+      es_ca: "{{es_secret['data']['admin-ca']|b64decode}}"
+      es_crt: "{{es_secret['data']['admin-cert']|b64decode }}"
+      es_key: "{{es_secret['data']['admin-key']|b64decode }}"
+      es_serviceip: "{{es_service.spec.clusterIP }}"
+      es_serviceport: "9200"
+  
+
+- name: install/configure prerequisites
+  hosts: nodes
+  gather_facts: false
+  tasks:
+  - set_fact:
+      es_ca: "{{ hostvars[groups['masters'][0]]['es_ca'] }}"
+      es_crt: "{{ hostvars[groups['masters'][0]]['es_crt'] }}"
+      es_key: "{{ hostvars[groups['masters'][0]]['es_key'] }}"
+      es_serviceip: "{{ hostvars[groups['masters'][0]]['es_serviceip'] }}"
+      es_serviceport: "{{ hostvars[groups['masters'][0]]['es_serviceport'] }}"
+        
+  - name: pkgs
+    yum: state=latest name={{ item }}
+    with_items:
+    - rsyslog-elasticsearch
+
+  - name: install ca file
+    copy: content={{ es_ca }} dest=/etc/rsyslog.d/esout.ca mode=0400
+
+  - name: install cert file
+    copy: content={{ es_crt }} dest=/etc/rsyslog.d/esout.crt mode=0400
+
+  - name: install key file
+    copy: content={{ es_key }} dest=/etc/rsyslog.d/esout.key mode=0400
+
+  - name: copy rsyslog elasticsearch config files
+    template: src=rsyslog_to_elasticsearch.conf.j2 dest=/etc/rsyslog.d/rsyslog_to_elasticsearch.conf
