@@ -1,3 +1,4 @@
 [OSEv3:vars]
 openshift_logging_use_ops=true
+openshift_logging_es_ops_memory_limit=2Gi
 
