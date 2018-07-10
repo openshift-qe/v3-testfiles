@@ -1,0 +1,91 @@
+---
+- name: Create elasticsearch server
+  gather_facts: yes
+  hosts: ESs
+  tasks:
+    - set_fact:
+        image_url: "docker.elastic.co/elasticsearch/elasticsearch:6.2.0" 
+        nodename: "{{ansible_hostname}}" 
+        clustername: "{{ansible_hostname}}" 
+
+    - name: make sure docker is installed
+      yum:
+        name: docker
+        state: present
+
+    - name: make sure docker is installed
+      systemd:
+        name: docker
+        state: started
+        enabled: True
+
+    - name: Create elasticsearch warehouse
+      file: 
+        path: /var/elasticsearch/data
+        state: directory
+        mode: 0777
+
+    - name: Clear data path
+      file:
+        state: absent
+        path: "/var/elasticsearch/data"
+
+    - name: Create elasticsearch warehouse
+      file: 
+        path: /var/elasticsearch/data
+        state: directory
+        mode: 0777
+
+    - name: Create Elasticsearch certgen silent file
+      template:
+        src: elasticsearch_instance.yml.j2
+        dest: /var/elasticsearch/data/elasticsearch_instance.yml
+        force: true
+        mode: 0777
+
+    - name: generate  Elasticsearch Container Cert
+      command: "docker run --entrypoint /usr/share/elasticsearch/bin/x-pack/certgen -v /var/elasticsearch/data:/usr/share/elasticsearch/data:Z {{image_url}} --in /usr/share/elasticsearch/data/elasticsearch_instance.yml --out /usr/share/elasticsearch/data/es-csr.zip -s"
+
+    - name: unzip cert
+      command: "docker run --entrypoint unzip -v /var/elasticsearch/data:/usr/share/elasticsearch/data:Z {{image_url}} /usr/share/elasticsearch/data/es-csr.zip -d /usr/share/elasticsearch/data/ "
+
+    - name: Create Elasticsearch configfile
+      template:
+        src: elasticsearch.yml.j2
+        dest: /var/elasticsearch/elasticsearch.yml
+        force: true
+
+    - name: Open port 9200
+      command: iptables -A INPUT -p tcp --dport 9200 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+
+    - name: Open port 9300
+      command: iptables -A INPUT -p tcp --dport 9200 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+
+    - name: start Elasticsearch Container
+      command: "docker run -d -p 9200:9200 -p 9300:9300 -e ES_JAVA_OPTS='-Xms512m -Xmx512m' -v /var/elasticsearch/data:/usr/share/elasticsearch/data:Z -v /var/elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:Z {{image_url}}"
+
+    - name: Create Elasticsearch certgen silent file
+      template:
+        src: elasticsearch_instance.yml.j2
+        dest: /var/elasticsearch/data/elasticsearch_instance.yml
+        force: true
+        mode: 0777
+
+    - name: Copy user json file
+      copy:
+        src: files/es_user.json
+        dest: /var/elasticsearch/data/es_user.json
+        mode: 0777
+
+#    - name: Add fluentd user
+#      command : "curl -k -XPOST -H \'Content-Type: application/json\' 'https://localhost:9200/_xpack/security/user/fluentd' -d @/var/elasticsearch/data/es_user.json"
+
+    - name: Add fluentd user
+      uri:
+        url: https://localhost:9200/_xpack/security/user/fluentd
+        method: POST
+        body_format: json
+        body: "{{ lookup('file','/home/git/LoggingMetrics/playbooks/files/es_user.json') }}"
+        validate_certs: no
+        headers:
+          Content-Type: "application/json"
