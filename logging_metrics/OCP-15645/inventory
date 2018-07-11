@@ -7,4 +7,4 @@ openshift_logging_eventrouter_sink=stdout
 openshift_logging_eventrouter_replicas=2
 openshift_logging_eventrouter_cpu_limit=2
 openshift_logging_eventrouter_memory_limit=256Mi
-openshift_logging_eventrouter_namespace=<%= cb.target_proj %>
+openshift_logging_eventrouter_namespace=<%= cb.org_project_name %>
