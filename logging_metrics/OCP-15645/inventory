@@ -1,0 +1,11 @@
+[OSEv3:vars]
+openshift_logging_install_logging=true
+openshift_logging_install_eventrouter=true
+openshift_logging_eventrouter_image_prefix=<%= product_docker_repo %>/openshift3/
+openshift_logging_eventrouter_image_version=v<%= cb.master_version %>
+openshift_logging_eventrouter_sink=stdout
+openshift_logging_eventrouter_nodeselector="{'region': 'infra'}"
+openshift_logging_eventrouter_replicas=2
+openshift_logging_eventrouter_cpu_limit=2
+openshift_logging_eventrouter_memory_limit=256Mi
+openshift_logging_eventrouter_namespace=<%= cb.target_proj %>
