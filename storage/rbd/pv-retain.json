@@ -14,7 +14,7 @@
         "pool": "rbd",
         "image": "disk01",
         "user": "admin",
-        "secretRef": { "name": "ceph-secret" },
+        "secretRef": { "name": "cephrbd-secret" },
         "keyring": "/etc/ceph/keyring",
         "fsType": "ext4",
         "features": "layering",
