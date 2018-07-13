@@ -1,0 +1,13 @@
+---
+apiVersion: servicecatalog.k8s.io/v1beta1
+kind: ServiceBinding
+metadata:
+  name: bind5
+  namespace: <%= project.name %>
+spec:
+  instanceRef:
+    name: <%= cb.prefix %>-postgresql-apb
+  secretTransforms:
+  - addKey:
+      key: "my-new-key"
+      jsonPathExpression: "key one is {.DB_HOST}, key two is {.DB_NAME}"

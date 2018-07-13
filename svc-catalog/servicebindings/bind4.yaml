@@ -1,0 +1,14 @@
+---
+apiVersion: servicecatalog.k8s.io/v1beta1
+kind: ServiceBinding
+metadata:
+  name: bind4
+  namespace: <%= project.name %>
+spec:
+  instanceRef:
+    name: <%= cb.prefix %>-postgresql-apb
+  secretTransforms:
+  - addKeysFrom:
+      secretRef: 
+        namespace: default
+        name: fake
