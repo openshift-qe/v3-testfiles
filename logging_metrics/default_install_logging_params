@@ -18,3 +18,7 @@ openshift_logging_es_memory_limit=2Gi
 openshift_logging_es_ops_memory_limit=2Gi
 openshift_logging_kibana_memory_limit=1Gi
 openshift_logging_kibana_ops_memory_limit=1Gi
+
+# get around bz#  https://bugzilla.redhat.com/show_bug.cgi?id=1600041
+openshift_logging_eventrouter_cpu_limit=350m
+openshift_logging_eventrouter_cpu_request=150m
