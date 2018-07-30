@@ -6,7 +6,6 @@ children=to_be_replaced
 
 [nodes]
 <%= cb.schedulable_nodes %>
-nodes=to_be_replaced
 
 [etcd]
 <%= env.etcd_hosts.first.hostname %> openshift_public_hostname=<%= env.etcd_hosts.first.hostname %>
