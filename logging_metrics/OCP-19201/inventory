@@ -1,0 +1,2 @@
+[OSEv3:vars]
+openshift_logging_es_pvc_dynamic=true
