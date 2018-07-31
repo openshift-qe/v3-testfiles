@@ -1,0 +1,9 @@
+[OSEv3:vars]
+# put any extra metering related parameters that are not default here
+openshift_metering_install=true
+openshift_metering_project=<%= cb.target_proj %>
+openshift_metering_image_prefix=<%= product_docker_repo %>openshift3/
+openshift_metering_image_version=v<%= cb.master_version %>
+# for OCP > 3.10.53
+oreg_url=<%= product_docker_repo %>openshift3/ose-${component}:${version}
+
