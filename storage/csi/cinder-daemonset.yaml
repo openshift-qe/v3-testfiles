@@ -11,8 +11,6 @@ spec:
       labels:
         app: cinder-csi-driver
     spec:
-      nodeSelector:
-          role: node
       serviceAccount: cinder-csi
       containers:
         - name: csi-driver-registrar
