@@ -3,7 +3,7 @@ apiVersion: extensions/v1beta1
 metadata:
   name: allow-from-red
 spec:
-  podSelector:
+  podSelector: {}
   ingress:
   - from:
     - podSelector:
