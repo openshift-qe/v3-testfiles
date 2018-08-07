@@ -18,3 +18,8 @@ openshift_logging_es_memory_limit=2Gi
 openshift_logging_es_ops_memory_limit=2Gi
 openshift_logging_kibana_memory_limit=1Gi
 openshift_logging_kibana_ops_memory_limit=1Gi
+
+# workaround for bug https://bugzilla.redhat.com/show_bug.cgi?id=1609385#c3
+openshift_logging_elasticsearch_image=<%= product_docker_repo %>openshift3/ose-logging_elasticsearch5:v<%= cb.master_version %>
+openshift_logging_kibana_image=<%= product_docker_repo %>openshift3/ose-logging_kibana:v<%= cb.master_version %>
+openshift_logging_curator_image=<%= product_docker_repo %>openshift3/ose-logging_curator:v<%= cb.master_version %>
