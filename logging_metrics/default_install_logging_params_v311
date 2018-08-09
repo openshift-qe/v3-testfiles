@@ -18,3 +18,11 @@ openshift_logging_es_memory_limit=2Gi
 openshift_logging_es_ops_memory_limit=2Gi
 openshift_logging_kibana_memory_limit=1Gi
 openshift_logging_kibana_ops_memory_limit=1Gi
+
+# for OCP >= 3.11
+openshift_logging_es_nodeselector={'node-role.kubernetes.io/infra': 'true'}
+
+# workaround for bug https://bugzilla.redhat.com/show_bug.cgi?id=1609385#c3
+openshift_logging_elasticsearch_image=<%= product_docker_repo %>openshift3/ose-logging-elasticsearch5:v<%= cb.master_version %>
+openshift_logging_kibana_image=<%= product_docker_repo %>openshift3/ose-logging-kibana5:v<%= cb.master_version %>
+openshift_logging_curator_image=<%= product_docker_repo %>openshift3/ose-logging-curator5:v<%= cb.master_version %>
