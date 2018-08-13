@@ -23,6 +23,7 @@ items:
       - name: local
         hostPath:
          path: /var/mnt
+         type: DirectoryOrCreate
 - apiVersion: v1
   kind: Service
   metadata:
