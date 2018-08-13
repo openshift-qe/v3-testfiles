@@ -9,7 +9,7 @@ spec:
       ports:
         - containerPort: 80
           name: "http-server"
-      volumeDevice:
+      volumeDevices:
       - devicePath: /dev/xvda
         name: myvolume
   volumes:
