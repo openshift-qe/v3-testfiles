@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: egress-routes
+data:
+  egress-routes.txt: "# Redirect connection for udp port 53 to destination\n53 udp
+    8.8.8.8\n\n# Redirect connection for tcp port 8888 to detination IP with port
+    8000\n8888 tcp 5.196.70.86 8000  \n\n# Fallback IP\n61.135.218.24\n"
