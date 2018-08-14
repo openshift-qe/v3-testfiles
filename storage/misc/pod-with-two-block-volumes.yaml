@@ -18,6 +18,6 @@ spec:
     - name: myvolume1
       persistentVolumeClaim:
         claimName: mypvc1
-    - name: myvolume1
+    - name: myvolume2
       persistentVolumeClaim:
         claimName: mypvc2
