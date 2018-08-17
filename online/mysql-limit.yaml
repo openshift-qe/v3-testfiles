@@ -1,0 +1,57 @@
+apiVersion: v1
+kind: DeploymentConfig
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftNewApp
+  creationTimestamp: null
+  labels:
+    app: mysql-limit
+  name: mysql-limit
+spec:
+  replicas: 1
+  selector:
+    app: mysql-limit
+    deploymentconfig: mysql-limit
+  strategy:
+    resources: {}
+  template:
+    metadata:
+      annotations:
+        openshift.io/container.mysql.image.entrypoint: '["container-entrypoint","run-mysqld"]'
+        openshift.io/generated-by: OpenShiftNewApp
+      creationTimestamp: null
+      labels:
+        app: mysql-limit
+        deploymentconfig: mysql-limit
+    spec:
+      containers:
+      - env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: test
+        image: ' '
+        name: mysql
+        ports:
+        - containerPort: 3306
+          protocol: TCP
+        resources:
+          limits:
+            memory: 1Gi
+        volumeMounts:
+        - mountPath: /var/lib/mysql/data
+          name: mysql-volume-1
+      volumes:
+      - emptyDir: {}
+        name: mysql-volume-1
+  test: false
+  triggers:
+  - type: ConfigChange
+  - imageChangeParams:
+      automatic: true
+      containerNames:
+      - mysql
+      from:
+        kind: ImageStreamTag
+        name: mysql:latest
+        namespace: openshift
+    type: ImageChange
+status: {}
