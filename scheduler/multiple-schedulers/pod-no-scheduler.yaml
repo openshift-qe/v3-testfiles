@@ -1,8 +1,9 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: no-scheduler
+  name: custom-scheduler
 spec:
+  schedulerName: custom-scheduler
   containers:
   - name: hello
     image: docker.io/ocpqe/hello-pod
