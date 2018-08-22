@@ -1,0 +1,16 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  generateName: allowprivilegeescalation-pod-
+spec:
+  restartPolicy: Never
+  containers:
+  - name: busybox
+    image: busybox
+    securityContext:
+      allowPrivilegeEscalation: true
+    command:
+    - /bin/sh
+    args:
+    - -c
+    - 'echo "IN INIT CONTAINER"; grep NoNewPriv /proc/self/status; sleep 1000'
