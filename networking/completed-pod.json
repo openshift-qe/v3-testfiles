@@ -2,16 +2,16 @@
         "kind": "Pod",
         "apiVersion":"v1",
         "metadata": {
-                "name": "completed-pod",
+                "generateName": "completed-pod-",
                 "labels": {
-                        "name": "test-pods"
+                        "name": "completed-pod"
                 }
         },
         "spec": {
                 "containers": [{
                         "command": [ "/bin/true" ],
                         "name": "completed-pod",
-                        "image": "bmeng/hello-openshift"
+                        "image": "aosqe/pod-for-ping"
                 }],
                 "restartPolicy": "Never"
         }
