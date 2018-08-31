@@ -1,0 +1,23 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: mypod
+spec:
+  containers:
+    - name: mycontainer
+      image: aosqe/hello-openshift
+      ports:
+        - containerPort: 80
+          name: "http-server"
+      volumeDevices:
+      - devicePath: /dev/xvda
+        name: myvolume1
+      - devicePath: /dev/xvdb
+        name: myvolume2
+  volumes:
+    - name: myvolume1
+      persistentVolumeClaim:
+        claimName: mypvc1
+    - name: myvolume2
+      persistentVolumeClaim:
+        claimName: mypvc2

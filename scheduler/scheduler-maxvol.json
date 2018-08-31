@@ -1,0 +1,20 @@
+{
+    "apiVersion": "v1",
+    "kind": "Policy",
+    "predicates": [
+        {
+            "name": "MaxEBSVolumeCount"
+        },
+        {
+            "name": "MaxGCEPDVolumeCount"
+        },
+        {
+            "name": "MaxAzureDiskVolumeCount"
+        },
+        {
+            "name": "GeneralPredicates"
+        }
+    ],
+    "priorities":[
+    ]
+}

@@ -1,0 +1,6 @@
+[hosts]
+
+[hosts:vars]
+containerized=False
+flexvolume_dir=/usr/libexec/kubernetes/kubelet-plugins/volume/exec/
+flexvolume_dir_containerized=/etc/origin/kubelet-plugins/volume/exec/

@@ -1,0 +1,21 @@
+---
+- name: Install dummy flexVolume
+  hosts:
+    - hosts
+  gather_facts: no
+
+  tasks:
+
+  - name: Create dummy flexVolume directory
+    file:
+      path: "{{ flexvolume_dir_containerzied if containerized else flexvolume_dir }}/openshift.com~dummy-attachable"
+      state: directory
+      mode: 0755
+      owner: root
+
+  - name: Install dummy flexVolume
+    copy:
+      src: dummy-attachable
+      dest: "{{ flexvolume_dir_containerzied if containerized else flexvolume_dir }}/openshift.com~dummy-attachable/dummy-attachable"
+      mode: 0777
+      owner: root

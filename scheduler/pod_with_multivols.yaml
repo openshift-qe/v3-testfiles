@@ -1,0 +1,46 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    name: pvc1
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 1Gi
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    name: pvc2
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 1Gi
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    name: pod-multivolsexceedlimit
+  spec:
+    containers:
+    - name: boring
+      image: openshift/hello-openshift:latest
+      volumeMounts:
+      - name: vol1
+        mountPath: /vol1
+      - name: vol2
+        mountPath: /vol2
+    volumes:
+    - name: vol1
+      persistentVolumeClaim:
+        claimName: pvc1
+    - name: vol2
+      persistentVolumeClaim:
+        claimName: pvc2
+kind: List
+metadata:
+  resourceVersion: ""
+  selfLink: ""

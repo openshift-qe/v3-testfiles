@@ -13,8 +13,8 @@
       "image": "openshift/hello-openshift",
       "resources":{
         "limits":{
-          "cpu":1,
-          "memory":800000000
+          "cpu":1000,
+          "memory":"800000000Mi"
         }
       }
     }]
