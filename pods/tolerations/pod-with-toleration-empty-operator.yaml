@@ -6,8 +6,6 @@ spec:
   containers:
     - image: "docker.io/ocpqe/hello-pod"
       name: hello-pod
-  nodeSelector:
-    vip: vip1
   tolerations:
     - key: dedicated
       value: special-user
