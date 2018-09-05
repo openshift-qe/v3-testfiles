@@ -1,0 +1,2 @@
+[OSEv3:vars]
+openshift_logging_fluentd_file_buffer_limit=-512mi
