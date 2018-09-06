@@ -1,4 +1,6 @@
 [OSEv3:vars]
+# case specific params
 openshift_logging_install_logging=true
 openshift_logging_fluentd_use_journal=true
+# comment
 openshift_logging_fluentd_journal_read_from_head=true
