@@ -1,2 +1,4 @@
 [OSEv3:vars]
-openshift_logging_install_logging=true openshift_logging_fluentd_use_journal=true openshift_logging_fluentd_journal_read_from_head=true
+openshift_logging_install_logging=true
+openshift_logging_fluentd_use_journal=true
+openshift_logging_fluentd_journal_read_from_head=true
