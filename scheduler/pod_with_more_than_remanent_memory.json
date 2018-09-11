@@ -12,7 +12,7 @@
       "name": "resource-pod",
       "image": "openshift/hello-openshift",
       "resources":{
-        "limits":{
+        "requests":{
           "cpu":"10m",
           "memory":"<%=cb.pod_request_memory + 1%>"
         }
