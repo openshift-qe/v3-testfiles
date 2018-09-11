@@ -13,7 +13,7 @@
       "image": "openshift/hello-openshift",
       "resources":{
         "limits":{
-          "cpu":10m,
+          "cpu":"10m",
           "memory":"<%=cb.pod_request_memory + 1%>"
         }
       }
