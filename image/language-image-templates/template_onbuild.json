@@ -118,7 +118,7 @@
         "source": {
           "type": "Git",
           "git": {
-            "uri": "https://github.com/openshift/sti-nodejs"
+            "uri": "https://github.com/sclorg/s2i-nodejs-container"
           },
           "contextDir": "0.10/test/test-app"
         },

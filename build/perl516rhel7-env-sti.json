@@ -118,7 +118,7 @@
         "source": {
           "type": "Git",
           "git": {
-            "uri": "https://github.com/openshift/sti-perl.git"
+            "uri": "https://github.com/sclorg/s2i-perl-container.git"
           },
           "contextDir": "5.20/test/sample-test-app"
         },

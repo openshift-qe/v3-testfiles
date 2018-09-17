@@ -118,7 +118,7 @@
         "source": {
           "type": "Git",
           "git": {
-            "uri": "https://github.com/openshift/sti-php"
+            "uri": "https://github.com/sclorg/s2i-php-container"
           },
           "contextDir": "5.5/test/test-app"
         },

@@ -115,7 +115,7 @@
         "source": {
           "type": "Git",
           "git": {
-            "uri": "git://github.com/openshift/sti-python.git"
+            "uri": "git://github.com/sclorg/s2i-python-container.git"
           },
          "contextDir": "3.3/test/standalone-test-app"
         },

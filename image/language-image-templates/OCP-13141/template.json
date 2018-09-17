@@ -41,7 +41,7 @@
         "source": {
             "type": "Git",
             "git": {
-                "uri": "https://github.com/openshift/rails-ex",
+                "uri": "https://github.com/sclorg/rails-ex",
                 "ref": "16716f4ae876836db25ff8ab235e49d04a52c2f9"
             },
             "secrets": []

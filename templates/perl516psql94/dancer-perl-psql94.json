@@ -318,7 +318,7 @@
     {
       "name": "SOURCE_REPOSITORY_URL",
       "description": "The URL of the repository with your application source code",
-      "value": "https://github.com/openshift/dancer-ex.git"
+      "value": "https://github.com/sclorg/dancer-ex.git"
     },
     {
       "name": "SOURCE_REPOSITORY_REF",

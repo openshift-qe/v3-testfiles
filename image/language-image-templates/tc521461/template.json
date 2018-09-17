@@ -41,7 +41,7 @@
         "source": {
             "type": "Git",
             "git": {
-                "uri": "https://github.com/openshift/ruby-ex"
+                "uri": "https://github.com/sclorg/ruby-ex"
             },
             "secrets": []
         },

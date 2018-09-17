@@ -33,7 +33,7 @@ parameters:
   displayName: Git Repository URL
   name: SOURCE_REPOSITORY_URL
   required: true
-  value: https://github.com/openshift/nodejs-ex.git
+  value: https://github.com/sclorg/nodejs-ex.git
 - displayName: Database Name
   name: DATABASE_NAME
   required: true
