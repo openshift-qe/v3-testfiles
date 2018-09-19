@@ -11,6 +11,8 @@ spec:
     volumeMounts:
     - mountPath: /test-pod
       name: test-volume
+    - mountPath: /admin-creds
+      name: admin-creds
     command:
     - "/bin/sh"
     - "-ec"
@@ -19,3 +21,6 @@ spec:
   - name: test-volume
     configMap:
       name: cluster-capacity-configmap
+  - name: admin-creds
+    secret:
+      name: admin-kubeconfig
