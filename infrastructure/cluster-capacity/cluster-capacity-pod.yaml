@@ -23,4 +23,4 @@ spec:
       name: cluster-capacity-configmap
   - name: admin-creds
     secret:
-      name: admin-kubeconfig
+      secretName: admin-kubeconfig
