@@ -7,19 +7,14 @@ metadata:
 spec:
   containers:
   - name: cluster-capacity
-    image: openshift3/ose-cluster-capacity:latest
+    image: openshift3/ose-cluster-capacity:v<%=env.get_version(user:user).first%>
     volumeMounts:
     - mountPath: /test-pod
       name: test-volume
-    env:
-    - name: CC_INCLUSTER
-      value: "true"
     command:
     - "/bin/sh"
     - "-ec"
-    - |
-      /bin/cluster-capacity --podspec=/test-pod/pod.yaml --verbose;while true;do sleep 10;done
-  serviceAccountName: cluster-capacity-sa
+    - "sleep inf"
   volumes:
   - name: test-volume
     configMap:
