@@ -1,7 +1,7 @@
 [OSEv3:vars]
 # put any extra metering related parameters that are not default here
 openshift_metering_install=true
-#openshift_monitoring_deploy=true
+openshift_monitoring_deploy=true
 ## for 3.11
 openshift_cluster_monitoring_operator_install=true
 # for OCP > 3.10.53
