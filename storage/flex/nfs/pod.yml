@@ -1,0 +1,18 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: pod002
+spec:
+  containers:
+    - name: dynamic
+      image: aosqe/hello-openshift
+      ports:
+        - containerPort: 80
+          name: "http-server"
+      volumeMounts:
+      - mountPath: "/mnt/"
+        name: flex
+  volumes:
+    - name: flex
+      persistentVolumeClaim:
+        claimName: claim002
