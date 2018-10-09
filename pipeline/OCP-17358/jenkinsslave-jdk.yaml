@@ -1,0 +1,24 @@
+kind: BuildConfig
+apiVersion: v1
+metadata:
+  name: openshift-slave-pipeline
+spec:
+  strategy:
+    type: JenkinsPipeline
+    jenkinsPipelineStrategy:
+      jenkinsfile: |-
+        podTemplate(label: "mypod", 
+                    cloud: "openshift", 
+                    inheritFrom: "maven", 
+                    containers: [
+            containerTemplate(name: "jnlp", 
+                              image: "registry.redhat.io/openshift3/jenkins-slave-base-rhel7:v3.11", 
+                              resourceLimitMemory: "1Gi", 
+                              envVars: [
+              envVar(key: "OPENSHIFT_JENKINS_JVM_ARCH", value: "x86_64"),
+            ])
+          ]) {
+          node("mypod") { 
+            sh "ls -l /etc/alternatives/java"
+          }
+        }
