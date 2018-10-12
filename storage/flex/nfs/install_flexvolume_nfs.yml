@@ -1,0 +1,24 @@
+---
+- name: Install nfs flexVolume
+  hosts:
+    - hosts
+  gather_facts: no
+
+  tasks:
+
+  - name: Create nfs flexVolume directory
+    file:
+      path: "{{ flexvolume_dir_containerzied if containerized else flexvolume_dir }}/openshift.com~nfs"
+      state: directory
+      mode: 0755
+      owner: root
+
+  - name: Install nfs flexVolume
+    copy:
+      src: "{{ item }}"
+      dest: "{{ flexvolume_dir_containerzied if containerized else flexvolume_dir }}/openshift.com~nfs/{{ item }}"
+      mode: 0777
+      owner: root
+    with_items:
+      - nfs
+      - jq
