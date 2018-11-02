@@ -1,0 +1,53 @@
+template: ../hosts/1master_etcd+Nregistry_router_node+Nnode
+
+
+rhel_roles:
+- master
+- node
+- router
+- registry
+
+
+iaas_name: GCE
+enable_cloudprovider: true
+node_number: 1
+image: qe-rhel-7-release
+install_update_docker: true
+docker_storage_driver: overlay2
+os_update: false
+vm_type: n1-standard-2
+install_method: rpm
+qe_additional_repos: "[{'id': 'prerelease-rhel7', 'name': 'prerelease-rhel7', 'baseurl': 'https://mirror.openshift.com/enterprise/rhel/rhel7next/os', 'enabled': 0, 'gpgcheck': 0},{'id': 'prerelease-extra', 'name': 'prerelease-extra', 'baseurl': 'https://mirror.openshift.com/enterprise/rhel/rhel7next/extras', 'enabled': 0, 'gpgcheck': 0},{'id': 'dockernext', 'name': 'dockernext', 'baseurl': 'https://mirror.openshift.com/enterprise/rhel/dockerextra/x86_64/os/', 'enabled': 0, 'gpgcheck': 0},{'id': 'docker_previous', 'name': 'docker_previous', 'baseurl': 'https://mirror.openshift.com/enterprise/rhel/dockerextra.previous/x86_64/os/', 'enabled': 0, 'gpgcheck': 0},{'id': 'aos', 'name': 'Prerelease OCP', 'baseurl': 'https://mirror.openshift.com/enterprise/all/3.11/latest/x86_64/os', 'enabled': 1, 'gpgcheck': 0}]"
+auth_type: allowall
+openshift_playbook_rpm_repos: "[{'id': 'aos-3_11-devel-install', 'name': 'aos-3_11-devel-install', 'baseurl': 'http://download.eng.bos.redhat.com/rcm-guest/puddles/RHAOS/AtomicOpenShift/3.11/latest/x86_64/os/', 'enabled': 1, 'gpgcheck': 0}]"
+#os_sdn_network_plugin_name: redhat/openshift-ovs-multitenant
+#os_sdn_network_plugin_name: redhat/openshift-ovs-networkpolicy
+#qe_openshift_registry_deployment_method: daemonset
+#os_firewall_use_firewalld: true
+openshift_master_default_subdomain_enable: true
+#openshift_release: v3.11
+enable_cloudprovider: true
+#openshift_registry_backend_storage: gcs
+#update_is_images_url: registry.access.redhat.com
+
+
+openshift_ansible_vars:
+  openshift_deployment_type: openshift-enterprise
+  oreg_url: registry.reg-aws.openshift.com:443/openshift3/ose-${component}:${version}
+  openshift_docker_insecure_registries: brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888,virt-openshift-05.lab.eng.nay.redhat.com:5000,virt-openshift-05.lab.eng.nay.redhat.com:5001,registry.reg-aws.openshift.com:443,asb-registry.usersys.redhat.com:5000
+  openshift_docker_blocked_registries: registry.hacker.com
+  openshift_hosted_registry_selector: '"role=node,registry=enabled"'
+  openshift_hosted_router_selector: '"role=node,router=enabled"'
+  debug_level: 5
+  template_service_broker_selector: '{"role": "node"}'
+  ansible_service_broker_node_selector: '{"role": "node"}'
+  openshift_cluster_monitoring_operator_node_selector: '{"role": "node"}' 
+  openshift_hosted_registry_storage_kind: object
+  openshift_hosted_registry_storage_provider: gcs
+  openshift_hosted_registry_storage_gcs_bucket: ose-qe-docker-registry
+  openshift_hosted_registry_storage_gcs_rootdirectory: /registry
+  openshift_hosted_registry_storage_gcs_keyfile: "{{ lookup('env', 'WORKSPACE') }}/private-openshift-misc/v3-launch-templates/functionality-testing/aos-3_11/extra-ansible/files/gcs_registry-key.json.j2"
+  
+  #openshift_disable_check: disk_availability,memory_availability,package_availability,docker_image_availability,docker_storage,package_version
+  openshift_check_min_host_disk_gb: 2
+  openshift_check_min_host_memory_gb: 1
