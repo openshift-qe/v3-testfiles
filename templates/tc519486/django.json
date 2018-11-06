@@ -108,7 +108,7 @@
           }
         ],
         "postCommit": {
-             "args": ["./manage.py", "test"]
+             "script": "./manage.py test"
         }
       }
     },
