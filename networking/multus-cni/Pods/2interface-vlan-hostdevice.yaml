@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: vlan-hostdevice-pod
+  annotations:
+    k8s.v1.cni.cncf.io/networks: vlan100-conf, host-device-conf
+spec:
+  containers:
+  - name: vlan-hostdevice-pod
+    image: docker.io/bmeng/centos-network
