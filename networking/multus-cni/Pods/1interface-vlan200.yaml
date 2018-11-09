@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: vlan200-pod
+  annotations:
+    k8s.v1.cni.cncf.io/networks: vlan200-conf
+spec:
+  containers:
+  - name: vlan200-pod
+    image: docker.io/bmeng/centos-network
