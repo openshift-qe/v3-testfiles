@@ -8,29 +8,29 @@ metadata:
     app: multus
 data:
   cni-conf.json: |
-	{
-		"name": "multus-cni-network",
-		"type": "multus",
-		"delegates": [
-		  {
-			"type": "openshift-sdn",
-			"name": "openshift-sdn",
-			"masterplugin": true
-		  },
-		  {
-			"type": "macvlan",
-			"master": "eth0",
-			"mode": "bridge",
-			"ipam": {
-			  "type": "host-local",
-			  "subnet": "10.1.1.0/24",
-			  "rangeStart": "10.1.1.100",
-			  "rangeEnd": "10.1.1.200",
-			  "routes": [
-				{ "dst": "0.0.0.0/0" }
-			  ],
-			  "gateway": "10.1.1.1"
-			}
-		  }
-		]
-	}
+    {
+      "name": "multus-cni-network",
+      "type": "multus",
+      "delegates": [
+        {
+          "type": "openshift-sdn",
+          "name": "openshift-sdn",
+          "masterplugin": true
+        },
+        {
+          "type": "macvlan",
+          "master": "eth0",
+          "mode": "bridge",
+          "ipam": {
+            "type": "host-local",
+            "subnet": "10.1.1.0/24",
+            "rangeStart": "10.1.1.100",
+            "rangeEnd": "10.1.1.200",
+            "routes": [
+            { "dst": "0.0.0.0/0" }
+            ],
+            "gateway": "10.1.1.1"
+          }
+        }
+      ]
+    }
