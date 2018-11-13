@@ -11,6 +11,8 @@ data:
     {
       "name": "multus-cni-network",
       "type": "multus",
+      "logFile": "/var/log/multus.log",
+      "logLevel": "debug",
       "delegates": [
         {
           "type": "openshift-sdn",
@@ -19,6 +21,7 @@ data:
         },
         {
           "type": "macvlan",
+          "name": "macvlan0",
           "master": "eth0",
           "mode": "bridge",
           "ipam": {

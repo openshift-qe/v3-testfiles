@@ -11,6 +11,8 @@ data:
     {
       "name": "multus-cni-network",
       "type": "multus",
+      "logFile": "/var/log/multus.log",
+      "logLevel": "debug",
       "delegates": [
         {
           "type": "openshift-sdn",
