@@ -1,0 +1,64 @@
+{
+  "_index": "project.prj.29061eda-a4ec-11e8-9ba7-fa163e68a0de.2018.08.22",
+  "_type": "com.redhat.viaq.common",
+  "_id": "AWVhAtA1t1rZ02_LcUxE",
+  "_version": 1,
+  "_score": null,
+  "_source": {
+    "metadata": {
+      "filename": "/var/log/containers/centos-logtest-49b67_prj_centos-logtest-98a059588ba56008d240644f0e8f2064a4581b14a3301561a6cebf4359f24c65.log",
+      "fileoffset": "62319"
+    },
+    "log": "2018-08-22 09:41:39,243 - SVTLogger - INFO - centos-logtest-49b67 : 182 : BV8V9ykY7 8isGABl2e v7AamrYk5 vwNQBxOHO 0AnIAArK3 I6ZCaRCvv uhMNX4NS4 r9nPcNLrQ m4AOvVocS LWqrs6BEN 0Q8jL5sz9 XLDyrIqUa y8W39QG9J aloZbI0eO P7XM55qN1 oM6MbRBRr r0NzPghtS ucqVrcIiW ZxXXlGp4o OdnFzEbZY \n",
+    "stream": "stderr",
+    "time": "2018-08-22T09:41:39.243510296Z",
+    "kubernetes": {
+      "namespace_id": "29061eda-a4ec-11e8-9ba7-fa163e68a0de",
+      "namespace_annotations": {
+        "openshift_io/description": "",
+        "openshift_io/display-name": "",
+        "openshift_io/requester": "anli",
+        "openshift_io/sa_scc_mcs": "s0:c15,c0",
+        "openshift_io/sa_scc_supplemental-groups": "1000210000/10000",
+        "openshift_io/sa_scc_uid-range": "1000210000/10000"
+      },
+      "creation_timestamp": "2018-08-21T02:44:44Z",
+      "pod_id": "492a791c-a5ed-11e8-9ba7-fa163e68a0de",
+      "annotations": {
+        "openshift_io/scc": "restricted"
+      },
+      "labels": {
+        "run": "centos-logtest",
+        "test": "centos-logtest"
+      },
+      "host": "preserve-anli-rsyslognode-2",
+      "pod_name": "centos-logtest-49b67",
+      "namespace_name": "prj",
+      "container_name": "centos-logtest",
+      "master_url": "https://kubernetes.default.svc.cluster.local:443"
+    },
+    "docker": {
+      "container_id": "98a059588ba56008d240644f0e8f2064a4581b14a3301561a6cebf4359f24c65"
+    },
+    "originalmsg": "2018-08-22 09:41:39,243 - SVTLogger - INFO - centos-logtest-49b67 : 182 : BV8V9ykY7 8isGABl2e v7AamrYk5 vwNQBxOHO 0AnIAArK3 I6ZCaRCvv uhMNX4NS4 r9nPcNLrQ m4AOvVocS LWqrs6BEN 0Q8jL5sz9 XLDyrIqUa y8W39QG9J aloZbI0eO P7XM55qN1 oM6MbRBRr r0NzPghtS ucqVrcIiW ZxXXlGp4o OdnFzEbZY \n",
+    "unparsed-data": "2018-08-22 09:41:39,243 - SVTLogger - INFO - centos-logtest-49b67 : 182 : BV8V9ykY7 8isGABl2e v7AamrYk5 vwNQBxOHO 0AnIAArK3 I6ZCaRCvv uhMNX4NS4 r9nPcNLrQ m4AOvVocS LWqrs6BEN 0Q8jL5sz9 XLDyrIqUa y8W39QG9J aloZbI0eO P7XM55qN1 oM6MbRBRr r0NzPghtS ucqVrcIiW ZxXXlGp4o OdnFzEbZY \n",
+    "message": "2018-08-22 09:41:39,243 - SVTLogger - INFO - centos-logtest-49b67 : 182 : BV8V9ykY7 8isGABl2e v7AamrYk5 vwNQBxOHO 0AnIAArK3 I6ZCaRCvv uhMNX4NS4 r9nPcNLrQ m4AOvVocS LWqrs6BEN 0Q8jL5sz9 XLDyrIqUa y8W39QG9J aloZbI0eO P7XM55qN1 oM6MbRBRr r0NzPghtS ucqVrcIiW ZxXXlGp4o OdnFzEbZY \n",
+    "hostname": "preserve-anli-rsyslognode-2",
+    "@timestamp": "2018-08-22T09:41:39.243510296Z",
+    "level": "err",
+    "pipeline_metadata": {
+      "collector": {
+        "name": "rsyslog",
+        "inputname": "imfile"
+      }
+    }
+  },
+  "fields": {
+    "@timestamp": [
+      1534930899243
+    ]
+  },
+  "sort": [
+    1534930899243
+  ]
+}

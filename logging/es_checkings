@@ -1,0 +1,99 @@
+#!/bin/bash
+# check the es status and resource
+
+if [ ! -e admin.kubeconfig ]; then
+   echo "no admin.kubeconfig in current directory,please login as cluster-admin"
+   echo "oc login publicmaster --config admin.kubeconfig"
+   exit 1
+fi
+export KUBECONFIG=admin.kubeconfig
+logging_namespace=${logging_namespace:-openshift-logging}
+oc project $logging_namespace
+
+es_master_pod1=$(oc get pods --selector es-node-master=true -o jsonpath={.items[?\(@.status.phase==\"Running\"\)].metadata.name} | cut -d" " -f1)
+if [ -z ${es_master_pod1} ]; then
+   echo "No running ES master pod!"
+   exit
+fi
+
+es_service=$(oc get service elasticsearch -o jsonpath={.spec.clusterIP})
+#es_route=$(oc get route elasticsearch -o jsonpath={.spec.host})
+
+fluentd_pod1=$(oc get pods --selector component=fluentd -o jsonpath={.items[?\(@.status.phase==\"Running\"\)].metadata.name} | cut -d" " -f1)
+if [ -z ${fluentd_pod1} ]; then
+   echo "No running fluentd !"
+   exit
+fi
+token=$(oc whoami -t)
+
+curl_es_get="oc exec -c elasticsearch $es_master_pod1 -- curl -s -XGET --cacert /etc/elasticsearch/secret/admin-ca --cert /etc/elasticsearch/secret/admin-cert --key /etc/elasticsearch/secret/admin-key https://logging-es:9200/"
+es_query="oc exec -c elasticsearch $es_master_pod1 -- es_util --query="
+es_healthy="oc exec -c elasticsearch $es_master_pod1 -- es_cluster_health"
+curl_fluentd_get="oc exec $fluentd_pod1 -- curl -s --cacert /etc/fluent/keys/ca --cert /etc/fluent/keys/cert --key /etc/fluent/keys/key https://logging-es:9200/"
+curl_token_get='oc exec -c elasticsearch  $fluentd_pod1 curl -kv -H 'X-Forwarded-For: 127.0.0.1' -H \"Authorization: Bearer $token\" https://$es_service'
+#curl_get_token='oc exec -c elasticsearch  $fluentd_pod1 curl -kv -H \"Authorization: Bearer `oc whoami -t`\" https://logging-es.logging.svc.cluster.local:9200/'
+
+
+
+function get_docs()
+{
+    cur_pod_name=$1
+    cur_index_name=$2
+    get_in_es $cur_pod_name ${cur_index_name}*/_count?pretty
+}
+
+
+
+function search_docs()
+{   
+    #No space in json string
+    cur_pod_name=$1
+    cur_index_name=$2
+    cur_key=$3
+    cur_value=$4
+    get_in_es ${cur_pod_name} ${cur_index_name}*/_count?pretty -d '{ "query" : { "match" : { "${cur_key}" : "${cur_value}" } } }'
+
+}
+set -x
+echo "-->1. list index in first node --< "
+${es_query}_cat/indices?v
+
+echo "-->1. get health in first node --< "
+$es_healthy
+
+
+echo "-->3. list aliases in first node --< "
+${es_query}_aliases?pretty
+
+echo "-->4. List ES swallow status "
+${es_query}_cat/thread_pool?v\&h=host,bulk.completed,bulk.rejected,bulk.queue,bulk.active,bulk.queueSize
+
+echo "-->5. check if there are event router documents --< "
+${es_query}.operations*/_count?pretty -d '{ "query" : { "match" : { "kubernetes.event.verb":"created"}}}'
+
+
+echo "-->5. check if there are logs for all nodes --< "
+#nodes=$(oc get nodes --output=name)
+#for node in $nodes; do
+#    node_name=${node#*\/}
+#    eval ${es_query}.operations*/_count?pretty -d '{ "query" : { "match" : { "hostname":"$node_name"}}}'
+#done
+
+#echo "-->6. check if there are docker event router documents --< "
+${es_query}.operations*/_count?pretty -d '{ "query" : { "match" : { "docker.event.verb":"created"}}}'
+
+echo "-->7. List Shards status"
+${es_query}_cat/shards
+
+echo "-->8. list the index number of .operations --< "
+${es_query}.operations*/_settings?pretty
+
+echo "-->9 get .orphaned index setting--< "
+${es_query}.orphaned*/_settings?pretty
+
+#echo "-->10 get buffer index"
+#oc exec -c elasticsearch $es_master_pod1 -- curl -s -XGET --cacert /etc/elasticsearch/secret/admin-ca --cert /etc/elasticsearch/secret/admin-cert --key /etc/elasticsearch/secret/admin-key https://localhost:9200/_cat/indices?v |egrep '2018.03.25|2018.03.26|2018.03.27' | awk 'BEGIN{sum=0 ;count=0}{ if(NR>1) {sum +=$7; count++; print $3"     "$7}}END{print "count="count "    sum="sum }' | tee Recordconsistence.logs
+
+
+echo "-->10. Token access checkin --< "
+$curl_token_get
