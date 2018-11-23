@@ -11,12 +11,9 @@ data:
     {
       "name": "multus-cni-network",
       "type": "multus",
-      "delegates": [
-        {
-          "type": "openshift-sdn",
-          "name": "openshift-sdn",
-          "masterplugin": true
-        }
-      ],
+      "logFile": "/var/log/multus.log",
+      "logLevel": "debug",
+      "clusterNetwork": "openshift-sdn",
+      "defaultNetworks": ["/etc/cni/macvlan"],
       "kubeconfig": "/etc/cni/net.d/multus.d/multus.kubeconfig"
     }
