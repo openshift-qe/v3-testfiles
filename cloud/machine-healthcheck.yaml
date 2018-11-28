@@ -1,0 +1,11 @@
+apiVersion: healthchecking.openshift.io/v1alpha1
+kind: MachineHealthCheck
+metadata:
+  name: example
+spec:
+  selector:
+    matchLabels:
+      sigs.k8s.io/cluster-api-cluster: $cluster
+      sigs.k8s.io/cluster-api-machine-role: worker
+      sigs.k8s.io/cluster-api-machine-type: worker
+      sigs.k8s.io/cluster-api-machineset: $machineset
