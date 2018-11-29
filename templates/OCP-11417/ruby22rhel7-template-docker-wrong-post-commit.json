@@ -142,7 +142,7 @@
           }
         },
         "postCommit": {
-          "args": ["bundle", "exec", "rake", "test", "vvv"]
+          "script": "bundle exec rake test vvv"
         },
         "resources": {}
       },

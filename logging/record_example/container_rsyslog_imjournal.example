@@ -1,0 +1,82 @@
+{
+  "_index": "project.prj.29061eda-a4ec-11e8-9ba7-fa163e68a0de.2018.08.22",
+  "_type": "com.redhat.viaq.common",
+  "_id": "AWVg7POH7zRDgmFYGKlS",
+  "_version": 1,
+  "_score": null,
+  "_source": {
+    "message": "2018-08-22 09:17:46,134 - SVTLogger - INFO - centos-logtest-w7qkp : 110 : 2o38Em0Jk DcrgunZ0T IAhfkMBNs LhJpA5oUi e7ijcR2VH pvKum4QcO prx6erQQQ 2BJkz4X0K uAFcxcOOd 2BemUlull 92jwGMoGH iWpDyRNxZ dymVoitKv n0U9Ck8lx wKpIiByWT sW7oUvrJw sdBpV8IJy DYujctQ10 eCBfgEFlg 6IWAiAiVV ",
+    "level": "info",
+    "hostname": "preserve-anli-rsyslognode-2",
+    "@timestamp": "2018-08-22T05:17:46.134880-04:00",
+    "pipeline_metadata": {
+      "collector": {
+        "name": "rsyslog",
+        "inputname": "imjournal"
+      }
+    },
+    "CONTAINER_ID": "72367058f4e7",
+    "CONTAINER_ID_FULL": "72367058f4e7b9107d252499db3dd13fdcfb0658c929d9738460abe541ad1d16",
+    "CONTAINER_NAME": "k8s_centos-logtest_centos-logtest-w7qkp_prj_f7c20fe9-a5eb-11e8-9ba7-fa163e68a0de_0",
+    "CONTAINER_TAG": "72367058f4e7",
+    "metadata": {},
+    "kubernetes": {
+      "namespace_id": "29061eda-a4ec-11e8-9ba7-fa163e68a0de",
+      "namespace_annotations": {
+        "openshift_io/description": "",
+        "openshift_io/display-name": "",
+        "openshift_io/requester": "anli",
+        "openshift_io/sa_scc_mcs": "s0:c15,c0",
+        "openshift_io/sa_scc_supplemental-groups": "1000210000/10000",
+        "openshift_io/sa_scc_uid-range": "1000210000/10000"
+      },
+      "creation_timestamp": "2018-08-21T02:44:44Z",
+      "pod_id": "f7c20fe9-a5eb-11e8-9ba7-fa163e68a0de",
+      "annotations": {
+        "openshift_io/scc": "restricted"
+      },
+      "labels": {
+        "run": "centos-logtest",
+        "test": "centos-logtest"
+      },
+      "host": "preserve-anli-rsyslognode-2",
+      "pod_name": "centos-logtest-w7qkp",
+      "namespace_name": "prj",
+      "container_name": "centos-logtest",
+      "master_url": "https://kubernetes.default.svc.cluster.local:443"
+    },
+    "docker": {
+      "container_id": "72367058f4e7b9107d252499db3dd13fdcfb0658c929d9738460abe541ad1d16"
+    },
+    "originalmsg": "2018-08-22 09:17:46,134 - SVTLogger - INFO - centos-logtest-w7qkp : 110 : 2o38Em0Jk DcrgunZ0T IAhfkMBNs LhJpA5oUi e7ijcR2VH pvKum4QcO prx6erQQQ 2BJkz4X0K uAFcxcOOd 2BemUlull 92jwGMoGH iWpDyRNxZ dymVoitKv n0U9Ck8lx wKpIiByWT sW7oUvrJw sdBpV8IJy DYujctQ10 eCBfgEFlg 6IWAiAiVV ",
+    "unparsed-data": "2018-08-22 09:17:46,134 - SVTLogger - INFO - centos-logtest-w7qkp : 110 : 2o38Em0Jk DcrgunZ0T IAhfkMBNs LhJpA5oUi e7ijcR2VH pvKum4QcO prx6erQQQ 2BJkz4X0K uAFcxcOOd 2BemUlull 92jwGMoGH iWpDyRNxZ dymVoitKv n0U9Ck8lx wKpIiByWT sW7oUvrJw sdBpV8IJy DYujctQ10 eCBfgEFlg 6IWAiAiVV ",
+    "systemd": {
+      "t": {
+        "MACHINE_ID": "34cdbef47b574f19a7abff702fddf1ac",
+        "BOOT_ID": "727be603076a415e8c51dea06f5cc7f2",
+        "CAP_EFFECTIVE": "1fffffffff",
+        "CMDLINE": "/usr/bin/dockerd-current --add-runtime docker-runc=/usr/libexec/docker/docker-runc-current --default-runtime=docker-runc --authorization-plugin=rhel-push-plugin --exec-opt native.cgroupdriver=systemd --userland-proxy-path=/usr/libexec/docker/docker-proxy-current --init-path=/usr/libexec/docker/docker-init-current --seccomp-profile=/etc/docker/seccomp.json --selinux-enabled --log-driver journald --signature-verification=False --storage-driver overlay2 --mtu=1450 --add-registry registry.redhat.io --block-registry registry.hacker.com --insecure-registry brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888 --insecure-registry virt-openshift-05.lab.eng.nay.redhat.com:5000 --insecure-registry virt-openshift-05.lab.eng.nay.redhat.com:5001 --insecure-registry registry.reg-aws.openshift.com:443 --insecure-registry asb-registry.usersys.redhat.com:5000 --add-registry registry.access.redhat.com",
+        "COMM": "dockerd-current",
+        "EXE": "/usr/bin/dockerd-current",
+        "GID": "0",
+        "HOSTNAME": "preserve-anli-rsyslognode-2",
+        "PID": "11541",
+        "SELINUX_CONTEXT": "system_u:system_r:container_runtime_t:s0",
+        "SOURCE_REALTIME_TIMESTAMP": "1534929466134559",
+        "SYSTEMD_CGROUP": "/system.slice/docker.service",
+        "SYSTEMD_SLICE": "system.slice",
+        "SYSTEMD_UNIT": "docker.service",
+        "TRANSPORT": "journal",
+        "UID": "0"
+      }
+    }
+  },
+  "fields": {
+    "@timestamp": [
+      1534929466134
+    ]
+  },
+  "sort": [
+    1534929466134
+  ]
+}
