@@ -30,7 +30,7 @@ curl_es_get="oc exec -c elasticsearch $es_master_pod1 -- curl -s -XGET --cacert 
 es_query="oc exec -c elasticsearch $es_master_pod1 -- es_util --query="
 es_healthy="oc exec -c elasticsearch $es_master_pod1 -- es_cluster_health"
 curl_fluentd_get="oc exec $fluentd_pod1 -- curl -s --cacert /etc/fluent/keys/ca --cert /etc/fluent/keys/cert --key /etc/fluent/keys/key https://logging-es:9200/"
-curl_token_get='oc exec -c elasticsearch  $fluentd_pod1 curl -kv -H 'X-Forwarded-For: 127.0.0.1' -H \"Authorization: Bearer $token\" https://$es_service'
+curl_token_get='oc exec $fluentd_pod1 -- curl -kv -H 'X-Forwarded-For: 127.0.0.1' -H "Authorization: Bearer $token" https://$es_service:9200'
 #curl_get_token='oc exec -c elasticsearch  $fluentd_pod1 curl -kv -H \"Authorization: Bearer `oc whoami -t`\" https://logging-es.logging.svc.cluster.local:9200/'
 
 
@@ -96,4 +96,5 @@ ${es_query}.orphaned*/_settings?pretty
 
 
 echo "-->10. Token access checkin --< "
-$curl_token_get
+
+oc exec $fluentd_pod1 -- curl -kv -H "X-Forwarded-For: 127.0.0.1" -H "Authorization: Bearer $token" https://${es_service}:9200
