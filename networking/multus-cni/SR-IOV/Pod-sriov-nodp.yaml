@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  generateName: testpod-
+  annotations:
+    k8s.v1.cni.cncf.io/networks: sriov-network
+spec:
+  containers:
+  - name: test-pod
+    image: bmeng/centos-network
