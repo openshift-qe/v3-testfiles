@@ -3,7 +3,7 @@ kind: Pod
 metadata:
   name: vlan-hostdevice-pod
   annotations:
-    k8s.v1.cni.cncf.io/networks: vlan100-conf, host-device-conf
+    k8s.v1.cni.cncf.io/networks: vlan100, host-device
 spec:
   containers:
   - name: vlan-hostdevice-pod

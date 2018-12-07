@@ -3,7 +3,7 @@ kind: Pod
 metadata:
   name: macvlan-hostdevice-pod
   annotations:
-    k8s.v1.cni.cncf.io/networks: host-device-conf,  macvlan-bridge-conf
+    k8s.v1.cni.cncf.io/networks: host-device,  macvlan-bridge
 spec:
   containers:
   - name: macvlan-hostdevice-pod

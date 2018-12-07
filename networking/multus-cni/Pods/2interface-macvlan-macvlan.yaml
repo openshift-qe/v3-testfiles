@@ -3,7 +3,7 @@ kind: Pod
 metadata:
   name: two-macvlan-pod
   annotations:
-    k8s.v1.cni.cncf.io/networks: macvlan-passthru-conf, macvlan-bridge-conf
+    k8s.v1.cni.cncf.io/networks: macvlan-passthru, macvlan-bridge
 spec:
   containers:
   - name: two-macvlan-pod

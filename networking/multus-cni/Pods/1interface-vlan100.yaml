@@ -3,7 +3,7 @@ kind: Pod
 metadata:
   name: vlan100-pod
   annotations:
-    k8s.v1.cni.cncf.io/networks: vlan100-conf
+    k8s.v1.cni.cncf.io/networks: vlan100
 spec:
   containers:
   - name: vlan100-pod

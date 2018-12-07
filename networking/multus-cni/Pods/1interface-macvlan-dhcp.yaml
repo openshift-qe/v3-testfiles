@@ -3,7 +3,7 @@ kind: Pod
 metadata:
   name: macvlan-dhcp-pod
   annotations:
-    k8s.v1.cni.cncf.io/networks: macvlan-dhcp-conf
+    k8s.v1.cni.cncf.io/networks: macvlan-dhcp
 spec:
   containers:
   - name: macvlan-dhcp-pod
