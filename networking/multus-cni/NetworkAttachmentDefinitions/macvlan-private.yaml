@@ -9,13 +9,6 @@ spec:
       "master": "eth0",
       "mode": "private",
       "ipam": {
-        "type": "host-local",
-        "subnet": "10.1.1.0/24",
-        "rangeStart": "10.1.1.100",
-        "rangeEnd": "10.1.1.200",
-        "routes": [
-          { "dst": "0.0.0.0/0" }
-        ],
-        "gateway": "10.1.1.1"
+        "type": "dhcp"
       }
     }'
