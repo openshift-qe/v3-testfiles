@@ -5,6 +5,6 @@ metadata:
 spec:
   selector:
     matchLabels:
-      sigs.k8s.io/cluster-api-cluster: qe-jhou
+      sigs.k8s.io/cluster-api-cluster: $clustername
       sigs.k8s.io/cluster-api-machine-role: master
       sigs.k8s.io/cluster-api-machine-type: master
