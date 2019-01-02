@@ -5,7 +5,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-      sigs.k8s.io/cluster-api-cluster: qe-jhou
+      sigs.k8s.io/cluster-api-cluster: $clustername
       sigs.k8s.io/cluster-api-machine-role: worker
       sigs.k8s.io/cluster-api-machine-type: worker
       sigs.k8s.io/cluster-api-machineset: $machineset
