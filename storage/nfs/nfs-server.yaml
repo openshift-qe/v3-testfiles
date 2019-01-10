@@ -21,9 +21,7 @@ items:
           name: local
     volumes:
       - name: local
-        hostPath:
-         path: /var/mnt
-         type: DirectoryOrCreate
+        emptyDir: {}
 - apiVersion: v1
   kind: Service
   metadata:

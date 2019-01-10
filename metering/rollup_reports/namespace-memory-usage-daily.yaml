@@ -1,0 +1,12 @@
+apiVersion: metering.openshift.io/v1alpha1
+kind: Report
+metadata:
+  name: namespace-memory-usage-daily
+spec:
+  generationQuery: "namespace-memory-usage"
+  schedule:
+    period: "daily"
+  inputs:
+  - name: NamespaceMemoryUsageReportName
+    value: namespace-memory-usage-hourly
+  gracePeriod: 1h # delay running 1 hour so that the hourly report has time to run

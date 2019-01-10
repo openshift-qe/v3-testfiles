@@ -3,7 +3,7 @@ kind: Pod
 metadata:
   name: macvlan-passthru-pod
   annotations:
-    k8s.v1.cni.cncf.io/networks: macvlan-passthru-conf
+    k8s.v1.cni.cncf.io/networks: macvlan-passthru
 spec:
   containers:
   - name: macvlan-passthru-pod

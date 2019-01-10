@@ -1,0 +1,41 @@
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  labels:
+    app: cni-plugins-supported
+    tier: node
+  name: cni-plugins-supported-ds
+  namespace: kube-system
+spec:
+  selector:
+    matchLabels:
+      app: cni-plugins-supported
+      tier: node
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: cni-plugins-supported
+        tier: node
+    spec:
+      containers:
+      - image: openshift/ose-container-networking-plugins-supported:v4.0
+        name: cni-plugins-supported
+        command: ["/bin/bash"]
+        args: ["-c", "cp /usr/src/plugins/bin/* /host/opt/cni/bin/ ; sleep inf"]
+        securityContext:
+          privileged: true
+        volumeMounts:
+        - mountPath: /host/opt/cni/bin
+          name: cnibin
+      serviceAccount: multus
+      serviceAccountName: multus
+      tolerations:
+      - effect: NoSchedule
+        key: node-role.kubernetes.io/master
+        operator: Exists
+      volumes:
+      - hostPath:
+          path: /opt/cni/bin
+          type: ""
+        name: cnibin

@@ -3,7 +3,7 @@ kind: Pod
 metadata:
   name: macvlan-private-pod
   annotations:
-    k8s.v1.cni.cncf.io/networks: macvlan-private-conf
+    k8s.v1.cni.cncf.io/networks: macvlan-private
 spec:
   containers:
   - name: macvlan-private-pod

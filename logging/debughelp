@@ -1,0 +1,119 @@
+# bash
+es_pod=
+kibana_pod=
+fluentd_pod=
+curator_pod=
+
+
+#1 Rest in ES pod
+oc exec -c elasticsearch ${es_pod} -- curl -s -k --cert /etc/elasticsearch/secret/admin-cert --key /etc/elasticsearch/secret/admin-key 'https://localhost:9200/_cat/indices?v'
+#2 Rest in fluentd
+oc exec $fluentd_pod -- curl -s --cacert /etc/fluent/keys/ca --cert /etc/fluent/keys/cert --key /etc/fluent/keys/key https://logging-es:9200/_cat/indices?v
+#3 Rest in curator 
+oc exec $curator_pod -- curator --host logging-es --use_ssl   --certificate /etc/curator/keys/ca --client-cert /etc/curator/keys/cert   --client-key /etc/curator/keys/key --loglevel INFO show indices   --all-indices
+
+#3) Rest via ES local DNS
+key=$(echo -H "Authorization: Bearer `oc whoami -t`")
+curl -kv "$key"  -H "X-Forwarded-For: 127.0.0.1"  https://logging-es.logging.svc.cluster.local:9200/_cat/indices?v
+#4) Rest via ES external DNS
+
+key=$(echo -H "Authorization: Bearer `oc whoami -t`")
+url="loggines-es.example.com"
+curl -kv "$key" https://$url/_cat/indices?v
+
+#5) Rest via kibana
+key=$(echo -H "Authorization: Bearer `oc whoami -t`")
+curl -kv "$key" https://loggines-es.example.com/_cat/indices?v
+curl -kv "$key" https://`oc get route logging-kibana -o jsonpath='{.spec.host}'`/elasticsearch/.all/_search?sort=@timestamp:desc | python -mjson.tool
+curl -kv "$key" https://`oc get route logging-kibana -o jsonpath='{.spec.host}'`/elasticsearch/.all/_mapping/field/*?_=1503931743553&ignore_unavailable=false&allow_no_indices=false&include_defaults=true
+
+
+#list index/alias/nodes
+curl -s -k --cert /etc/elasticsearch/secret/admin-cert --key /etc/elasticsearch/secret/admin-key 'https://localhost:9200/_cat/indices?v'
+curl -s -k --cert /etc/elasticsearch/secret/admin-cert --key /etc/elasticsearch/secret/admin-key https://localhost:9200/_cat/aliases
+curl -s -k --cert  /etc/elasticsearch/secret/admin-cert --key  /etc/elasticsearch/secret/admin-key https://localhost:9200/_cat/nodes?v
+
+#search in es 
+https://localhost:9200/$index_name*/_search?pretty&size=50&pretty&q=$search_string' --insecure 
+https://localhost:9200/_search?pretty&size=50&q=kubernetes.event.verb:*' --insecure | python -mjson.tool
+https://localhost:9200/_search?pretty&size=50&q=docker.user:*' --insecure | python -mjson.tool
+#swallow status 
+https://localhost:9200/_cat/thread_pool?v\&h=host,bulk.completed,bulk.rejected,bulk.queue,bulk.active,bulk.queueSize
+https://localhost:9200/_nodes/thread_pool?pretty
+#?https://logging-es.logging.svc:9200/project.anlirest -d '{ "user" : "kimchy", "post_date" : "2009-11-15T14:12:12", "message" : "trying out Elasticsearch" }
+https://logging-es.logging.svc:9200/_count"
+
+
+#put/post document
+https://logging-es:9200/project-qe.2016.07.14/fluentdtest/ -d '{"message" : "project-qe 2016.07.14 message"}'
+
+
+https://localhost:9200/_search?pretty -H 'Content-Type: application/json' -d'
+{
+    "query": {
+        "match" : {
+            "kubernetes.pod_name" : "logging-eventrouter-1-8bb25"
+        }
+    }
+}
+'
+https://logging-es.logging.svc.cluster.local:9200/.operations*/_search?pretty -d '{"query": { "match": {"message" : "anlieventevent" }}}'
+
+
+curl -XPUT localhost:9200/_cluster/settings -d '{
+    "persistent" : {
+        "discovery.zen.minimum_master_nodes" : 2
+    }
+}'
+
+
+
+Elasticsearch view
+_cluster/settings
+_nodes/stats
+_cat/shards?h=index,shard,prirep,state,unassigned.reason| grep UNASSIGNED
+_cluster/allocation/explain?pretty
+_cat/thread_pool?v
+_cluster/allocation/explain -d '{ "index": ".operations.2018.09.20", "shard" : "0", "primary": false, "current_node": "logging-es-data-master-h40v2k95"}' | python -mjson.tool
+_cat/plugins?v
+
+
+
+#fluentd checking
+cat /var/log/es-containers.log.pos
+journalctl -c `cat /var/log/journal.pos`
+
+# Debug in fluentd
+oc edit configmap logging-fluentd
+#then, remove the @include configs.d/openshift/system.conf and replace with this
+    <system>
+       log_level debug
+    </system>
+
+Certificate debug:
+oc exec $fluentd_pod -- curl -v https://kubernetes.default.svc.cluster.local
+oc exec $es_pod -- curl -v https://kubernetes.default.svc.cluster.local
+oc exec logging-fluentd-0dtg7 -- curl -v -s --cacert /var/run/secrets/kubernetes.io/serviceaccount/ca.crt https://kubernetes.default.svc.cluster.local
+
+oc set env ds/logging-fluentd DEBUG=true VERBOSE=true DEBUG_TRANSPORTER=true TRANSPORTER_LOG_LEVEL=debug
+oc set env ds/logging-fluentd JOURNAL_SOURCE=/run/log/journal
+oc set env ds/logging-fluentd ENABLE_UTF8_FILTER=true
+oc set env dc/logging-elasicsearch* ES_JAVA_OPTS=-Djavax.net.debug=all
+
+
+oc set env dc/logging-kibana ELASTICSEARCH_STARTUPTIMEOUT=5000  LOGGING_VERBOSE=true
+oc set env dc/logging-kibana ELASTICSEARCH_PINGTIMEOUT=15000  LOGGING_VERBOSE=true
+
+
+check fluentd log in /var/log/fluentd.log  (> OCP v3.4)
+curl -O https://raw.githubusercontent.com/openshift/origin-aggregated-logging/master/hack/logging-dump.sh
+
+
+
+
+
+
+Rsyslog:
+:syslogtag, isequal, "kubernetes:" /var/log/kubernetes.log
+& stop
+
