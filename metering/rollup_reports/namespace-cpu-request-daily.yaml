@@ -1,0 +1,12 @@
+apiVersion: metering.openshift.io/v1alpha1
+kind: Report
+metadata:
+  name: namespace-cpu-request-daily
+spec:
+  generationQuery: "namespace-cpu-request"
+  schedule:
+    period: "daily"
+  inputs:
+  - name: NamespaceCPURequestReportName
+    value: namespace-cpu-request-hourly
+  gracePeriod: 1h # delay running 1 hour so that the hourly report has time to run
