@@ -3,7 +3,7 @@ kind: Pod
 metadata:
   name: macvlan-vepa-pod
   annotations:
-    k8s.v1.cni.cncf.io/networks: macvlan-vepa-conf
+    k8s.v1.cni.cncf.io/networks: macvlan-vepa
 spec:
   containers:
   - name: macvlan-vepa-pod

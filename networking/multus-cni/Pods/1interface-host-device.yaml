@@ -3,7 +3,7 @@ kind: Pod
 metadata:
   name: host-device-pod
   annotations:
-    k8s.v1.cni.cncf.io/networks: host-device-conf
+    k8s.v1.cni.cncf.io/networks: host-device
 spec:
   containers:
   - name: host-device-pod
