@@ -1,7 +1,7 @@
 apiVersion: "logging.openshift.io/v1alpha1"
 kind: "ClusterLogging"
 metadata:
-  name: "SingleRedundancy"
+  name: "zeroredundancy"
 spec:
   managementState: "Managed"
   logStore:
@@ -9,7 +9,7 @@ spec:
     elasticsearch:
       nodeCount: 3
       storage: {}
-      redundancyPolicy: "SingleRedundancy"
+      redundancyPolicy: "ZeroRedundancy"
   visualization:
     type: "kibana"
     kibana:
@@ -17,7 +17,7 @@ spec:
   curation:
     type: "curator"
     curator:
-      schedule: "*/30 * * * *"
+      schedule: "*/10 * * * *"
   collection:
     logs:
       type: "fluentd"
