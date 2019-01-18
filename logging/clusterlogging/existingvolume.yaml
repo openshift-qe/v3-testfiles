@@ -13,9 +13,9 @@ spec:
           apiVersion: v1
           metadata:
             name: myclaim
-         spec:
-           accessModes:
-             - ReadWriteOnce
+          spec:
+            accessModes:
+            - ReadWriteOnce
           selector:
              matchLabels:
              preparefor: "logging1"

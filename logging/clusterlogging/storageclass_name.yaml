@@ -1,7 +1,7 @@
 apiVersion: "logging.openshift.io/v1alpha1"
 kind: "ClusterLogging"
 metadata:
-  name: "storageclass"
+  name: "storageclassname"
 spec:
   managementState: "Managed"
   logStore:
@@ -13,14 +13,14 @@ spec:
           apiVersion: v1
           metadata:
             name: myclaim
-         spec:
-           accessModes:
-             - ReadWriteOnce
-           volumeMode: Filesystem
-          resources:
-             requests:
-              storage: 8Gi
-           storageClassName: gp2
+          spec:
+            accessModes:
+            - ReadWriteOnce
+            volumeMode: Filesystem
+            resources:
+              requests:
+               storage: 8Gi
+          storageClassName: gp2
         redundancyPolicy: "ZeroRedundancy"
   visualization:
     type: "kibana"

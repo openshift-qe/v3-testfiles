@@ -13,14 +13,14 @@ spec:
           apiVersion: v1
           metadata:
             name: myclaim
-         spec:
-           accessModes:
-             - ReadWriteOnce
-           volumeMode: Filesystem
+          spec:
+            accessModes:
+            - ReadWriteOnce
+          volumeMode: Filesystem
           resources:
-             requests:
+            requests:
               storage: 8Gi
-           storageClassName: standard
+          storageClassName: standard
         redundancyPolicy: "ZeroRedundancy"
   visualization:
     type: "kibana"

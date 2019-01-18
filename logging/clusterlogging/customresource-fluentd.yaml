@@ -1,7 +1,7 @@
 apiVersion: "logging.openshift.io/v1alpha1"
 kind: "ClusterLogging"
 metadata:
-  name: "example"
+  name: "customresourcefluentd"
 spec:
   managementState: "Managed"
   logStore:
@@ -39,7 +39,7 @@ spec:
   collection:
     logs:
       type: "fluentd"
-      fluentd: {}
+      fluentd:
         resources:
           limits:
             memory: 1Gi
