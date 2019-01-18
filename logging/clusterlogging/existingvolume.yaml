@@ -1,0 +1,34 @@
+apiVersion: "logging.openshift.io/v1alpha1"
+kind: "ClusterLogging"
+metadata:
+  name: "existingvolume"
+spec:
+  managementState: "Unmanaged"
+  logStore:
+    type: "elasticsearch"
+    elasticsearch:
+      nodeCount: 1
+      storage:
+        VolumeClaimTemplate:
+          apiVersion: v1
+          metadata:
+            name: myclaim
+         spec:
+           accessModes:
+             - ReadWriteOnce
+          selector:
+             matchLabels:
+             preparefor: "logging1"
+      redundancyPolicy: "ZeroRedundancy"
+  visualization:
+    type: "kibana"
+    kibana:
+      replicas: 1
+  curation:
+    type: "curator"
+    curator:
+      schedule: "*/10 * * * *"
+  collection:
+    logs:
+      type: "fluentd"
+      fluentd: {}
