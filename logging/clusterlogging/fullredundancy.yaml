@@ -1,18 +1,15 @@
 apiVersion: "logging.openshift.io/v1alpha1"
 kind: "ClusterLogging"
 metadata:
-  name: "hostpath"
+  name: "fullredundancy"
 spec:
-  managementState: "Unmanaged"
+  managementState: "Managed"
   logStore:
     type: "elasticsearch"
     elasticsearch:
-      nodeCount: 1
-      storage:
-        HostPath:
-          path: /data
-          type: Directory
-      redundancyPolicy: "SingleRedundancy"
+      nodeCount: 3
+      storage: {}
+      redundancyPolicy: "FullRedundancy"
   visualization:
     type: "kibana"
     kibana:
@@ -20,7 +17,7 @@ spec:
   curation:
     type: "curator"
     curator:
-      schedule: "*/10 * * * *"
+      schedule: "*/30 * * * *"
   collection:
     logs:
       type: "fluentd"
