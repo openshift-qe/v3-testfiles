@@ -1,12 +1,8 @@
-apiVersion: "marketplace.redhat.com/v1alpha1"
-kind: "CatalogSourceConfig"
+apiVersion: marketplace.redhat.com/v1alpha1
+kind: CatalogSourceConfig
 metadata:
-  name: "metering"
-  namespace: "openshift-marketplace"
-  labels:
-    opsrc-datastore: "true"
-    opsrc-provider: redhat
-
+  name: metering
+  namespace: openshift-marketplace
 spec:
-  targetNamespace: "openshift-operators"
-  packages: "metering"
+  targetNamespace: openshift-operators
+  packages: metering
