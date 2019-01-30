@@ -3,6 +3,10 @@ kind: "CatalogSourceConfig"
 metadata:
   name: "metering"
   namespace: "openshift-marketplace"
+  labels:
+    opsrc-datastore: "true"
+    opsrc-provider: redhat
+
 spec:
-  targetNamespace: "openshift-metering"
+  targetNamespace: "openshift-operators"
   packages: "metering"
