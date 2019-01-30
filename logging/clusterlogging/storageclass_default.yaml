@@ -7,21 +7,10 @@ spec:
   logStore:
     type: "elasticsearch"
     elasticsearch:
-      nodeCount: 2
-      storage: 
-        VolumeClaimTemplate:
-          apiVersion: v1
-          metadata:
-            name: myclaim
-          spec:
-            accessModes:
-            - ReadWriteOnce
-          volumeMode: Filesystem
-          resources:
-            requests:
-              storage: 8Gi
-          storageClassName: standard
-        redundancyPolicy: "ZeroRedundancy"
+      nodeCount: 3
+      storage:
+        size: "20G"
+      redundancyPolicy: "SingleRedundancy"
   visualization:
     type: "kibana"
     kibana:

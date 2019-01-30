@@ -1,0 +1,8 @@
+apiVersion: operators.coreos.com/v1alpha2
+kind: OperatorGroup
+metadata:
+ name: metering
+ namespace: openshift-metering
+spec:
+ targetNamespaces:
+   - openshift-metering
