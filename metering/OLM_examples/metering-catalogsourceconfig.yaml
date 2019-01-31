@@ -1,8 +1,8 @@
-apiVersion: marketplace.redhat.com/v1alpha1
-kind: CatalogSourceConfig
+apiVersion: "marketplace.redhat.com/v1alpha1"
+kind: "CatalogSourceConfig"
 metadata:
-  name: metering
-  namespace: openshift-marketplace
+  name: "metering"
+  namespace: "openshift-marketplace"
 spec:
-  targetNamespace: openshift-metering
-  packages: metering
+  targetNamespace: "openshift-metering"
+  packages: "metering"
