@@ -4,5 +4,5 @@ metadata:
   name: metering
   namespace: openshift-marketplace
 spec:
-  targetNamespace: openshift-operators
+  targetNamespace: openshift-metering
   packages: metering
