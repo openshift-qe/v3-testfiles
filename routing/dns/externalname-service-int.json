@@ -1,0 +1,11 @@
+{
+    "kind": "Service",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "external-internal"
+    },
+    "spec": {
+        "type": "ExternalName",
+        "externalName": "service-unsecure.myproject.svc.cluster.local"
+    }
+}

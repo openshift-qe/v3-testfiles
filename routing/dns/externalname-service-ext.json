@@ -1,0 +1,11 @@
+{
+    "kind": "Service",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "external-external"
+    },
+    "spec": {
+        "type": "ExternalName",
+        "externalName": "www.google.com"
+    }
+}
