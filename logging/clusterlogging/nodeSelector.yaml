@@ -1,0 +1,29 @@
+apiVersion: "logging.openshift.io/v1alpha1"
+kind: "ClusterLogging"
+metadata:
+  name: "nodeselector"
+spec:
+  managementState: "Managed"
+  logStore:
+    type: "elasticsearch"
+    elasticsearch:
+      nodeSelector:
+        node-type: infra
+        cluster-logging-component: es
+      nodeCount: 3
+      storage:
+        size: "20G"
+        storageClassName: "gp2"
+      redundancyPolicy: "SingleRedundancy"
+  visualization:
+    type: "kibana"
+    kibana:
+      replicas: 1
+  curation:
+    type: "curator"
+    curator:
+      schedule: "*/10 * * * *"
+  collection:
+    logs:
+      type: "fluentd"
+      fluentd: {}
