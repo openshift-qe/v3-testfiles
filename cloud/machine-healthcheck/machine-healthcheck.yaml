@@ -5,7 +5,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-      sigs.k8s.io/cluster-api-cluster: $clustername
+      sigs.k8s.io/cluster-api-cluster: preserve-chaoyang5
       sigs.k8s.io/cluster-api-machine-role: worker
       sigs.k8s.io/cluster-api-machine-type: worker
-      sigs.k8s.io/cluster-api-machineset: $machineset
+      sigs.k8s.io/cluster-api-machineset: preserve-chaoyang5-worker-us-east-2a
