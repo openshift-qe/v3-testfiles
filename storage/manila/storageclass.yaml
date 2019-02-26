@@ -4,5 +4,6 @@ metadata:
   name: "manila-share"
 provisioner: "externalstorage.k8s.io/manila"
 parameters:
-  type: "lvmsharetype"
+  type: "lvm"
   zones: "nova"
+
