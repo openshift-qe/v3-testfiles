@@ -1,12 +1,15 @@
 apiVersion: "logging.openshift.io/v1alpha1"
 kind: "ClusterLogging"
 metadata:
-  name: "storageclassname"
+  name: "nodeselector"
 spec:
   managementState: "Managed"
   logStore:
     type: "elasticsearch"
     elasticsearch:
+      nodeSelector:
+        node-type: infra
+        cluster-logging-component: es
       nodeCount: 3
       storage:
         size: "20G"
