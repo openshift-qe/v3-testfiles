@@ -11,6 +11,9 @@ spec:
         node-type: infra
         cluster-logging-component: es
       nodeCount: 3
+      resources:
+        requests:
+          memory: 2Gi
       storage:
         size: "20G"
         storageClassName: "gp2"
