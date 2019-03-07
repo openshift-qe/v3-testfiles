@@ -8,6 +8,9 @@ spec:
     type: "elasticsearch"
     elasticsearch:
       nodeCount: 3
+      resources:
+        requests:
+          memory: 2Gi
       storage:
         size: "20G"
       redundancyPolicy: "SingleRedundancy"
