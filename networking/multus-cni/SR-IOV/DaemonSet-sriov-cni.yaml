@@ -22,7 +22,7 @@ spec:
     spec:
       hostNetwork: true
       nodeSelector:
-        beta.kubernetes.io/arch: linux
+        beta.kubernetes.io/os: linux
       tolerations:
       - operator: Exists
       serviceAccountName: sriov-cni
