@@ -10,6 +10,6 @@ spec:
     image: bmeng/centos-network
     resources:
       requests:
-        intel.com/sriov: 1
+        openshift.io/sriov: 1
       limits:
-        intel.com/sriov: 1
+        openshift.io/sriov: 1
