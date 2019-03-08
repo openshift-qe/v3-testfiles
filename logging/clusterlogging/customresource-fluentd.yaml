@@ -12,7 +12,7 @@ spec:
         limits:
           memory: 2Gi
         requests:
-          cpu: 500m
+          cpu: 200m
           memory: 2Gi
       storage: {}
       redundancyPolicy: "SingleRedundancy"
