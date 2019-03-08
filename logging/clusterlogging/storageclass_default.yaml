@@ -9,7 +9,10 @@ spec:
     elasticsearch:
       nodeCount: 3
       resources:
+        limits:
+          memory: 2Gi
         requests:
+          cpu: 200m
           memory: 2Gi
       storage:
         size: "20G"
