@@ -2,11 +2,13 @@ This folder include all cvp cases and the other configuration to access a cluste
 <br>
 #The case scripts
 <br>
-1) the script must be a shell with same name with the case name
+1) The script must be a shell using same name as the case name
 <br>
-2) the case must be executed able.
+2) The script should return pass( 0) or fail (not 0)
 <br>
-3) the case must return pass( 0) or fail (not 0)
+3) It is better to use relative path in your scripts
+<br>
+4) The script will be executed in this director {$PWD=this directory}
 
 #The following files will be placed under this directory by jenkins job.
 <br>
@@ -21,4 +23,4 @@ This folder include all cvp cases and the other configuration to access a cluste
     hosts: the ansible inventory file
 <br>
     kubeconfig: the cluster-admin kubeconfig
-
+# The oc binary is places under the default PATH directory $HOME/bin
