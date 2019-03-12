@@ -1,0 +1,10 @@
+apiVersion: marketplace.redhat.com/v1alpha1
+kind: CatalogSourceConfig
+metadata:
+  name: installed-community-openshift-logging
+  namespace: openshift-marketplace
+spec:
+  csDisplayName: Community Operators
+  csPublisher: Community
+  packages: cluster-logging
+  targetNamespace: openshift-logging
