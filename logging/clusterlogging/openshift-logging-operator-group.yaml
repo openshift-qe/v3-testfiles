@@ -1,0 +1,14 @@
+apiVersion: operators.coreos.com/v1alpha2
+kind: OperatorGroup
+metadata:
+  annotations:
+    olm.providedAPIs: ClusterLogging.v1alpha1.logging.openshift.io
+  name: openshift-logging
+  namespace: openshift-logging
+spec:
+  selector: {}
+  serviceAccount:
+    metadata:
+      creationTimestamp: null
+  targetNamespaces:
+  - openshift-logging

@@ -1,0 +1,10 @@
+apiVersion: marketplace.redhat.com/v1alpha1
+kind: CatalogSourceConfig
+metadata:
+  name: installed-community-openshift-operators
+  namespace: openshift-marketplace
+spec:
+  csDisplayName: Community Operators
+  csPublisher: Community
+  packages: elasticsearch-operator
+  targetNamespace: openshift-operators
