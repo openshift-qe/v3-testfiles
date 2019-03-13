@@ -3,8 +3,8 @@ kind: Report
 metadata:
   name: namespace-cpu-usage-hourly
 spec:
-  reportingStart: "2019-01-01T00:00:00Z"
   generationQuery: "namespace-cpu-usage"
-  schedule:
-    period: "hourly"
+  reportingStart: '2019-01-01T00:00:00Z'
+  reportingEnd: '2019-01-30T23:59:59Z'
+  runImmediately: true
 
