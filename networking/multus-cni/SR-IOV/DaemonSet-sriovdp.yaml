@@ -1,40 +1,39 @@
-apiVersion: extensions/v1beta1
 kind: DaemonSet
+apiVersion: apps/v1
 metadata:
-  name: kube-sriov-device-plugin-amd64
-  namespace: kube-system
-  labels:
-    tier: node
-    app: sriovdp
+  name: sriov-device-plugin
+  namespace: openshift-sriov
+  annotations:
+    kubernetes.io/description: |
+      This daemon set launches the SR-IOV network device plugin on each node.
 spec:
+  selector:
+    matchLabels:
+      app: sriov-device-plugin
+  updateStrategy:
+    type: RollingUpdate
   template:
     metadata:
       labels:
-        tier: node
-        app: sriovdp
+        app: sriov-device-plugin
+        component: network
+        type: infra
+        openshift.io/component: network
+      annotations:
+        scheduler.alpha.kubernetes.io/critical-pod: ''
     spec:
       hostNetwork: true
       hostPID: true
       nodeSelector:
-        beta.kubernetes.io/arch: amd64
+        beta.kubernetes.io/os: linux
       tolerations:
-      - key: node-role.kubernetes.io/master
-        operator: Exists
-        effect: NoSchedule
+      - operator: Exists
       serviceAccountName: sriov-device-plugin
       containers:
-      - name: kube-sriovdp
-        image: nfvpe/sriov-device-plugin:latest
+      - name: sriov-device-plugin
+        image: SRIOVDevicePluginImage
         args:
-        - --log-dir=sriovdp
         - --log-level=10
-        resources:
-          requests:
-            cpu: "100m"
-            memory: "50Mi"
-          limits:
-            cpu: "100m"
-            memory: "50Mi"
         securityContext:
           privileged: true
         volumeMounts:
@@ -44,8 +43,6 @@ spec:
         - name: net
           mountPath: /sys/class/net
           readOnly: true
-        - name: log
-          mountPath: /var/log
       volumes:
         - name: devicesock
           hostPath:
@@ -53,6 +50,3 @@ spec:
         - name: net
           hostPath:
             path: /sys/class/net
-        - name: log
-          hostPath:
-            path: /var/log
