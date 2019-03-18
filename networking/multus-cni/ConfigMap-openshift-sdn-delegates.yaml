@@ -2,7 +2,6 @@ kind: ConfigMap
 apiVersion: v1
 metadata:
   name: multus-cni-config
-  namespace: kube-system
   labels:
     tier: node
     app: multus
@@ -20,5 +19,5 @@ data:
           "masterplugin": true
         }
       ],
-      "kubeconfig": "/etc/cni/net.d/multus.d/multus.kubeconfig"
+      "kubeconfig": "/etc/kubernetes/cni/net.d/multus.d/multus.kubeconfig"
     }

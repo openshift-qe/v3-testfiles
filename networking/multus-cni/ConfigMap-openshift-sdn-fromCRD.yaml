@@ -12,11 +12,12 @@ data:
       "type": "multus",
       "logFile": "/var/log/multus.log",
       "logLevel": "debug",
-      "confDir": "/etc/kubernetes/cni/net.d/",
       "binDir": "/var/lib/cni/bin/",
-      # 80-openshift.conf should be found under /etc/kubernetes/cni/net.d/
+      "multusNamespace": "openshift-multus",
+      "systemNamespaces" ["openshift-multus"].
+      # the CRD of openshift-sdn should be created under multusNamespace
       "clusterNetwork": "openshift-sdn",
-      # the macvlan.conf should be found under /etc/cni/macvlan
-      "defaultNetworks": ["/etc/cni/macvlan/"],
+      # the CRD of macvlan-bridge should be created under multusNamespace
+      "defaultNetworks": ["macvlan-bridge"],
       "kubeconfig": "/etc/kubernetes/cni/net.d/multus.d/multus.kubeconfig"
     }
