@@ -8,9 +8,8 @@ spec:
     type: "elasticsearch"
     elasticsearch:
       nodeSelector:
-        node-type: infra
-        cluster-logging-component: es
-      nodeCount: 3
+        logging: es
+      nodeCount: 1
       resources:
         limits:
           memory: 2Gi
@@ -20,14 +19,18 @@ spec:
       storage:
         size: "20G"
         storageClassName: "gp2"
-      redundancyPolicy: "SingleRedundancy"
+      redundancyPolicy: "ZeroRedundancy"
   visualization:
     type: "kibana"
     kibana:
+      nodeSelector:
+        logging: kibana
       replicas: 1
   curation:
     type: "curator"
     curator:
+      nodeSelector:
+        logging: curator
       schedule: "*/10 * * * *"
   collection:
     logs:
