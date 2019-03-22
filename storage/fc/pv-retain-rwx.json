@@ -10,8 +10,8 @@
     },
     "accessModes": [ "ReadWriteMany" ],
     "fc": {
-        "targetWWNS": [ "500a0981891b8dc5", "500a0981991b8dc5"],
-        "lun": 2,
+        "targetWWNs": [ "50050768030539b6", "50050768030539b7"],
+        "lun": 0,
         "fsType": "ext4"
     },
     "persistentVolumeReclaimPolicy": "Retain"
