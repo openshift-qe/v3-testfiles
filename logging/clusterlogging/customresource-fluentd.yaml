@@ -25,6 +25,13 @@ spec:
         requests:
           cpu: 500m
           memory: 1Gi
+      proxy:
+        resources:
+          limits:
+            memory: 100Mi
+          requests:
+            cpu: 100m
+            memory: 100Mi
       replicas: 1
   curation:
     type: "curator"

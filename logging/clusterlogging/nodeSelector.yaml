@@ -35,4 +35,6 @@ spec:
   collection:
     logs:
       type: "fluentd"
-      fluentd: {}
+      fluentd:
+        nodeSelector:
+          logging: fluentd
