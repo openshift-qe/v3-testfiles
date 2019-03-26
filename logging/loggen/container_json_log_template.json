@@ -9,7 +9,7 @@
             "apiVersion": "v1",
             "data": {
                 "ocp_logtest.cfg": "--raw --file /var/lib/svt/json.example  --text-type input --rate 60.0",
-                "json.example": "{\"message\": \"MERGE_JSON_LOG=true\", \"level\": \"debug\",\" Layer1\": \"layer1 0\", \"layer2\": {\"name\":\"Layer2 1\", \"tips\":\"decide by PRESERVE_JSON_LOG\"}, \"StringNumber\":\"10\", \"Number\": 10,\"foo.bar\":\"dotstring\",\"{foobar}\":\"bracestring\",\"[foobar]\":\"bracket string\", \"foo:bar\":\"colonstring\" }"
+                "json.example": "{\"message\": \"MERGE_JSON_LOG=true\", \"level\": \"debug\",\"Layer1\": \"layer1 0\", \"layer2\": {\"name\":\"Layer2 1\", \"tips\":\"Decide by PRESERVE_JSON_LOG\"}, \"StringNumber\":\"10\", \"Number\": 10,\"foo.bar\":\"Dot Item\",\"{foobar}\":\"Brace Item\",\"[foobar]\":\"Bracket Item\", \"foo:bar\":\"Colon Item\",\"foo bar\":\"Space Item\" }"
             },
             "kind": "ConfigMap",
             "metadata": {
