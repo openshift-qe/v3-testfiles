@@ -8,8 +8,8 @@
         {
             "apiVersion": "v1",
             "data": {
-                "ocp_logtest.cfg": "--raw --file /var/lib/svt/json.example",
-                "json.example": '{"message": "PRESERVE_JSON_LOG true", "level": "anlilevel","anlifield": "top level field", "NextFloor": {"name":"Floor1", "tips":"IgnoreWhenPRESERVE_JSON_LOG=false"} }'
+                "ocp_logtest.cfg": "--raw --file /var/lib/svt/json.example  --text-type input --rate 60.0",
+                "json.example": "{\"message\": \"MERGE_JSON_LOG=true\", \"level\": \"debug\",\" Layer1\": \"layer1 0\", \"layer2\": {\"name\":\"Layer2 1\", \"tips\":\"decide by PRESERVE_JSON_LOG\"}, \"StringNumber\":\"10\", \"Number\": 10,\"foo.bar\":\"dotstring\",\"{foobar}\":\"bracestring\",\"[foobar]\":\"bracket string\", \"foo:bar\":\"colonstring\" }"
             },
             "kind": "ConfigMap",
             "metadata": {
@@ -39,9 +39,8 @@
                     "spec": {
                         "containers": [
                             {
-                                "env": [
-                                ],
-                                "image": "${LOGTEST_IMAGE}",
+                                "env": [],
+                                "image": "docker.io/mffiedler/ocp-logtest:latest",
                                 "imagePullPolicy": "Always",
                                 "name": "centos-logtest",
                                 "resources": {},
@@ -61,11 +60,6 @@
                                     "name": "logtest-config"
                                 }
                             }
-                        ],
-                        "imagePullSecrets": [
-                            {
-                                "name": "default-dockercfg-ukomu"
-                            }
                         ]
                     }
                 }
@@ -73,11 +67,6 @@
         }
     ],
     "parameters": [
-        {
-            "name": "LOGTEST_IMAGE",
-            "displayName": "logtest image",
-            "value": "docker.io/mffiedler/ocp-logtest:latest"
-        },
         {
             "name": "IDENTIFIER",
             "displayName": "identifier",
@@ -87,11 +76,6 @@
             "name": "REPLICAS",
             "displayName": "Replicas",
             "value": "1"
-        },
-        {
-            "name": "PLACEMENT",
-            "displayName": "Placement",
-            "value": "logtest"
         }
     ]
 }
