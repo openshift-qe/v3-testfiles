@@ -6,9 +6,5 @@ metadata:
   name: openshift-logging
   namespace: openshift-logging
 spec:
-  selector: {}
-  serviceAccount:
-    metadata:
-      creationTimestamp: null
   targetNamespaces:
   - openshift-logging

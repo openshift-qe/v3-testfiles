@@ -7,6 +7,6 @@ spec:
   channel: preview
   installPlanApproval: Automatic
   name: cluster-logging
-  source: installed-community-openshift-logging
+  source: cluster-logging-operator
   sourceNamespace: openshift-logging
   startingCSV: clusterlogging.v0.0.1

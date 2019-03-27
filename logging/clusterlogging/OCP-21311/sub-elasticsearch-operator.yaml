@@ -7,6 +7,6 @@ spec:
   channel: preview
   installPlanApproval: Automatic
   name: elasticsearch-operator
-  source: installed-community-openshift-operators
+  source: elasticsearch-operator
   sourceNamespace: openshift-operators
   startingCSV: elasticsearch-operator.v0.0.1
