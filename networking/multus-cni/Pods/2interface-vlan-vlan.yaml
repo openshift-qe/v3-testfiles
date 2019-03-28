@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: two-vlan100-pod
+  generateName: two-vlan100-pod-
   annotations:
     k8s.v1.cni.cncf.io/networks: vlan100, vlan100
 spec:

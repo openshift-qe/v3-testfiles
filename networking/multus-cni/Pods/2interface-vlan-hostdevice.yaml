@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: vlan-hostdevice-pod
+  generateName: vlan-hostdevice-pod-
   annotations:
     k8s.v1.cni.cncf.io/networks: vlan100, host-device
 spec:

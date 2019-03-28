@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: vlan-macvlan-pod
+  generateName: vlan-macvlan-pod-
   annotations:
     k8s.v1.cni.cncf.io/networks: vlan100, macvlan-bridge
 spec:

@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: macvlan-private-pod
+  generateName: macvlan-private-pod-
   annotations:
     k8s.v1.cni.cncf.io/networks: macvlan-private
 spec:
