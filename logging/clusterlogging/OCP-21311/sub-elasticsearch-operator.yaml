@@ -9,4 +9,4 @@ spec:
   name: elasticsearch-operator
   source: elasticsearch-operator
   sourceNamespace: openshift-operators
-  startingCSV: elasticsearch-operator.v0.0.1
+  startingCSV: elasticsearch-operator.v4.1.0
