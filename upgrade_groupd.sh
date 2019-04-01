@@ -1,0 +1,373 @@
+#!/bin/bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+
+UI_PRO=uiupgrade
+DEVEXP_PRO=dexpupgrade
+METERING_PRO=meteringupgrade
+
+TEAM=all
+RESULT_FILE=/tmp/upgradeData
+
+
+
+function ui {
+  echo "Collectting pre_upgrade data for UI team.... "
+  echo -e "================== UI-TEAM DATA `date` ============================================" >> $RESULT_FILE
+
+  echo -e "#oc get pods -n openshift-console -o yaml | grep console.openshift.io/image | uniq\n$(oc get pods -n openshift-console -o yaml | grep console.openshift.io/image | uniq)" >> $RESULT_FILE
+  echo -e "#oc get pods -n openshift-console-operator -o yaml | grep 'image:'|uniq\n$(oc get pods -n openshift-console-operator -o yaml | grep 'image:' | uniq)" >> $RESULT_FILE
+  echo -e "#oc get clusteroperator console -o yaml\n$(oc get clusteroperator console -o yaml)" >> $RESULT_FILE
+  echo "==================UI team's namespace ${UI_PRO} is created!"
+  oc new-project ${UI_PRO}
+  echo "=================Preparing upgrade data for UI team....."
+  oc new-app centos/ruby-25-centos7~https://github.com/sclorg/ruby-ex.git
+  oc create -f https://raw.githubusercontent.com/openshift-qe/v3-testfiles/master/daemon/daemonset.yaml
+  oc create -f https://raw.githubusercontent.com/openshift-qe/v3-testfiles/master/deployment/deployment1.json
+  oc create -f https://raw.githubusercontent.com/openshift-qe/v3-testfiles/master/deployment/hello-deployment-1.yaml
+  oc patch console.config cluster  -p '{"spec":{"authentication":{"logoutRedirect": "https://www.baidu.com"}}}'  --type=merge
+  oc patch console.operator cluster -p '{"spec":{"customization":{"documentationBaseURL": "https://docs.okd.io/latest/"}}}' --type=merge
+  oc patch console.operator cluster -p '{"spec":{"customization":{"brand": "okd"}}}' --type=merge
+  echo "waiting for pods running....."
+  sleep 30
+  echo -e "#oc get all -n ${UI_PRO}\n$(oc get all -n ${UI_PRO})" >> $RESULT_FILE
+  echo "Data preparing for UI team was finished!"
+  echo -e  "\033[31m Please double confirm web access work well before upgrade. The console route is https://$(oc get route -n openshift-console -l app=console | sed -n '2p'|awk '{print $2}')  \033[0m"
+  echo -e  "\033[31m Please manually create serviceinstance & servicebinding on web console! You can use \"-e TSB\" or \"-e ASB\" to enable TSB/ASB.  \033[0m"
+}
+
+function enableASB {
+  echo "==================Install ASB...."
+  oc patch ServiceCatalogAPIServer cluster -p '{"spec":{"managementState": "Managed"}}' --type=merge
+  oc patch ServiceCatalogControllerManager cluster -p '{"spec":{"managementState": "Managed"}}' --type=merge
+  oc new-project ansible-service-broker
+  cat << EOF > asbog.yaml
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  name: ansible-service-broker
+  namespace: ansible-service-broker
+spec:
+  targetNamespaces:
+    - ansible-service-broker
+EOF
+ oc create -f asbog.yaml -n ansible-service-broker
+ cat << EOF > asbcsc.yaml
+apiVersion: operators.coreos.com/v1
+kind: CatalogSourceConfig
+metadata:
+  name: installed-community-ansible-service-broker
+  namespace: openshift-marketplace
+spec:
+  csDisplayName: Community Operators
+  csPublisher: Community
+  packages: ansibleservicebroker
+  targetNamespace: ansible-service-broker
+EOF
+ oc create -f asbcsc.yaml -n openshift-marketplace
+ 
+ cat << EOF > asbsubscription.yaml
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  labels:
+    csc-owner-name: installed-community-ansible-service-broker
+    csc-owner-namespace: openshift-marketplace
+  name: automationbroker
+spec:
+  channel: alpha
+  installPlanApproval: Automatic
+  name: automationbroker
+  source: installed-community-ansible-service-broker
+  startingCSV: automationbrokeroperator.v0.2.0
+EOF
+  oc create -f asbsubscription.yaml  -n ansible-service-broker
+  
+  echo "waiting for pods running....."
+  sleep 30
+
+  cat << EOF > asb-cr.yaml
+apiVersion: osb.openshift.io/v1alpha1
+kind: AutomationBroker
+metadata:
+  name: ansible-service-broker
+  namespace: ansible-service-broker
+EOF
+  oc create -f asb-cr.yaml -n ansible-service-broker
+
+  echo "waiting for pods running....."
+  sleep 30
+  if [ !$(oc get po -n ansible-service-broker | tail -n +2 |grep  -cvE "(Running|Completed)") ] ; then
+    echo -e  "\033[31m TSB install successfully, need a few minutes to wait asb ready !  \033[0m"
+  else
+    echo -e "\033[31m TSB installation failed , please manually install ASB on console！ \033[0m"
+  fi
+
+}
+function enableTSB {
+  echo "==================Install TSB...."
+  oc patch ServiceCatalogAPIServer cluster -p '{"spec":{"managementState": "Managed"}}' --type=merge
+  oc patch ServiceCatalogControllerManager cluster -p '{"spec":{"managementState": "Managed"}}' --type=merge
+  oc new-project template-service-broker
+  cat << EOF > tsbog.yaml
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  name: template-service-broker-og
+  namespace: template-service-broker
+spec:
+  targetNamespaces:
+    - template-service-broker
+EOF
+
+  oc create -f tsbog.yaml -n template-service-broker
+
+  cat << EOF > tsbcsc.yaml
+apiVersion: operators.coreos.com/v1
+kind: CatalogSourceConfig
+metadata:
+  name: installed-community-template-service-broker
+  namespace: openshift-marketplace
+spec:
+  csDisplayName: Community Operators
+  csPublisher: Community
+  packages: templateservicebroker
+  targetNamespace: template-service-broker
+EOF
+  oc create -f tsbcsc.yaml -n openshift-marketplace
+
+  cat << EOF > tsbsubscription.yaml
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  labels:
+    csc-owner-name: installed-community-template-service-broker
+    csc-owner-namespace: openshift-marketplace
+  name: templateservicebroker
+  namespace: template-service-broker
+spec:
+  channel: alpha
+  installPlanApproval: Automatic
+  name: templateservicebroker
+  source: installed-community-template-service-broker
+  sourceNamespace: template-service-broker
+  startingCSV: templateservicebrokeroperator.v0.2.0
+EOF
+  oc create -f tsbsubscription.yaml -n template-service-broker
+
+  echo "waiting for pods running....."
+  sleep 30
+
+cat << EOF > tsb-cr.yaml
+apiVersion: osb.openshift.io/v1alpha1
+kind: TemplateServiceBroker
+metadata:
+  name: template-service-broker
+  namespace: template-service-broker
+EOF
+  oc create -f tsb-cr.yaml -n template-service-broker
+
+  echo "waiting for pods running....."
+  sleep 30
+  if [ !$(oc get po -n template-service-broker | tail -n +2 |grep  -cvE "(Running|Completed)") ] ; then
+    echo -e  "\033[31m TSB install successfully, need a few minutes to wait tsb ready !  \033[0m"
+  else 
+    echo -e "\033[31m TSB installation failed , please manually install TSB on web console!  \033[0m"
+  fi
+}
+
+#DevExp team
+function devExp {
+  echo "Collectting pre_upgrade data for DevExp team.... "
+  echo -e "================== DEVEXP-TEAM  DATA `date` ============================================" >> $RESULT_FILE
+  echo -e "#oc get pods -o yaml -n openshift-image-registry | grep imageID |uniq\n$(oc get pods -o yaml -n openshift-image-registry | grep imageID |uniq)" >> $RESULT_FILE
+  echo -e "#oc get pods -o yaml -n openshift-cluster-samples-operator | grep imageID |uniq\n$(oc get pods -o yaml -n openshift-cluster-samples-operator | grep imageID |uniq)" >> $RESULT_FILE
+  echo -e "#oc get pods -n openshift-image-registry\n$(oc get pods -n openshift-image-registry)" >> $RESULT_FILE
+  echo -e "#oc describe is jenkins -n openshift\n$(oc describe is jenkins -n openshift)" >> $RESULT_FILE
+  echo -e "#oc describe is ruby -n openshift\n$(oc describe is ruby -n openshift)" >> $RESULT_FILE
+
+  echo "================== DEVEXP team's namespace ${DEVEXP_PRO} is created!"
+  oc new-project ${DEVEXP_PRO}
+  echo "=================Preparing upgrade data for DEVEXP team....."
+  oc new-app ruby~https://github.com/openshift/ruby-ex
+  oc new-app -f jenkins-ephemeral
+
+  echo "==================waiting for pods running....."
+  sleep 30
+  echo -e "#oc get all -n ${DEVEXP_PRO} \n$(oc get all -n ${DEVEXP_PRO})" >> $RESULT_FILE
+  echo "Data preparing for DEVEXP team was finished!"
+
+}
+
+#Monitoring
+function monitoring {
+  echo "Collectting pre_upgrade data for Monitoring team.... "
+  echo -e "================== MONITORING-TEAM  DATA `date` ============================================" >> $RESULT_FILE
+  echo  -e "#oc get clusteroperator monitoring -o yaml\n$(oc get clusteroperator monitoring -o yaml)" >> $RESULT_FILE
+  echo "=================Preparing upgrade data for MONITORING team....."
+  oc create -f https://raw.githubusercontent.com/juzhao/monitoring/master/config.yaml
+  echo "waiting for PVC creation....."
+  sleep 20
+  echo  -e "#oc -n openshift-monitoring get pvc | grep -v NAME | wc -l\n$(oc -n openshift-monitoring get pvc | grep -v NAME | wc -l)" >> upgradeData
+  echo -e "#for pod in \$(oc -n openshift-monitoring get pod  | grep prometheus-k8s | awk '{print \$1}'); do echo \$pod; oc -n openshift-monitoring get pod \$pod -oyaml | grep -i retention; done\n$(for pod in $(oc -n openshift-monitoring get pod  | grep prometheus-k8s | awk '{print $1}'); do echo $pod; oc -n openshift-monitoring get pod $pod -oyaml | grep -i retention; done)" >> $RESULT_FILE
+  echo -e "#oc -n openshift-monitoring logs \$(oc -n openshift-monitoring get pod | grep telemeter-client | awk '{print \$1}') -c telemeter-client | grep "https://infogw.api.stage.openshift.com"\n$(oc -n openshift-monitoring logs $(oc -n openshift-monitoring get pod | grep telemeter-client | awk '{print $1}') -c telemeter-client | grep https://infogw.api.stage.openshift.com)" >> $RESULT_FILE
+  echo "Data preparing for MONITORING team was finished!"
+}
+
+#Logging team
+
+function enableLogging {
+  echo "==================Install LOGGING........"
+  oc create -f https://raw.githubusercontent.com/openshift-qe/v3-testfiles/master/logging/clusterlogging/OCP-21311/namespace.yaml
+  oc create -f https://raw.githubusercontent.com/openshift-qe/v3-testfiles/master/logging/clusterlogging/OCP-21311/operator-group.yaml
+  oc create -f https://raw.githubusercontent.com/openshift-qe/v3-testfiles/master/logging/clusterlogging/OCP-21311/csc-clusterlogigng.yaml
+  oc create -f https://raw.githubusercontent.com/openshift-qe/v3-testfiles/master/logging/clusterlogging/OCP-21311/csc-elasticsearch.yaml
+  oc create -f https://raw.githubusercontent.com/openshift-qe/v3-testfiles/master/logging/clusterlogging/OCP-21311/sub-cluster-logging.yaml
+  oc create -f https://raw.githubusercontent.com/openshift-qe/v3-testfiles/master/logging/clusterlogging/OCP-21311/sub-elasticsearch-operator.yaml
+  sleep 30
+
+  echo "==================waiting for pods running....."
+  oc create -f https://raw.githubusercontent.com/openshift-qe/v3-testfiles/master/logging/clusterlogging/example.yaml  -n openshift-logging
+  sleep 30
+  echo "==================waiting for pods running....."
+  if [ !$(oc get po -n openshift-logging | tail -n +2 |grep  -cvE "(Running|Completed)") ] ; then
+   echo -e  "\033[31m Logging installed successfully!  \033[0m"
+  else
+   echo -e "\033[31m  Logging installation failed, please check!!!  \033[0m"
+ fi
+}
+
+function logging {
+ if [ !$(oc get po -n openshift-logging | tail -n +2 |grep  -cvE "(Running|Completed)") ] ; then
+   echo "Collectting pre_upgrade data for LOGGING team.... "
+   echo -e "================== LOGGING-TEAM  DATA `date` ============================================" >> $RESULT_FILE
+   echo -e "#oc exec -c elasticsearch \$(oc get pods --selector component=elasticsearch -n openshift-logging) -n openshift-logging -- es_cluster_health |grep status\n$(oc exec -c elasticsearch $(oc get pods --selector component=elasticsearch -n openshift-logging) -n openshift-logging -- es_cluster_health |grep status)" >> $RESULT_FILE
+   echo -e "#oc exec -c elasticsearch \$(oc get pods --selector component=elasticsearch -n openshift-logging) -n openshift-logging -- es_util --query=_cat/indices?v\n$( oc exec -c elasticsearch $(oc get pods --selector component=elasticsearch -n openshift-logging) -n openshift-logging -- es_util --query=_cat/indices?v)" >> $RESULT_FILE
+   echo -e "#oc get pods --selector component=elasticsearch --n openshift-logging\n$(oc get pods --selector component=elasticsearch --n openshift-logging)" >> $RESULT_FILE
+   echo -e "#oc get pods --selector component=kibana --n openshift-logging \n$(oc get pods --selector component=kibana --n openshift-logging)" >> $RESULT_FILE
+   echo -e "#oc get pods --selector component=fluentd --n openshift-logging\n$( oc get pods --selector component=fluentd --n openshift-logging)" >> $RESULT_FILE
+   echo -e "#oc exec -c elasticsearch \$(oc get pods --selector component=elasticsearch -n openshift-logging) -- es_cluster_health\n$(oc exec -c elasticsearch $(oc get pods --selector component=elasticsearch -n openshift-logging) -- es_cluster_health)" >> $RESULT_FILE
+   echo -e "#oc exec -c elasticsearch \$(oc get pods --selector component=elasticsearch -n openshift-logging) -- es_util --query=_cat/shards\n$(oc exec -c elasticsearch $(oc get pods --selector component=elasticsearch -n openshift-logging) -- es_util --query=_cat/shards)" >> $RESULT_FILE
+   echo "Data preparing for LOGGING team was finished!"
+   echo -e "\033[31m Please MANUALLY access Kibana route via admin and normal useres and save some data: https://$(oc get route -n openshift-logging) \033[0m" >> $RESULT_FILE
+ else
+   echo -e "\033[31m  Please make sure the Logging has been installed!  \033[0m"
+fi
+}
+
+function metering {
+    echo -e "================== METERING DATA `date` ============================================" 
+    ssh -i libra-new.pem -t -o StrictHostKeyChecking=no -o ProxyCommand='ssh -i libra-new.pem  -A -o StrictHostKeyChecking=no -o ServerAliveInterval=30 -W %h:%p core@$(oc get service -n openshift-ssh-bastion ssh-bastion -o jsonpath="{.status.loadBalancer.ingress[0].hostname}")' core@$(oc get node |sed  -n 2p |awk '{print $1}') "sudo -i"
+    echo -e "curl \"http://127.0.0.1:8001/api/v1/namespaces/metering-upgrade/services/https:reporting-operator:http/proxy/api/v1/reports/get?name=node-cpu-capacity\&namespace=openshift-metering\&format=csv\"\n$(curl "http://127.0.0.1:8001/api/v1/namespaces/metering-upgrade/services/https:reporting-operator:http/proxy/api/v1/reports/get?name=node-cpu-capacity&namespace=metering-upgrade&format=csv")" >> $RESULT_FILE
+    echo -e "curl \"http://127.0.0.1:8001/api/v1/namespaces/metering-upgrade/services/https:reporting-operator:http/proxy/api/v1/reports/get?name=node-cpu-capacity\&namespace=openshift-metering\&format=csv\"\n$(curl "http://127.0.0.1:8001/api/v1/namespaces/metering-upgrade/services/https:reporting-operator:http/proxy/api/v1/reports/get?name=node-cpu-capacity&namespace=metering-upgrade&format=tabular")" >> $RESULT_FILE
+    exit
+    exit
+    echo "Please copy data from  $(oc get node |sed  -n 2p |awk '{print $1}'):$RESULT_FILE to localhost: $RESULT_FILE "
+
+}
+
+function enablemetering {
+   echo -e "Please make sure your cluster satisfy the following requirements needed by metering"
+   echo -e "num_masters: 3,num_workers: 3, vm_type: m5.xlarge"
+   echo -e "Please make sure you have clone the https://github.com/operator-framework/operator-metering repo."
+   read -p "Please give the operator-metering directory path:" path
+   export METERING_NAMESPACE=metering-upgrade
+   $path/hack/install.sh
+   echo "waiting pod running....."
+   sleep 120
+   if [ !$(oc get po -n $METERING_NAMESPACE | tail -n +2 |grep  -cvE "(Running|Completed)") ] ; then
+     echo -e  "\033[31m Metering installed successfully!  \033[0m"
+   else
+     echo -e "\033[31m  Metering installation failed, please check!!!  \033[0m"
+    fi
+}
+
+function commonData {
+  echo -e "================== COMMON DATA `date` ============================================" > $RESULT_FILE
+  echo -e "#oc get clusterversion\n$(oc get clusterversion)" >> $RESULT_FILE
+  echo -e "#oc get clusteroperator\n$(oc get clusteroperator)" >> $RESULT_FILE
+}
+
+function prepareDataforOneTeam {
+  commonData
+  while true; 
+    do
+      case "$TEAM" in
+           UI) ui; exit 1;;
+           DEVEXP) devExp; exit 1;;
+           MONITORING) monitoring; exit 1;;
+           LOGGING) logging; exit 1;;
+	   METERING) metering; exit 1;;
+	   *) echo "Invalid value: Now only support UI|DEVEXP|METERING|MONITORING|LOGGING team!"; exit 1;;
+    esac
+  done
+}
+
+
+function prepareDataforAllTeam {
+   commonData
+   enableTSB
+   #enableLogging #Logging installation has bug.
+   enablemetering
+   ui
+   devExp
+   monitoring
+   #logging
+   #metering # Need to double confim steps with Peter.
+
+}
+
+function enableComponent {
+  while true; 
+    do
+      case "$COMPONENT" in
+           LOGGING) enableLogging; exit 1;;
+           TSB) enableTSB; exit 1 ;;
+           ASB) enableASB; exit 1 ;;
+	   METERING) enablemetering; exit 1 ;;
+           *) echo "Invalid value: Now only support to enable LOGGING|TSB|ASB component!"; exit 1;;
+    esac
+ done
+}
+
+while getopts t:f:he: opt
+  do
+     case "$opt" in
+       f)
+       RESULT_FILE=$OPTARG
+       echo "The pre-upgrade status will be record in $RESULT_FILE file!"
+       ;;
+       t)
+       TEAM=$OPTARG
+       ;;
+       h)
+       echo "Options:"
+       echo "-t: Please give team name which you plan to prepare data for it. UI|DEVEXP|METERING|MONITORING|LOGGING (default is ALL)"
+       echo "Noted: TSB component required by UI-team, Logging component required by Logging-team!"
+       echo "-f: Please give the archive file recorded the pre-upgrade status. (default is /tmp/upgradeData)"
+       echo "-e: You can enable component for upgrade. support LOGGING|TSB|ASB (default is ALL)"
+       exit 1;;
+       e)
+       COMPONENT=$OPTARG
+       enableComponent
+  esac
+done
+
+if [ $TEAM = "all" ]
+then
+  prepareDataforAllTeam
+elif [ $TEAM != "all" ]
+then
+  prepareDataforOneTeam
+fi
+
+
+function removeTSB {
+  echo "=========Removing TSB==========="
+  oc delete project template-service-broker
+  oc delete catalogsourceconfigs.operators.coreos.com installed-community-template-service-broker -n openshift-marketplace
+
+}
