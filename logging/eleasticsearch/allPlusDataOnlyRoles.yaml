@@ -1,0 +1,27 @@
+apiVersion: logging.openshift.io/v1
+kind: Elasticsearch
+metadata:
+  generation: 1
+  name: elasticsearch
+spec:
+  managementState: Managed
+  nodeSpec:
+    image: quay.io/openshift/origin-logging-elasticsearch5:latest
+    resources:
+      limits:
+        memory: 2Gi
+      requests:
+        cpu: 200m
+        memory: 2Gi
+  nodes:
+  - nodeCount: 2
+    roles:
+    - client
+    - data
+    - master
+    storage: {}
+  - nodeCount: 1
+    roles:
+    - data
+    storage: {}
+  redundancyPolicy: SingleRedundancy
