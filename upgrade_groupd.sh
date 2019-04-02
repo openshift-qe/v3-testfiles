@@ -12,8 +12,6 @@ METERING_PRO=meteringupgrade
 TEAM=all
 RESULT_FILE=/tmp/upgradeData
 
-
-
 function ui {
   echo "Collectting pre_upgrade data for UI team.... "
   echo -e "================== UI-TEAM DATA `date` ============================================" >> $RESULT_FILE
@@ -188,10 +186,13 @@ function devExp {
   echo -e "#oc get pods -n openshift-image-registry\n$(oc get pods -n openshift-image-registry)" >> $RESULT_FILE
   echo -e "#oc describe is jenkins -n openshift\n$(oc describe is jenkins -n openshift)" >> $RESULT_FILE
   echo -e "#oc describe is ruby -n openshift\n$(oc describe is ruby -n openshift)" >> $RESULT_FILE
+  echo -e "#oc get pods -n openshift-controller-manager -o yaml |grep imageID |uniq\n$(oc get pods -n openshift-controller-manager -o yaml |grep imageID |uniq)" >> $RESULT_FILE
+  echo -e "#oc  get pods -n openshift-controller-manager -o yaml  |grep phase:\n$(oc  get pods -n openshift-controller-manager -o yaml  |grep phase:)" >> $RESULT_FILE
 
   echo "================== DEVEXP team's namespace ${DEVEXP_PRO} is created!"
   oc new-project ${DEVEXP_PRO}
   echo "=================Preparing upgrade data for DEVEXP team....."
+  oc patch config.samples.operator.openshift.io cluster -p '{"spec": {"skippedImagestreams": ["perl", "mysql"]}}' --type merge
   oc new-app ruby~https://github.com/openshift/ruby-ex
   oc new-app -f jenkins-ephemeral
 
@@ -206,19 +207,29 @@ function devExp {
 function monitoring {
   echo "Collectting pre_upgrade data for Monitoring team.... "
   echo -e "================== MONITORING-TEAM  DATA `date` ============================================" >> $RESULT_FILE
-  echo  -e "#oc get clusteroperator monitoring -o yaml\n$(oc get clusteroperator monitoring -o yaml)" >> $RESULT_FILE
+  echo -e "#oc get clusteroperator monitoring -o yaml\n$(oc get clusteroperator monitoring -o yaml)" >> $RESULT_FILE
   echo "=================Preparing upgrade data for MONITORING team....."
   oc create -f https://raw.githubusercontent.com/juzhao/monitoring/master/config.yaml
   echo "waiting for PVC creation....."
-  sleep 20
-  echo  -e "#oc -n openshift-monitoring get pvc | grep -v NAME | wc -l\n$(oc -n openshift-monitoring get pvc | grep -v NAME | wc -l)" >> upgradeData
+  timeout 60 bash -c "pvcaccount=0; while [ ${pvcaccount} -lt 5 ]; do pvcaccount=$(oc -n openshift-monitoring get pvc | grep -v NAME | wc -l); done"
+  echo -e "#oc -n openshift-monitoring get pvc | grep -v NAME\n$(oc -n openshift-monitoring get pvc | grep -v NAME)" >> upgradeData
   echo -e "#for pod in \$(oc -n openshift-monitoring get pod  | grep prometheus-k8s | awk '{print \$1}'); do echo \$pod; oc -n openshift-monitoring get pod \$pod -oyaml | grep -i retention; done\n$(for pod in $(oc -n openshift-monitoring get pod  | grep prometheus-k8s | awk '{print $1}'); do echo $pod; oc -n openshift-monitoring get pod $pod -oyaml | grep -i retention; done)" >> $RESULT_FILE
-  echo -e "#oc -n openshift-monitoring logs \$(oc -n openshift-monitoring get pod | grep telemeter-client | awk '{print \$1}') -c telemeter-client | grep "https://infogw.api.stage.openshift.com"\n$(oc -n openshift-monitoring logs $(oc -n openshift-monitoring get pod | grep telemeter-client | awk '{print $1}') -c telemeter-client | grep https://infogw.api.stage.openshift.com)" >> $RESULT_FILE
+  echo -e "#oc -n openshift-monitoring logs \
+$(oc -n openshift-monitoring get pod | grep telemeter-client | awk '{print \$1}') -c telemeter-client | grep "https://infogw.api.stage.openshift.com"\n$(oc -n openshift-monitoring logs $(oc -n openshift-monitoring get pod | grep telemeter-client | awk '{print $1}') -c telemeter-client | grep https://infogw.api.stage.openshift.com)" >> $RESULT_FILE
+  echo  -e "#oc get clusteroperator monitoring -o yaml\n$(oc get clusteroperator monitoring -o yaml)" >> $RESULT_FILE
   echo "Data preparing for MONITORING team was finished!"
 }
 
 #Logging team
-
+function es_cluste_health {
+     es_pod=$(oc get pods --selector component=elasticsearch  |grep Running)
+     pod_name=${es_pod%% *}   
+     timeout 60 bash -c "es_healthy=unknown; while [ ${es_healthy} != healthy ]; do oc exec -c elasticsearch $pod_name -- es_cluster_health  | grep green; if [ $? -eq 0 ]; then es_healthy=healthy; fi; done"
+     if [ -n $? ] ; then
+      echo "elasticsearch unhealthy!"
+      exit 1
+    fi
+}
 function enableLogging {
   echo "==================Install LOGGING........"
   oc create -f https://raw.githubusercontent.com/openshift-qe/v3-testfiles/master/logging/clusterlogging/OCP-21311/namespace.yaml
@@ -228,16 +239,19 @@ function enableLogging {
   oc create -f https://raw.githubusercontent.com/openshift-qe/v3-testfiles/master/logging/clusterlogging/OCP-21311/sub-cluster-logging.yaml
   oc create -f https://raw.githubusercontent.com/openshift-qe/v3-testfiles/master/logging/clusterlogging/OCP-21311/sub-elasticsearch-operator.yaml
   sleep 30
+  echo "==================waiting for pods running....."
+  oc create -f https://raw.githubusercontent.com/anpingli/v3-testfiles/master/logging/clusterlogging/storageclass_name.yaml  -n openshift-logging
+  podstatus=unknown
+  timeout 300 bash -c 'podstatus=unknown; while [ ${podstatus} !=  "running" ]; do oc get pods --selector component=elasticsearch -n openshift-logging|grep Running; if [ $? -eq 0 ]; then podstatus=running; fi; done;'
+  es_cluste_health
+  timeout 10 bash -c 'podstatus=unknown; while [ ${podstatus} !=  "running" ]; do oc get pods --selector component=fluentd -n openshift-logging|grep Running; if [ $? -eq 0 ]; then podstatus=running; fi; done;'
+  timeout 10 bash -c 'podstatus=unknown; while [ ${podstatus} !=  "running" ]; do oc get pods --selector component=kibana -n openshift-logging|grep Running; if [ $? -eq 0 ]; then podstatus=running; fi; done;'
+  if [ -n $? ] ; then
+      echo "\033[31m Logging installed failed! \033[0m"
+      exit 1
+  fi
+  echo -e  "\033[31m Logging installed successfully!  \033[0m"
 
-  echo "==================waiting for pods running....."
-  oc create -f https://raw.githubusercontent.com/openshift-qe/v3-testfiles/master/logging/clusterlogging/example.yaml  -n openshift-logging
-  sleep 30
-  echo "==================waiting for pods running....."
-  if [ !$(oc get po -n openshift-logging | tail -n +2 |grep  -cvE "(Running|Completed)") ] ; then
-   echo -e  "\033[31m Logging installed successfully!  \033[0m"
-  else
-   echo -e "\033[31m  Logging installation failed, please check!!!  \033[0m"
- fi
 }
 
 function logging {
@@ -285,10 +299,38 @@ function enablemetering {
     fi
 }
 
+function removeTSB {
+  echo "=========Removing TSB==========="
+  oc delete project template-service-broker
+  oc delete catalogsourceconfigs.operators.coreos.com installed-community-template-service-broker -n openshift-marketplace
+
+}
+
+function removeASB {
+  echo "=========Removing ASB==========="
+  oc delete project ansible-service-broker
+  oc delete catalogsourceconfigs.operators.coreos.com installed-community-ansible-service-broker -n openshift-marketplace
+
+}
+
 function commonData {
   echo -e "================== COMMON DATA `date` ============================================" > $RESULT_FILE
   echo -e "#oc get clusterversion\n$(oc get clusterversion)" >> $RESULT_FILE
   echo -e "#oc get clusteroperator\n$(oc get clusteroperator)" >> $RESULT_FILE
+}
+
+
+function removeComponent {
+  while true;
+    do
+      case "$COMPONENT" in
+           LOGGING) removeLogging; exit 1;; #  Non-implement 
+           TSB) removeTSB; exit 1 ;;
+           ASB) removeASB; exit 1 ;;
+           METERING) removemetering; exit 1 ;; # Non-implement 
+           *) echo "Invalid value: Now only support to remove LOGGING|TSB|ASB|METERING component!"; exit 1;;
+    esac
+ done
 }
 
 function prepareDataforOneTeam {
@@ -328,12 +370,12 @@ function enableComponent {
            TSB) enableTSB; exit 1 ;;
            ASB) enableASB; exit 1 ;;
 	   METERING) enablemetering; exit 1 ;;
-           *) echo "Invalid value: Now only support to enable LOGGING|TSB|ASB component!"; exit 1;;
+           *) echo "Invalid value: Now only support to enable LOGGING|TSB|ASB|METERING component!"; exit 1;;
     esac
  done
 }
 
-while getopts t:f:he: opt
+while getopts t:f:he:r: opt
   do
      case "$opt" in
        f)
@@ -348,26 +390,27 @@ while getopts t:f:he: opt
        echo "-t: Please give team name which you plan to prepare data for it. UI|DEVEXP|METERING|MONITORING|LOGGING (default is ALL)"
        echo "Noted: TSB component required by UI-team, Logging component required by Logging-team!"
        echo "-f: Please give the archive file recorded the pre-upgrade status. (default is /tmp/upgradeData)"
-       echo "-e: You can enable component for upgrade. support LOGGING|TSB|ASB (default is ALL)"
+       echo "-e: You can enable component for upgrade. support LOGGING|TSB|ASB|METERING  (default is ALL)"
+       echo "-r: You can remove specified component. support LOGGING|ASB|TSB|METERING"
        exit 1;;
        e)
        COMPONENT=$OPTARG
        enableComponent
+       ;;
+       r)
+       COMPONENT=$OPTARG
+       removeComponent
+       ;;
+       ?)
+       exit 0;;
   esac
 done
 
 if [ $TEAM = "all" ]
 then
   prepareDataforAllTeam
-elif [ $TEAM != "all" ]
-then
+else
   prepareDataforOneTeam
 fi
 
 
-function removeTSB {
-  echo "=========Removing TSB==========="
-  oc delete project template-service-broker
-  oc delete catalogsourceconfigs.operators.coreos.com installed-community-template-service-broker -n openshift-marketplace
-
-}
