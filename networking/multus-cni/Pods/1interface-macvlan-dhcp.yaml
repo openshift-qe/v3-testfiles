@@ -2,6 +2,8 @@ apiVersion: v1
 kind: Pod
 metadata:
   generateName: macvlan-dhcp-pod-
+  labels:
+    name: macvlan-dhcp-pod
   annotations:
     k8s.v1.cni.cncf.io/networks: macvlan-dhcp
 spec:
