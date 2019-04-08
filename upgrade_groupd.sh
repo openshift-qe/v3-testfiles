@@ -194,7 +194,7 @@ function devExp {
   echo "=================Preparing upgrade data for DEVEXP team....."
   oc patch config.samples.operator.openshift.io cluster -p '{"spec": {"skippedImagestreams": ["perl", "mysql"]}}' --type merge
   oc new-app ruby~https://github.com/openshift/ruby-ex
-  oc new-app -f jenkins-ephemeral
+  oc new-app jenkins-ephemeral
 
   echo "==================waiting for pods running....."
   sleep 30
@@ -221,8 +221,9 @@ function monitoring {
 
 #Logging team
 function es_cluster_health {
-     timeout 60 bash -c 'es_pod=$(oc get pods --selector component=elasticsearch -n openshift-logging |grep Running); pod_name=${es_pod%% *}; es_healthy=unknown; while [ ${es_healthy} != "healthy" ]; do oc -n openshift-logging exec -c elasticsearch $pod_name -- es_cluster_health  | grep green; if [ $? -eq 0 ]; then es_healthy=healthy; fi; done;'
-     if [ ! $? ] ; then
+     echo -e $(oc get pods --selector component=elasticsearch -n openshift-logging |grep Running)
+     timeout 60 bash -c 'es_pod=$(oc get pods --selector component=elasticsearch -n openshift-logging |grep Running); pod_name=${es_pod%% *}; es_healthy=unknown; while [ ${es_healthy} != "healthy" ]; do echo -e "#oc -n openshift-logging exec -c elasticsearch \${pod_name} -- es_cluster_health  | grep green\n$(oc -n openshift-logging exec -c elasticsearch ${pod_name} -- es_cluster_health  | grep green)"; if [ $? -eq 0 ]; then es_healthy=healthy; fi; done;'
+    if [ ! $? ] ; then
       echo "elasticsearch is unhealthy!!"
       exit 1
     else
@@ -255,15 +256,16 @@ function enableLogging {
 function logging {
    echo "Collectting pre_upgrade data for LOGGING team.... "
    echo -e "================== LOGGING-TEAM  DATA `date` ============================================" >> $RESULT_FILE
-   echo -e "#oc exec -c elasticsearch \$(oc get pods --selector component=elasticsearch -n openshift-logging) -n openshift-logging -- es_cluster_health |grep status\n$(oc exec -n openshift-logging -c elasticsearch $(oc get pods --selector component=elasticsearch -n openshift-logging) -- es_cluster_health |grep status)" >> $RESULT_FILE
-   echo -e "#oc exec -c elasticsearch \$(oc get pods --selector component=elasticsearch -n openshift-logging) -n openshift-logging -- es_util --query=_cat/indices?v\n$( oc exec  -n openshift-logging -c elasticsearch $(oc get pods --selector component=elasticsearch -n openshift-logging) -- es_util --query=_cat/indices?v)" >> $RESULT_FILE
+   echo -e "#oc exec -c elasticsearch \$(oc get pods --selector component=elasticsearch -n openshift-logging | sed  -n 2p |awk '{print \$1 }' ) -n openshift-logging -- es_cluster_health |grep status\n$(oc exec -n openshift-logging -c elasticsearch $(oc get pods --selector component=elasticsearch -n openshift-logging | sed  -n 2p |awk '{print $1 }') -- es_cluster_health |grep status)" >> $RESULT_FILE
+   echo -e "#oc exec -c elasticsearch \$(oc get pods --selector component=elasticsearch -n openshift-logging | sed  -n 2p |awk '{print \$1 }' ) -n openshift-logging -- es_util --query=_cat/indices?v\n$( oc exec  -n openshift-logging -c elasticsearch $(oc get pods --selector component=elasticsearch -n openshift-logging | sed  -n 2p |awk '{print $1 }') -- es_util --query=_cat/indices?v)" >> $RESULT_FILE
    echo -e "#oc get pods --selector component=elasticsearch -n openshift-logging\n$(oc get pods --selector component=elasticsearch -n openshift-logging)" >> $RESULT_FILE
    echo -e "#oc get pods --selector component=kibana -n openshift-logging \n$(oc get pods --selector component=kibana -n openshift-logging)" >> $RESULT_FILE
    echo -e "#oc get pods --selector component=fluentd -n openshift-logging\n$( oc get pods --selector component=fluentd -n openshift-logging)" >> $RESULT_FILE
-   echo -e "#oc exec -c elasticsearch \$(oc get pods --selector component=elasticsearch -n openshift-logging) -- es_cluster_health\n$(oc exec -n openshift-logging -c elasticsearch $(oc get pods --selector component=elasticsearch -n openshift-logging) -- es_cluster_health)" >> $RESULT_FILE
-   echo -e "#oc exec -c elasticsearch \$(oc get pods --selector component=elasticsearch -n openshift-logging) -- es_util --query=_cat/shards\n$(oc exec -n openshift-logging -c elasticsearch $(oc get pods --selector component=elasticsearch -n openshift-logging) -- es_util --query=_cat/shards)" >> $RESULT_FILE
+   echo -e "#oc exec -c elasticsearch \$(oc get pods --selector component=elasticsearch -n openshift-logging | sed  -n 2p |awk '{print \$1 }') -- es_cluster_health\n$(oc exec -n openshift-logging -c elasticsearch $(oc get pods --selector component=elasticsearch -n openshift-logging | sed  -n 2p |awk '{print $1 }' ) -- es_cluster_health)" >> $RESULT_FILE
+   echo -e "#oc exec -c elasticsearch \$(oc get pods --selector component=elasticsearch -n openshift-logging | sed  -n 2p |awk '{print \$1}' ) -- es_util --query=_cat/shards\n$(oc exec -n openshift-logging -c elasticsearch $(oc get pods --selector component=elasticsearch -n openshift-logging | sed  -n 2p |awk '{print $1 }' ) -- es_util --query=_cat/shards)" >> $RESULT_FILE
    echo "Data preparing for LOGGING team was finished!"
-   echo -e "\033[31m Please MANUALLY access Kibana route via admin and normal useres and save some data: https://$(oc get route -n openshift-logging) \033[0m" >> $RESULT_FILE
+   echo -e "\033[31m Please MANUALLY access Kibana route via admin and normal useres and save some data: https://$(oc get route -n openshift-logging | sed -n 2p |  awk '{print $2 }'
+) \033[0m" >> $RESULT_FILE
 }
 
 function metering {
@@ -345,13 +347,13 @@ function prepareDataforOneTeam {
 
 function prepareDataforAllTeam {
    commonData
-   enableTSB
-   #enableLogging #Logging installation has bug.
-   enablemetering
+   #enableTSB
    ui
    devExp
    monitoring
-   #logging
+   enableLogging
+   logging
+   #enablemetering
    #metering # Need to double confim steps with Peter.
 
 }
