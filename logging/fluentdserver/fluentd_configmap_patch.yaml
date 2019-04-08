@@ -1,0 +1,41 @@
+apiVersion: v1
+data:
+  secure-forward.conf: |
+     <store>
+     @type forward
+     <security>
+       self_hostname $HOSTNAME
+       shared_key oo_key_passphrase
+     </security>
+     <server>
+       name: server1
+       host oo_external_fluentd_server
+       port 24220
+     </server>
+     </store>
+
+     <store>
+     @type forward
+     <server>
+       name: server2
+       host oo_external_fluentd_server
+       port 24224
+     </server>
+     </store>
+
+
+     <store>
+     @type forward
+     transport tls
+     tls_cert_path /etc/fluent/keys/forward_ca_cert
+     tls_verify_hostname false
+     tls_allow_self_signed_cert
+     tls_insecure_mode 
+     tls_version
+
+     <server>
+       name: server3
+       host oo_external_fluentd_server
+       port 24284
+     </server>
+     </store>
