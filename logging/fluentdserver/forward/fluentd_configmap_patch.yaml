@@ -1,0 +1,11 @@
+apiVersion: v1
+data:
+  secure-forward.conf: |
+    <store>
+      @type forward
+      <server>
+        name: server2
+        host oo_external_fluentd_server
+        port 24224
+      </server>
+    </store>

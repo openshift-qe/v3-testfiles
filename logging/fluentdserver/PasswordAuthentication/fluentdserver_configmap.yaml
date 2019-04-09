@@ -1,0 +1,14 @@
+apiVersion: v1
+data:
+  fluent.conf: |
+    <source>
+      @type forward
+      <security>
+        self_hostname YOUR_SERVER_NAME
+        shared_key PASSWORD
+      </security>
+    </source>
+kind: ConfigMap
+metadata:
+  name: fluentdserver
+  namespace: openshift-logging
