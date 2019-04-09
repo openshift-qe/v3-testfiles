@@ -4,11 +4,11 @@ data:
     <source>
       @type forward
       <security>
-        self_hostname YOUR_SERVER_NAME
-        shared_key PASSWORD
+        self_hostname $HOSTNAME
+        shared_key oo_share_key
       </security>
     </source>
 kind: ConfigMap
 metadata:
-  name: fluentdserver
+  name: fluentdserver2
   namespace: openshift-logging

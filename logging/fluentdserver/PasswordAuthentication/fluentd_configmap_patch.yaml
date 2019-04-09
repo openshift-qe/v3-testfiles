@@ -8,7 +8,7 @@ data:
         port 24224
       </server>
       <security>
-        self_hostname HOSTNAME
-        shared_key secret
+        self_hostname $HOSTNAME
+        shared_key oo_share_key
       </security>
     </store>

@@ -31,5 +31,5 @@ data:
      </source>
 kind: ConfigMap
 metadata:
-  name: fluentdserver
+  name: fluentdserver3
   namespace: openshift-logging

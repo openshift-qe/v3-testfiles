@@ -4,8 +4,7 @@ data:
     <store>
       @type forward
       <server>
-        name: server2
-        host oo_external_fluentd_server
+        host 192.168.1.2
         port 24224
       </server>
     </store>
