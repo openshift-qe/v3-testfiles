@@ -36,7 +36,7 @@ spec:
           privileged: true
           procMount: Default
         volumeMounts:
-        - mountPath: /fluent/etc
+        - mountPath: /fluentd/etc
           name: config 
           readOnly: true
       serviceAccount: fluentdserver
