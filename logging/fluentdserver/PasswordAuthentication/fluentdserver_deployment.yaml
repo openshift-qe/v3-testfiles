@@ -26,28 +26,18 @@ spec:
     spec:
       containers:
       - name: "fluentd"
-        image: "docker.io/openshift/origin-logging-fluentd:latest"
+        image: "docker.io/fluent/fluentd:latest"
         imagePullPolicy: "IfNotPresent"
         command: 
-        - "/bin/bash"
-        - "-c"
-        - "export LD_LIBRARY_PATH=/opt/rh/rh-nodejs8/root/usr/lib64:/opt/rh/rh-ruby25/root/usr/local/lib64:/opt/rh/rh-ruby25/root/usr/lib64;/opt/rh/rh-ruby25/root/usr/local/bin/fluentd --no-supervisor -o /opt/app-root/src/fluentd.logs --log-rotate-age 2 --log-rotate-size 1024000"
         ports:
         - containerPort: 24220
           name: fluentd
-        - containerPort: 24224
-          name: fluentd-key
-        - containerPort: 24284
-          name: fluentd-cert
         securityContext:
           privileged: true
           procMount: Default
         volumeMounts:
-        - mountPath: /etc/fluent/configs.d/user
+        - mountPath: /fluent/etc
           name: config 
-          readOnly: true
-        - mountPath: /etc/fluent/keys
-          name: certs
           readOnly: true
       serviceAccount: fluentdserver
       serviceAccountName: fluentdserver
