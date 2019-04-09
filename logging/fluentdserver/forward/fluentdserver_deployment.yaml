@@ -1,10 +1,10 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: "fluentdserver"
+  name: "fluentdserver1"
   labels:
-    provider: openshift
-    component: "fluentdserver"
+    provider: aosqe
+    component: "fluentd"
     logging-infra: "fluentdserver"
   namespace: openshift-logging
 spec:
@@ -12,8 +12,8 @@ spec:
   revisionHistoryLimit: 10
   selector:
     matchLabels:
-      provider: openshift
-      component: "fluentdserver"
+      provider: aosqe
+      component: "fluentd"
       logging-infra: "fluentdserver"
   strategy:
     type: Recreate
@@ -21,8 +21,8 @@ spec:
     metadata:
       labels:
         logging-infra: "fluentdserver"
-        provider: openshift
-        component: "fluentdserver"
+        provider: aosqe
+        component: "fluentd"
     spec:
       containers:
       - name: "fluentd"
