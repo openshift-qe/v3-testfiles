@@ -1,0 +1,38 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: "fluentdserver"
+  labels:
+    provider: openshift
+    component: "fluentdserver"
+    logging-infra: "fluentdserver"
+  namespace: openshift-logging
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      provider: openshift
+      component: "fluentdserver"
+      logging-infra: "fluentdserver"
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        logging-infra: "fluentdserver"
+        provider: openshift
+        component: "fluentdserver"
+    spec:
+      containers:
+      - name: "fluentd"
+        image: "docker.io/fluent/fluentd:latest"
+        imagePullPolicy: "IfNotPresent"
+        ports:
+        - containerPort: 24220
+          name: fluentd
+        securityContext:
+          privileged: true
+          procMount: Default
+      serviceAccount: fluentdserver
+      serviceAccountName: fluentdserver
