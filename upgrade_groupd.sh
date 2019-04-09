@@ -9,7 +9,7 @@ UI_PRO=uiupgrade
 DEVEXP_PRO=dexpupgrade
 METERING_PRO=meteringupgrade
 
-TEAM=all
+TEAM=none
 RESULT_FILE=/tmp/upgradeData
 
 function ui {
@@ -339,7 +339,7 @@ function prepareDataforOneTeam {
            MONITORING) monitoring; exit 0;;
            LOGGING) logging; exit 0;;
 	   METERING) metering; exit 0;;
-	   *) echo "Invalid value: Now only support UI|DEVEXP|METERING|MONITORING|LOGGING team!"; exit 1;;
+	   *) echo "Invalid value: Now only support UI|DEVEXP|METERING|MONITORING|LOGGING team! Use '-h' to get help."; exit 1;;
     esac
   done
 }
@@ -366,12 +366,13 @@ function enableComponent {
            TSB) enableTSB; exit 0;;
            ASB) enableASB; exit 0;;
 	   METERING) enablemetering; exit 0;;
-           *) echo "Invalid value: Now only support to enable LOGGING|TSB|ASB|METERING component!"; exit 1;;
+           *)
+	   echo "Invalid value: Now only support to enable LOGGING|TSB|ASB|METERING component! Use '-h' to get help."; exit 1;;
     esac
  done
 }
 
-while getopts t:f:he:r: opt
+while getopts at:f:he:r: opt
   do
      case "$opt" in
        f)
@@ -383,10 +384,11 @@ while getopts t:f:he:r: opt
        ;;
        h)
        echo "Options:"
-       echo "-t: Please give team name which you plan to prepare data for it. UI|DEVEXP|METERING|MONITORING|LOGGING (default is ALL)"
+       echo "-a: Prepare data for all team."
+       echo "-t: Please give team name which you plan to prepare data for it. UI|DEVEXP|METERING|MONITORING|LOGGING"
        echo "Noted: TSB component required by UI-team, Logging component required by Logging-team!"
        echo "-f: Please give the archive file recorded the pre-upgrade status. (default is /tmp/upgradeData)"
-       echo "-e: You can enable component for upgrade. support LOGGING|TSB|ASB|METERING  (default is ALL)"
+       echo "-e: You can enable component for upgrade. support LOGGING|TSB|ASB|METERING"
        echo "-r: You can remove specified component. support LOGGING|ASB|TSB|METERING"
        exit 0;;
        e)
@@ -397,15 +399,18 @@ while getopts t:f:he:r: opt
        COMPONENT=$OPTARG
        removeComponent
        ;;
+       a)
+       TEAM=all
+       ;;
        ?)
        exit 1;;
   esac
 done
 
 if [ $TEAM = "all" ]
-then
+ then
   prepareDataforAllTeam
-else
+ else
   prepareDataforOneTeam
 fi
 
