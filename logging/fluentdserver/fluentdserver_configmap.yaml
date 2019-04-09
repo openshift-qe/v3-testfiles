@@ -17,20 +17,20 @@ data:
       </security>
     </source>
 
-    #<source>
-    #  @type forward
-    # @label @ocpc
-    # port 24284
+    <source>
+      @type forward
+      @label @ocpc
+      port 24284
 
-    # <transport tls>
-    #   # version TLSv1_2
-    #   cert_path             /etc/fluent/keys/app-key
-    #   client_cert_auth true
-    #   ca_path /fluentd/certs/ca.crt
-    #   private_key_path       /etc/fluent/keys/app-cert
-    #   private_key_passphrase oo_key_passphrase
-    # </transport>
-    #/source>
+      <transport tls>
+        version TLSv1_2
+        cert_path             /etc/fluent/keys/app-key
+        client_cert_auth true
+        ca_path /fluentd/certs/ca.crt
+        private_key_path       /etc/fluent/keys/app-cert
+        private_key_passphrase oo_key_passphrase
+      </transport>
+    </source>
 
     <label @ocpa>
       <match **>
@@ -56,17 +56,17 @@ data:
       </match>
     </label>
 
-    #label @ocpc>
-    # <match **>
-    #   @type file
-    #   path         /opt/app-root/src/ocpc.*.log
-    #   symlink_path /opt/app-root/src/ocpc.log
-    #   append       true
-    #   time_slice_format %Y%m%d
-    #   time_slice_wait   10m
-    #   time_format       %Y%m%dT%H%M%S%z
-    # </match>
-    #/label>
+    <label @ocpc>
+      <match **>
+        @type file
+        path         /opt/app-root/src/ocpc.*.log
+        symlink_path /opt/app-root/src/ocpc.log
+        append       true
+        time_slice_format %Y%m%d
+        time_slice_wait   10m
+        time_format       %Y%m%dT%H%M%S%z
+      </match>
+    </label>
 kind: ConfigMap
 metadata:
   name: fluentdserver
