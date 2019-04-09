@@ -1,0 +1,20 @@
+apiVersion: v1
+data:
+  fluent.conf: |
+    <source>
+       @type forward
+       <transport tls>
+         version TLSv1_2
+         ciphers ALL:!aNULL:!eNULL:!SSLv2
+         insecure false
+
+        # For Cert generated and signed by private CA Certificate
+         ca_cert_path /fluentd/keys/fluentd.crt
+         ca_private_key_path /fluentd/keys/fluentd.key
+         ca_private_key_passphrase "oo_passphrase"
+       </transport>
+     </source>
+kind: ConfigMap
+metadata:
+  name: fluentdserver3
+  namespace: openshift-logging

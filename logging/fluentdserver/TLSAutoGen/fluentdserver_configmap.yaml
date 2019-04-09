@@ -1,0 +1,23 @@
+apiVersion: v1
+data:
+  fluent.conf: |
+    <source>
+       @type forward
+       <transport tls>
+         version TLSv1_2
+         ciphers ALL:!aNULL:!eNULL:!SSLv2
+         insecure false
+         # For generating certs by private CA certs or self-signed
+         generate_private_key_length 2048
+         generate_cert_country US
+         generate_cert_state CA
+         generate_cert_locality Mountain View
+         generate_cert_common_name "Common Name"
+         generate_cert_expiration "#{10 * 365 * 86400}"
+         generate_cert_digest sha256
+       </transport>
+     </source>
+kind: ConfigMap
+metadata:
+  name: fluentdserver5
+  namespace: openshift-logging

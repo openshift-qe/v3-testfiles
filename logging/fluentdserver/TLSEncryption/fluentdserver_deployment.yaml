@@ -1,7 +1,7 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: "fluentdserver4"
+  name: "fluentdserver3"
   labels:
     provider: aosqe
     component: "fluentd"
@@ -38,7 +38,7 @@ spec:
         - mountPath: /fluentd/etc
           name: config 
           readOnly: true
-        - mountPath: /etc/fluent/keys
+        - mountPath: /fluent/keys
           name: certs
           readOnly: true
       serviceAccount: fluentdserver
@@ -46,9 +46,9 @@ spec:
       volumes:
       - configMap:
           defaultMode: 420
-          name: fluentdserver4
+          name: fluentdserver3
         name: config
       - name: certs
         secret:
           defaultMode: 420
-          secretName: fluentdserver
+          secretName: fluentdserver3
