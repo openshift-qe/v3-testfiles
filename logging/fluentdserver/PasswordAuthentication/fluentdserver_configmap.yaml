@@ -3,11 +3,38 @@ data:
   fluent.conf: |
     <source>
       @type forward
+      @id    input1
+      @label @mainstream
       <security>
         self_hostname $HOSTNAME
         shared_key oo_share_key
       </security>
     </source>
+    <filter **>
+      @type stdout
+    </filter>
+    <label @mainstream>
+      <match docker.**>
+        @type file
+        @id   output_docker1
+        path         /fluentd/log/docker.*.log
+        symlink_path /fluentd/log/docker.log
+        append       true
+        time_slice_format %Y%m%d
+        time_slice_wait   1m
+        time_format       %Y%m%dT%H%M%S%z
+      </match>
+      <match **>
+        @type file
+        @id   output1
+        path         /fluentd/log/data.*.log
+        symlink_path /fluentd/log/data.log
+        append       true
+        time_slice_format %Y%m%d
+        time_slice_wait   10m
+        time_format       %Y%m%dT%H%M%S%z
+      </match>
+    </label>
 kind: ConfigMap
 metadata:
   name: fluentdserver2
