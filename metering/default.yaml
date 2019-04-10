@@ -4,13 +4,13 @@ metadata:
   name: "operator-metering"
 spec:
   reporting-operator:
-  spec:
-    route:
-      enabled: true
-    authProxy:
-      enabled: true
-      htpasswdData: |
-        testuser-0:{SHA}hmqIQ3qX3U8o1WL4yih+pwGOo2k=
-      cookieSeed: "2bc7283ca4c0b193fc0625525039478bc2dffa53c368440f4a8a417862de87ae"
-      subjectAccessReviewEnabled: true
-      delegateURLsEnabled: true
+    spec:
+      route:
+        enabled: true
+      authProxy:
+        enabled: true
+        htpasswdData: |
+          fake_user:{SHA}FiffE7XNizUh0CvY6yyjEzSzrvI=
+        cookieSeed: "8d5c4ce78f05e749edd632673aa7998ae9fa3264866e8a4864b500f04460a9b8"
+        subjectAccessReviewEnabled: true
+        delegateURLsEnabled: true
