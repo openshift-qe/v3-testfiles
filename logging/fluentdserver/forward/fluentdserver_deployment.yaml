@@ -5,7 +5,7 @@ metadata:
   labels:
     provider: aosqe
     component: "fluentd"
-    logging-infra: "fluentdserver"
+    logging-infra: "fluentdserver1"
   namespace: openshift-logging
 spec:
   replicas: 1
@@ -14,13 +14,13 @@ spec:
     matchLabels:
       provider: aosqe
       component: "fluentd"
-      logging-infra: "fluentdserver"
+      logging-infra: "fluentdserver1"
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        logging-infra: "fluentdserver"
+        logging-infra: "fluentdserver1"
         provider: aosqe
         component: "fluentd"
     spec:
@@ -29,7 +29,7 @@ spec:
         image: "docker.io/fluent/fluentd:latest"
         imagePullPolicy: "IfNotPresent"
         ports:
-        - containerPort: 24220
+        - containerPort: 24224
           name: fluentd
         securityContext:
           privileged: true
