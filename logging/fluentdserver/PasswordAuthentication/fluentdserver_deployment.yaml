@@ -30,7 +30,7 @@ spec:
         imagePullPolicy: "IfNotPresent"
         command: 
         ports:
-        - containerPort: 24220
+        - containerPort: 24224
           name: fluentd
         securityContext:
           privileged: true
