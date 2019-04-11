@@ -5,7 +5,7 @@ data:
       @type forward
       <server>
         host 192.168.1.2
-        port 24224
+        port 24220
       </server>
       <security>
         self_hostname $HOSTNAME
