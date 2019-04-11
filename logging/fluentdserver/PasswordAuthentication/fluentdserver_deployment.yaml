@@ -5,7 +5,7 @@ metadata:
   labels:
     provider: aosqe
     component: "fluentd"
-    logging-infra: "fluentdserver"
+    logging-infra: "fluentdserver2"
   namespace: openshift-logging
 spec:
   replicas: 1
@@ -14,13 +14,13 @@ spec:
     matchLabels:
       provider: aosqe
       component: "fluentd"
-      logging-infra: "fluentdserver"
+      logging-infra: "fluentdserver2"
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        logging-infra: "fluentdserver"
+        logging-infra: "fluentdserver2"
         provider: aosqe
         component: "fluentd"
     spec:
