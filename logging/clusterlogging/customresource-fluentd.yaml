@@ -32,7 +32,7 @@ spec:
           requests:
             cpu: 100m
             memory: 100Mi
-      replicas: 1
+      replicas: 2
   curation:
     type: "curator"
     curator:
@@ -42,7 +42,7 @@ spec:
         requests:
           cpu: 200m
           memory: 200Mi
-      schedule: "*/5 * * * *"
+      schedule: "*/10 * * * *"
   collection:
     logs:
       type: "fluentd"
