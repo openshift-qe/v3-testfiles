@@ -5,7 +5,7 @@ metadata:
   labels:
     name: two-macvlan-pod
   annotations:
-    k8s.v1.cni.cncf.io/networks: macvlan-passthru, macvlan-bridge
+    k8s.v1.cni.cncf.io/networks: macvlan-private, macvlan-bridge
 spec:
   containers:
   - name: two-macvlan-pod
