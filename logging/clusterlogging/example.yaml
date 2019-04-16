@@ -2,6 +2,8 @@ apiVersion: "logging.openshift.io/v1"
 kind: "ClusterLogging"
 metadata:
   name: "instance"
+  labels:
+    example: "managed"
 spec:
   managementState: "Managed"
   logStore:

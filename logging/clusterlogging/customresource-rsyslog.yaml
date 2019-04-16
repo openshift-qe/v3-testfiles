@@ -2,6 +2,8 @@ apiVersion: "logging.openshift.io/v1"
 kind: "ClusterLogging"
 metadata:
   name: "instance"
+  labels:
+    customresource: "rsyslog"
 spec:
   managementState: "Managed"
   logStore:
