@@ -1,4 +1,4 @@
-#### Store the templates for the network.openshift.config.io custom resource.
+#### Store the templates for the network.operator.config.io custom resource.
 
 #### Will be used during the cluster installation, for changing the lower level network configs which cannot be modified in `install-config.yml`.
 
