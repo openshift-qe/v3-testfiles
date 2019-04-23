@@ -1,0 +1,30 @@
+apiVersion: "operator.openshift.io/v1"
+kind: "Network"
+metadata:
+  name: "cluster"
+spec:
+  serviceNetwork:
+  - "172.30.0.0/16"
+  clusterNetwork:
+  - cidr: "10.128.0.0/14"
+    hostPrefix: 23
+  defaultNetwork:
+    type: OpenShiftSDN
+    openshiftSDNConfig:
+      mode: NetworkPolicy
+  additionalNetworks:
+    - type: Raw
+      name: macvlan-conf
+      rawCNIConfig: '{
+        "type": "macvlan",
+        "name": "macvlan-network",
+        "master": "eth0",
+        "ipam": {
+                "type": "host-local",
+                "subnet": "10.200.1.0/24",
+                "routes": [{
+                        "dst": "0.0.0.0/0"
+                }],
+                "gateway": "10.200.1.1"
+        }
+      }'
