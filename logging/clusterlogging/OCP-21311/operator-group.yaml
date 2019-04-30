@@ -1,5 +1,7 @@
 apiVersion: operators.coreos.com/v1
 kind: OperatorGroup
+labels:
+  og_label: openshift-logging-og
 metadata:
   generateName: openshift-logging-
   namespace: openshift-logging
