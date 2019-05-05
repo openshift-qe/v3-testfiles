@@ -1,6 +1,6 @@
 oc create sa rsyslogserver
-oc adm policy add-scc-to-user restricted system:serviceaccount:openshift-logging:rsyslogserver
-oc create -f internal-rsyslog.yml 
+oc adm policy add-scc-to-user privileged system:serviceaccount:openshift-logging:rsyslogserver
+oc create -f rsyslogserver.yaml
 oc expose dc rsyslogserver
 serviceip1=`oc get service rsyslogserver custom-columns=IP:.spec.clusterIP`
 oc scale deployment cluster-logging-operator --replicas=0
