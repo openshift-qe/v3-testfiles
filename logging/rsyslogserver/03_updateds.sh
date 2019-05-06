@@ -1,4 +1,5 @@
 #! /bin/bash
+# Enable fluentd to send log to remote rsyslog server using out_rsyslog_buffer. out_rsyslog_buffer send message via TCP.
 oc project openshift-logging
 kubeversion=$(oc version |tail -1)
 fluentds="fluentd"
