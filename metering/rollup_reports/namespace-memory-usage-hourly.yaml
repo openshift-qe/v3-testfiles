@@ -4,6 +4,6 @@ metadata:
   name: namespace-memory-usage-hourly
 spec:
   reportingStart: "2019-01-01T00:00:00Z"
-  generationQuery: "namespace-memory-usage"
+  query: "namespace-memory-usage"
   schedule:
     period: "hourly"

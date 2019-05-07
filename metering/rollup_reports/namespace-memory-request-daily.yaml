@@ -3,7 +3,7 @@ kind: Report
 metadata:
   name: namespace-memory-request-daily
 spec:
-  generationQuery: "namespace-memory-request"
+  query: "namespace-memory-request"
   reportingStart: "2019-01-01T00:00:00Z"
   schedule:
     period: "daily"

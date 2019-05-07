@@ -3,7 +3,7 @@ kind: Report
 metadata:
   name: namespace-cpu-request-daily
 spec:
-  generationQuery: "namespace-cpu-request"
+  query: "namespace-cpu-request"
   reportingStart: "2019-01-01T00:00:00Z"
   schedule:
     period: "daily"

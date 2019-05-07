@@ -3,7 +3,7 @@ kind: Report
 metadata:
   name: namespace-cpu-usage-daily
 spec:
-  generationQuery: "namespace-cpu-usage"
+  query: "namespace-cpu-usage"
   reportingStart: "2019-01-01T00:00:00Z"
   schedule:
     period: "daily"

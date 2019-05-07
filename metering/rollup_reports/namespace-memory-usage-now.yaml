@@ -3,7 +3,7 @@ kind: Report
 metadata:
   name: namespace-memory-usage-now
 spec:
-  generationQuery: "namespace-memory-usage"
+  query: "namespace-memory-usage"
   reportingStart: '2019-01-01T00:00:00Z'
   reportingEnd: '2019-12-30T23:59:59Z'
   runImmediately: true

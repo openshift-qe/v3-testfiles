@@ -4,7 +4,7 @@ metadata:
   name: namespace-memory-request-hourly
 spec:
   reportingStart: "2019-01-01T00:00:00Z"
-  generationQuery: "namespace-memory-request"
+  query: "namespace-memory-request"
   schedule:
     period: "hourly"
 
