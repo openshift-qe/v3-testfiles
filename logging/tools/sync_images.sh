@@ -179,6 +179,39 @@ spec:
       unmanaged: true
 EOF
 oc apply -f above.yaml
+
+oc project openshift-marketplace
+oc delete opsrc redhat-operators
+oc delete opsrc certified-operators
+oc delete opsrc community-operators
+
+cat <<EOF >token.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: marketplacesecret
+  namespace: openshift-marketplace
+type: Opaque
+stringData:
+    token: "${quay.token}"
+EOF
+oc create -f token.yaml
+
+
+cat <<EOF >OP.yaml
+apiVersion: operators.coreos.com/v1
+kind: OperatorSource
+metadata:
+  name: art-applications
+  namespace: openshift-marketplace
+spec:
+  type: appregistry     
+  endpoint: https://quay.io/cnr
+  registryNamespace: redhat-operators-art
+  authorizationToken:
+    secretName: marketplacesecret
+EOF
+oc create -f OP.yaml
 }
 
 ###########################Main##########################################
@@ -189,3 +222,4 @@ for REPOSITORY in ${REPOSITORYS}; do
     getimageNames
 done
 syncImages
+
