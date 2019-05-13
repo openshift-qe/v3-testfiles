@@ -60,6 +60,42 @@ function downloadRepos()
 
 function getimageNames()
 {
+cat <<EOF >getimageNames.py
+'''
+Created on May 9, 2019
+@author: anli@redhat.com
+'''
+import argparse
+import re
+import sys
+import os
+import yaml
+
+images=[]
+parser = argparse.ArgumentParser()
+parser.add_argument('-f', '--file')
+args=parser.parse_args()
+
+"""
+pip install pyyaml
+http://ansible-tran.readthedocs.io/en/latest/docs/YAMLSyntax.html
+"""
+f = open(args.file)
+res=yaml.load(f, Loader=yaml.FullLoader)
+f.close()
+#print(res)
+res2=yaml.load(res['data']['clusterServiceVersions'],Loader=yaml.FullLoader)
+#print res2
+for vitem in res2:
+    for ditem in  vitem['spec']['install']['spec']['deployments']:
+        for citem in ditem["spec"]["template"]['spec']["containers"]:
+            images.append(citem['image'])
+            print str(citem['image'])
+            for  eitem in citem['env']:
+                if(re.search("_IMAGE", eitem['name'])):
+                    images.append(eitem['value'])
+                    print eitem['value']
+EOF
     IMS=$(python getimageNames.py -f quay.${REPOSITORY}/bundle.yaml)
     IMAGES="${IMAGES} ${IMS}"
 }
@@ -107,6 +143,12 @@ oc apply -f /tmp/defaultRoute.yaml
 to_registry=$(oc get images.config.openshift.io/cluster  -o jsonpath={.status.externalRegistryHostnames[0]})
 oc create serviceaccount registry |true
 oc adm policy add-cluster-role-to-user admin -z registry
+oc get secret router-certs-default -n openshift-ingress -o json |jq -r '.data["tls.crt"]' | base64 -d |tee ca.crt
+sudo cp ca.crt /etc/pki/ca-trust/source/anchors/${to_registry}.crt
+sudo update-ca-trust enable
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+
 docker login "${to_registry}" -u registry -p `oc sa get-token registry`
 if [[ $? != 0 ]]; then
     echo "Can not login cluster ${to_registry}"
@@ -137,13 +179,47 @@ spec:
       unmanaged: true
 EOF
 oc apply -f above.yaml
+
+oc project openshift-marketplace
+oc delete opsrc redhat-operators
+oc delete opsrc certified-operators
+oc delete opsrc community-operators
+
+cat <<EOF >token.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: marketplacesecret
+  namespace: openshift-marketplace
+type: Opaque
+stringData:
+    token: "${quay.token}"
+EOF
+oc create -f token.yaml
+
+
+cat <<EOF >OP.yaml
+apiVersion: operators.coreos.com/v1
+kind: OperatorSource
+metadata:
+  name: art-applications
+  namespace: openshift-marketplace
+spec:
+  type: appregistry     
+  endpoint: https://quay.io/cnr
+  registryNamespace: redhat-operators-art
+  authorizationToken:
+    secretName: marketplacesecret
+EOF
+oc create -f OP.yaml
 }
 
 ###########################Main##########################################
 connectToCluster
-#getQuayToken
+getQuayToken
 for REPOSITORY in ${REPOSITORYS}; do
-#    downloadRepos
+    downloadRepos
     getimageNames
 done
 syncImages
+
