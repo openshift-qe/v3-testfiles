@@ -9,6 +9,7 @@ to_registry=default-route-openshift-image-registry.apps.qeoanli.qe.devcluster.op
 
 function getQuayToken()
 {
+echo "#get Quay Token"
     echo -n "Login Quay.io"
     if [[ $REFRESH == true || ! -f quay.token ]]; then
         echo -n "Quay Username: "
@@ -19,13 +20,14 @@ function getQuayToken()
         Quay_Token=$(curl -s -H "Content-Type: application/json" -XPOST https://quay.io/cnr/api/v1/users/login -d ' { "user": { "username": "'"anli"'", "password": "'"beginr00t"'" } }' |jq -r '.token')
 	echo "$Quay_Token" > quay.token
     else
-        TOEKN=$(cat quay.token)
+        Quay_Token=$(cat quay.token)
     fi
 
 }
 
 function downloadRepos()
 {  
+echo "#Download buldle.yaml from Operator source"
     Quay_Token=$(cat quay.token)
     mkdir -p "quay.${REPOSITORY}"
     cd "quay.${REPOSITORY}"
@@ -36,10 +38,12 @@ function downloadRepos()
     fi
     releases=$(jq -r '.[].release' manifest.json)
     echo  ""
-    echo "##Download repos for $REPOSITORY\n"
+    echo "##Download repos for $REPOSITORY"
+    echo  ""
     jq '.[].release ' manifest.json |tr  ["\n"] ' '
     echo  ""
-    echo "Please input one version to download\n"
+    echo "Please input one version to download"
+    echo  ""
     read -s release
     match=false
     for version in ${releases}; do
@@ -60,6 +64,7 @@ function downloadRepos()
 
 function getimageNames()
 {
+echo "#Get image name from Operator source"
 cat <<EOF >getimageNames.py
 '''
 Created on May 9, 2019
@@ -102,6 +107,7 @@ EOF
 
 function syncImages()
 {
+echo "#sync image from internal regsitry to cluster"
     for image in ${IMAGES}; do
         echo $image
         if [[ $image =~ image-registry.openshift-image-registry.svc:5000 ]]; then
@@ -131,6 +137,7 @@ function syncImages()
 
 function connectToCluster()
 {
+echo "#Enable external router for regsitry"
 cat <<EOF >/tmp/defaultRoute.yaml
 apiVersion: imageregistry.operator.openshift.io/v1
 kind: Config
@@ -140,15 +147,17 @@ spec:
   defaultRoute: true
 EOF
 oc apply -f /tmp/defaultRoute.yaml
+echo "#Configure cert and token to registry"
 to_registry=$(oc get images.config.openshift.io/cluster  -o jsonpath={.status.externalRegistryHostnames[0]})
 oc create serviceaccount registry |true
 oc adm policy add-cluster-role-to-user admin -z registry
-oc get secret router-certs-default -n openshift-ingress -o json |jq -r '.data["tls.crt"]' | base64 -d |tee ca.crt
+oc get secret router-certs-default -n openshift-ingress -o json |jq -r '.data["tls.crt"]' | base64 -d >ca.crt
 sudo cp ca.crt /etc/pki/ca-trust/source/anchors/${to_registry}.crt
 sudo update-ca-trust enable
 sudo systemctl daemon-reload
 sudo systemctl restart docker
 
+echo "#Log in registry"
 docker login "${to_registry}" -u registry -p `oc sa get-token registry`
 if [[ $? != 0 ]]; then
     echo "Can not login cluster ${to_registry}"
@@ -156,9 +165,10 @@ if [[ $? != 0 ]]; then
 fi
 }
 
-function above()
+function updateCluster()
 {
-echo <<EOF > above.yaml
+echo "#set OperatorSource unmanaged"
+cat <<EOF > above.yaml
 apiVersion: config.openshift.io/v1
 kind: ClusterVersion
 metadata:
@@ -180,10 +190,13 @@ spec:
 EOF
 oc apply -f above.yaml
 
+echo "#Delete offical OperatorSource"
 oc project openshift-marketplace
-oc delete opsrc redhat-operators
-oc delete opsrc certified-operators
-oc delete opsrc community-operators
+oc delete opsrc redhat-operators  |  true
+oc delete opsrc certified-operators | true
+oc delete opsrc community-operators | true
+
+echo "#Create Art OperatorSource"
 
 cat <<EOF >token.yaml
 apiVersion: v1
@@ -193,9 +206,9 @@ metadata:
   namespace: openshift-marketplace
 type: Opaque
 stringData:
-    token: "${quay.token}"
+    token: "${Quay_Token}"
 EOF
-oc create -f token.yaml
+oc create -f token.yaml 
 
 
 cat <<EOF >OP.yaml
@@ -218,8 +231,10 @@ oc create -f OP.yaml
 connectToCluster
 getQuayToken
 for REPOSITORY in ${REPOSITORYS}; do
-    downloadRepos
-    getimageNames
-done
-syncImages
+    echo "#get Image names for $REPOSITORY"
+#    downloadRepos
+#    getimageNames
 
+done
+#syncImages
+updateCluster
