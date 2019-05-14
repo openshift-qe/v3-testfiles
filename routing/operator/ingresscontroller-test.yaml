@@ -1,0 +1,21 @@
+kind: IngressController
+apiVersion: operator.openshift.io/v1
+metadata:
+  name: test
+  namespace: openshift-ingress-operator
+spec:
+  defaultCertificate:
+    name: "test-certs"
+  domain: router-test.example.com
+  replicas: 1
+  nodePlacement:
+    tolerations:
+    - effect: NoExecute
+      operator: Exists
+      key: router-test
+  routeSelector:
+    matchLabels:
+      route: router-test
+  namespaceSelector:
+    matchLabels:
+      namespace: router-test
