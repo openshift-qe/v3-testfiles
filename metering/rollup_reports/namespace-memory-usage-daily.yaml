@@ -4,7 +4,6 @@ metadata:
   name: namespace-memory-usage-daily
 spec:
   query: "namespace-memory-usage"
-  reportingStart: "2019-01-01T00:00:00Z"
   schedule:
     period: "daily"
   inputs:
