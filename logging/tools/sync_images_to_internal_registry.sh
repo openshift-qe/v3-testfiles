@@ -1,16 +1,15 @@
 set -e
 NAMESPACE=redhat-operators-art
 REPOSITORYS="elasticsearch-operator cluster-logging"
-REFRESH=false
+REFRESH=true
 from_registry=brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888
 to_registry=default-route-openshift-image-registry.apps.qeoanli.qe.devcluster.openshift.com
-
-
 
 function getQuayToken()
 {
 echo "#get Quay Token"
-    echo -n "Login Quay.io"
+    echo "Login Quay.io"
+    echo ""
     if [[ $REFRESH == true || ! -f quay.token ]]; then
         echo -n "Quay Username: "
         read USERNAME
@@ -29,13 +28,12 @@ function downloadRepos()
 {  
 echo "#Download buldle.yaml from Operator source"
     Quay_Token=$(cat quay.token)
+    rm -rf "quay.${REPOSITORY}"
     mkdir -p "quay.${REPOSITORY}"
     cd "quay.${REPOSITORY}"
     URL="https://quay.io/cnr/api/v1/packages/${NAMESPACE}/${REPOSITORY}"
-    if [[ $REFRESH == true || ! -f manifest.json ]]; then
-        echo curl -s -H "Content-Type: application/json" -H "Authorization: ${Quay_Token}" -XGET $URL 
-        curl -s -H "Content-Type: application/json" -H "Authorization: ${Quay_Token}" -XGET $URL |python -m json.tool | tee manifest.json
-    fi
+    echo curl -s -H "Content-Type: application/json" -H "Authorization: ${Quay_Token}" -XGET $URL 
+    curl -s -H "Content-Type: application/json" -H "Authorization: ${Quay_Token}" -XGET $URL |python -m json.tool | tee manifest.json
     releases=$(jq -r '.[].release' manifest.json)
     echo  ""
     echo "##Download repos for $REPOSITORY"
@@ -165,76 +163,12 @@ if [[ $? != 0 ]]; then
 fi
 }
 
-function updateCluster()
-{
-echo "#set OperatorSource unmanaged"
-cat <<EOF > above.yaml
-apiVersion: config.openshift.io/v1
-kind: ClusterVersion
-metadata:
-  name: version
-spec:
-  overrides:
-    - kind: OperatorSource
-      name: certified-operators
-      namespace: openshift-marketplace
-      unmanaged: true
-    - kind: OperatorSource
-      name: redhat-operators
-      namespace: openshift-marketplace
-      unmanaged: true
-    - kind: OperatorSource
-      name: community-operators
-      namespace: openshift-marketplace
-      unmanaged: true
-EOF
-oc apply -f above.yaml
-
-echo "#Delete offical OperatorSource"
-oc project openshift-marketplace
-oc delete opsrc redhat-operators  |  true
-oc delete opsrc certified-operators | true
-oc delete opsrc community-operators | true
-
-echo "#Create Art OperatorSource"
-
-cat <<EOF >token.yaml
-apiVersion: v1
-kind: Secret
-metadata:
-  name: marketplacesecret
-  namespace: openshift-marketplace
-type: Opaque
-stringData:
-    token: "${Quay_Token}"
-EOF
-oc create -f token.yaml 
-
-
-cat <<EOF >OP.yaml
-apiVersion: operators.coreos.com/v1
-kind: OperatorSource
-metadata:
-  name: art-applications
-  namespace: openshift-marketplace
-spec:
-  type: appregistry     
-  endpoint: https://quay.io/cnr
-  registryNamespace: redhat-operators-art
-  authorizationToken:
-    secretName: marketplacesecret
-EOF
-oc create -f OP.yaml
-}
-
 ###########################Main##########################################
-connectToCluster
 getQuayToken
 for REPOSITORY in ${REPOSITORYS}; do
     echo "#get Image names for $REPOSITORY"
-#    downloadRepos
-#    getimageNames
-
+    downloadRepos
+    getimageNames
 done
-#syncImages
-updateCluster
+connectToCluster
+syncImages
