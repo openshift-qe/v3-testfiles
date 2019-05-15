@@ -1,39 +1,37 @@
+# !/bin/bash
 set -e
 NAMESPACE=redhat-operators-art
 REPOSITORYS="elasticsearch-operator cluster-logging"
+#REPOSITORYS="metering  openshifttemplateservicebroker  openshiftansibleservicebroker"
 REFRESH=true
 from_registry=brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888
 to_registry=default-route-openshift-image-registry.apps.qeoanli.qe.devcluster.openshift.com
+cur_dir=$PWD
 
 function getQuayToken()
 {
 echo "#get Quay Token"
     echo "Login Quay.io"
     echo ""
-    if [[ $REFRESH == true || ! -f quay.token ]]; then
-        echo -n "Quay Username: "
-        read USERNAME
-        echo -n "Quay Password: "
-        read -s PASSWORD
+    echo "Quay Username: "
+    read USERNAME
+    echo "Quay Password: "
+    read -s PASSWORD
  
-        Quay_Token=$(curl -s -H "Content-Type: application/json" -XPOST https://quay.io/cnr/api/v1/users/login -d ' { "user": { "username": "'"anli"'", "password": "'"beginr00t"'" } }' |jq -r '.token')
-	echo "$Quay_Token" > quay.token
-    else
-        Quay_Token=$(cat quay.token)
-    fi
-
+    Quay_Token=$(curl -s -H "Content-Type: application/json" -XPOST https://quay.io/cnr/api/v1/users/login -d ' { "user": { "username": "'"anli"'", "password": "'"beginr00t"'" } }' |jq -r '.token')
+    echo "$Quay_Token" > ${cur_dir}/quay.token
 }
 
 function downloadRepos()
 {  
 echo "#Download buldle.yaml from Operator source"
-    Quay_Token=$(cat quay.token)
+    Quay_Token=$(cat ${cur_dir}/quay.token)
     rm -rf "quay.${REPOSITORY}"
     mkdir -p "quay.${REPOSITORY}"
     cd "quay.${REPOSITORY}"
     URL="https://quay.io/cnr/api/v1/packages/${NAMESPACE}/${REPOSITORY}"
     echo curl -s -H "Content-Type: application/json" -H "Authorization: ${Quay_Token}" -XGET $URL 
-    curl -s -H "Content-Type: application/json" -H "Authorization: ${Quay_Token}" -XGET $URL |python -m json.tool | tee manifest.json
+    curl -s -H "Content-Type: application/json" -H "Authorization: ${Quay_Token}" -XGET $URL |python -m json.tool > manifest.json
     releases=$(jq -r '.[].release' manifest.json)
     echo  ""
     echo "##Download repos for $REPOSITORY"
@@ -99,14 +97,13 @@ for vitem in res2:
                     images.append(eitem['value'])
                     print eitem['value']
 EOF
-    IMS=$(python getimageNames.py -f quay.${REPOSITORY}/bundle.yaml)
-    IMAGES="${IMAGES} ${IMS}"
+    python getimageNames.py -f quay.${REPOSITORY}/bundle.yaml | tee -a ${cur_dir}/quay.images
 }
 
 function syncImages()
 {
 echo "#sync image from internal regsitry to cluster"
-    for image in ${IMAGES}; do
+    for image in $(cat ${cur_dir}/quay.images); do
         echo $image
         if [[ $image =~ image-registry.openshift-image-registry.svc:5000 ]]; then
             #openshift/ose-logging-fluentd:v4.1.0-201905101016
@@ -156,6 +153,7 @@ sudo systemctl daemon-reload
 sudo systemctl restart docker
 
 echo "#Log in registry"
+echo docker login "${to_registry}" -u registry -p `oc sa get-token registry`
 docker login "${to_registry}" -u registry -p `oc sa get-token registry`
 if [[ $? != 0 ]]; then
     echo "Can not login cluster ${to_registry}"
@@ -165,10 +163,13 @@ fi
 
 ###########################Main##########################################
 getQuayToken
-for REPOSITORY in ${REPOSITORYS}; do
-    echo "#get Image names for $REPOSITORY"
-    downloadRepos
-    getimageNames
-done
+if [[ $REFRESH == true ]]; then
+    >${cur_dir}/quay.images
+    for REPOSITORY in ${REPOSITORYS}; do
+        echo "#get Image names for $REPOSITORY"
+        downloadRepos
+        getimageNames
+    done
+fi
 connectToCluster
 syncImages
