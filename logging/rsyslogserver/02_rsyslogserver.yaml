@@ -18,15 +18,13 @@ objects:
   data:
     rsyslog.conf: |+
       global(processInternalMessages="on")
-      module(load="impstats") # config.enabled=`echo $ENABLE_STATISTICS`)
       module(load="imptcp")
       module(load="imudp" TimeRequery="500")
       module(load="omstdout")
-      module(load="mmjsonparse")
-  
+
       input(type="imptcp" port="514")
       input(type="imudp" port="514")
-      syslog.* :omstdout:
+      action(type="omstdout")
 - kind: ConfigMap
   apiVersion: v1
   metadata:
