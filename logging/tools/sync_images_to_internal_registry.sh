@@ -18,7 +18,7 @@ echo "#get Quay Token"
     echo "Quay Password: "
     read -s PASSWORD
  
-    Quay_Token=$(curl -s -H "Content-Type: application/json" -XPOST https://quay.io/cnr/api/v1/users/login -d ' { "user": { "username": "'"anli"'", "password": "'"beginr00t"'" } }' |jq -r '.token')
+    Quay_Token=$(curl -s -H "Content-Type: application/json" -XPOST https://quay.io/cnr/api/v1/users/login -d ' { "user": { "username": "'"${USERNAME}"'", "password": "'"${PASSWORD}"'" } }' |jq -r '.token')
     echo "$Quay_Token" > ${cur_dir}/quay.token
 }
 
