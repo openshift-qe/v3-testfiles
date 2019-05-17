@@ -1,0 +1,9 @@
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  labels:
+    app: sti-bc
+  name: sti
+spec:
+  lookupPolicy:
+    local: false
