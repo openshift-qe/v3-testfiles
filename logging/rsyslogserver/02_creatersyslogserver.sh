@@ -13,7 +13,7 @@ objects:
 - kind: ConfigMap
   apiVersion: v1
   metadata:
-    name: ${NAME}-main
+    name: \${NAME}-main
     namespace: openshift-logging
     labels:
       provider: aosqe
@@ -31,7 +31,7 @@ objects:
 - kind: ConfigMap
   apiVersion: v1
   metadata:
-    name: ${NAME}-bin
+    name: \${NAME}-bin
     namespace: openshift-logging
     labels:
       provider: aosqe
@@ -42,12 +42,12 @@ objects:
 - kind: Deployment
   apiVersion: extensions/v1beta1
   metadata:
-    name:  ${NAME}
+    name:  \${NAME}
     namespace: openshift-logging
     labels:
       provider: aosqe
       component: "rsyslogserver"
-      appname: ${NAME}
+      appname: \${NAME}
   spec:
     replicas: 1
     revisionHistoryLimit: 10
@@ -62,7 +62,7 @@ objects:
         labels:
           provider: aosqe
           component: "rsyslogserver"
-          appname: ${NAME}
+          appname: \${NAME}
       spec:
         serviceAccount: rsyslogserver
         serviceAccountName: rsyslogserver
@@ -90,11 +90,11 @@ objects:
         volumes:
         - configMap:
             defaultMode: 420
-            name: ${NAME}-main
+            name: \${NAME}-main
           name: main
         - configMap:
             defaultMode: 420
-            name: ${NAME}-bin
+            name: \${NAME}-bin
           name: bin
 
 - apiVersion: v1
@@ -105,14 +105,14 @@ objects:
     labels:
       provider: aosqe
       component: "rsyslogserver"
-    name: ${NAME}
+    name: \${NAME}
   spec:
     ports:
-    - name: ${NAME}
+    - name: \${NAME}
       port: 514
       targetPort: 514
     selector:
-      appname: ${NAME}
+      appname: \${NAME}
       provider: aosqe
 parameters:
 - description: The name assigned to all of the object 
