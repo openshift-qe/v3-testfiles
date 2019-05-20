@@ -31,7 +31,7 @@ data:
       @id remote-syslog-input
       remote_syslog ${serviceIPs[0]}
       port 514
-      hostname logging-fluentd
+      hostname \${hostname}
       tag_key ident,systemd.u.SYSLOG_IDENTIFIER
       facility local0
       severity info
