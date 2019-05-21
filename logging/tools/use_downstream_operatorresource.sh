@@ -20,7 +20,7 @@ echo "#get Quay Token"
 
 function updateCluster()
 {
-echo "#set OperatorSource unmanaged"
+#echo "#set OperatorSource unmanaged"
 cat <<EOF > above.yaml
 apiVersion: config.openshift.io/v1
 kind: ClusterVersion
@@ -41,13 +41,13 @@ spec:
       namespace: openshift-marketplace
       unmanaged: true
 EOF
-oc apply -f above.yaml
+#oc apply -f above.yaml
 
 echo "#Delete offical OperatorSource"
 oc project openshift-marketplace
-oc delete opsrc redhat-operators  |  true
-oc delete opsrc certified-operators | true
-oc delete opsrc community-operators | true
+#oc delete opsrc redhat-operators  |  true
+#oc delete opsrc certified-operators | true
+#oc delete opsrc community-operators | true
 
 echo "#Create Art OperatorSource"
 
