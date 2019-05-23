@@ -5,14 +5,16 @@ metadata:
   namespace: openshift-ingress-operator
 spec:
   defaultCertificate:
-    name: "test-certs"
+    name: test-certs
   domain: router-test.example.com
   replicas: 1
   nodePlacement:
+    nodeSelector:
+      matchLabels:
+        beta.kubernetes.io/os: linux
     tolerations:
-    - effect: NoExecute
+    - effect: NoSchedule
       operator: Exists
-      key: router-test
   routeSelector:
     matchLabels:
       route: router-test
