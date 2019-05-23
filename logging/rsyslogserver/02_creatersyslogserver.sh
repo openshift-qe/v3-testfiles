@@ -79,7 +79,11 @@ objects:
             procMount: Default
           ports:
           - containerPort: 514
-            name: rsyslog-pod
+            name: rsyslog-pod-tcp
+            protocol: TCP
+          - containerPort: 514
+            name: rsyslog-pod-udp
+            protocol: UDP
           volumeMounts:
           - mountPath: /etc/rsyslog/conf
             name: main
@@ -108,9 +112,14 @@ objects:
     name: \${NAME}
   spec:
     ports:
-    - name: \${NAME}
+    - name: rsyslogserver-tcp
       port: 514
       targetPort: 514
+      protocol: TCP
+    - name: rsyslogserver-udp
+      port: 514
+      targetPort: 514
+      protocol: UDP
     selector:
       appname: \${NAME}
       provider: aosqe
