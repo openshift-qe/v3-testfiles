@@ -1,0 +1,82 @@
+{
+    "apiVersion": "v1",
+    "kind": "Template",
+    "metadata": {
+        "name": "centos-logtest-template"
+    },
+    "objects": [
+        {
+            "apiVersion": "v1",
+            "data": {
+                "ocp_logtest.cfg": "--raw --file /var/lib/svt/json.example  --text-type input --rate 60.0",
+                "json.example": "{ \"@version\":1, \"category\":\"developer\", \"code\":\"KKMSVC004E\", \"@timestamp\":\"2018-01-18T13:35:50.415+0100\", \"sequence\":4638, \"loggerName\":\"at.jrap.soa.services.jaxrs.internal.exception.AbstractCheckedStatusExceptionMapper\", \"loglevel\":\"ERROR\", \"threadName\":\"default task-23\", \"message\":\"Failed to search for Kunde by name: java.lang.NullPointerException\", \"threadId\":270, \"mdc\":{ \"RBG_APPLICATION\":\"drb_dev\", \"RBG_REQUEST_CORRELATION\":\"S_discovery_120c17359f81139e\", \"RBG_IPADDRESS\":\"10.94.10.1\" }, \"exception\":{ \"class\":\"at.rsg.kokuma.model.KokumaBusinessException\", \"message\":\"{developer} KKMSVC004E: Failed to search forKunde by name: java.lang.NullPointerException\", \"trace\":[\"at.rsg.kokuma.services.impl.business.kundensuche.KundensucheBusinessBean.sucheName(195)\", \"... 63 filtered\", \"at.rsg.kokuma.services.impl.business.kundensuche.KundensucheBusinessBean$$$view20.sucheName\", \"... 9 filtered\",\"at.rsg.kokuma.services.impl.business.kundensuche.KundensucheBusinessBean$Proxy$_$$_Weld$EnterpriseProxy$.sucheName\", \"at.rsg.kokuma.services.impl.KundensucheServiceBean.sucheName(35)\", \"... 10 filtered\", \"at.rsg.kokuma.services.impl.logging.LoggingInterceptor.log(51)\", \"... 10 filtered\", \"at.jrap.commons.validation.internal.ExceptionInterceptor.mapException(35)\", \"... 10 filtered\", \"at.jrap.commons.secured.internal.SecuredInterceptor.checkSecurity(51)\", \"... 10 filtered\", \"at.jrap.commons.exceptions.internal.ExceptionInterceptor.mapException(48)\", \"... 10 filtered\", \"at.jrap.commons.context.internal.ServiceContextManagingInterceptor.reset(53)\", \"... 10 filtered\", \"at.jrap.commons.logging.internal.ThreadContextResettingInterceptor.reset(53)\", \"... 65 filtered\", \"at.rsg.kokuma.services.KundensucheService$$$view15.sucheName\", \"... 9 filtered\", \"at.rsg.kokuma.services.impl.KundensucheService$1917269646$Proxy$_$$_Weld$EnterpriseProxy$.sucheName\", \"at.rsg.kokuma.services.kundensucheservice.jaxrs.KundensucheServiceResource.sucheName(75)\", \"at.rsg.kokuma.services.kundensucheservice.jaxrs.KundensucheServiceResource$Proxy$_$$_WeldClientProxy.sucheName\", \"...16 filtered\", \"at.jrap.soa.cors.CorsFilter.doFilter(85)\", \"... 29 filtered\" ], \"cause\":{ \"class\":\"java.lang.NullPointerException\", \"message\":\"^\", \"trace\":[\"at.rsg.kokuma.services.impl.business.kundensuche.KundensucheBusinessBean.createGefundenerKunde(344)\", \"at.rsg.kokuma.services.impl.business.kundensuche.KundensucheBusinessBean.createGefundenerKunde(380)\", \"... 266 more\" ] } } }"
+            },
+            "kind": "ConfigMap",
+            "metadata": {
+                "name": "logtest-config"
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "ReplicationController",
+            "metadata": {
+                "name": "centos-logtest",
+                "labels": {
+                    "run": "centos-logtest",
+                    "test": "centos-logtest"
+                }
+            },
+            "spec": {
+                "replicas": "${{REPLICAS}}",
+                "template": {
+                    "metadata": {
+                        "generateName": "centos-logtest-",
+                        "labels": {
+                            "run": "centos-logtest",
+                            "test": "centos-logtest"
+                        }
+                    },
+                    "spec": {
+                        "containers": [
+                            {
+                                "env": [],
+                                "image": "docker.io/mffiedler/ocp-logtest:latest",
+                                "imagePullPolicy": "Always",
+                                "name": "centos-logtest",
+                                "resources": {},
+                                "volumeMounts": [
+                                    {
+                                        "name": "config",
+                                        "mountPath": "/var/lib/svt"
+                                    }
+                                ],
+                                "terminationMessagePath": "/dev/termination-log"
+                            }
+                        ],
+                        "volumes": [
+                            {
+                                "name": "config",
+                                "configMap": {
+                                    "name": "logtest-config"
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    ],
+    "parameters": [
+        {
+            "name": "IDENTIFIER",
+            "displayName": "identifier",
+            "value": "1"
+        },
+        {
+            "name": "REPLICAS",
+            "displayName": "Replicas",
+            "value": "1"
+        }
+    ]
+}
+
