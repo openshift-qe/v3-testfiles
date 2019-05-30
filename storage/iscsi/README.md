@@ -5,7 +5,7 @@ Install required packages on your node:
 
 ## Configure iscsi initiator on your node
 ```
-echo 'InitiatorName=iqn.2015-06.world.server:www.server.world' > /etc/iscsi/initiatorname.iscsi
+echo 'InitiatorName=iqn.2016-04.test.com:test.img' > /etc/iscsi/initiatorname.iscsi
 ```
 
 Edit `/etc/iscsi/iscsid.conf`

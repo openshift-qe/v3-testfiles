@@ -11,7 +11,7 @@
     "accessModes": [ "ReadOnlyMany" ],
     "iscsi": {
         "targetPortal": "192.168.0.225:3260",
-        "iqn": "iqn.2015-06.world.server:storage.target00",
+        "iqn": "iqn.2016-04.test.com:storage.target00",
         "lun": 0,
         "fsType": "ext4",
         "readOnly": true
