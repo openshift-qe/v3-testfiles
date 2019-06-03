@@ -9,7 +9,7 @@ spec:
     type: "elasticsearch"
     elasticsearch:
       nodeSelector:
-        logging: es
+        es: yes
       nodeCount: 1
       resources:
         limits:
@@ -25,17 +25,17 @@ spec:
     type: "kibana"
     kibana:
       nodeSelector:
-        logging: kibana
+        kibana: yes
       replicas: 1
   curation:
     type: "curator"
     curator:
       nodeSelector:
-        logging: curator
+        curator: yes
       schedule: "*/10 * * * *"
   collection:
     logs:
       type: "fluentd"
       fluentd:
         nodeSelector:
-          logging: fluentd
+          fluentd: yes
