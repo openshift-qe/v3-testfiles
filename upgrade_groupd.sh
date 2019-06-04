@@ -55,7 +55,7 @@ function devExp {
   oc new-app ruby:2.2~https://github.com/openshift/ruby-hello-world --strategy=docker
   
 
-  echo "==================waiting for pods running....."
+  echo "==================waiting 300s untill pods running....."
   sleep 300
   echo "waiting ruby-ex pod running..."; podstatus=unknown; while [ ${podstatus} !=  "running" ]; do oc get pods --selector app=ruby-ex -n devexpupgrade|grep Running; if [ $? -eq 0 ]; then podstatus=running; fi; done;
   echo "waiting ruby-hello-world pod running..."; podstatus=unknown; while [ ${podstatus} !=  "running" ]; do oc get pods --selector app=ruby-hello-world -n devexpupgrade|grep Running; if [ $? -eq 0 ]; then podstatus=running; fi; done;
