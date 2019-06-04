@@ -6,7 +6,7 @@ set -o pipefail
 
 
 UI_PRO=uiupgrade
-DEVEXP_PRO=dexpupgrade
+DEVEXP_PRO=devexpupgrade
 METERING_PRO=meteringupgrade
 
 TEAM=none
@@ -52,6 +52,8 @@ function devExp {
   oc patch config.samples.operator.openshift.io cluster -p '{"spec": {"skippedImagestreams": ["perl", "mysql"]}}' --type merge
   oc new-app ruby~https://github.com/openshift/ruby-ex
   oc new-app jenkins-ephemeral
+  oc new-app ruby:2.2~https://github.com/openshift/ruby-hello-world --strategy=docker
+  
 
   echo "==================waiting for pods running....."
   sleep 30
