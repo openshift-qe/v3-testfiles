@@ -29,15 +29,7 @@ metadata:
 spec:
   overrides:
     - kind: OperatorSource
-      name: certified-operators
-      namespace: openshift-marketplace
-      unmanaged: true
-    - kind: OperatorSource
       name: redhat-operators
-      namespace: openshift-marketplace
-      unmanaged: true
-    - kind: OperatorSource
-      name: community-operators
       namespace: openshift-marketplace
       unmanaged: true
 EOF
@@ -45,9 +37,7 @@ EOF
 
 echo "#Delete offical OperatorSource"
 oc project openshift-marketplace
-#oc delete opsrc redhat-operators  |  true
-#oc delete opsrc certified-operators | true
-#oc delete opsrc community-operators | true
+oc delete opsrc redhat-operators  |  true
 
 echo "#Create Art OperatorSource"
 
