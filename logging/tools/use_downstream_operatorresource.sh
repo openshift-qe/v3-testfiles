@@ -45,7 +45,7 @@ cat <<EOF >token.yaml
 apiVersion: v1
 kind: Secret
 metadata:
-  name: marketplacesecret
+  name: artsecret
   namespace: openshift-marketplace
 type: Opaque
 stringData:
@@ -65,7 +65,7 @@ spec:
   endpoint: https://quay.io/cnr
   registryNamespace: redhat-operators-art
   authorizationToken:
-    secretName: marketplacesecret
+    secretName: artsecret
 EOF
 oc create -f OP.yaml
 }
