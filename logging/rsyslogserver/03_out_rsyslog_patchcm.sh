@@ -1,11 +1,12 @@
 #! /bin/bash
 # Send log to rsyslog server using out_rsyslog. out_rsyslog send message via UDP
 oc project openshift-logging
-kubeversion=$(oc version |tail -1)
+kubeversion=$(oc version -o json | jq '.serverVersion.minor')
+kubeversion=${kubeversion:1:2}
+
 fluentds="fluentd"
 
-# Get the fluent DS name
-if [[ $kubeversion =~ "kubernetes v1.11" ]] ; then
+if [[ $kubeversion < 13 ]] ; then
         echo "v3.x: The fluent ds name is logging-fluentd"
 	fluentds=logging-fluentd
 else
