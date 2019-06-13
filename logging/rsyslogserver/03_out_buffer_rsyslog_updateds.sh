@@ -1,10 +1,12 @@
 #! /bin/bash
 # Enable fluentd to send log to remote rsyslog server using out_rsyslog_buffer. out_rsyslog_buffer send message via TCP.
 oc project openshift-logging
-kubeversion=$(oc version |tail -1)
+kubeversion=$(oc version -o json | jq '.serverVersion.minor')
+kubeversion=${kubeversion:1:2}
+
 fluentds="fluentd"
 
-if [[ $kubeversion =~ "kubernetes v1.11" ]] ; then
+if [[ $kubeversion < 13 ]] ; then
         echo "v3.x: The fluent ds name is logging-fluentd"
 	fluentds=logging-fluentd
 else
