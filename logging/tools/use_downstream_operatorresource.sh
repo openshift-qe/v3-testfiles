@@ -33,7 +33,7 @@ spec:
       namespace: openshift-marketplace
       unmanaged: true
 EOF
-#oc apply -f above.yaml
+oc apply -f above.yaml
 
 echo "#Delete offical OperatorSource"
 oc project openshift-marketplace
