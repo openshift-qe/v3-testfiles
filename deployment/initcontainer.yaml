@@ -1,13 +1,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: example
-  namespace: hasha-pro1
+  name: initcontainer
 spec:
   selector:
     matchLabels:
       app: hello-openshift
-  replicas: 3
+  replicas: 1
   template:
     metadata:
       labels:
