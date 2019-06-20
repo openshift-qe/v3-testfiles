@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: initcontainer
+spec:
+  selector:
+    matchLabels:
+      app: hello-openshift
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: hello-openshift
+    spec:
+      initContainers:
+        - name: wait
+          image: centos:centos7
+          command: ["/bin/sh", "-c", "env"]
+      containers:
+        - name: hello-openshift
+          image: openshift/hello-openshift
+          ports:
+            - containerPort: 8080
