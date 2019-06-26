@@ -9,4 +9,4 @@ spec:
   source: "elasticsearch"
   sourceNamespace: "openshift-operators-redhat"
   name: "elasticsearch-operator"
-  startingCSV: elasticsearch-operator.v4.1.0
+  #startingCSV: elasticsearch-operator.v4.1.0

@@ -42,7 +42,7 @@ echo "#Download buldle.yaml from Operator source"
         echo  ""
         echo "Please input one version to download"
         echo  ""
-        read -s release
+        read release
         match=false
         for version in ${releases}; do
              if [[ $release == $version ]];then
