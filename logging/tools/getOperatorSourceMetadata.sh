@@ -1,7 +1,7 @@
 # !/bin/bash
 set -e
-NAMESPACE=redhat-operators-art
-REPOSITORYS="elasticsearch-operator cluster-logging metering openshifttemplateservicebroker openshiftansibleservicebroker"
+NAMESPACE=${1:-redhat-operators-art}
+REPOSITORYS="elasticsearch-operator cluster-logging openshifttemplateservicebroker openshiftansibleservicebroker metering"
 REFRESH=true
 use_latest=true
 cur_dir=$PWD
