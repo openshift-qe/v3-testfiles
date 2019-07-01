@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: testpod
+  labels:
+    name: test
+spec:
+  affinity:
+    podAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchExpressions:
+          - key: app
+            operator: In
+            values:
+            - "csi-mockplugin-cluster-driver-registrar"
+        topologyKey: kubernetes.io/hostname
+
+  restartPolicy: Never
+  terminationGracePeriodSeconds: 1
+  tolerations:
+    - key: node.kubernetes.io/network-unavailable
+  containers:
+    - image: gcr.io/google_containers/busybox
+      command:
+        - "/bin/sh"
+        - "-c"
+        - "while true; do date; sleep 1; done"
+      name: busybox
+      volumeMounts:
+        - name: vol
+          mountPath: /mnt/test
+  volumes:
+      - name: vol
+        persistentVolumeClaim:
+          claimName: myclaim
+

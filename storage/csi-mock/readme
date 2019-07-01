@@ -1,0 +1,67 @@
+Usage:
+
+1. Install the mock driver. Make sure that 'default' is your current project, otherwise update the yaml accordingly.
+   $ oc apply -f csi-mock-driver.yaml
+
+2. Wait for the driver to start
+   $ oc get pod -w
+   NAME                                        READY   STATUS    RESTARTS   AGE
+   csi-mockplugin-cluster-driver-registrar-0   5/5     Running   0          8m47s
+
+3. Create claim, wait until it's bound (should be fast)
+   $ oc apply -f claim.yaml
+   $ oc get pvc
+   NAME      STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+   myclaim   Bound    pvc-2ff67210-997e-11e9-b95f-000d3a92752a   500Mi      RWO            csi-mock-sc    8m41s
+
+4. Start a pod *on the same node as the driver*!!! pod.yaml uses affinity for that.
+   $ oc apply -f pod.yaml
+   $ oc get pod -w
+   NAME                                        READY   STATUS    RESTARTS   AGE
+   csi-mockplugin-cluster-driver-registrar-0   5/5     Running   0          10m
+   testpod                                     1/1     Running   0          9m25s
+
+5. Check logs of the mock driver. It logs all calls as json. Find /csi.v1.Node/NodePublishVolume call
+   and check it contains / does not contain volume_context with "csi.storage.k8s.io/pod.uid" and so on.
+
+   $ oc logs csi-mockplugin-cluster-driver-registrar-0 -c mock
+   ...
+   gRPCCall:
+{
+  "Method": "/csi.v1.Node/NodePublishVolume",
+  "Request": {
+    "volume_id": "4",
+    "publish_context": {
+      "device": "/dev/mock",
+      "readonly": "false"
+    },
+    "staging_target_path": "/var/lib/kubelet/plugins/kubernetes.io/csi/pv/pvc-2ff67210-997e-11e9-b95f-000d3a92752a/globalmount",
+    "target_path": "/var/lib/kubelet/pods/34e3434f-997e-11e9-8133-000d3a91841b/volumes/kubernetes.io~csi/pvc-2ff67210-997e-11e9-b95f-000d3a92752a/mount",
+    "volume_capability": {
+      "AccessType": {
+        "Mount": {
+          "fs_type": "ext4"
+        }
+      },
+      "access_mode": {
+        "mode": 1
+      }
+    },
+    "volume_context": {                                        <----- HERE
+      "csi.storage.k8s.io/pod.name": "testpod",
+      "csi.storage.k8s.io/pod.namespace": "default",
+      "csi.storage.k8s.io/pod.uid": "34e3434f-997e-11e9-8133-000d3a91841b",
+      "csi.storage.k8s.io/serviceAccount.name": "default",
+      "name": "pvc-2ff67210-997e-11e9-b95f-000d3a92752a",
+      "storage.kubernetes.io/csiProvisionerIdentity": "1561710255009-8081-io.kubernetes.storage.mock"
+    }
+  },
+  "Response": {},
+  "Error": ""
+}
+
+  The above log is displayed as single-line, I pretty-printed it for better readability.
+
+
+6. Play with csi-mock-driver.yaml and set cluster-driver-registrar cmdline parameters not to pass
+   pod info to NodePublish (--pod-info-mount=false) && go to 1.
