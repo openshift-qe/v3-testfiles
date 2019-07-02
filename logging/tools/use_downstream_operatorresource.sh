@@ -1,10 +1,11 @@
 #!/bin/bash
+NAMESPACE=${1:-redhat-operators-art}
 
 function getQuayToken()
 {
-echo "#get Quay Token"
-    echo -n "Login Quay.io"
+echo "###get Quay Token"
     if [[ $REFRESH == true || ! -f quay.token ]]; then
+        echo -n "Login Quay.io"
         echo -n "Quay Username: "
         read USERNAME
         echo -n "Quay Password: "
@@ -20,7 +21,7 @@ echo "#get Quay Token"
 
 function updateCluster()
 {
-#echo "#set OperatorSource unmanaged"
+echo "###set OperatorSource unmanaged"
 cat <<EOF > above.yaml
 apiVersion: config.openshift.io/v1
 kind: ClusterVersion
@@ -35,11 +36,12 @@ spec:
 EOF
 oc apply -f above.yaml
 
-echo "#Delete offical OperatorSource"
+echo "###Delete offical OperatorSource"
 oc project openshift-marketplace
 oc delete opsrc redhat-operators  |  true
 
-echo "#Create Art OperatorSource"
+echo "###Create&Update QE OperatorSource"
+
 
 cat <<EOF >token.yaml
 apiVersion: v1
@@ -51,8 +53,13 @@ type: Opaque
 stringData:
     token: "${Quay_Token}"
 EOF
-oc create -f token.yaml 
 
+oc get secret artsecret -o name -n openshift-marketplace
+if [[ $? == 0 ]]; then
+    oc apply -f token.yaml 
+else
+    oc create -f token.yaml 
+fi
 
 cat <<EOF >OP.yaml
 apiVersion: operators.coreos.com/v1
@@ -63,11 +70,16 @@ metadata:
 spec:
   type: appregistry     
   endpoint: https://quay.io/cnr
-  registryNamespace: redhat-operators-art
+  registryNamespace: ${NAMESPACE}
   authorizationToken:
     secretName: artsecret
 EOF
-oc create -f OP.yaml
+oc get OperatorSource  art-applications -o name -n openshift-marketplace
+if [[ $? == 0 ]];then
+    oc apply -f OP.yaml
+else
+    oc create -f OP.yaml
+fi
 }
 
 getQuayToken
