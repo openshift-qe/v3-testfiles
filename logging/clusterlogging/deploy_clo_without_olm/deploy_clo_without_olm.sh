@@ -21,9 +21,9 @@ if [[ X"$registry" == X"prod"]]; then
 fi
 
 rm -rf clo; mkdir clo
-cd eo
+cd clo
 curl -s -O https://raw.githubusercontent.com/anpingli/v3-testfiles/master/logging/clusterlogging/deploy_via_olm/4.2/00_clo_ns.yaml
-curl -s -O https://raw.githubusercontent.com/anpingli/v3-testfiles/master/logging/clusterlogging/deploy_via_olm/4.2/00_clo_ns.yaml
+curl -s -O https://raw.githubusercontent.com/anpingli/v3-testfiles/master/logging/clusterlogging/deploy_via_olm/4.2/00_sa.yaml
 
 if [[ X"$registry_replace" == X"yes"]]; then
 sed -i s#quay.io/openshift/origin-#${registry_url}# 05-deployment.yaml
