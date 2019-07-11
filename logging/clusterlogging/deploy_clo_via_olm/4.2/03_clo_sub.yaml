@@ -8,4 +8,4 @@ spec:
   installPlanApproval: Automatic
   name: cluster-logging
   source: redhat-operators
-  sourceNamespace: openshift-logging
+  sourceNamespace: openshift-marketplace

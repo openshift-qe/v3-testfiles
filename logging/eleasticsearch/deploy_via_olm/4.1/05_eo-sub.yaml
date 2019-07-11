@@ -7,5 +7,5 @@ spec:
   channel: preview
   installPlanApproval: Automatic
   source: "elasticsearch"
-  sourceNamespace: "openshift-marketplace"
+  sourceNamespace: "openshift-operators-redhat"
   name: "elasticsearch-operator"
