@@ -1,5 +1,5 @@
 #!/bin/bash
-NAMESPACE=${1:-anli}
+NAMESPACE=${1:-redhat-operators-art}
 
 function getQuayToken()
 {
