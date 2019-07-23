@@ -22,7 +22,7 @@ echo "###get Quay Token"
 function updateCluster()
 {
 echo "###set OperatorSource unmanaged"
-cat <<EOF > above.yaml
+cat <<EOF > clusterversion.yaml
 apiVersion: config.openshift.io/v1
 kind: ClusterVersion
 metadata:
@@ -33,8 +33,13 @@ spec:
       name: redhat-operators
       namespace: openshift-marketplace
       unmanaged: true
+    - kind: Deployment
+      name: marketplace-operator
+      namespace: openshift-marketplace
+      unmanaged: true
 EOF
-oc apply -f above.yaml
+oc apply -f clusterversion.yaml
+oc get deployment marketplace-operator -o json --export -n openshift-marketplace | jq 'del(.spec.template.spec.containers[].args[1])' | oc apply -f -
 
 echo "###Delete offical OperatorSource"
 oc project openshift-marketplace
@@ -42,19 +47,18 @@ oc delete opsrc redhat-operators  |  true
 
 echo "###Create&Update QE OperatorSource"
 
-
 cat <<EOF >token.yaml
 apiVersion: v1
 kind: Secret
 metadata:
-  name: artsecret
+  name: qesecret
   namespace: openshift-marketplace
 type: Opaque
 stringData:
     token: "${Quay_Token}"
 EOF
 
-oc get secret artsecret -o name -n openshift-marketplace
+oc get secret qesecret -o name -n openshift-marketplace
 if [[ $? == 0 ]]; then
     oc apply -f token.yaml 
 else
@@ -65,16 +69,16 @@ cat <<EOF >OP.yaml
 apiVersion: operators.coreos.com/v1
 kind: OperatorSource
 metadata:
-  name: art-applications
+  name: qe-app-registry
   namespace: openshift-marketplace
 spec:
   type: appregistry     
   endpoint: https://quay.io/cnr
   registryNamespace: ${NAMESPACE}
   authorizationToken:
-    secretName: artsecret
+    secretName: qesecret
 EOF
-oc get OperatorSource  art-applications -o name -n openshift-marketplace
+oc get OperatorSource  qe-app-registry -o name -n openshift-marketplace
 if [[ $? == 0 ]];then
     oc apply -f OP.yaml
 else
