@@ -9,6 +9,11 @@ spec:
     type: "elasticsearch"
     elasticsearch:
       nodeCount: 2
+      tolerations:
+      - key: "qetest"
+        operator: "Exists"
+        effect: "NoExecute"
+        tolerationSeconds: 6000
       resources:
         limits:
           memory: 2Gi
@@ -20,6 +25,11 @@ spec:
   visualization:
     type: "kibana"
     kibana:
+      tolerations:
+      - key: "qetest"
+        operator: "Exists"
+        effect: "NoExecute"
+        tolerationSeconds: 6000
       resources:
         limits:
           memory: 1Gi
@@ -30,6 +40,11 @@ spec:
   curation:
     type: "curator"
     curator:
+      tolerations:
+      - key: "qetest"
+        operator: "Exists"
+        effect: "NoExecute"
+        tolerationSeconds: 6000
       resources:
         limits:
           memory: 200Mi
@@ -41,6 +56,11 @@ spec:
     logs:
       type: "rsyslog"
       rsyslog: 
+        tolerations:
+        - key: "qetest"
+          operator: "Exists"
+          effect: "NoExecute"
+          tolerationSeconds: 6000
         resources:
           limits:
             memory: 1Gi
