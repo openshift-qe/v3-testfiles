@@ -123,9 +123,8 @@
           "type": "Docker",
           "dockerStrategy": {
             "from": {
-              "kind": "ImageStreamTag",
-              "name": "ruby:2.2",
-              "namespace": "openshift"
+              "kind": "DockerImage",
+              "name": "centos/ruby-22-centos7:latest"
             },
             "env": [
               {
