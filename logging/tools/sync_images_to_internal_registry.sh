@@ -7,7 +7,7 @@ cur_dir=$PWD
 function syncImages()
 {
 echo "#sync image from internal regsitry to cluster"
-    for image in $(cat ${cur_dir}/OperatorSourceImage_Labels.txt); do
+    for image in $(cat ${cur_dir}/OperatorSource_Images_Labels.txt); do
         echo $image
         if [[ $image =~ image-registry.openshift-image-registry.svc:5000 ]]; then
             #openshift/ose-logging-fluentd:v4.1.0-201905101016
@@ -66,7 +66,7 @@ fi
 }
 
 ###########################Main##########################################
-if [[ ! -f ${cur_dir}/OperatorSourceImage_Labels.txt ]]; then
+if [[ ! -f ${cur_dir}/OperatorSource_Images_Labels.txt ]]; then
     echo "Couldn't find the file OperatorSourceImage_Labels.txt in current directory, please run getOperatorSourceMetadata.sh to generate it at first"
     exit 1
 fi
