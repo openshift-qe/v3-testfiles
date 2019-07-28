@@ -1,6 +1,6 @@
 # !/bin/bash
 set -e
-NAMESPACE=redhat-operators-stage
+NAMESPACE=${1:-redhat-operators-art}
 #REPOSITORYS="elasticsearch-operator cluster-logging openshifttemplateservicebroker openshiftansibleservicebroker"
 REPOSITORYS="elasticsearch-operator cluster-logging"
 use_latest=true
