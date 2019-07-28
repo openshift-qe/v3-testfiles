@@ -1,32 +1,32 @@
 # !/bin/bash
 set -e
-NAMESPACE=${1:-redhat-operators-art}
-REPOSITORYS="elasticsearch-operator cluster-logging openshifttemplateservicebroker openshiftansibleservicebroker metering"
-REFRESH=true
+NAMESPACE=redhat-operators-stage
+#REPOSITORYS="elasticsearch-operator cluster-logging openshifttemplateservicebroker openshiftansibleservicebroker"
+REPOSITORYS="elasticsearch-operator cluster-logging"
 use_latest=true
-cur_dir=$PWD
+work_dir=$PWD
 
 function getQuayToken()
 {
-echo "#get Quay Token"
-    echo "Login Quay.io"
-    echo ""
-    echo "Quay Username: "
-    read USERNAME
-    echo "Quay Password: "
-    read -s PASSWORD
- 
+    if [[ "X$REG_QUAY_USER" != "X" && "X$REG_QUAY_PASSWORD" != "X" ]]; then
+        USERNAME=$REG_QUAY_USER
+        PASSWORD=$REG_QUAY_PASSWORD
+    else
+        echo "#get Quay Token"
+        echo "Login Quay.io"
+        echo ""
+        echo "Quay Username: "
+        read USERNAME
+        echo "Quay Password: "
+        read -s PASSWORD
+    fi
     Quay_Token=$(curl -s -H "Content-Type: application/json" -XPOST https://quay.io/cnr/api/v1/users/login -d ' { "user": { "username": "'"${USERNAME}"'", "password": "'"${PASSWORD}"'" } }' |jq -r '.token')
-    echo "$Quay_Token" > ${cur_dir}/quay.token
+    echo "$Quay_Token" > ${work_dir}/quay.token
 }
 
 function downloadRepos()
 {  
 echo "#Download buldle.yaml from Operator source"
-    Quay_Token=$(cat ${cur_dir}/quay.token)
-    rm -rf "quay.${REPOSITORY}"
-    mkdir -p "quay.${REPOSITORY}"
-    cd "quay.${REPOSITORY}"
     URL="https://quay.io/cnr/api/v1/packages/${NAMESPACE}/${REPOSITORY}"
     echo curl -s -H "Content-Type: application/json" -H "Authorization: ${Quay_Token}" -XGET $URL 
     curl -s -H "Content-Type: application/json" -H "Authorization: ${Quay_Token}" -XGET $URL |python -m json.tool > manifest.json
@@ -42,7 +42,7 @@ echo "#Download buldle.yaml from Operator source"
         echo  ""
         echo "Please input one version to download"
         echo  ""
-        read release
+        read -s release
         match=false
         for version in ${releases}; do
              if [[ $release == $version ]];then
@@ -60,13 +60,16 @@ echo "#Download buldle.yaml from Operator source"
     curl -s -H "Content-Type: application/json" -H "Authorization: ${Quay_Token}" -XGET $URL/blobs/sha256/$distget  -o buddle_${release}.tar.gz
     gunzip buddle_${release}.tar.gz
     tar -xvf buddle_${release}.tar
-    cd ..
 }
 
 function getimageNames()
 {
 echo "#Get image name from Operator source"
-cat <<EOF >getimageNames.py
+
+clusterserviceversionfile=$(find . -name *clusterserviceversion.yaml)
+
+
+cat <<EOF >getimageNames_buddle.py
 '''
 Created on May 9, 2019
 @author: anli@redhat.com
@@ -102,16 +105,57 @@ for vitem in res2:
                     images.append(eitem['value'])
                     print eitem['value']
 EOF
-    python getimageNames.py -f quay.${REPOSITORY}/bundle.yaml | tee -a ${cur_dir}/OperatorSourceImage_Labels.txt
+
+cat <<EOF >getimageNames_clusterversion.py
+'''
+Created on July 25, 2019
+@author: anli@redhat.com
+'''
+import argparse
+import re
+import sys
+import os
+import yaml
+
+images=[]
+parser = argparse.ArgumentParser()
+parser.add_argument('-f', '--file')
+args=parser.parse_args()
+
+"""
+pip install pyyaml
+http://ansible-tran.readthedocs.io/en/latest/docs/YAMLSyntax.html
+"""
+f = open(args.file)
+res_ClusterServiceVersion=yaml.load(f, Loader=yaml.FullLoader)
+f.close()
+
+for item_deployment in  res_ClusterServiceVersion['spec']['install']['spec']['deployments']:
+    for item_container in item_deployment["spec"]["template"]['spec']["containers"]:
+        images.append(item_container['image'])
+        print str(item_container['image'])
+        for  item_env in item_container['env']:
+            if(re.search("_IMAGE", item_env['name'])):
+                images.append(item_env['value'])
+                print item_env['value']
+EOF
+
+#python getimageNames_buddle.py -f $clusterserviceversionfile | tee -a ${work_dir}/OperatorSource_Images_Labels.txt
+python getimageNames_clusterversion.py -f $clusterserviceversionfile | tee -a ${work_dir}/OperatorSource_Images_Labels.txt
 }
 
 
 ###########################Main##########################################
+>${work_dir}/OperatorSource_Images_Labels.txt
 getQuayToken
->${cur_dir}/OperatorSourceImage_Labels.txt
-
+Quay_Token=$(cat ${work_dir}/quay.token)
 for REPOSITORY in ${REPOSITORYS}; do
+    rm -rf "quay.${REPOSITORY}"
+    mkdir -p "quay.${REPOSITORY}"
+    cd "quay.${REPOSITORY}"
+
     echo "#get Image names for $REPOSITORY"
     downloadRepos
     getimageNames
+    cd ${work_dir}
 done
