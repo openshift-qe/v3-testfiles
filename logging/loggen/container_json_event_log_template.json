@@ -8,8 +8,8 @@
         {
             "apiVersion": "v1",
             "data": {
-                "ocp_logtest.cfg": "--raw --file /var/lib/svt/event.example  --text-type input --rate 60.0",
-                "event.example": "{ \"data\": { \"OCP-19431\": "{\"event\": \"anlieventevent\", \"verb\": \"ADDED\" }"
+                "ocp_logtest.cfg": "--raw --num-lines 50 --line-length 0 --file /var/lib/svt/event.example  --text-type input --rate 60.0",
+                "event.example": "{\"event\": \"anlieventevent\", \"verb\": \"ADDED\" }"
             },
             "kind": "ConfigMap",
             "metadata": {
