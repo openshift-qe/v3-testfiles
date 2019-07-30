@@ -59,7 +59,7 @@
       "kind": "ImageStream",
       "apiVersion": "v1",
       "metadata": {
-        "name": "origin-ruby22-sample",
+        "name": "origin-ruby-sample",
         "creationTimestamp": null
       },
       "spec": {},
@@ -71,11 +71,10 @@
       "kind": "ImageStream",
       "apiVersion": "v1",
       "metadata": {
-        "name": "ruby-22-rhel7",
+        "name": "ruby-rhel7",
         "creationTimestamp": null
       },
       "spec": {
-        "dockerImageRepository": "registry.access.redhat.com/rhscl/ruby-22-rhel7"
       },
       "status": {
         "dockerImageRepository": ""
@@ -85,10 +84,10 @@
       "kind": "BuildConfig",
       "apiVersion": "v1",
       "metadata": {
-        "name": "ruby22-sample-build",
+        "name": "ruby-sample-build",
         "creationTimestamp": null,
         "labels": {
-          "name": "ruby22-sample-build"
+          "name": "ruby-sample-build"
         }
       },
       "spec": {
@@ -149,7 +148,7 @@
         "output": {
           "to": {
             "kind": "ImageStreamTag",
-            "name": "origin-ruby22-sample:latest"
+            "name": "origin-ruby-sample:latest"
           }
         },
         "postCommit": {
@@ -188,7 +187,7 @@
               ],
               "from": {
                 "kind": "ImageStreamTag",
-                "name": "origin-ruby22-sample:latest"
+                "name": "origin-ruby-sample:latest"
               },
               "lastTriggeredImage": ""
             }
@@ -212,7 +211,7 @@
             "containers": [
               {
                 "name": "ruby-helloworld",
-                "image": "origin-ruby22-sample",
+                "image": "origin-ruby-sample",
                 "ports": [
                   {
                     "containerPort": 8080,
@@ -319,7 +318,7 @@
             "containers": [
               {
                 "name": "ruby-helloworld-database",
-                "image": "registry.access.redhat.com/rhscl/mysql-56-rhel7:latest",
+                "image": "registry.access.redhat.com/rhscl/mysql-80-rhel7:latest",
                 "ports": [
                   {
                     "containerPort": 3306,
