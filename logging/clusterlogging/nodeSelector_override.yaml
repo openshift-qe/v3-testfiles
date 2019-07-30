@@ -9,7 +9,7 @@ spec:
     type: "elasticsearch"
     elasticsearch:
       nodeSelector:
-        es: on
+        kubernetes.io/os: foo
       nodeCount: 1
       resources:
         limits:
@@ -25,17 +25,18 @@ spec:
     type: "kibana"
     kibana:
       nodeSelector:
+        kubernetes.io/os: foo
         kibana: on
       replicas: 1
   curation:
     type: "curator"
     curator:
       nodeSelector:
-        curator: on
+        kubernetes.io/os: foo
       schedule: "*/10 * * * *"
   collection:
     logs:
       type: "fluentd"
       fluentd:
         nodeSelector:
-          fluentd: on
+          kubernetes.io/os: foo
