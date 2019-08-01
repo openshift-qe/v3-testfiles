@@ -30,10 +30,12 @@ metadata:
 spec:
   overrides:
     - kind: OperatorSource
+      group: ""
       name: redhat-operators
       namespace: openshift-marketplace
       unmanaged: true
     - kind: Deployment
+      group: ""
       name: marketplace-operator
       namespace: openshift-marketplace
       unmanaged: true
