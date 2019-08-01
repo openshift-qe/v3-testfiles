@@ -7,7 +7,7 @@
     "spec": {
 		"initContainers": [{
 			"name": "init",
-			"image": "aosqe/hello-openshift",
+			"image": "docker.io/aosqe/hello-openshift",
 			"command": ["sh", "-c", "mkdir /mnt/subpath; cp /hello /mnt/subpath/hello"],
 			"volumeMounts": [{
 				"name": "nfs",
@@ -16,7 +16,7 @@
 		}],
         "containers": [{
             "name": "myfrontend",
-            "image": "aosqe/hello-openshift",
+            "image": "docker.io/aosqe/hello-openshift",
             "imagePullPolicy": "IfNotPresent",
             "ports": [{
                 "containerPort": 80,

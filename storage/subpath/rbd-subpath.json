@@ -7,7 +7,7 @@
     "spec": {
 		"initContainers": [{
 			"name": "init",
-			"image": "aosqe/hello-openshift",
+			"image": "docker.io/aosqe/hello-openshift",
 			"command": ["sh", "-c", "mkdir /mnt/rbd/subpath; cp /hello /mnt/rbd/subpath/hello"],
 			"volumeMounts": [{
 				"name": "rbd",
@@ -16,7 +16,7 @@
 		}],
         "containers": [{
             "name": "ceph",
-            "image": "aosqe/hello-openshift",
+            "image": "docker.io/aosqe/hello-openshift",
             "imagePullPolicy": "IfNotPresent",
             "volumeMounts": [{
                 "mountPath": "/mnt/rbd",

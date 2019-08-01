@@ -5,7 +5,7 @@ metadata:
 spec:
   containers:
   - name: container-test
-    image: aosqe/hello-openshift
+    image: docker.io/aosqe/hello-openshift
     volumeMounts:
     - name: all-in-one
       subpath: projected

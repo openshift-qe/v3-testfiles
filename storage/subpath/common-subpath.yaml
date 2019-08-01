@@ -5,14 +5,14 @@ metadata:
 spec:
   initContainers:
     - name: init
-      image: aosqe/hello-openshift
+      image: docker.io/aosqe/hello-openshift
       command: ["sh", "-c", "mkdir /mnt/iaas/subpath; cp /hello /mnt/iaas/subpath/hello"]
       volumeMounts:
         - mountPath: "/mnt/iaas"
           name: dynamic
   containers:
     - name: testpod
-      image: aosqe/hello-openshift
+      image: docker.io/aosqe/hello-openshift
       ports:
         - containerPort: 80
           name: "http-server"

@@ -8,7 +8,7 @@
         "containers": [
             {
                 "name": "rbd",
-                "image": "aosqe/hello-openshift",
+                "image": "docker.io/aosqe/hello-openshift",
                 "volumeMounts": [
                     {
                         "mountPath": "/mnt/rbd",
