@@ -5,7 +5,7 @@ metadata:
 spec:
   containers:
     - name: sockfile
-      image: aosqe/hello-openshift
+      image: docker.io/aosqe/hello-openshift
       ports:
         - containerPort: 80
           name: "http-server"

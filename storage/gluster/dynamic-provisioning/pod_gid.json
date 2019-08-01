@@ -10,7 +10,7 @@
     "spec": {
         "containers": [{
             "name": "gluster",
-            "image": "aosqe/hello-openshift",
+            "image": "docker.io/aosqe/hello-openshift",
             "imagePullPolicy": "IfNotPresent",
             "volumeMounts": [{
                 "mountPath": "/mnt/gluster",

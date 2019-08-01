@@ -13,7 +13,7 @@ spec:
       devicePath: /dev/xvda
   initContainers:
   - name: init
-    image: aosqe/hello-openshift
+    image: docker.io/aosqe/hello-openshift
     ports:
     - containerPort: 8080
     volumeDevices:

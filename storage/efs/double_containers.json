@@ -12,7 +12,7 @@
     "containers": [
       {
         "name": "hello-openshift",
-        "image": "aosqe/hello-openshift",
+        "image": "docker.io/aosqe/hello-openshift",
         "ports": [
           {
             "containerPort": 8080,

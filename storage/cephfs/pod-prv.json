@@ -7,7 +7,7 @@
     "spec": {
         "containers": [{
             "name": "myfrontend",
-            "image": "aosqe/hello-openshift",
+            "image": "docker.io/aosqe/hello-openshift",
             "imagePullPolicy": "IfNotPresent",
             "securityContext": {
                 "privileged": true

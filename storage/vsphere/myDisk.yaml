@@ -4,7 +4,7 @@
       name: vmdk
     spec:
       containers:
-      - image: aosqe/hello-openshift
+      - image: docker.io/aosqe/hello-openshift
         name: test-container
         volumeMounts:
         - mountPath: /mnt/vmdk
