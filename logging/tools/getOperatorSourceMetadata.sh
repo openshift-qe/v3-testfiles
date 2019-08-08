@@ -191,7 +191,7 @@ fi
 
 ###########################Main##########################################
 >${work_dir}/OperatorSource_Images_Labels.txt
-#getQuayToken
+getQuayToken
 Quay_Token=$(cat ${work_dir}/quay.token)
 for REPOSITORY in ${REPOSITORYS}; do
     rm -rf "quay.${REPOSITORY}"
