@@ -11,17 +11,18 @@ echo "  getOperatorSourceMetadata.sh  redhat-operators-art 4.1"
 echo "#############Note End #############"
 echo ""
 #REPOSITORYS="elasticsearch-operator cluster-logging openshifttemplateservicebroker openshiftansibleservicebroker"
-REPOSITORYS="elasticsearch-operator cluster-logging"
+#REPOSITORYS="elasticsearch-operator cluster-logging"
+REPOSITORYS="elasticsearch-operator"
 use_latest=true
 work_dir=$PWD
 
 function getQuayToken()
 {
+    echo "##get Quay Token"
     if [[ "X$REG_QUAY_USER" != "X" && "X$REG_QUAY_PASSWORD" != "X" ]]; then
         USERNAME=$REG_QUAY_USER
         PASSWORD=$REG_QUAY_PASSWORD
     else
-        echo "#get Quay Token"
         echo "Login Quay.io"
         echo ""
         echo "Quay Username: "
@@ -35,12 +36,12 @@ function getQuayToken()
 
 function downloadRepos()
 {  
-echo "#Download buldle.yaml from Operator source"
+    echo "#Download buldle.yaml from Operator source"
     URL="https://quay.io/cnr/api/v1/packages/${NAMESPACE}/${REPOSITORY}"
-    echo  "Get buddle Version"
+    echo "#Get buddle Version"
     curl -s -H "Content-Type: application/json" -H "Authorization: ${Quay_Token}" -XGET $URL |python -m json.tool > manifest.json
     if [[ $use_latest = true ]] ; then
-        echo  "Get latest buddle"
+        echo  "#Get latest buddle version"
         release=$(jq -r '.[].release' manifest.json|sort -V |tail -1)
 	echo "The version $release will be used "
     else
@@ -67,16 +68,16 @@ echo "#Download buldle.yaml from Operator source"
 
     fi
     distget=$(jq -r --arg RELEASE "$release" '.[] | select(.release == $RELEASE).content.digest' manifest.json)
-    echo "Get  buddle_${release}.tar.gz"
+    echo "#Get  buddle_${release}.tar.gz"
     curl -s -H "Content-Type: application/json" -H "Authorization: ${Quay_Token}" -XGET $URL/blobs/sha256/$distget  -o buddle_${release}.tar.gz
-    echo "unzip  buddle_${release}.tar.gz"
+    echo "#unzip  buddle_${release}.tar.gz"
     gunzip buddle_${release}.tar.gz
     tar -xvf buddle_${release}.tar
 }
 
 function getimageNames()
 {
-echo "#Get image name from App Registry"
+echo "##Get image name from App Registry"
 
 
 cat <<EOF >getimageNames_buddle.py
@@ -152,29 +153,39 @@ EOF
 
 if [[ "X$VERSION" == "X" ]]; then
     if [[ -f "${PWD}/bundle.yaml" ]] ;then
-        echo python getimageNames_buddle.py -f ${PWD}/bundle.yaml
+        echo "#Print Images names"
+        echo "python getimageNames_buddle.py -f ${PWD}/bundle.yaml"
+        echo "--------"
         python getimageNames_buddle.py -f ${PWD}/bundle.yaml | tee -a ${work_dir}/OperatorSource_Images_Labels.txt
     else
-	echo "Find clusterserviceversion.yaml"
+	echo "#Find clusterserviceversion.yaml"
         csv_num=$(find .  -type f -name *clusterserviceversion.yaml  |wc -l)
 	clusterserviceversionfile=""
 	if [[  "$csv_num" ==  "1" ]]; then
-	     echo "Found one clusterserviceversion.yaml"
+	     echo "#Found one clusterserviceversion.yaml"
              clusterserviceversionfile=$(find ${VERSION} -type f -name *clusterserviceversion.yaml)
+             if [[ "X${clusterserviceversionfile}" != "X" ]] ;then
+                 echo "#Print Images names"
+                 echo "python getimageNames_clusterversion.py -f $clusterserviceversionfile"
+                 echo "--------"
+                 python getimageNames_clusterversion.py -f $clusterserviceversionfile | tee -a ${work_dir}/OperatorSource_Images_Labels.txt
+             fi
         elif [[ "$csv_num" == "0" ]]; then
-	     echo "Found zero clusterserviceversion.yaml"
+	     echo "#Found zero clusterserviceversion.yaml"
 	else
-	     echo "Found more than one clusterserviceversion.yaml"
-	     echo "Find the defaultChannel in package.yaml"
+	     echo "#Found more than one clusterserviceversion.yaml"
+	     echo "#Find the defaultChannel in package.yaml"
 
              pkg_num=$(ls -1 *package.yaml|wc -l)
 	     if [[ "$pkg_num" == "1" ]]; then
-	         echo "Found one package.yaml"
+	         echo "#Found one package.yaml"
 		 VERSION=$(grep defaultChannel *.package.yaml|cut -d: -f 2)
 		 VERSION=${VERSION//\"}
                  clusterserviceversionfile=$(find ${VERSION} -type f -name *clusterserviceversion.yaml)
                  if [[ "X${clusterserviceversionfile}" != "X" ]] ;then
-                     echo getimageNames_clusterversion.py -f $clusterserviceversionfile 
+                     echo "#Print Images names"
+                     echo "python getimageNames_clusterversion.py -f $clusterserviceversionfile\n"
+                     echo "--------"
                      python getimageNames_clusterversion.py -f $clusterserviceversionfile | tee -a ${work_dir}/OperatorSource_Images_Labels.txt
                  fi
 	     fi
@@ -183,7 +194,9 @@ if [[ "X$VERSION" == "X" ]]; then
 else
     clusterserviceversionfile=$(find ${VERSION} -type f -name *clusterserviceversion.yaml)
     if [[ "X${clusterserviceversionfile}" != "X" ]] ;then
-        echo getimageNames_clusterversion.py -f $clusterserviceversionfile 
+        echo "#Print Images names"
+        echo "python getimageNames_clusterversion.py -f $clusterserviceversionfile\n"
+        echo "--------"
         python getimageNames_clusterversion.py -f $clusterserviceversionfile | tee -a ${work_dir}/OperatorSource_Images_Labels.txt
     fi
 fi
@@ -198,7 +211,7 @@ for REPOSITORY in ${REPOSITORYS}; do
     mkdir -p "quay.${REPOSITORY}"
     cd "quay.${REPOSITORY}"
 
-    echo "#Get Image names for $REPOSITORY"
+    echo "##Get Image names for $REPOSITORY"
     downloadRepos
     getimageNames
     cd ${work_dir}
