@@ -10,9 +10,10 @@ echo "You can specify where to get image list by VERSION"
 echo "  getOperatorSourceMetadata.sh  redhat-operators-art 4.1"
 echo "#############Note End #############"
 echo ""
-#REPOSITORYS="elasticsearch-operator cluster-logging openshifttemplateservicebroker openshiftansibleservicebroker"
+REPOSITORYS="elasticsearch-operator cluster-logging openshifttemplateservicebroker openshiftansibleservicebroker sriov-network-operator"
+#REPOSITORYS="openshifttemplateservicebroker openshiftansibleservicebroker"
+#REPOSITORYS="sriov-network-operator"
 #REPOSITORYS="elasticsearch-operator cluster-logging"
-REPOSITORYS="elasticsearch-operator"
 use_latest=true
 work_dir=$PWD
 
