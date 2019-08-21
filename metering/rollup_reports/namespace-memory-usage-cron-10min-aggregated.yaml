@@ -1,0 +1,16 @@
+apiVersion: metering.openshift.io/v1alpha1
+kind: Report
+metadata:
+  name: namespace-memory-usage-cron-10min
+spec:
+  reportingStart: '2019-05-17T02:26:00Z'
+  query: "namespace-memory-usage"
+  schedule:
+    period: "cron"
+    cron:
+      expression: "*/10 * * * *"
+  inputs:
+  - name: NamespaceMemoryUsageReportName
+    value: namespace-memory-usage-cron-5min
+
+

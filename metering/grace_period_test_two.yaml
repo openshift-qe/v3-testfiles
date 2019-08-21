@@ -1,0 +1,8 @@
+apiVersion: metering.openshift.io/v1alpha1
+kind: Report
+metadata:
+  name: namespace-cpu-request-grace-period-two
+spec:
+  reportingStart: '2019-07-11T20:09:00Z'
+  reportingEnd: '2019-07-12T00:10:00Z'
+  query: "namespace-cpu-request"
