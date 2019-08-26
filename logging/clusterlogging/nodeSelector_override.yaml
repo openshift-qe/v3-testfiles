@@ -10,6 +10,7 @@ spec:
     elasticsearch:
       nodeSelector:
         kubernetes.io/os: foo
+        elasticsearch: deploy
       nodeCount: 1
       resources:
         limits:
@@ -26,7 +27,6 @@ spec:
     kibana:
       nodeSelector:
         kubernetes.io/os: foo
-        kibana: on
       replicas: 1
   curation:
     type: "curator"
