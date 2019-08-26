@@ -182,8 +182,7 @@ if [[ "X$VERSION" == "X" ]]; then
 	         echo "#Found one package.yaml"
 		 pkg_file=$(find . -name  *package.yaml)
 		 pkg_dir=$(dirname $pkg_file)
-		 VERSION=$(grep defaultChannel $pkg_file |cut -d: -f 2)
-		 VERSION=${VERSION//\"}
+		 VERSION=$(grep defaultChannel cluster-logging-ihphqjo6/cluster-logging.package.yaml  |awk '{print $2}' |tr -d '"')
                  clusterserviceversionfile=$(find $pkg_dir/${VERSION} -type f -name *clusterserviceversion.yaml)
                  if [[ "X${clusterserviceversionfile}" != "X" ]] ;then
                      echo "#Print Images names"
