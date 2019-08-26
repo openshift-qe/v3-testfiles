@@ -177,12 +177,14 @@ if [[ "X$VERSION" == "X" ]]; then
 	     echo "#Found more than one clusterserviceversion.yaml"
 	     echo "#Find the defaultChannel in package.yaml"
 
-             pkg_num=$(ls -1 *package.yaml|wc -l)
+             pkg_num=$(find . -name  *package.yaml |wc -l)
 	     if [[ "$pkg_num" == "1" ]]; then
 	         echo "#Found one package.yaml"
-		 VERSION=$(grep defaultChannel *.package.yaml|cut -d: -f 2)
+		 pkg_file=$(find . -name  *package.yaml)
+		 pkg_dir=$(dirname $pkg_file)
+		 VERSION=$(grep defaultChannel $pkg_file |cut -d: -f 2)
 		 VERSION=${VERSION//\"}
-                 clusterserviceversionfile=$(find ${VERSION} -type f -name *clusterserviceversion.yaml)
+                 clusterserviceversionfile=$(find $pkg_dir/${VERSION} -type f -name *clusterserviceversion.yaml)
                  if [[ "X${clusterserviceversionfile}" != "X" ]] ;then
                      echo "#Print Images names"
                      echo "python getimageNames_clusterversion.py -f $clusterserviceversionfile\n"
