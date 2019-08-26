@@ -1,7 +1,7 @@
 apiVersion: "logging.openshift.io/v1"
 kind: "ClusterLogging"
 metadata:
-  name: "instance"
+  name: "instance" 
   namespace: openshift-logging
 spec:
   managementState: "Managed"
@@ -19,7 +19,7 @@ spec:
           memory: 8Gi
         requests:
           cpu: 100m
-          memory: 1Gi
+          memory: 2Gi
       storage: {}
       redundancyPolicy: "ZeroRedundancy"
   visualization:
@@ -35,8 +35,15 @@ spec:
           memory: 2Gi
         requests:
           cpu: 100m
-          memory: 1Gi
-      replicas: 1
+          memory: 2Gi
+      proxy:
+        resources:
+          limits:
+            memory: 200Mi
+          requests:
+            cpu: 100m
+            memory: 200Mi
+      replicas: 2
   curation:
     type: "curator"
     curator:
@@ -50,12 +57,12 @@ spec:
           memory: 200Mi
         requests:
           cpu: 100m
-          memory: 100Mi
-      schedule: "*/5 * * * *"
+          memory: 200Mi
+      schedule: "*/10 * * * *"
   collection:
     logs:
-      type: "rsyslog"
-      rsyslog: 
+      type: "fluentd"
+      fluentd:
         tolerations:
         - key: "qetest"
           operator: "Exists"
@@ -66,4 +73,4 @@ spec:
             memory: 2Gi
           requests:
             cpu: 100m
-            memory: 1Gi
+            memory: 2Gi
