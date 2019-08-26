@@ -11,9 +11,9 @@ echo "  getOperatorSourceMetadata.sh  redhat-operators-art 4.1"
 echo "#############Note End #############"
 echo ""
 REPOSITORYS="elasticsearch-operator cluster-logging openshifttemplateservicebroker openshiftansibleservicebroker sriov-network-operator"
-#REPOSITORYS="openshifttemplateservicebroker openshiftansibleservicebroker"
-#REPOSITORYS="sriov-network-operator"
-#REPOSITORYS="elasticsearch-operator cluster-logging"
+REPOSITORYS="openshifttemplateservicebroker openshiftansibleservicebroker"
+REPOSITORYS="sriov-network-operator"
+REPOSITORYS="elasticsearch-operator cluster-logging"
 use_latest=true
 work_dir=$PWD
 
@@ -164,15 +164,17 @@ if [[ "X$VERSION" == "X" ]]; then
 	clusterserviceversionfile=""
 	if [[  "$csv_num" ==  "1" ]]; then
 	     echo "#Found one clusterserviceversion.yaml"
-             clusterserviceversionfile=$(find ${VERSION} -type f -name *clusterserviceversion.yaml)
+             clusterserviceversionfile=$(find . -type f -name *clusterserviceversion.yaml)
              if [[ "X${clusterserviceversionfile}" != "X" ]] ;then
                  echo "#Print Images names"
                  echo "python getimageNames_clusterversion.py -f $clusterserviceversionfile"
                  echo "--------"
                  python getimageNames_clusterversion.py -f $clusterserviceversionfile | tee -a ${work_dir}/OperatorSource_Images_Labels.txt
-             fi
+             else
+	         echo "# Error: No clusterserviceversion.yaml"
+	     fi
         elif [[ "$csv_num" == "0" ]]; then
-	     echo "#Found zero clusterserviceversion.yaml"
+	     echo "# Error: No clusterserviceversion.yaml"
 	else
 	     echo "#Found more than one clusterserviceversion.yaml"
 	     echo "#Find the defaultChannel in package.yaml"
@@ -181,20 +183,23 @@ if [[ "X$VERSION" == "X" ]]; then
 	     if [[ "$pkg_num" == "1" ]]; then
 	         echo "#Found one package.yaml"
 		 pkg_file=$(find . -name  *package.yaml)
-		 pkg_dir=$(dirname $pkg_file)
-		 VERSION=$(grep defaultChannel cluster-logging-ihphqjo6/cluster-logging.package.yaml  |awk '{print $2}' |tr -d '"')
-                 clusterserviceversionfile=$(find $pkg_dir/${VERSION} -type f -name *clusterserviceversion.yaml)
+		 pkg_default=$(grep defaultChannel $pkg_file |awk '{print $2}' |tr -d '"')
+                 clusterserviceversionfile=$(find . -type f -name *clusterserviceversion.yaml |grep $pkg_default)
                  if [[ "X${clusterserviceversionfile}" != "X" ]] ;then
                      echo "#Print Images names"
                      echo "python getimageNames_clusterversion.py -f $clusterserviceversionfile\n"
                      echo "--------"
                      python getimageNames_clusterversion.py -f $clusterserviceversionfile | tee -a ${work_dir}/OperatorSource_Images_Labels.txt
-                 fi
+                 else
+	             echo "# Error: No clusterserviceversion.yaml"
+                 fi 
+             else
+	         echo "#Error Muiltiple packags"
 	     fi
         fi
     fi
 else
-    clusterserviceversionfile=$(find ${VERSION} -type f -name *clusterserviceversion.yaml)
+    clusterserviceversionfile=$(find . -type f -name *clusterserviceversion.yaml |grep ${VERSION})
     if [[ "X${clusterserviceversionfile}" != "X" ]] ;then
         echo "#Print Images names"
         echo "python getimageNames_clusterversion.py -f $clusterserviceversionfile\n"
