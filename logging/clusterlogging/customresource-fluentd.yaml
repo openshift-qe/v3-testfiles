@@ -8,7 +8,7 @@ spec:
   logStore:
     type: "elasticsearch"
     elasticsearch:
-      nodeCount: 2
+      nodeCount: 1
       tolerations:
       - key: "qetest"
         operator: "Exists"
@@ -16,12 +16,12 @@ spec:
         tolerationSeconds: 6000
       resources:
         limits:
-          memory: 2Gi
+          memory: 8Gi
         requests:
-          cpu: 200m
-          memory: 2Gi
+          cpu: 100m
+          memory: 1Gi
       storage: {}
-      redundancyPolicy: "SingleRedundancy"
+      redundancyPolicy: "ZeroRedundancy"
   visualization:
     type: "kibana"
     kibana:
@@ -32,14 +32,14 @@ spec:
         tolerationSeconds: 6000
       resources:
         limits:
-          memory: 1Gi
+          memory: 2Gi
         requests:
-          cpu: 500m
+          cpu: 100m
           memory: 1Gi
       proxy:
         resources:
           limits:
-            memory: 100Mi
+            memory: 200Mi
           requests:
             cpu: 100m
             memory: 100Mi
@@ -56,8 +56,8 @@ spec:
         limits:
           memory: 200Mi
         requests:
-          cpu: 200m
-          memory: 200Mi
+          cpu: 100m
+          memory: 100Mi
       schedule: "*/10 * * * *"
   collection:
     logs:
@@ -70,7 +70,7 @@ spec:
           tolerationSeconds: 6000
         resources:
           limits:
-            memory: 1Gi
+            memory: 2Gi
           requests:
-            cpu: 200m
+            cpu: 100m
             memory: 1Gi
