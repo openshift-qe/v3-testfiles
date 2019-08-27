@@ -21,6 +21,19 @@ echo "###get Quay Token"
 
 function updateCluster()
 {
+echo "# disable redhat-operators.yaml"
+cat <<EOF >disbale_redhat_operator.yaml
+apiVersion: config.openshift.io/v1
+kind: OperatorHub
+metadata:
+  name: cluster
+spec:
+  disableAllDefaultSources: false
+  sources:
+  - disabled: true
+    name: redhat-operators
+EOF
+oc apply -f disbale_redhat_operator.yaml
 
 echo "###Create&Update QE OperatorSource"
 oc project openshift-marketplace
