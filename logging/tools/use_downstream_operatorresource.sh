@@ -21,33 +21,9 @@ echo "###get Quay Token"
 
 function updateCluster()
 {
-echo "###set OperatorSource unmanaged"
-cat <<EOF > clusterversion.yaml
-apiVersion: config.openshift.io/v1
-kind: ClusterVersion
-metadata:
-  name: version
-spec:
-  overrides:
-    - kind: OperatorSource
-      group: ""
-      name: redhat-operators
-      namespace: openshift-marketplace
-      unmanaged: true
-    - kind: Deployment
-      group: ""
-      name: marketplace-operator
-      namespace: openshift-marketplace
-      unmanaged: true
-EOF
-oc apply -f clusterversion.yaml
-oc get deployment marketplace-operator -o json --export -n openshift-marketplace | jq 'del(.spec.template.spec.containers[].args[1])' | oc apply -f -
-
-echo "###Delete offical OperatorSource"
-oc project openshift-marketplace
-oc delete opsrc redhat-operators  |  true
 
 echo "###Create&Update QE OperatorSource"
+oc project openshift-marketplace
 
 cat <<EOF >token.yaml
 apiVersion: v1
