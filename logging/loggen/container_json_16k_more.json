@@ -8,7 +8,7 @@
         {
             "apiVersion": "v1",
             "data": {
-                "ocp_logtest.cfg": "--num-lines 50 --line-length 20000 --text-type randomjson --rate 60.0"
+                "ocp_logtest.cfg": "--num-lines 1 --line-length 20000 --text-type randomjson --rate 60.0"
             },
             "kind": "ConfigMap",
             "metadata": {
