@@ -40,15 +40,12 @@ https://localhost:9200/_search?pretty&size=50&q=docker.user:*' --insecure | pyth
 #swallow status 
 https://localhost:9200/_cat/thread_pool?v\&h=host,bulk.completed,bulk.rejected,bulk.queue,bulk.active,bulk.queueSize
 https://localhost:9200/_nodes/thread_pool?pretty
-#?https://logging-es.logging.svc:9200/project.anlirest -d '{ "user" : "kimchy", "post_date" : "2009-11-15T14:12:12", "message" : "trying out Elasticsearch" }
 https://logging-es.logging.svc:9200/_count"
 
 
 #put/post document
-https://logging-es:9200/project-qe.2016.07.14/fluentdtest/ -d '{"message" : "project-qe 2016.07.14 message"}'
 
-
-https://localhost:9200/_search?pretty -H 'Content-Type: application/json' -d'
+es_util --query=_search?pretty -H 'Content-Type: application/json' -d'
 {
     "query": {
         "match" : {
@@ -57,7 +54,38 @@ https://localhost:9200/_search?pretty -H 'Content-Type: application/json' -d'
     }
 }
 '
+es_util --query=_search/project* -H 'Content-Type: application/json' -d '{ "user" : "kimchy", "post_date" : "2009-11-15T14:12:12", "message" : "trying out Elasticsearch" }
+
+es_util --query=_search -H 'Content-Type: application/json' -d'
+{
+  "query": { 
+    "bool": { 
+      "must": [ { "match": { "hostname":"10-0-154-208.kubelet.kube-system.svc.cluster.local"}},
+                { "match": { "hostname":"10-0-154-208.kubelet.kube-system.svc.cluster.local"}}],
+      "filter": [ { "exists":  { "field":"kubernetes" }} ]
+    }
+  }
+}'
+
+es_util --query=_search?size=0 -H 'Content-Type: application/json' -d'
+{
+    "aggs" : {
+        "exists_field_kubernetes" : {
+            "filter": {"exists": {"field":"kubernetes"}},
+             "aggs" : {
+                 "distinct_hostname_name" : {
+                    "terms" : {
+                        "field" : "hostname"
+                     }
+                 }
+             }
+        }
+    }
+}
+'
+
 https://logging-es.logging.svc.cluster.local:9200/.operations*/_search?pretty -d '{"query": { "match": {"message" : "anlieventevent" }}}'
+
 
 
 curl -XPUT localhost:9200/_cluster/settings -d '{
@@ -107,10 +135,6 @@ oc set env dc/logging-kibana ELASTICSEARCH_PINGTIMEOUT=15000  LOGGING_VERBOSE=tr
 
 check fluentd log in /var/log/fluentd.log  (> OCP v3.4)
 curl -O https://raw.githubusercontent.com/openshift/origin-aggregated-logging/master/hack/logging-dump.sh
-
-
-
-
 
 
 Rsyslog:
