@@ -52,7 +52,7 @@
                 "from": {
                     "kind": "ImageStreamTag",
                     "namespace": "openshift",
-                    "name": "ruby:2.0"
+                    "name": "ruby:latest"
                 }
             }
         },
