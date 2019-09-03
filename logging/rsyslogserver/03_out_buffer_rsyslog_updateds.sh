@@ -22,7 +22,7 @@ if [[ ${#serviceIPs[@]} == 0 ]]; then
 fi
 if [[ ${#serviceIPs[@]} > 0 ]]; then 
    echo "use ${serviceIPs[0]} as REMOTE_SYSLOG_HOST"
-   oc set env ds/${fluentds} USE_REMOTE_SYSLOG=true REMOTE_SYSLOG_HOST=${serviceIPs[0]}  REMOTE_SYSLOG_TAG_KEY='ident,systemd.u.SYSLOG_IDENTIFIER'  REMOTE_SYSLOG_USE_RECORD=true REMOTE_SYSLOG_SEVERITY=info
+   oc set env ds/${fluentds} USE_REMOTE_SYSLOG=true REMOTE_SYSLOG_HOST=${serviceIPs[0]}  REMOTE_SYSLOG_TAG_KEY='ident,systemd.u.SYSLOG_IDENTIFIER'  REMOTE_SYSLOG_USE_RECORD=true REMOTE_SYSLOG_SEVERITY=info REMOTE_SYSLOG_TYPE=syslog_buffered 
 fi
 if [[ ${#serviceIPs[@]} > 1 ]]; then 
    echo "use ${serviceIPs[1]} as REMOTE_SYSLOG_HOST_BACKUP"
