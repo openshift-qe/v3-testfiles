@@ -6,7 +6,7 @@ if [[ X"$registry" == X""]]; then
 	echo "please specify which registry to used. [brew,stage,prod]"
 fi
 if [[ X"$registry" == X"brew"]]; then
-    registry_url="brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888/openshift/ose-"
+    registry_url="registry.example.com/openshift/ose-"
     registry_replace=yes
 fi
 
