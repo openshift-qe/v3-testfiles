@@ -1,6 +1,6 @@
 # !/bin/bash
 set -e
-From_Registry=brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888
+From_Registry=registry.example.com
 To_Registry=default-route-openshift-image-registry.apps.qeoanli.qe.devcluster.openshift.com
 Cert_Dir=$HOME/cert.d
 Cur_Dir=$PWD
