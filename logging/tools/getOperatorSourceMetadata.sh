@@ -160,11 +160,11 @@ if [[ "X$VERSION" == "X" ]]; then
         python getimageNames_buddle.py -f ${PWD}/bundle.yaml | tee -a ${work_dir}/OperatorSource_Images_Labels.txt
     else
 	echo "#Find clusterserviceversion.yaml"
-        csv_num=$(find .  -type f -name *clusterserviceversion.yaml  |wc -l)
+        csv_num=$(find .  -type f -name *clusterserviceversion.yaml|grep -v manifests  |wc -l)
 	clusterserviceversionfile=""
 	if [[  "$csv_num" ==  "1" ]]; then
 	     echo "#Found one clusterserviceversion.yaml"
-             clusterserviceversionfile=$(find . -type f -name *clusterserviceversion.yaml)
+             clusterserviceversionfile=$(find . -type f -name *clusterserviceversion.yaml | grep -v manifests)
              if [[ "X${clusterserviceversionfile}" != "X" ]] ;then
                  echo "#Print Images names"
                  echo "python getimageNames_clusterversion.py -f $clusterserviceversionfile"
@@ -184,7 +184,7 @@ if [[ "X$VERSION" == "X" ]]; then
 	         echo "#Found one package.yaml"
 		 pkg_file=$(find . -name  *package.yaml)
 		 pkg_default=$(grep defaultChannel $pkg_file |awk '{print $2}' |tr -d '"' | tr -d "'")
-                 clusterserviceversionfile=$(find . -type f -name *clusterserviceversion.yaml |grep $pkg_default)
+                 clusterserviceversionfile=$(find . -type f -name *clusterserviceversion.yaml |grep -v manifests|grep $pkg_default)
                  if [[ "X${clusterserviceversionfile}" != "X" ]] ;then
                      echo "#Print Images names"
                      echo "python getimageNames_clusterversion.py -f $clusterserviceversionfile\n"
@@ -199,7 +199,7 @@ if [[ "X$VERSION" == "X" ]]; then
         fi
     fi
 else
-    clusterserviceversionfile=$(find . -type f -name *clusterserviceversion.yaml |grep ${VERSION})
+    clusterserviceversionfile=$(find . -type f -name *clusterserviceversion.yaml |grep -v manifests|grep ${VERSION})
     if [[ "X${clusterserviceversionfile}" != "X" ]] ;then
         echo "#Print Images names"
         echo "python getimageNames_clusterversion.py -f $clusterserviceversionfile\n"
