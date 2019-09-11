@@ -1,5 +1,9 @@
 #!/bin/bash
-namespace=${1:-aosqe42}
+namespace=${1}
+if [[ "X$namespace" == "X" ]];then
+   echo "please specify the app registry namespace. For example: openshift-operators-stage, aosqe42"
+   exit
+fi
 registry_type=${2:-quay}
 version="4.1.$(date +%s)"
 
@@ -82,10 +86,10 @@ function pushManifesToRegistry()
     	fi
         echo "#push manifest ${image_name} to $namespace"
         echo operator-courier --verbose push ${repo_name}/  $namespace ${repo_name} $version  \"$Quay_Token\"
-        #operator-courier --verbose push ${repo_name}/  ${namespace} ${repo_name} ${version}  "${Quay_Token}"
+        operator-courier --verbose push ${repo_name}/  ${namespace} ${repo_name} ${version}  "${Quay_Token}"
     done
 }
 
 getManifest
-#printImageName
+printImageName
 pushManifesToRegistry
