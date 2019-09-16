@@ -19,20 +19,24 @@ work_dir=$PWD
 
 function getQuayToken()
 {
-    echo "##get Quay Token"
-    if [[ "X$REG_QUAY_USER" != "X" && "X$REG_QUAY_PASSWORD" != "X" ]]; then
-        USERNAME=$REG_QUAY_USER
-        PASSWORD=$REG_QUAY_PASSWORD
+    if [[ -e ${PWD}/quay.token ]]; then
+            Quay_Token=$(cat ${PWD}/quay.token)
     else
-        echo "Login Quay.io"
-        echo ""
-        echo "Quay Username: "
-        read USERNAME
-        echo "Quay Password: "
-        read -s PASSWORD
+        echo "##get Quay Token"
+        if [[ "X$REG_QUAY_USER" != "X" && "X$REG_QUAY_PASSWORD" != "X" ]]; then
+            USERNAME=$REG_QUAY_USER
+            PASSWORD=$REG_QUAY_PASSWORD
+        else
+            echo "Login Quay.io"
+            echo ""
+            echo "Quay Username: "
+            read USERNAME
+            echo "Quay Password: "
+            read -s PASSWORD
+        fi
+        Quay_Token=$(curl -s -H "Content-Type: application/json" -XPOST https://quay.io/cnr/api/v1/users/login -d ' { "user": { "username": "'"${USERNAME}"'", "password": "'"${PASSWORD}"'" } }' |jq -r '.token')
+        echo "$Quay_Token" > ${PWD}/quay.token
     fi
-    Quay_Token=$(curl -s -H "Content-Type: application/json" -XPOST https://quay.io/cnr/api/v1/users/login -d ' { "user": { "username": "'"${USERNAME}"'", "password": "'"${PASSWORD}"'" } }' |jq -r '.token')
-    echo "$Quay_Token" > ${work_dir}/quay.token
 }
 
 function downloadRepos()
@@ -212,7 +216,6 @@ fi
 ###########################Main##########################################
 >${work_dir}/OperatorSource_Images_Labels.txt
 getQuayToken
-Quay_Token=$(cat ${work_dir}/quay.token)
 for REPOSITORY in ${REPOSITORYS}; do
     rm -rf "quay.${REPOSITORY}"
     mkdir -p "quay.${REPOSITORY}"
