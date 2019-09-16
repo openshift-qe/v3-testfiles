@@ -5,7 +5,7 @@ if [[ "X$namespace" == "X" ]];then
    exit
 fi
 op_images=${2:-ose-elasticsearch-operator ose-cluster-logging-operator ose-ansible-service-broker-operator ose-template-service-broker-operator}
-registry_type=${3:-internal}
+registry_type=${3:-quay}
 
 version="4.1.$(date +%s)"
 declare -A image_registry_dir=( ["ose-elasticsearch-operator"]="elasticsearch-operator" 
@@ -50,8 +50,12 @@ function getQuayToken()
             USERNAME=$REG_QUAY_USER
             PASSWORD=$REG_QUAY_PASSWORD
         else
-            USERNAME="anli"
-            PASSWORD="aosqe2019"
+            echo "Login Quay.io"
+            echo ""
+            echo "Quay Username: "
+            read USERNAME
+            echo "Quay Password: "
+            read -s PASSWORD
         fi
         Quay_Token=$(curl -s -H "Content-Type: application/json" -XPOST https://quay.io/cnr/api/v1/users/login -d ' { "user": { "username": "'"${USERNAME}"'", "password": "'"${PASSWORD}"'" } }' |jq -r '.token')
         echo "$Quay_Token" > ${PWD}/quay.token
@@ -114,8 +118,18 @@ function pushManifesToRegistry()
     	if [[ $csv_files != "" ]]; then
                 if [[ $registry_type == "quay" ]];then
     		    echo "#Replace image registry to quay"rrr
-		    sed -i 's#image-registry.openshift-image-registry.svc:5000/openshift/\(.*\):\(v[^"'\'']*\)#quay.io/openshift-release-dev/ocp-v4.0-art-dev:\1-\2#' $csv_files
+		    sed -i 's#image-registry.openshift-image-registry.svc:5000/openshift/\(.*\):\(v[^"'\'']*\)#quay.io/openshift-release-dev/ocp-v4.0-art-dev:\2-\1#' $csv_files
                 fi
+
+                if [[ $registry_type == "brew" ]];then
+                    echo "#Replace image registry to quay"
+                    sed -i 's#brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888#brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888#' $csv_files
+                fi
+                if [[ $registry_type == "brewstage" ]];then
+                    echo "#Replace image registry to quay"
+                    sed -i 's#brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888#brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888#' $csv_files
+                fi
+
     	fi
         echo "#push manifest ${image_name} to $namespace"
         echo operator-courier --verbose push ${repo_name}/  $namespace ${repo_name} $version  \"$Quay_Token\"
