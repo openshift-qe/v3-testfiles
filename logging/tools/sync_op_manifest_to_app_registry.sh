@@ -4,8 +4,8 @@ if [[ "X$namespace" == "X" ]];then
    echo "please specify the app registry namespace. For example: openshift-operators-stage, aosqe42"
    exit
 fi
-op_images=${2:-ose-elasticsearch-operator ose-cluster-logging-operator ose-ansible-service-broker-operator ose-template-service-broker-operator}
-registry_type=${3:-quay}
+registry_type=${2:-quay}
+op_images=${3:-ose-elasticsearch-operator ose-cluster-logging-operator ose-ansible-service-broker-operator ose-template-service-broker-operator}
 
 version="4.1.$(date +%s)"
 declare -A image_registry_dir=( ["ose-elasticsearch-operator"]="elasticsearch-operator" 
