@@ -10,12 +10,12 @@ spec:
     elasticsearch:
       nodeCount: 1
       resources:
-        limits:
-          memory: 2Gi
         requests:
           cpu: 200m
           memory: 2Gi
-      storage: {}
+      storage: 
+        storageClassName: "gp2"
+        size: "10Gi"
       redundancyPolicy: "ZeroRedundancy"
   visualization:
     type: "kibana"
