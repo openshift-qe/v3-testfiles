@@ -112,7 +112,7 @@ case "$PLATFORM" in
        MIRROR_REGISTRY="mirror-registry.qe.devcluster.openshift.com:5001"
        ;;
      baremetal)
-       MIRROR_REGISTRY="internal-registry.qe.devcluster.openshift.com:5000"
+       MIRROR_REGISTRY="upshift.mirror-registry.qe.devcluster.openshift.com:5000"
        ;; 
      other)
        echo "The platform like aws, gcp, azure have random and temporary mirror registries"
