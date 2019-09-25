@@ -11,37 +11,43 @@ echo "#sync image from internal regsitry to cluster"
 	#Replace with brew if it is internal registry in the csv
 	from_image=${image/image-registry.openshift-image-registry.svc:5000/brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888}
 	image_labels=$(oc image info $from_image --insecure=true --filter-by-os linux/amd64 -o json |jq '.config.config.Labels')
-        #image_name=openshift/ose-logging-fluentd
-	image_name=$(echo $image_labels |jq -r '.name')
-	#image_version=v4.1.0
-        image_version=$(echo $image_labels |jq -r '.version')
-	#image_release=201905101016
-        image_release=$(echo $image_labels |jq -r '.release')
 
-	if [[ $image =~ "docker.io" ]]; then
-	    echo "skip: this tool doesn't supoprt docker.io"
-		continue
+	if [[ $image_labels == "" || $image =~ "origin-" ]]; then
+            #image_name=openshiftx/ose-logging-fluentd:latest
+            image_name=${image#*\/}
+            #image_name=openshift/ose-logging-fluentd:latest
+            image_name=${image_name/*\//openshift\/}
+	    to_image_version=$to_registry/$image_name
+	    to_image_release=$to_registry/$image_name
+
+	else
+            #image_name=openshift/ose-logging-fluentd
+	    image_name=$(echo $image_labels |jq -r '.name')
+            #image_version=v4.1.0
+            image_version=$(echo $image_labels |jq -r '.version')
+            #image_release=201905101016
+            image_release=$(echo $image_labels |jq -r '.release')
+
+	    to_image_version=$to_registry/$image_name:$image_version
+	    to_image_release=$to_registry/$image_name:$image_version-${image_release}
 	fi
 
-        if [[ $image =~ "quay.io" ]]; then
-            echo "skip: this tool doesn't supoprt quay.io"
-            continue
-            echo " step 1: docker pull $from_image"
-            docker pull $from_image
-            echo " step 2: docker tag $from_image $to_registry/$image_name:$image_version"
-            docker tag $from_image $to_registry/$image_name:$image_version
-            echo " step 3: docker push $to_registry/$image_name:$image_version "
-            docker push $to_registry/$image_name:$image_version
-            echo " step 2: docker tag $from_image $to_registry/$image_name:$image_version-${image_release}"
-            docker tag $from_image $to_registry/$image_name:$image_version-${image_release}
-            echo " step 3: docker push $to_registry/$image_name:$image_version-${image_release}"
-            docker push $to_registry/$image_name:$image_version-${image_release}
-        else 
-	    echo "# oc image mirror $from_image  $to_registry/$image_name:$image_version --insecure=true"
-            oc image mirror $from_image  $to_registry/$image_name:$image_version --insecure=true
-            echo "# oc image mirror $from_image  $to_registry/$image_name:$image_version-${image_release} --insecure=true"
-            oc image mirror $from_image  $to_registry/$image_name:$image_version-${image_release} --insecure=true
-	fi
+        #    echo "skip: this tool doesn't supoprt origin image"
+        #    continue
+        #    echo " step 1: docker pull $from_image"
+        #    docker pull $from_image
+        #    echo " step 2: docker tag $from_image $to_image_version"
+        #    docker tag $from_image $to_image_version
+        #    echo " step 3: docker push $to_image_version "
+        #    docker push $to_image_version
+        #    echo " step 2: docker tag $from_image $to_image_release"
+        #    docker tag $from_image $to_image_release
+        #    echo " step 3: docker push $to_image_release"
+        #    docker push $to_image_release
+	echo "# oc image mirror $from_image  $to_image_version --insecure=true"
+        oc image mirror $from_image  $to_image_version --insecure=true
+        echo "# oc image mirror $from_image  $to_image_release --insecure=true"
+        oc image mirror $from_image  $to_image_release --insecure=true
     done
 }
 
