@@ -1,8 +1,10 @@
 #!/bin/bash
 # check the es status and resource
-testtype=$1
-logging_namespace=${$2:-openshift-logging}
+logging_namespace=${logging_namespace:-openshift-logging}
 oc project $logging_namespace
+testtype=$1
+
+
 
 es_master_pod1=$(oc get pods --selector component=elasticsearch -o jsonpath={.items[?\(@.status.phase==\"Running\"\)].metadata.name} | cut -d" " -f1)
 if [ -z ${es_master_pod1} ]; then

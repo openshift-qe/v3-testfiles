@@ -1,0 +1,53 @@
+#!/bin/bash
+# check the es status and resource
+testtype=$1
+logging_namespace=${$2:-openshift-logging}
+oc project $logging_namespace
+
+es_master_pod1=$(oc get pods --selector component=elasticsearch -o jsonpath={.items[?\(@.status.phase==\"Running\"\)].metadata.name} | cut -d" " -f1)
+if [ -z ${es_master_pod1} ]; then
+   es_master_pod1=$(oc get pods --selector component=es -o jsonpath={.items[?\(@.status.phase==\"Running\"\)].metadata.name} | cut -d" " -f1)
+   if [ -z ${es_master_pod1} ]; then
+       echo "No running ES master pod!"
+       exit
+   fi
+fi
+
+es_service=$(oc get service elasticsearch -o jsonpath={.spec.clusterIP})
+if [ -z ${es_service} ]; then
+     es_service=$(oc get service logging-es -o jsonpath={.spec.clusterIP})
+fi
+
+function es_run()
+{
+	oc exec -c elasticsearch $es_master_pod1 -- exec es_util --query=$*
+}
+
+function es_explain_unassigned()
+{
+	shards=$1
+	es_run _cluster/settings
+        es_run _nodes/stats
+        es_run _cat/shards?h=index,shard,prirep,state,unassigned.reason| grep UNASSIGNED
+        es_run _cluster/allocation/explain?pretty
+        es_run _cat/thread_pool?v
+        #es_run _cluster/allocation/explain -d '{ "index": "", "shard" : "0", "primary": false, "current_node": "logging-es-data-master-h40v2k95"}' | python -mjson.tool
+        es_run _cat/plugins?v
+}
+
+
+#########################################
+
+
+
+${es_query}_cat/shards |tee shards.list
+
+declare -a unassigned_shards=$(cat shards.list  |grep UNASSIGNED | awk '{print $1}' )
+
+if [[ "X$testtype" == "X" ]]; then
+    es_explain_unassigned  unassigned_shards[0]
+else
+
+fi
+
+
