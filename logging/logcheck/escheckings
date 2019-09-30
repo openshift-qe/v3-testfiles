@@ -1,0 +1,141 @@
+#!/bin/bash
+# check the es status and resource
+testtype=$1
+logging_namespace=${$2:-openshift-logging}
+oc project $logging_namespace
+
+es_master_pod1=$(oc get pods --selector component=elasticsearch -o jsonpath={.items[?\(@.status.phase==\"Running\"\)].metadata.name} | cut -d" " -f1)
+if [ -z ${es_master_pod1} ]; then
+   es_master_pod1=$(oc get pods --selector component=es -o jsonpath={.items[?\(@.status.phase==\"Running\"\)].metadata.name} | cut -d" " -f1)
+   if [ -z ${es_master_pod1} ]; then
+       echo "No running ES master pod!"
+       exit
+   fi
+fi
+
+es_service=$(oc get service elasticsearch -o jsonpath={.spec.clusterIP})
+if [ -z ${es_service} ]; then
+     es_service=$(oc get service logging-es -o jsonpath={.spec.clusterIP})
+fi
+
+fluentd_pod1=$(oc get pods --selector logging-infra=fluentd -o jsonpath={.items[?\(@.status.phase==\"Running\"\)].metadata.name} | cut -d" " -f1)
+token=$(oc whoami -t)
+
+curl_es_get="oc exec -c elasticsearch $es_master_pod1 -- curl -s -XGET --cacert /etc/elasticsearch/secret/admin-ca --cert /etc/elasticsearch/secret/admin-cert --key /etc/elasticsearch/secret/admin-key https://logging-es:9200/"
+es_query="oc exec -c elasticsearch $es_master_pod1 -- es_util --query="
+#curl_fluentd_get="oc exec $fluentd_pod1 -- curl -s --cacert /etc/fluent/keys/ca --cert /etc/fluent/keys/cert --key /etc/fluent/keys/key https://logging-es:9200/"
+#curl_token_get='oc exec $fluentd_pod1 -- curl -kv -H 'X-Forwarded-For: 127.0.0.1' -H "Authorization: Bearer $token" https://$es_service:9200'
+
+
+function get_docs()
+{
+    cur_pod_name=$1
+    cur_index_name=$2
+    get_in_es $cur_pod_name ${cur_index_name}*/_count?pretty
+}
+
+
+
+function search_docs()
+{   
+    #No space in json string
+    cur_pod_name=$1
+    cur_index_name=$2
+    cur_key=$3
+    cur_value=$4
+    get_in_es ${cur_pod_name} ${cur_index_name}*/_count?pretty -d '{ "query" : { "match" : { "${cur_key}" : "${cur_value}" } } }'
+
+}
+set -x
+echo "-->1. get health  --< "
+$es_healthy
+
+echo "-->2. list index  --< "
+${es_query}_cat/indices?v
+
+if [[ "$testtype" == "1" ]] ;then
+	exit 0
+fi
+
+echo "-->3. List Shards status"
+${es_query}_cat/shards
+
+echo "-->4. list aliases  --< "
+${es_query}_aliases?pretty
+
+echo "-->5. check if there system logs for all nodes --< "
+oc get nodes --output=name
+
+${es_query}_search?size=0 -H 'Content-Type: application/json' -d'
+{
+    "aggs" : {
+        "exists_field_kubernetes" : {
+            "filter": {"exists": {"field":"systemd"}},
+             "aggs" : {
+                 "distinct_hostname_name" : {
+                    "terms" : {
+                        "field" : "hostname"
+                     }
+                 }
+             }
+        }
+    }
+}' |python -m json.tool
+
+
+echo "-->6. check if there container logs for all nodes --< "
+oc get nodes --output=name
+
+${es_query}_search?size=0 -H 'Content-Type: application/json' -d'
+{
+    "aggs" : {
+        "exists_field_kubernetes" : {
+            "filter": {"exists": {"field":"kubernetes"}},
+             "aggs" : {
+                 "distinct_hostname_name" : {
+                    "terms" : {
+                        "field" : "hostname"
+                     }
+                 }
+             }
+        }
+    }
+}' |python -m json.tool
+
+
+if [[ "$testtype" == "2" ]] ;then
+
+echo "-->5. check if there are logs for all pods --< "
+pods=$(oc get pods --output=name)
+for pod in $nodes; do
+    node_name=${node#*\/}
+    eval ${es_query}.operations*/_count?pretty -d '{ "query" : { "match" : { "hostname":"$node_name"}}}'
+done
+
+echo "-->5. List ES swallow status "
+${es_query}_cat/thread_pool?v\&h=host,bulk.completed,bulk.rejected,bulk.queue,bulk.active,bulk.queueSize
+
+echo "-->6. list the index number of .operations --< "
+${es_query}.operations*/_settings?pretty
+
+echo "-->7 get .orphaned index setting--< "
+${es_query}.orphaned*/_settings?pretty
+
+
+
+echo "-->5. check if there are event router documents --< "
+${es_query}.operations*/_count?pretty -d '{ "query" : { "match" : { "kubernetes.event.verb":"created"}}}'
+
+#echo "-->6. check if there are docker event router documents --< "
+#${es_query}.operations*/_count?pretty -d '{ "query" : { "match" : { "docker.event.verb":"created"}}}'
+
+
+#echo "-->10 get buffer index"
+#oc exec -c elasticsearch $es_master_pod1 -- curl -s -XGET --cacert /etc/elasticsearch/secret/admin-ca --cert /etc/elasticsearch/secret/admin-cert --key /etc/elasticsearch/secret/admin-key https://localhost:9200/_cat/indices?v |egrep '2018.03.25|2018.03.26|2018.03.27' | awk 'BEGIN{sum=0 ;count=0}{ if(NR>1) {sum +=$7; count++; print $3"     "$7}}END{print "count="count "    sum="sum }' | tee Recordconsistence.logs
+
+
+#echo "-->10. Token access checkin --< "
+
+#oc exec $fluentd_pod1 -- curl -kv -H "X-Forwarded-For: 127.0.0.1" -H "Authorization: Bearer $token" https://${es_service}:9200
+
+fi
