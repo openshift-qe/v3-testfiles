@@ -1,7 +1,7 @@
 #!/bin/bash
 # check the es status and resource
 testtype=$1
-logging_namespace=${$2:-openshift-logging}
+logging_namespace=${2:-openshift-logging}
 oc project $logging_namespace
 
 es_master_pod1=$(oc get pods --selector component=elasticsearch -o jsonpath={.items[?\(@.status.phase==\"Running\"\)].metadata.name} | cut -d" " -f1)
@@ -20,7 +20,7 @@ fi
 
 function es_run()
 {
-	oc exec -c elasticsearch $es_master_pod1 -- exec es_util --query=$*
+	oc exec -c elasticsearch $es_master_pod1 -- es_util --query=$*
 }
 
 function es_explain_unassigned()
@@ -40,13 +40,14 @@ function es_explain_unassigned()
 
 
 
-${es_query}_cat/shards |tee shards.list
+es_run _cat/shards |tee shards.list
 
 declare -a unassigned_shards=$(cat shards.list  |grep UNASSIGNED | awk '{print $1}' )
 
 if [[ "X$testtype" == "X" ]]; then
     es_explain_unassigned  unassigned_shards[0]
 else
+    echo " To DO"
 
 fi
 
