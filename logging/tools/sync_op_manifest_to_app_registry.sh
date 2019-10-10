@@ -1,15 +1,15 @@
 #!/bin/bash
-namespace=${1}
+namespace=${$1}
 if [[ "X$namespace" == "X" ]];then
    echo "please specify the app registry namespace. For example: openshift-operators-stage, aosqe42"
    exit
 fi
 
 #The registry type: quay,stage, brewstage, prod
-registry_type=${2:-quay}
+registry_type=${$2:-quay}
 
 #The default operators to be upload
-op_images=${3:-elasticsearch-operator cluster-logging-operator ansible-service-broker-operator template-service-broker-operator node-feature-discovery cluster-nfd-operator}
+op_images=${$3:-elasticsearch-operator cluster-logging-operator ansible-service-broker-operator template-service-broker-operator node-feature-discovery cluster-nfd-operator}
 
 #The version in quay app registry
 version="4.1.$(date +%s)"
@@ -17,7 +17,7 @@ version="4.1.$(date +%s)"
 #The registry DNS
 declare -A registry_hash=( ["quay"]="quay.io"
                      ["internal"]="image-registry.openshift-image-registry.svc:5000"
-                     ["brew"]="brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888"
+                     ["brew"]="registry-proxy.engineering.redhat.com"
                      ["brewstage"]="brewregistry.stage.redhat.io"
                      ["stage"]="registry.stage.redhat.io"
                      ["prod"]="registry.redhat.io")
@@ -58,18 +58,19 @@ fi
 for op_image in ${op_images}; do
 
     if [[ "X${image_registry_dir[$op_image]}" == "X" ]]; then
-            echo "Warning: ${op_image} is skipped as we couldn't is repo in predefined varaible image_registry_dir, please ping anli append it"
+        echo "Warning: ${op_image} is skipped as we couldn't is repo in predefined varaible image_registry_dir, please ping anli append it"
 	    continue
     fi
 
     images=$(grep $op_image ImageList |grep -v '#' )
+    
     if [[ "X${images}" == "X" ]]; then
-          echo "Warning: ${op_image} is skipped as we couldn't find the Operator images in ImageList"
-	  continue
+        echo "Warning: ${op_image} is skipped as we couldn't find the Operator images in ImageList"
+	    continue
     fi
 
     for line in $images; do
-	if [[ ${op_image_hash[${op_image}]} == ""  ]] ;then
+	    if [[ ${op_image_hash[${op_image}]} == ""  ]] ;then
             # Note: The first found operator image will be used, the following will be ignore except for it is an operator metadata image
             echo "Info: ${op_image} will be updated using $line "
             op_image_hash[${op_image}]=$line
@@ -79,8 +80,8 @@ for op_image in ${op_images}; do
                 echo "Info: ${op_image} will be updated using $line "
                 op_image_hash[${op_image}]=$line
             fi
-	fi
-     done
+	    fi
+    done
 done
 
 function getQuayToken()
@@ -93,9 +94,13 @@ function getQuayToken()
             USERNAME=$REG_QUAY_USER
             PASSWORD=$REG_QUAY_PASSWORD
         else
-            USERNAME="anli"
-            PASSWORD="aosqe2019"
-        fi
+            echo "Login Quay.io"
+            echo ""
+            echo "Quay Username: "
+            read USERNAME
+            echo "Quay Password: "
+            read -s PASSWORD
+	fi
         Quay_Token=$(curl -s -H "Content-Type: application/json" -XPOST https://quay.io/cnr/api/v1/users/login -d ' { "user": { "username": "'"${USERNAME}"'", "password": "'"${PASSWORD}"'" } }' |jq -r '.token')
         echo "$Quay_Token" > ${PWD}/quay.token
     fi
@@ -107,16 +112,19 @@ function getManifest()
     echo ""
     echo "#1) Copy manifest from image"
     for key in "${!op_image_hash[@]}"; do
-	image=${op_image_hash[$key]}
-	if [[ $image == "" ]];then
-		continue
-	fi
-    	brew_image=${image/openshift4/openshift}
-    	repo_name="${image_registry_dir[${key}]}"
-    	rm -rf $repo_name
-	mkdir $repo_name
-	echo " extract manifest from $brew_image"
-	oc image extract $brew_image --path /manifests/*:$repo_name --insecure=true --confirm
+        echo "=== $key"
+	    image=${op_image_hash[$key]}
+	    if [[ $image == "" ]];then
+		    continue
+	    fi
+        brew_image=${image/openshift4/openshift}
+        repo_name="${image_registry_dir[${key}]}"
+        rm -rf $repo_name
+	    mkdir $repo_name
+	    echo " extract manifest from $brew_image to $repo_name"
+	    oc image extract $brew_image --path /manifests/*:$repo_name --insecure=true --confirm
+        find $repo_name -type f -name "image-references" -exec rm {} \;
+        find $repo_name -type f -name "art.yaml" -exec rm {} \;
     done
 }
 
@@ -147,32 +155,32 @@ function pushManifesToRegistry()
     echo "#3) push manifest to ${namespace}"
     getQuayToken
     for key in "${!op_image_hash[@]}"; do
-	image="${op_image_hash[$key]}"
-	if [[ $image == "" ]];then
-		continue
-	fi
+	    image="${op_image_hash[$key]}"
+	    if [[ $image == "" ]];then
+	        continue
+	    fi
         repo_name="${image_registry_dir[${key}]}"
     	csv_files=$(find $repo_name -name *clusterserviceversion.yaml)
     	if [[ $csv_files != "" ]]; then
                 if [[ $registry_type == "quay" ]];then
-    		    echo "#Replace image registry to quay"rrr
+    		    echo "#Replace image registry to quay.io"
 		    sed -i 's#image-registry.openshift-image-registry.svc:5000/openshift/\(.*\):\(v[^"'\'']*\)#quay.io/openshift-release-dev/ocp-v4.0-art-dev:\2-\1#' $csv_files
                 fi
 
                 if [[ $registry_type == "brew" ]];then
-                    echo "#Replace image registry to quay"
-                    sed -i 's#image-registry.openshift-image-registry.svc:5000#brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888#' $csv_files
+                    echo "#Replace image registry to registry-proxy"
+                    sed -i 's#image-registry.openshift-image-registry.svc:5000/openshift/#registry-proxy.engineering.redhat.com/rh-osbs/openshift-#' $csv_files
                 fi
                 if [[ $registry_type == "brewstage" ]];then
-                    echo "#Replace image registry to quay"
+                    echo "#Replace image registry to brewregistry"
                     sed -i 's#image-registry.openshift-image-registry.svc:5000#brewregistry.stage.redhat.io#' $csv_files
                 fi
                 if [[ $registry_type == "prod" ]];then
-                    echo "#Replace image registry to quay"
+                    echo "#Replace image registry to registry.redhat.io"
                     sed -i 's#image-registry.openshift-image-registry.svc:5000#registry.redhat.io#' $csv_files
                 fi
                 if [[ $registry_type == "stage" ]];then
-                    echo "#Replace image registry to quay"
+                    echo "#Replace image registry to registry.stage.redhat.io"
                     sed -i 's#image-registry.openshift-image-registry.svc:5000#registry.stage.redhat.io#' $csv_files
                 fi
 
@@ -186,4 +194,3 @@ function pushManifesToRegistry()
 getManifest
 pushManifesToRegistry
 printImageName  ${registry_hash[$registry_type]}
-
