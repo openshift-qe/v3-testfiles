@@ -17,7 +17,7 @@ version="4.1.$(date +%s)"
 #The registry DNS
 declare -A registry_hash=( ["quay"]="quay.io"
                      ["internal"]="image-registry.openshift-image-registry.svc:5000"
-                     ["brew"]="brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888"
+                     ["brew"]="registry-proxy.engineering.redhat.com"
                      ["brewstage"]="brewregistry.stage.redhat.io"
                      ["stage"]="registry.stage.redhat.io"
                      ["prod"]="registry.redhat.io")
@@ -161,7 +161,7 @@ function pushManifesToRegistry()
 
                 if [[ $registry_type == "brew" ]];then
                     echo "#Replace image registry to quay"
-                    sed -i 's#image-registry.openshift-image-registry.svc:5000#brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888#' $csv_files
+                    sed -i 's#image-registry.openshift-image-registry.svc:5000/openshift/#registry-proxy.engineering.redhat.com/rh-osbs/openshift-#' $csv_files
                 fi
                 if [[ $registry_type == "brewstage" ]];then
                     echo "#Replace image registry to quay"
