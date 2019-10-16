@@ -1,10 +1,8 @@
 {
-  "kind": "Template",
+  "kind": "List",
   "apiVersion": "v1",
-  "metadata": {
-    "name": "PVs"
-  },
-  "objects": [
+  "metadata": {},
+  "items": [
      {
         "apiVersion": "v1",
         "kind": "PersistentVolume",
@@ -49,5 +47,5 @@
            "persistentVolumeReclaimPolicy": "Retain"
         }
      }
-  ]
+ ]
 }
