@@ -1,0 +1,14 @@
+apiVersion: console.openshift.io/v1
+kind: ConsoleCLIDownload
+metadata:
+  name: clidownloadtest
+spec:
+  description: The oc binary offers the same capabilities as the kubectl binary, but it is further extended to natively support OpenShift Container Platform features.
+  displayName: oc - OpenShift Command Line Interface (CLI)
+  links:
+  - href: https://mirror.openshift.com/pub/openshift-v4/clients/oc
+    text: Download oc2
+  - href: https://mirror.openshift.com/pub/openshift-v4/clients/oc
+    text: Download oc3
+  - href: https://mirror.openshift.com/pub/openshift-v4/clients/oc
+    text: 下载oc命令行
