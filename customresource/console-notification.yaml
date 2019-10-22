@@ -1,0 +1,12 @@
+apiVersion: console.openshift.io/v1
+kind: ConsoleNotification
+metadata:
+  name: notification3
+spec:
+  backgroundColor: yellow
+  color: blue
+  link:
+    href: https://www.youtube.com 
+    text: Youtube
+  location: BannerTopBottom
+  text: Subscribe
