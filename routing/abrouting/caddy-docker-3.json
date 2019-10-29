@@ -11,7 +11,7 @@
   "spec": {
       "containers": [{
         "name": "caddy-docker-pod",
-        "image": "yadu/caddy-docker-3",
+        "image": "aosqe/caddy-docker-3",
         "ports": [
           {
             "containerPort": 8080

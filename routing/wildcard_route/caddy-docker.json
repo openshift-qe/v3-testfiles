@@ -11,7 +11,7 @@
         "spec": {
                 "containers": [{
                         "name": "caddy-docker-pod",
-                        "image": "bmeng/caddy-docker-wildcard",
+                        "image": "aosqe/caddy-docker-wildcard",
                         "ports": [
                                 {
                                         "containerPort": 8080

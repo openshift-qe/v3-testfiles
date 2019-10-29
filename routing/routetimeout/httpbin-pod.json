@@ -10,7 +10,7 @@
   "spec": {
       "containers": [{
         "name": "httpbin-http",
-        "image": "yadu/httpbin80",
+        "image": "aosqe/httpbin80",
         "ports": [
           {
             "containerPort": 8080
@@ -19,7 +19,7 @@
       },
       {
         "name": "httpbin-https",
-        "image": "yadu/httpbin",
+        "image": "aosqe/httpbin",
         "ports": [
           {
             "containerPort": 8443

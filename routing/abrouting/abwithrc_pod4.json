@@ -23,7 +23,7 @@
                     "spec": {
                         "containers": [
                             {
-                                "image": "yadu/caddy-docker-4",
+                                "image": "aosqe/caddy-docker-4",
                                 "name": "test-pods-4"
                             }
                         ]
