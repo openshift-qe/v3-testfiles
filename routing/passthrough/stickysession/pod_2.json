@@ -12,7 +12,7 @@
         "spec": {
                 "containers": [{
                         "name": "tls-server2",
-                        "image": "bmeng/tls-server",
+                        "image": "aosqe/tls-server",
                         "ports": [
                         {
                                 "containerPort": 9999

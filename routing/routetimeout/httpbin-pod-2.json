@@ -11,7 +11,7 @@
   "spec": {
       "containers": [{
         "name": "httpbin-pod",
-        "image": "yadu/httpbin",
+        "image": "aosqe/httpbin",
         "ports": [
           {
             "containerPort": 8080
