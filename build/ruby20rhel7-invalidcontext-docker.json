@@ -124,7 +124,7 @@
           "type": "Docker",
           "dockerStrategy": {
             "from": {
-              "kind": "DockrerImage",
+              "kind": "DockerImage",
               "name": "docker.io/centos/ruby-22-centos7"
             },
             "env": [
