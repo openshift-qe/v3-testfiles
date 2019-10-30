@@ -1,12 +1,12 @@
 apiVersion: "autoscaling.openshift.io/v1alpha1"
 kind: "MachineAutoscaler"
 metadata:
-  generateName: autoscale-2c-
+  generateName: autoscale-
   namespace: "openshift-machine-api"
 spec:
   minReplicas: 1
-  maxReplicas: 3
+  maxReplicas: 2
   scaleTargetRef:
     apiVersion: machine.openshift.io/v1beta1
     kind: MachineSet
-    name: qe-bmeng-ap-221-worker-ap-northeast-1c
+    name: 
