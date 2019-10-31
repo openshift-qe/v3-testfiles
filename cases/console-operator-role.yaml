@@ -1,0 +1,64 @@
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: console-operator
+  namespace: openshift-console
+  selfLink: >-
+    /apis/rbac.authorization.k8s.io/v1/namespaces/openshift-console/roles/console-operator
+  uid: 2558215b-fab0-11e9-8e47-02f9ed9abd42
+  resourceVersion: '527286'
+  creationTimestamp: '2019-10-30T00:56:45Z'
+rules:
+  - verbs:
+      - get
+      - list
+      - watch
+      - create
+      - update
+      - delete
+    apiGroups:
+      - console.openshift.io
+    resources:
+      - consoles
+  - verbs:
+      - get
+      - list
+      - watch
+      - create
+      - update
+      - delete
+      - patch
+    apiGroups:
+      - ''
+    resources:
+      - services
+      - events
+      - configmaps
+      - secrets
+  - verbs:
+      - get
+      - list
+      - watch
+    apiGroups:
+      - ''
+    resources:
+      - pods
+  - verbs:
+      - get
+      - list
+      - watch
+    apiGroups:
+      - apps
+    resources:
+      - replicasets
+  - verbs:
+      - get
+      - list
+      - watch
+      - create
+      - update
+      - delete
+    apiGroups:
+      - route.openshift.io
+    resources:
+      - routes
