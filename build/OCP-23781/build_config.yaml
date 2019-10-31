@@ -1,0 +1,22 @@
+kind: BuildConfig
+apiVersion: build.openshift.io/v1
+metadata:
+  name: env-var-bc
+spec:
+  output:
+    to:
+      kind: ImageStreamTag
+      name: 'sti:latest'
+  strategy:
+    type: Source
+    sourceStrategy:
+      from:
+        kind: DockerImage
+        name: 'registry.access.redhat.com/jboss-eap-7/eap72-openshift:1.0'
+      env:
+        - name: TEST
+          value: '${user.home}'
+  source:
+    type: None
+  triggers:
+    - type: ConfigChange
