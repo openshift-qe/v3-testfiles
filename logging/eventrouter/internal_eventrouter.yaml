@@ -9,7 +9,7 @@ objects:
   - kind: ServiceAccount 
     apiVersion: v1
     metadata:
-      name: logging-eventrouter
+      name: eventrouter
       namespace: ${NAMESPACE}
   - kind: ClusterRole 
     apiVersion: v1
@@ -25,7 +25,7 @@ objects:
       name: event-reader-binding
     subjects:
     - kind: ServiceAccount
-      name: logging-eventrouter
+      name: eventrouter
       namespace: ${NAMESPACE}
     roleRef:
       kind: ClusterRole
@@ -33,7 +33,7 @@ objects:
   - kind: ConfigMap
     apiVersion: v1
     metadata:
-      name: logging-eventrouter
+      name: eventrouter
       namespace: ${NAMESPACE}
     data:
       config.json: |-
@@ -43,7 +43,7 @@ objects:
   - kind: Deployment
     apiVersion: apps/v1
     metadata:
-      name: logging-eventrouter
+      name: eventrouter
       namespace: ${NAMESPACE}
       labels:
         component: eventrouter
@@ -62,9 +62,9 @@ objects:
             component: eventrouter
             logging-infra: eventrouter
             provider: openshift
-          name: logging-eventrouter
+          name: eventrouter
         spec:
-          serviceAccount: logging-eventrouter
+          serviceAccount: eventrouter
           containers:
             - name: kube-eventrouter
               image: ${IMAGE}
@@ -81,11 +81,11 @@ objects:
           volumes:
             - name: config-volume
               configMap:
-                name: logging-eventrouter
+                name: eventrouter
 parameters:
   - name: IMAGE  
     displayName: Image
-    value: "image-registry.openshift-image-registry.svc:5000/openshift/ose-logging-eventrouter:v4.1.12"
+    value: "image-registry.openshift-image-registry.svc:5000/openshift/ose-logging-eventrouter:latest"
   - name: MEMORY 
     displayName: Memory
     value: "128Mi"

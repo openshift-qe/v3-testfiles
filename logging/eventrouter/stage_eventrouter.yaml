@@ -85,7 +85,7 @@ objects:
 parameters:
   - name: IMAGE  
     displayName: Image
-    value: "registry.redhat.io/openshift4/ose-logging-eventrouter:latest"
+    value: "registry.stage.redhat.io/openshift4/ose-logging-eventrouter:latest"
   - name: MEMORY 
     displayName: Memory
     value: "128Mi"
