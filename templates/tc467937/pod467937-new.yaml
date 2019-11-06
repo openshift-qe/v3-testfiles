@@ -1,6 +1,5 @@
 kind: Pod
 apiVersion: v1
-id: kurbernetes-metadata-volume-plugin
 metadata:
   labels:
     zone: us-est-coast
@@ -17,7 +16,7 @@ spec:
       command: ["sh", "-c", "while true; do if [[ -e /etc/labels ]]; then cat /etc/labels; fi; if [[ -e /etc/annotations ]]; then cat /etc/annotations; fi; sleep 5; done"]
       volumeMounts:
         - name: podinfo
-          mountPath: /etc
+          mountPath: /data/podinfo-dir
           readOnly: false
   volumes:
     - name: podinfo
