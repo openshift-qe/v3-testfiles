@@ -1,0 +1,17 @@
+apiVersion: "k8s.cni.cncf.io/v1"
+kind: NetworkAttachmentDefinition
+metadata:
+  name: macvlan-ipam-host-local
+spec:
+  config: '{
+          "name": "macvlan-ipam-host-local",
+          "type": "macvlan",
+          "mode": "macvlan-mode",
+          "master": "ens3",
+          "ipam": {
+            "type": "host-local",
+            "subnet": "66.6.6.0/24",
+            "rangeStart": "66.6.6.100",
+            "rangeEnd": "66.6.6.200"
+      }
+  }'

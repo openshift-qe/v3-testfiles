@@ -1,0 +1,18 @@
+#### Use: oc edit networks.operator.openshift.io cluster
+additionalNetworks:
+- name: CNO_raw
+  namespace: CNO_raw
+  rawCNIConfig: '{ "cniVersion": "0.3.1", "type": "bridge", "master": "ens5", "ipam":
+      { "type": "static", "addresses": [ { "address": "22.2.2.2/24", "gateway": "22.2.2.254"
+      } ] } }'
+  type: Raw
+
+
+
+spec:
+  additionalNetworks:
+  - name: CNO_raw
+    namespace: CNO_raw
+    rawCNIConfig: '{ "cniVersion": "0.3.1", "type": "bridge", "master": "ens5", "ipam":
+      { "type": "dhcp" } }'
+    type: Raw

@@ -1,0 +1,15 @@
+#### oc get networks.operator.openshift.io cluster -o yaml
+    
+additionalNetworks:
+- name: macvlan-ipam-static
+  namespace: test1
+  simpleMacvlanConfig:
+    ipamConfig:
+      staticIPAMConfig:
+        addresses:
+        - address: 22.2.2.2/24
+          gateway: 22.2.2.254
+      type: static
+    master: ens5
+    mode: bridge
+  type: SimpleMacvlan

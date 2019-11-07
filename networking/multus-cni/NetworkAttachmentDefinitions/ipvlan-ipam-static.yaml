@@ -1,0 +1,19 @@
+apiVersion: "k8s.cni.cncf.io/v1"
+kind: NetworkAttachmentDefinition
+metadata:
+  name: ipvlan-ipam-static 
+spec:
+  config: '{
+          "name": "ipvlan-ipam-static",
+          "type": "ipvlan",
+          "master": "ens3",
+          "ipam": {
+                    "type": "static",
+                    "addresses": [
+                        {
+                          "address": "22.2.2.2/24",
+                          "gateway": "22.2.2.254"
+                        }
+                    ]
+          }
+  }'

@@ -1,0 +1,14 @@
+apiVersion: "k8s.cni.cncf.io/v1"
+kind: NetworkAttachmentDefinition
+metadata:
+  name: macvlan-ipam-dhcp
+spec:
+  config: '{
+          "name": "macvlan-ipam-dhcp",
+          "type": "macvlan",
+          "mode": "macvlan-mode",
+          "master": "ens3",
+          "ipam": {
+                    "type": "dhcp"
+          }
+  }'

@@ -1,0 +1,20 @@
+apiVersion: "k8s.cni.cncf.io/v1"
+kind: NetworkAttachmentDefinition
+metadata:
+  name: macvlan-ipam-static
+spec:
+  config: '{
+          "name": "macvlan-ipam-static",
+          "type": "macvlan",
+          "mode": "macvlan-mode",
+          "master": "ens3",
+          "ipam": {
+                    "type": "static",
+                    "addresses": [
+                        {
+                          "address": "22.2.2.44/24",
+                          "gateway": "22.2.2.1"
+                        }
+                    ]
+          }
+  }'

@@ -1,0 +1,9 @@
+## Use “oc edit networks.operator.openshift.io cluster” to configure MACLVAN
+
+spec:
+  additionalNetworks:
+  - name: test-macvlan-case1
+    namespace: openshift-multus
+    type: SimpleMacvlan
+
+

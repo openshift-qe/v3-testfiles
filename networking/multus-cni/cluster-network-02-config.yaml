@@ -1,0 +1,23 @@
+
+metadata:
+  name: cluster
+spec:
+  clusterNetwork:
+  - cidr: 10.128.0.0/14
+    hostPrefix: 23
+  defaultNetwork:
+    openshiftSDNConfig:
+      mode: NetworkPolicy
+      vxlanPort: 4789
+      mtu: 1452
+      useExternalOpenvswitch: false
+    type: OpenshiftSDN
+  serviceNetwork: 
+  - 172.30.0.0/16
+  disableMultiNetwork: true
+  deployKubeProxy: false
+  kubeProxyConfig:
+    iptablesSyncPeriod: 30s
+    bindAddress: 0.0.0.0
+    proxyArguments:
+      iptables-min-sync-period: ["30s"]
