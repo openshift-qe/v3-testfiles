@@ -9,3 +9,6 @@ spec:
   - name: test-pod
     command: ["/bin/bash", "-c", "sleep 2000000000000"]
     image: dougbtv/centos-network
+  nodeSelector:
+    test: test
+
