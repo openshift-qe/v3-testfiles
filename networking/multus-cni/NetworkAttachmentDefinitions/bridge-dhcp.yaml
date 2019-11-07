@@ -1,0 +1,14 @@
+apiVersion: "k8s.cni.cncf.io/v1"
+kind: NetworkAttachmentDefinition
+metadata:
+  name: bridge-dhcp
+spec:
+  config: '{
+          "name": "bridge-dhcp",
+          "type": "bridge",
+          "ipMasq": true,
+          "bridge": "bridgedhcp",
+          "ipam": {
+                    "type": "dhcp",
+          }
+  }'
