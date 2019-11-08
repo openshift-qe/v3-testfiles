@@ -40,8 +40,9 @@
           "type": "Docker",
           "dockerStrategy": {
             "from": {
-              "kind": "DockerImage",
-              "name": "registry.access.redhat.com/rhscl/ruby-22-rhel7:latest"
+              "kind": "ImageStreamTag",
+              "name": "ruby:2.5",
+              "namespace": "openshift"
             },
             "env": [
               {
