@@ -11,14 +11,14 @@ spec:
     spec:
       containers:
       - name: hello-openshift
-        image: yapei/hello-openshift
+        image: aosqe/hello-openshift-centos
         resources:
           limits:
             memory: 256Mi
         ports:
         - containerPort: 80
       - name: hello-openshift-fedora
-        image: yapei/hello-openshift-fedora
+        image: aosqe/hello-openshift-fedora
         ports:
         - containerPort: 8080
         resources:

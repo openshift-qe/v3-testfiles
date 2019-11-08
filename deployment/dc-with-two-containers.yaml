@@ -24,7 +24,7 @@ spec:
         run: dctest
     spec:
       containers:
-      - image: yapei/hello-openshift
+      - image: aosqe/hello-openshift-centos
         imagePullPolicy: IfNotPresent
         name: dctest-1
         ports:
@@ -35,7 +35,7 @@ spec:
           limits:
             memory: 256Mi
         terminationMessagePath: /dev/termination-log
-      - image: yapei/hello-openshift-fedora
+      - image: aosqe/hello-openshift-fedora
         imagePullPolicy: IfNotPresent
         name: dctest-2
         ports:
