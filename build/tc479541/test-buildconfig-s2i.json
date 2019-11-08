@@ -40,8 +40,9 @@
       "type": "Source",
       "sourceStrategy": {
         "from": {
-          "kind": "DockerImage",
-          "name": "docker.io/qeopenshift/ruby-22-centos7"
+          "kind": "ImageStreamTag",
+          "name": "ruby:2.5",
+          "namespace": "openshift"
         },
         "pullSecret": {"name" : "pull"}
       }
