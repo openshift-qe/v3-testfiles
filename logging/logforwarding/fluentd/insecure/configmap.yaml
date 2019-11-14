@@ -1,0 +1,29 @@
+apiVersion: v1
+data:
+  fluent.conf: |
+    <source>
+      @type forward
+      port  24224
+    </source>
+
+    <match *_default_** **_kube-*_** **_openshift-*_** **_openshift_** journal.** system.var.log**>
+      @type file
+      append true
+      path /tmp/infra.logs
+    </match>
+    <match kubernetes.**>
+      @type file
+      append true
+      path /tmp/app.logs
+    </match>
+    <match linux-audit.log** k8s-audit.log** openshift-audit.log**>
+      @type file
+      append true
+      path /tmp/audit.logs
+    </match>
+    <match **>
+      @type stdout
+    </match>
+kind: ConfigMap
+metadata:
+  name: fluentdserver

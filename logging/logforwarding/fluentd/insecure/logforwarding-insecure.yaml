@@ -1,0 +1,24 @@
+apiVersion: logging.openshift.io/v1alpha1
+kind: LogForwarding
+metadata:
+  name: instance
+  namespace: openshift-logging
+spec:
+  outputs:
+    - name: fluentd-created-by-user
+      type: forward
+      endpoint: 'fluentdserver1.openshift-logging.svc:24224'
+      insecure: true
+  pipelines:
+    - name: clo-default-app-pipeline
+      inputType: logs.app
+      outputRefs:
+        - fluentd-created-by-user
+    - name: clo-default-infra-pipeline
+      inputType: logs.infra
+      outputRefs:
+        - fluentd-created-by-user
+    - name: clo-default-audit-pipeline
+      inputType: logs.audit
+      outputRefs:
+        - fluentd-created-by-user
