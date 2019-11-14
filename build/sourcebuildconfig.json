@@ -34,7 +34,7 @@
           "sourceStrategy": {
             "from": {
               "kind": "ImageStreamTag",
-              "name": "php:5.5",
+              "name": "php:latest",
               "namespace": "openshift"
             }
           }
