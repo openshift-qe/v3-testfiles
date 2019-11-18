@@ -4,4 +4,4 @@ metadata:
   name: slow
   annotations:
     storageclass.beta.kubernetes.io/is-default-class: "false"
-provisioner: kubernetes.io/#PROVISIONER#
+provisioner: kubernetes.io/xxxx
