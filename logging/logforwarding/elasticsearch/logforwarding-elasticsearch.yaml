@@ -11,11 +11,11 @@ spec:
       secret:
         name: piplinesecret
   pipelines:
-    - name: clo-default-app-pipeline
+    - name: app-pipeline
       inputType: logs.app
       outputRefs:
         - user-created-es
-    - name: clo-default-infra-pipeline
+    - name: infra-pipeline
       inputType: logs.infra
       outputRefs:
         - user-created-es

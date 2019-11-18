@@ -10,15 +10,15 @@ spec:
       endpoint: 'fluentdserver1.openshift-logging.svc:24224'
       insecure: true
   pipelines:
-    - name: clo-default-app-pipeline
+    - name: app-pipeline
       inputType: logs.app
       outputRefs:
         - fluentd-created-by-user
-    - name: clo-default-infra-pipeline
+    - name: infra-pipeline
       inputType: logs.infra
       outputRefs:
         - fluentd-created-by-user
-    - name: clo-default-audit-pipeline
+    - name: audit-pipeline
       inputType: logs.audit
       outputRefs:
         - fluentd-created-by-user
