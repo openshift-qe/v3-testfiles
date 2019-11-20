@@ -1,0 +1,13 @@
+apiVersion: console.openshift.io/v1
+kind: ConsoleLink
+metadata:
+  name: link-for-some-ns
+spec:
+  href: 'https://www.example.com'
+  location: NamespaceDashboard
+  # This text will appear in a box called "Laucher" under "namespace" or "project" in the web console
+  text: This only appear in some projects
+  namespaceDashboard:
+    namespaces:
+    # for these specific namespaces
+    - openshift-console
