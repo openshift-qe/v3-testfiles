@@ -11,14 +11,14 @@ spec:
       insecure: true
   pipelines:
     - name: app-pipeline
-      inputType: logs.app
+      inputSource: logs.app
       outputRefs:
         - fluentd-created-by-user
     - name: infra-pipeline
-      inputType: logs.infra
+      inputSource: logs.infra
       outputRefs:
         - fluentd-created-by-user
     - name: audit-pipeline
-      inputType: logs.audit
+      inputSource: logs.audit
       outputRefs:
         - fluentd-created-by-user
