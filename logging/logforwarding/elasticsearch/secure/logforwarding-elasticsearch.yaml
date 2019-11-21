@@ -12,14 +12,14 @@ spec:
         name: piplinesecret
   pipelines:
     - name: app-pipeline
-      inputType: logs.app
+      inputSource: logs.app
       outputRefs:
         - user-created-es
     - name: infra-pipeline
-      inputType: logs.infra
+      inputSource: logs.infra
       outputRefs:
         - user-created-es
     - name: audit-pipeline
-      inputType: logs.audit
+      inputSource: logs.audit
       outputRefs:
         - user-created-es
