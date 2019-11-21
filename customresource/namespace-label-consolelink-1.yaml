@@ -1,0 +1,14 @@
+apiVersion: console.openshift.io/v1
+kind: ConsoleLink
+metadata:
+ name: exampleone
+spec:
+ href: 'https://www.example.com'
+ location: NamespaceDashboard
+ text: Special link one
+ namespaceDashboard:
+   namespaceSelector:
+     matchLabels:
+       test: one
+   namespaces:
+     - uiautotest3
