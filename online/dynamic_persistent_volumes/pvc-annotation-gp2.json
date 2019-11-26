@@ -1,0 +1,21 @@
+{
+  "kind": "PersistentVolumeClaim",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "pvc-annotation-gp2",
+    "annotations": {
+       "volume.beta.kubernetes.io/storage-class": "gp2"
+    }
+  },
+  "spec": {
+    "accessModes": [
+      "ReadWriteOnce"
+    ],
+    "resources": {
+      "requests": {
+        "storage": "1Gi"
+      }
+    }
+  }
+}
+
