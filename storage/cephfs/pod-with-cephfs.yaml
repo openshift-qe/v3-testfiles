@@ -9,7 +9,7 @@
         "containers": [
             {
                 "name": "cephfs-rw",
-                "image": "jhou/hello-openshift",
+                "image": "aosqe/hello-openshift",
                 "volumeMounts": [
                     {
                         "mountPath": "/mnt/cephfs",

@@ -12,7 +12,7 @@ metadata:
 spec:
   containers:
     - name: client-container
-      image: docker.io/aosqe/hello-openshift
+      image: aosqe/hello-openshift
       securityContext:
         privileged: false
       volumeMounts:
