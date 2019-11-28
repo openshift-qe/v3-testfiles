@@ -10,7 +10,7 @@
     "spec": {
 		"initContainers": [{
 			"name": "init",
-			"image": "docker.io/aosqe/hello-openshift",
+			"image": "aosqe/hello-openshift",
 			"command": ["sh", "-c", "mkdir /mnt/gluster/subpath; cp /hello /mnt/gluster/subpath/hello"],
 			"volumeMounts": [{
 				"name": "gluster",
@@ -19,7 +19,7 @@
 		}],
         "containers": [{
             "name": "gluster",
-            "image": "docker.io/aosqe/hello-openshift",
+            "image": "aosqe/hello-openshift",
             "imagePullPolicy": "IfNotPresent",
             "volumeMounts": [{
                 "mountPath": "/mnt/gluster",

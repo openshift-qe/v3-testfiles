@@ -7,7 +7,7 @@ metadata:
 spec:
   containers:
     - name: myfrontend
-      image: jhou/hello-openshift
+      image: aosqe/hello-openshift
       ports:
         - containerPort: 80
           name: "http-server"

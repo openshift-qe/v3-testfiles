@@ -12,7 +12,7 @@ spec:
         name: hellopod
     spec:
       containers:
-        - image: docker.io/aosqe/hello-openshift
+        - image: aosqe/hello-openshift
           name: hellopod
           ports:
             - containerPort: 80

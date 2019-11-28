@@ -7,14 +7,14 @@ spec:
     fsGroup: 1001
   containers:
   - name: a
-    image: jhou/hello-openshift
+    image: aosqe/hello-openshift
     securityContext:
       runAsUser: 1009
     volumeMounts:
       - mountPath: "/example/hostpath/a"
         name: empty-vol
   - name: b
-    image: jhou/hello-openshift-fedora
+    image: aosqe/hello-openshift-fedora
     securityContext:
       runAsUser: 1010
     volumeMounts:

@@ -12,7 +12,7 @@
     "containers": [
       {
         "name": "cinder",
-        "image": "jhou/hello-openshift",
+        "image": "aosqe/hello-openshift",
         "ports": [
           {
             "containerPort": 8080,

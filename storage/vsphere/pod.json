@@ -7,7 +7,7 @@
     "spec": {
         "containers": [{
             "name": "vsphere",
-            "image": "docker.io/aosqe/hello-openshift",
+            "image": "aosqe/hello-openshift",
             "imagePullPolicy": "IfNotPresent",
             "volumeMounts": [{
                 "mountPath": "/mnt/vsphere",

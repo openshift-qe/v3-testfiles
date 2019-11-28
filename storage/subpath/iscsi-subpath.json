@@ -10,7 +10,7 @@
     "spec": {
 		"initContainers": [{
 			"name": "init",
-			"image": "docker.io/aosqe/hello-openshift",
+			"image": "aosqe/hello-openshift",
 			"command": ["sh", "-c", "mkdir /mnt/iscsi/subpath; cp /hello /mnt/iscsi/subpath/hello"],
 			"volumeMounts": [{
 				"name": "iscsi",
@@ -19,7 +19,7 @@
 		}],
         "containers": [{
             "name": "iscsi",
-            "image": "jhou/hello-openshift",
+            "image": "aosqe/hello-openshift",
             "imagePullPolicy": "IfNotPresent",
             "volumeMounts": [{
                 "name": "iscsi",

@@ -7,7 +7,7 @@ metadata:
    name: volume-test
 spec:
  containers:
-  - image: jhou/hello-openshift
+  - image: aosqe/hello-openshift
     name: azure
     ports: 
       - containerPort: 8080
