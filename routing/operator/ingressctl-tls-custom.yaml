@@ -5,7 +5,7 @@ metadata:
   namespace: openshift-ingress-operator
 spec:
   defaultCertificate:
-    name: test-certs
+    name: router-certs-default
   domain: router-test.example.com
   replicas: 1
   nodePlacement:

@@ -16,4 +16,4 @@ spec:
     - effect: NoSchedule
       operator: Exists
   tlsSecurityProfile:
-    type: Modern
+    type: Intermediate
