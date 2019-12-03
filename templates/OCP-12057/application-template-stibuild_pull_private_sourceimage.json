@@ -136,7 +136,7 @@
             {
               "from": {
                 "kind": "DockerImage",
-                "name": "docker.io/qeopenshift/ruby-22-centos7"
+                "name": "docker.io/centos/ruby-25-centos7"
               },
               "pullSecret": { "name": "pull" },
               "paths": [
@@ -153,7 +153,7 @@
           "sourceStrategy": {
             "from": {
               "kind": "ImageStreamTag",
-              "name": "ruby-22-centos7:latest"
+              "name": "ruby-25-centos7:latest"
             },
             "env": [
               {
