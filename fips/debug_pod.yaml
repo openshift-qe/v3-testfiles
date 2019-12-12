@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    debug.openshift.io/source-container: container-00
+    debug.openshift.io/source-resource: /v1, Resource=nodes/node_name
+  creationTimestamp: null
+  name: pod_name
+  namespace: default
+spec:
+  containers:
+  - command:
+    - /bin/sh
+    image: registry.redhat.io/rhel7/support-tools
+    name: container-00
+    resources: {}
+    securityContext:
+      privileged: true
+      runAsUser: 0
+    stdin: true
+    stdinOnce: true
+    tty: true
+    volumeMounts:
+    - mountPath: /host
+      name: host
+  hostNetwork: true
+  hostPID: true
+  nodeName: node_name
+  restartPolicy: Never
+  volumes:
+  - hostPath:
+      path: /
+      type: Directory
+    name: host
+status: {}
