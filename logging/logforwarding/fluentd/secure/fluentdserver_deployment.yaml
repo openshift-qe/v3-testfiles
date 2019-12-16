@@ -6,7 +6,6 @@ metadata:
     provider: aosqe
     component: "fluentd"
     logging-infra: "fluentdserver"
-  namespace: openshift-logging
 spec:
   replicas: 1
   revisionHistoryLimit: 10
