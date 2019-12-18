@@ -1,0 +1,32 @@
+apiVersion: console.openshift.io/v1
+kind: ConsoleLink
+metadata:
+  name: usermenu1
+spec:
+  href: https://www.youtube.com
+  location: UserMenu
+  text: usermenutest
+
+---
+apiVersion: console.openshift.io/v1
+kind: ConsoleLink
+metadata:
+  name: helpmenu1
+spec:
+  href: https://baidu.com
+  location: HelpMenu
+  text: Baidu
+
+---
+apiVersion: console.openshift.io/v1
+kind: ConsoleLink
+metadata:
+  name: applicationmenu1
+spec:
+  applicationMenu:
+    imageURL: https://cdn.sstatic.net/Sites/stackoverflow/company/img/logos/so/so-logo.svg?v=a010291124bf
+    section: stackoverflow.com
+  href:  https://stackoverflow.com
+  location: ApplicationMenu
+  text: stackoverflow
+
