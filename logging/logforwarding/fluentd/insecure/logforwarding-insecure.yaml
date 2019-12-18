@@ -7,7 +7,7 @@ spec:
   outputs:
     - name: fluentd-created-by-user
       type: forward
-      endpoint: 'fluentdserver1.openshift-logging.svc:24224'
+      endpoint: 'fluentdserver.openshift-logging.svc:24224'
       insecure: true
   pipelines:
     - name: app-pipeline
