@@ -1,11 +1,11 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: "fluentdserver1"
+  name: "fluentdserver"
   labels:
     provider: aosqe
     component: "fluentd"
-    logging-infra: "fluentdserver1"
+    logging-infra: "fluentdserver"
 spec:
   replicas: 1
   revisionHistoryLimit: 10
@@ -13,20 +13,24 @@ spec:
     matchLabels:
       provider: aosqe
       component: "fluentd"
-      logging-infra: "fluentdserver1"
+      logging-infra: "fluentdserver"
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        logging-infra: "fluentdserver1"
+        logging-infra: "fluentdserver"
         provider: aosqe
         component: "fluentd"
     spec:
       containers:
       - name: "fluentd"
-        image: "docker.io/fluent/fluentd:latest"
-        imagePullPolicy: "IfNotPresent"
+        image: "quay.io/openshift/origin-logging-fluentd:latest"
+        imagePullPolicy: "Always"
+        args:
+        - "fluentd"
+        - "-c"
+        - "/fluentd/etc/fluent.conf"
         ports:
         - containerPort: 24224
           name: fluentd
