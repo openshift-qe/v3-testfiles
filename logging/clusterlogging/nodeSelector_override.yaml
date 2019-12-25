@@ -10,7 +10,6 @@ spec:
     elasticsearch:
       nodeSelector:
         kubernetes.io/os: foo
-        elasticsearch: deploy
       nodeCount: 1
       resources:
         requests:
