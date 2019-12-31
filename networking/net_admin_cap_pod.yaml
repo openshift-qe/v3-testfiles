@@ -2,6 +2,8 @@ apiVersion: v1
 kind: Pod
 metadata:
   generateName: network-pod-
+  labels:
+          name: network-pod
 spec:
   containers:
   - name: network-pod
