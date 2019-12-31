@@ -1,0 +1,30 @@
+apiVersion: "logging.openshift.io/v1"
+kind: "ClusterLogging"
+metadata:
+  annotations:
+    clusterlogging.openshift.io/logforwardingtechpreview: enabled
+  name: "instance"
+  namespace: "openshift-logging"
+spec:
+  managementState: "Managed"
+  logStore:
+    type: "elasticsearch"
+    elasticsearch:
+      nodeCount: 1
+      redundancyPolicy: "ZeroRedundancy"
+      resources:
+        requests:
+          cpu: "100m"
+          memory: "1Gi"
+  visualization:
+    type: "kibana"
+    kibana:
+      replicas: 1
+  curation:
+    type: "curator"
+    curator:
+      schedule: "*/10 * * * *"
+  collection:
+    logs:
+      type: "fluentd"
+      fluentd: {}

@@ -5,7 +5,7 @@ metadata:
 spec:
   containers:
     - name: dynamic
-      image: docker.io/aosqe/hello-openshift
+      image: aosqe/hello-openshift
       ports:
         - containerPort: 80
           name: "http-server"

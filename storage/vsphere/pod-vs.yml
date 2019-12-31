@@ -5,7 +5,7 @@ metadata:
 spec:
   containers:
   - name: vs
-    image: docker.io/aosqe/hello-openshift
+    image: aosqe/hello-openshift
     command: ["sleep", "600000"]
     securityContext:
       privileged: true

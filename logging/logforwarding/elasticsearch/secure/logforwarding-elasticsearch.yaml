@@ -1,0 +1,25 @@
+apiVersion: logging.openshift.io/v1alpha1
+kind: LogForwarding
+metadata:
+  name: instance
+  namespace: openshift-logging
+spec:
+  outputs:
+    - name: user-created-es
+      type: elasticsearch
+      endpoint: 'elasticsearch-server.openshift-logging.svc:9200'
+      secret:
+        name: piplinesecret
+  pipelines:
+    - name: app-pipeline
+      inputSource: logs.app
+      outputRefs:
+        - user-created-es
+    - name: infra-pipeline
+      inputSource: logs.infra
+      outputRefs:
+        - user-created-es
+    - name: audit-pipeline
+      inputSource: logs.audit
+      outputRefs:
+        - user-created-es

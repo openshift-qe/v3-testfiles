@@ -12,7 +12,7 @@
     "containers": [
       {
         "name": "gce",
-        "image": "docker.io/aosqe/hello-openshift",
+        "image": "aosqe/hello-openshift",
         "ports": [
           {
             "containerPort": 8080,

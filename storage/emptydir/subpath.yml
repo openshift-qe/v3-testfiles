@@ -10,7 +10,7 @@ spec:
     # games(35) is member in group users(100)
     runAsUser: 35
   containers:
-    - image: docker.io/aosqe/hello-openshift
+    - image: aosqe/hello-openshift
       name: show
       volumeMounts:
         - name: "direct"

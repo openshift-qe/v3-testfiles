@@ -1,0 +1,8 @@
+apiVersion: console.openshift.io/v1
+kind: ConsoleLink
+metadata:
+  name: link-for-all-ns
+spec:
+  href: 'https://www.example.com'
+  location: NamespaceDashboard
+  text: This appears in all namespaces

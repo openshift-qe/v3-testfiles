@@ -33,12 +33,18 @@
 		"source": {
 		    "type": "Git",
 		    "git": {
-			"uri": "https://github.com/gabemontero/nosrc-extended-test-bldr.git"
+			"uri": "https://github.com/openshift-qe/nosrc-extended-test-bldr.git"
 		    }
 		},
 		"strategy": {
-		    "type": "Docker",
-		    "dockerStrategy": {
+		    "type": "Source",
+		    "sourceStrategy": {
+                         "from": {
+                           "kind": "ImageStreamTag",
+                           "name": "ruby:latest",
+                           "namespace": "openshift"
+                        },
+                         "scripts": "https://raw.githubusercontent.com/openshift-qe/nosrc-extended-test-bldr/master"
 		    }
 		},
 		"output":{
@@ -51,4 +57,3 @@
 	}
     ]
 }
-

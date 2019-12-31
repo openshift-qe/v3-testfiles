@@ -10,7 +10,7 @@
     "spec": {
         "containers": [{
             "name": "gluster",
-            "image": "jhou/hello-openshift",
+            "image": "aosqe/hello-openshift",
             "imagePullPolicy": "IfNotPresent",
             "securityContext": {
                 "privileged": true

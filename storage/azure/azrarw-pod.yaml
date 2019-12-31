@@ -4,7 +4,7 @@ metadata:
  name: azrarw
 spec:
  containers:
-  - image: docker.io/aosqe/hello-openshift
+  - image: aosqe/hello-openshift
     name: azure
     volumeMounts:
       - name: azure

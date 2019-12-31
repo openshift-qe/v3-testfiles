@@ -8,7 +8,7 @@
         "containers": [
             {
                 "name": "glusterfspod",
-                "image": "docker.io/aosqe/hello-openshift",
+                "image": "aosqe/hello-openshift",
                 "imagePullPolicy": "IfNotPresent",
                 "securityContext": {
                     "privileged": true
