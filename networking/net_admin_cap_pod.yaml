@@ -12,3 +12,4 @@ spec:
       capabilities:
         add: ["NET_ADMIN"]
   hostNetwork: true
+  nodeName: node-name
