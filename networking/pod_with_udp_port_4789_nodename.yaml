@@ -27,4 +27,4 @@ items:
           name: udp-pod
           image: aosqe/pod-for-ping
         restartPolicy: Always
-        nodeName: node-name
+      nodeName: node-name
