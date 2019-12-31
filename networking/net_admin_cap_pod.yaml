@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  generateName: network-pod-
+spec:
+  containers:
+  - name: network-pod
+    image: docker.io/bmeng/centos-network
+    securityContext:
+      capabilities:
+        add: ["NET_ADMIN"]
+  hostNetwork: true
+
