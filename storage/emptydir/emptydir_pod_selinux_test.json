@@ -35,7 +35,7 @@
       },
       {
         "name": "c2",
-        "image": "aosqe/hello-openshift-i",
+        "image": "aosqe/hello-openshift",
         "ports": [
           {
             "containerPort": 9091,
