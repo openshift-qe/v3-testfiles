@@ -1,0 +1,21 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  name: symlink-rel-link
+spec:
+  source:
+    dockerfile: |-
+      FROM centos:7
+      RUN mkdir -p /dest
+      COPY link/hello.txt /dest/
+      RUN cat /dest/hello.txt
+    images:
+    - from:
+        kind: DockerImage
+        name: docker.io/aosqe/symlink-test:relative
+      paths:
+      - destinationDir: link
+        sourcePath: /symlink-image/link/hello.txt
+    type: Dockerfile
+  strategy:
+    dockerStrategy: {}
