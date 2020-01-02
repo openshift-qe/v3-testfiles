@@ -12,14 +12,10 @@ spec:
         es: deploy1
       nodeCount: 1
       resources:
-        limits:
-          memory: 2Gi
         requests:
           cpu: 200m
           memory: 2Gi
-      storage:
-        size: "20G"
-        storageClassName: "gp2"
+      storage: {}
       redundancyPolicy: "ZeroRedundancy"
   visualization:
     type: "kibana"
