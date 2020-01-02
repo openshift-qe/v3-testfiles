@@ -17,7 +17,7 @@ spec:
         run: hello-openshift
     spec: 
       containers:
-      - image: aosqe/hello-openshift
+      - image: aosqe/storage
         imagePullPolicy: IfNotPresent 
         name: hello-openshift
         ports:

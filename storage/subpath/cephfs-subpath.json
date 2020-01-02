@@ -7,7 +7,7 @@
     "spec": {
 		"initContainers": [{
 			"name": "init",
-			"image": "aosqe/hello-openshift",
+			"image": "aosqe/storage",
             "command": ["sh", "-c", "mkdir /mnt/cephfs/subpath; cp /hello /mnt/cephfs/subpath/hello"],
 			"volumeMounts": [{
 				"name": "cephfs",
@@ -19,7 +19,7 @@
 		}],
         "containers": [{
             "name": "ceph",
-            "image": "aosqe/hello-openshift",
+            "image": "aosqe/storage",
             "imagePullPolicy": "IfNotPresent",
             "volumeMounts": [{
                 "mountPath": "/mnt/cephfs",

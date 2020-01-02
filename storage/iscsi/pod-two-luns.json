@@ -11,7 +11,7 @@
         "containers": [
             {
                 "name": "iscsi-rw",
-                "image": "aosqe/hello-openshift",
+                "image": "aosqe/storage",
                 "imagePullPolicy": "IfNotPresent",
                 "ports": [{
                     "containerPort": 6379

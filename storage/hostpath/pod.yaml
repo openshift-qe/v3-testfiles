@@ -7,7 +7,7 @@ metadata:
 spec:
   containers:
     - name: myfrontend
-      image: aosqe/hello-openshift
+      image: aosqe/storage
       securityContext:
           privileged: true
       ports:

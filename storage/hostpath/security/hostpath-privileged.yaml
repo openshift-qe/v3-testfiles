@@ -7,7 +7,7 @@ spec:
     fsGroup: 123456
   containers:
   - name: a
-    image: aosqe/hello-openshift
+    image: aosqe/storage
     ports:
       - containerPort: 8080
         protocol: "TCP"
@@ -17,7 +17,7 @@ spec:
       - mountPath: "/example/hostpath/a"
         name: host-vol
   - name: b
-    image: aosqe/hello-openshift-fedora
+    image: aosqe/storage
     ports:
       - containerPort: 8081
         protocol: "TCP"

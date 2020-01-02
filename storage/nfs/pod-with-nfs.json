@@ -10,7 +10,7 @@
     "spec": {
         "containers": [{
             "name": "myfrontend",
-            "image": "aosqe/hello-openshift",
+            "image": "aosqe/storage",
             "imagePullPolicy": "IfNotPresent",
             "ports": [{
                 "containerPort": 80,

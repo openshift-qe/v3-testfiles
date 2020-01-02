@@ -13,7 +13,7 @@
         },
         "containers": [{
             "name": "myfrontend",
-            "image": "aosqe/hello-openshift",
+            "image": "aosqe/storage",
             "imagePullPolicy": "IfNotPresent",
             "securityContext": {
                 "privileged": true

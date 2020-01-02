@@ -5,7 +5,7 @@ metadata:
 spec:
   containers:
     - name: privileged
-      image: aosqe/hello-openshift
+      image: aosqe/storage
       securityContext:
         privileged: true
       ports:

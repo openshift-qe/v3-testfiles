@@ -12,7 +12,7 @@
     "containers": [
       {
         "name": "c1",
-        "image": "aosqe/hello-openshift",
+        "image": "aosqe/storage",
         "ports": [
           {
             "containerPort": 8080,
@@ -35,7 +35,7 @@
       },
       {
         "name": "c2",
-        "image": "aosqe/hello-openshift-i",
+        "image": "aosqe/storage",
         "ports": [
           {
             "containerPort": 9091,

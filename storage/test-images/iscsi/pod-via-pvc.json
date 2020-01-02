@@ -10,7 +10,7 @@
     "spec": {
         "containers": [{
             "name": "iscsi",
-            "image": "aosqe/hello-openshift",
+            "image": "aosqe/storage",
             "imagePullPolicy": "IfNotPresent",
             "volumeMounts": [{
                 "mountPath": "/mnt/iscsi",

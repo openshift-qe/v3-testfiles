@@ -9,7 +9,7 @@ spec:
     - resources:
         limits :
           cpu: 0.5
-      image: aosqe/hello-openshift
+      image: aosqe/storage
       name: cinder
       ports: 
         - containerPort: 3306

@@ -12,7 +12,7 @@
     "containers": [
       {
         "name": "aws",
-        "image": "aosqe/hello-openshift",
+        "image": "aosqe/storage",
         "ports": [
           {
             "containerPort": 8080,

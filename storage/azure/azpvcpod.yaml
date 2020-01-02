@@ -4,7 +4,7 @@ metadata:
  name: azpvcpo
 spec:
  containers:
-  - image: aosqe/hello-openshift
+  - image: aosqe/storage
     name: azure
     volumeMounts:
       - name: azure
