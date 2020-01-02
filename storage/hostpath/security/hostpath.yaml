@@ -19,7 +19,7 @@ spec:
       - mountPath: "/example/hostpath/a"
         name: host-vol
   - name: b
-    image: aosqe/hello-openshift-i
+    image: aosqe/hello-openshift
     ports:
       - containerPort: 8081
         protocol: "TCP"
