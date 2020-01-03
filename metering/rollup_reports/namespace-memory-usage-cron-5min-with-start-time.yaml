@@ -3,7 +3,7 @@ kind: Report
 metadata:
   name: namespace-memory-usage-cron-5min-with-starttime
 spec:
-  reportingStart: '2019-05-21T12:44:00Z'
+  reportingStart: '2020-05-21T12:44:00Z'
   query: "namespace-memory-usage"
   schedule:
     period: "cron"
