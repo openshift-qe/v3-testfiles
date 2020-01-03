@@ -1,0 +1,12 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: foo-encrypted
+parameters:
+  csi.storage.k8s.io/fsType: ext4
+  encrypted: "true"
+  csi.storage.k8s.io/provisioner-secret-name: aws-creds
+  csi.storage.k8s.io/provisioner-secret-namespace: kube-system
+provisioner: ebs.csi.aws.com
+reclaimPolicy: Delete
+volumeBindingMode: WaitForFirstConsumer
