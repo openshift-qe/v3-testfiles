@@ -13,5 +13,4 @@ metadata:
 spec:
   containers:
   - name:  runtimeconfig-pod
-    command: ["/bin/bash", "-c", "trap : TERM INT; sleep infinity & wait"]
-    image: dougbtv/centos-network
+    image: docker.io/bmeng/centos-network
