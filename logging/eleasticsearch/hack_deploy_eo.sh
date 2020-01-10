@@ -1,6 +1,7 @@
 #!/bin/bash
 registry=${1:-"origin"}
 image_version=${2:-":latest"}
+branch=${3:-"4.3"}
 #image_version="@sha256:xxxx"
 
 if [[ X"$registry" == X"origin" ]]; then
@@ -12,15 +13,15 @@ if [[ X"$registry" == X"internal" ]]; then
 fi
 
 if [[ X"$registry" == X"brew" ]]; then
-    registry_url="xxxx/openshift3-ose-"
+    registry_url="registry-proxy.engineering.redhat.com/rh-osbs/openshift3-ose-"
 fi
 
 if [[ X"$registry" == X"stage" ]]; then
-    registry_url="xxxx/ose-"
+    registry_url="registry.stage.redhat.io/openshif4/ose-"
 fi
 
 if [[ X"$registry" == X"prod" ]]; then
-    registry_url="registry.redhat.io/openshift4/ose-"
+    registry_url="registry.redhat.io/openshift3/ose-"
 fi
 
 echo 'apiVersion: v1
@@ -40,6 +41,10 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: elasticsearch-operator' |oc create -f -
+
+if [[ $branch == "4.3" ]]; then
+   oc create -f https://raw.githubusercontent.com/openshift/elasticsearch-operator/release-4.3/manifests/4.3/elasticsearches.crd.yaml
+fi
 
 echo '---
 kind: ClusterRole
@@ -121,21 +126,6 @@ roleRef:
   kind: ClusterRole
   name: elasticsearch-operator
   apiGroup: rbac.authorization.k8s.io' | oc create -f -
-
-echo '---
-apiVersion: apiextensions.k8s.io/v1beta1
-kind: CustomResourceDefinition
-metadata:
-  name: elasticsearches.logging.openshift.io
-spec:
-  group: logging.openshift.io
-  names:
-    kind: Elasticsearch
-    listKind: ElasticsearchList
-    plural: elasticsearches
-    singular: elasticsearch
-  scope: Namespaced
-  version: v1'|oc create -f -
 
 echo "---
 apiVersion: apps/v1
