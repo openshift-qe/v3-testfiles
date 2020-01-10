@@ -5,13 +5,9 @@ metadata:
   annotations:
     k8s.v1.cni.cncf.io/networks: '[
             { "name": "runtimeconfig-def-ip",
-              "ips": [ "22.2.2.100/24" ] }
+              "ips": [ "192.168.22.2/24" ] }
     ]'
 spec:
   containers:
   - name: runtimeconfig-pod-ip
-    image: docker.io/centos/tools:latest
-    command:
-    - /sbin/init
-    securityContext:
-      privileged: true
+    image: docker.io/bmeng/centos-network
