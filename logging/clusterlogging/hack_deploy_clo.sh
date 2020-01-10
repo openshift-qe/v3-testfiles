@@ -1,6 +1,7 @@
 #!/bin/bash
 registry=${1:-"origin"}
 image_version=${2:-":latest"}
+branch="4.3"
 #image_version="@sha256:xxxx"
 
 if [[ X"$registry" == X"internal" ]]; then
@@ -12,15 +13,15 @@ if [[ X"$registry" == X"origin" ]]; then
 fi
 
 if [[ X"$registry" == X"brew" ]]; then
-    registry_url="xxxx/openshift3-ose-"
+    registry_url="registry-proxy.engineering.redhat.com/rh-osbs/openshift3-ose-"
 fi
 
 if [[ X"$registry" == X"stage" ]]; then
-    registry_url="xxxx/ose-"
+    registry_url="registry.stage.redhat.io/openshif4/ose-"
 fi
 
 if [[ X"$registry" == X"prod" ]]; then
-    registry_url="registry.redhat.io/openshift4/ose-"
+    registry_url="registry.redhat.io/openshift3/ose-"
 fi
 
 echo '
@@ -35,6 +36,13 @@ metadata:
     openshift.io/cluster-monitoring: "true"' |oc create -f -
 
 oc project openshift-logging
+if [[ $branch == "4.3" ]]; then
+    oc create -f https://raw.githubusercontent.com/openshift/cluster-logging-operator/release-4.3/manifests/4.3/0100_clusterroles.yaml
+    oc create -f https://raw.githubusercontent.com/openshift/cluster-logging-operator/release-4.3/manifests/4.3/0110_clusterrolebindings.yaml
+    oc create -f https://raw.githubusercontent.com/openshift/cluster-logging-operator/release-4.3/manifests/4.3/cluster-loggings.crd.yaml
+    oc create -f https://raw.githubusercontent.com/openshift/cluster-logging-operator/release-4.3/manifests/4.3/collectors.crd.yaml
+    oc create -f https://raw.githubusercontent.com/openshift/cluster-logging-operator/release-4.3/manifests/4.3/logforwardings.crd.yaml
+fi
 
 echo 'apiVersion: v1
 kind: ServiceAccount
@@ -101,6 +109,7 @@ rules:
   - priorityclasses
   verbs:
   - "*" '| oc create -f -
+
 echo '---
 kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1beta1
@@ -126,21 +135,6 @@ subjects:
 roleRef:
   kind: ClusterRole
   name: cluster-logging-operator-priority' | oc create -f -
-
-echo 'apiGroup: rbac.authorization.k8s.io
-apiVersion: apiextensions.k8s.io/v1beta1
-kind: CustomResourceDefinition
-metadata:
-  name: clusterloggings.logging.openshift.io
-spec:
-  group: logging.openshift.io
-  names:
-    kind: ClusterLogging
-    listKind: ClusterLoggingList
-    plural: clusterloggings
-    singular: clusterlogging
-  scope: Namespaced
-  version: v1alpha1'|oc create -f -
 
 echo "apiVersion: extensions/v1beta1
 kind: Deployment
