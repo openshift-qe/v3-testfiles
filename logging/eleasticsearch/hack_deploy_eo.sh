@@ -7,16 +7,20 @@ if [[ X"$registry" == X"origin" ]]; then
     registry_url="quay.io/openshift/origin-"
 fi
 
+if [[ X"$registry" == X"internal" ]]; then
+    registry_url="image-registry.openshift-image-registry.svc:5000/openshift/ose-"
+fi
+
 if [[ X"$registry" == X"brew" ]]; then
-    registry_url="registry-proxy.engineering.redhat.com/rh-osbs/openshift3-ose-"
+    registry_url="xxxx/openshift3-ose-"
 fi
 
 if [[ X"$registry" == X"stage" ]]; then
-    registry_url="registry.stage.redhat.io/openshif4/ose-"
+    registry_url="xxxx/ose-"
 fi
 
 if [[ X"$registry" == X"prod" ]]; then
-    registry_url="registry.redhat.io/openshift3/ose-"
+    registry_url="registry.redhat.io/openshift4/ose-"
 fi
 
 echo 'apiVersion: v1
@@ -112,7 +116,7 @@ metadata:
 subjects:
 - kind: ServiceAccount
   name: elasticsearch-operator
-  namespace: openshift-logging
+  namespace: openshift-operators-redhat
 roleRef:
   kind: ClusterRole
   name: elasticsearch-operator

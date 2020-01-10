@@ -3,20 +3,24 @@ registry=${1:-"origin"}
 image_version=${2:-":latest"}
 #image_version="@sha256:xxxx"
 
+if [[ X"$registry" == X"internal" ]]; then
+    registry_url="image-registry.openshift-image-registry.svc:5000/openshift/ose-"
+fi
+
 if [[ X"$registry" == X"origin" ]]; then
-    registry_url="quay.io/openshift/"
+    registry_url="quay.io/openshift/origin-"
 fi
 
 if [[ X"$registry" == X"brew" ]]; then
-    registry_url="registry-proxy.engineering.redhat.com/rh-osbs/openshift3-ose-"
+    registry_url="xxxx/openshift3-ose-"
 fi
 
 if [[ X"$registry" == X"stage" ]]; then
-    registry_url="registry.stage.redhat.io/openshif4/ose-"
+    registry_url="xxxx/ose-"
 fi
 
 if [[ X"$registry" == X"prod" ]]; then
-    registry_url="registry.redhat.io/openshift3/ose-"
+    registry_url="registry.redhat.io/openshift4/ose-"
 fi
 
 echo '
@@ -138,10 +142,11 @@ spec:
   scope: Namespaced
   version: v1alpha1'|oc create -f -
 
-echo "apiVersion: apps/v1
+echo "apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: cluster-logging-operator
+  namespace: openshift-logging
 spec:
   replicas: 1
   selector:
@@ -161,8 +166,24 @@ spec:
         - cluster-logging-operator
         env:
           - name: WATCH_NAMESPACE
+            value: openshift-logging
+          - name: POD_NAME
             valueFrom:
               fieldRef:
-                fieldPath: metadata.namespace
+                apiVersion: v1
+                fieldPath: metadata.name
           - name: OPERATOR_NAME
-            value: cluster-logging-operator " | oc create -f -
+            value: cluster-logging-operator 
+          - name: ELASTICSEARCH_IMAGE
+            value: ${registry_url}logging-elasticsearch5${image_version}
+          - name: FLUENTD_IMAGE
+            value: ${registry_url}logging-fluentd${image_version}
+          - name: KIBANA_IMAGE
+            value: ${registry_url}logging-kibana5${image_version}
+          - name: CURATOR_IMAGE
+            value: ${registry_url}logging-curator5${image_version}
+          - name: OAUTH_PROXY_IMAGE
+            value: ${registry_url}oauth-proxy${image_version}
+          - name: PROMTAIL_IMAGE
+            value: ${registry_url}promtail${image_version}
+" | oc apply -f -
