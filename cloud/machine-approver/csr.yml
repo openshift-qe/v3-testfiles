@@ -3,7 +3,7 @@ kind: CertificateSigningRequest
 metadata:
   generateName: csr-test-
   labels:
-      test: "true"
+      testpendingcsr: "true"
 spec:
   groups:
   - system:nodes
