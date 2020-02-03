@@ -14,6 +14,7 @@ else
 fi
 
 rsyslogservers=$(oc get service -l component=rsyslogserver -o jsonpath={.items[*].spec.clusterIP})
+rsyslogservers="rsyslogserver.openshift-logging.svc.cluster.local"
 declare -a serviceIPs
 serviceIPs=($(echo $rsyslogservers))
 if [[ ${#serviceIPs[@]} == 0 ]]; then 

@@ -1,5 +1,5 @@
 #! /bin/bash
-# Enable fluentd to send log to remote rsyslog server using out_rsyslog_buffer. out_rsyslog_buffer send message via TCP.
+# Enable fluentd to send log to remote rsyslog server using out_rsyslog. out_rsyslog send message via UDP.
 oc project openshift-logging
 kubeversion=$(oc version -o json | jq '.serverVersion.minor')
 kubeversion=${kubeversion:1:2}
@@ -14,6 +14,7 @@ else
 fi
 
 rsyslogservers=$(oc get service -l component=rsyslogserver -o jsonpath={.items[*].spec.clusterIP})
+rsyslogservers="rsyslogserver.openshift-logging.svc.cluster.local"
 declare -a serviceIPs
 serviceIPs=($(echo $rsyslogservers))
 if [[ ${#serviceIPs[@]} == 0 ]]; then 
