@@ -3,6 +3,9 @@ kind: Deployment
 metadata:
   name: hello-openshift
 spec:
+  selector:
+    matchLabels:
+      app: hello-openshift
   replicas: 3
   template:
     metadata:
