@@ -1,0 +1,16 @@
+apiVersion: machineconfiguration.openshift.io/v1
+kind: MachineConfig
+metadata:
+  name: 99-worker-journald-conf2
+spec:
+  config:
+  config:
+    storage:
+      files:
+      - contents:
+          source: data:text/plain;charset=utf-8;base64,W3NvdXJjZSx5YW1sXQotLS0tCkNvbXByZXNzPW5vIApGb3J3YXJkVG9Db25zb2xlPXllcyAKRm9yd2FyZFRvU3lzbG9nPW5vIApNYXhSZXRlbnRpb25TZWM9MzBzIApSYXRlTGltaXRCdXJzdD0xMDAwMCAKUmF0ZUxpbWl0SW50ZXJ2YWw9MXMgClN0b3JhZ2U9dm9sYXRpbGUgClN5bmNJbnRlcnZhbFNlYz0xcyAKU3lzdGVtTWF4VXNlPThnIApTeXN0ZW1LZWVwRnJlZT0yMCUgClN5c3RlbU1heEZpbGVTaXplMTBNIAo=
+          verification: {}
+        filesystem: root
+        mode: 644
+        path: /etc/systemd/journald.conf
+    systemd: {}
