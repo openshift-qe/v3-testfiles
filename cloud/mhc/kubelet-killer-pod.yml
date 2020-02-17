@@ -10,7 +10,7 @@ spec:
   - command:
     - pkill
     - -STOP
-    - hyperkube
+    - kubelet
     image: busybox
     imagePullPolicy: Always
     name: kubelet-killer
