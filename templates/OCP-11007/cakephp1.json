@@ -101,7 +101,7 @@
             "from": {
               "kind": "ImageStreamTag",
               "namespace": "${NAMESPACE}",
-              "name": "php:7.0"
+              "name": "php:latest"
             },
             "env":  [
               {
