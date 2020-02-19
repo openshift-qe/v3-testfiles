@@ -8,6 +8,8 @@ spec:
     name: router-certs-default
   domain: router-test.example.com
   replicas: 1
+  endpointPublishingStrategy:
+    type: HostNetwork
   nodePlacement:
     nodeSelector:
       matchLabels:
