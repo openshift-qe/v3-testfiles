@@ -13,5 +13,5 @@ spec:
             values:
             - "4"
   containers:
-  - name: rhel7
-    image: registry.access.redhat.com/openshift3/container-engine
+  - name: hello-openshift
+    image: openshift/hello-openshift

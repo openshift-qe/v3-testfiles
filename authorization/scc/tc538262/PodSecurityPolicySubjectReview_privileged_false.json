@@ -1,5 +1,5 @@
 {
-    "kind": "PodSecurityPolicySubjectReview",
+    "kind": "PodSecurityPolicySelfSubjectReview",
     "apiVersion": "v1",
     "metadata": {
         "name": "pspsr"
@@ -51,7 +51,7 @@
             }
         }
     },
-    "status": {
+	"status": {
 
-    }
+	}
 }

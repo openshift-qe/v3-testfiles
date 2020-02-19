@@ -9,7 +9,7 @@ data:
         ca_private_key_path /etc/fluentd/secrets/ca.key
       </transport>
       <security>
-        shared_key fluentdserver
+        shared_key "#{File.open('/etc/fluentd/secrets/shared_key') do |f| f.readline end.rstrip}"
         self_hostname fluentdserver
       </security>
     </source>

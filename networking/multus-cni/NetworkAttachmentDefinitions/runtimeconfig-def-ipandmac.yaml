@@ -5,10 +5,10 @@ metadata:
 spec:
   config: '{
       "cniVersion": "0.3.1",
+      "name": "runtimeconfig-def",
       "plugins": [{
           "type": "macvlan",
           "capabilities": { "ips": true },
-          "master": "ens5",
           "mode": "bridge",
           "ipam": {
             "type": "static"

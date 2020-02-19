@@ -1,0 +1,83 @@
+{
+  "kind": "Template",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "paused-build",
+    "creationTimestamp": null,
+    "annotations": {
+      "description": "",
+      "iconClass": "icon-ruby",
+      "tags": "instant-app,ruby"
+    }
+  },
+  "objects": [
+    {
+      "kind": "ImageStream",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "ruby-25-centos7"
+      },
+      "spec": {
+        "dockerImageRepository": "centos/ruby-25-centos7"
+      },
+      "status": {
+        "dockerImageRepository": ""
+      }
+    },
+    {
+      "kind": "ImageStream",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "ruby-sample"
+      },
+      "spec": {},
+      "status": {
+        "dockerImageRepository": ""
+      }
+    },
+    {
+      "kind": "BuildConfig",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "paused-build",
+        "creationTimestamp": null,
+        "labels": {
+          "name": "paused-build"
+        }
+      },
+      "spec": {
+        "source": {
+          "type": "Git",
+          "git": {
+            "uri": "https://github.com/openshift/ruby-ex.git"
+          }
+        },
+        "strategy": {
+          "type": "Source",
+          "sourceStrategy": {
+            "from": {
+              "kind": "ImageStreamTag",
+              "name": "ruby-25-centos7:latest"
+            }
+          }
+        },
+        "triggers": [
+          {
+            "type": "ImageChange",
+            "imageChange": {}
+          }
+        ],
+        "output": {
+          "to": {
+            "kind": "ImageStreamTag",
+            "name": "ruby-sample:latest"
+          }
+        }
+      }
+    }
+  ],
+  "parameters": [],
+  "labels": {
+    "template": "application-template-stibuild"
+  }
+}

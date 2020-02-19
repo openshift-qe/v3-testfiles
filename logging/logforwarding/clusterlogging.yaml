@@ -14,8 +14,8 @@ spec:
       redundancyPolicy: "ZeroRedundancy"
       resources:
         requests:
-          cpu: "300m"
-          memory: "2Gi"
+          cpu: "100m"
+          memory: "1Gi"
   visualization:
     type: "kibana"
     kibana:

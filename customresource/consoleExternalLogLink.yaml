@@ -1,0 +1,28 @@
+apiVersion: console.openshift.io/v1
+kind: ConsoleExternalLogLink
+metadata:
+  name: consolelog1
+spec:
+  text: externalloglink1
+  hrefTemplate: https://stackoverflow.com/ 
+
+---
+
+apiVersion: console.openshift.io/v1
+kind: ConsoleExternalLogLink
+metadata:
+  name: consolelog2
+spec:
+  hrefTemplate: 'https://example.com/logs?resourceName=${resourceName}&containerName=${containerName}&resourceNamespace=${resourceNamespace}'
+  text: Example Logs
+
+---
+
+apiVersion: console.openshift.io/v1
+kind: ConsoleExternalLogLink
+metadata:
+  name: consolelog3
+spec:
+  text: userprojectLogLink3
+  hrefTemplate: https://stackoverflow.com/
+  namespaceFilter: ^(?!openshift).*

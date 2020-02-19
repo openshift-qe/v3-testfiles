@@ -8,27 +8,18 @@ spec:
     seLinuxOptions:
       level: s0:c13,c2
   containers:
-  - name: a
-    image: aosqe/hello-openshift
-    ports:
-      - containerPort: 8080
-        protocol: "TCP"
-    securityContext:
-      runAsUser: 1000130001
-    volumeMounts:
-      - mountPath: "/example/hostpath/a"
-        name: host-vol
-  - name: b
-    image: aosqe/hello-openshift-i
+  - image: aosqe/hello-openshift
+    name: a
     ports:
       - containerPort: 8081
         protocol: "TCP"
     securityContext:
-      runAsUser: 1000130002
+      runAsUser: 1000130001
     volumeMounts:
-      - mountPath: "/example/hostpath/b"
+      - mountPath: "/example/hostpath"
         name: host-vol
   volumes:
     - name: host-vol
       hostPath:
         path: "/tmp/example-pod"
+
