@@ -3,6 +3,6 @@ kind: MachineConfig
 metadata:
   labels:
     machineconfiguration.openshift.io/role: worker
-  name: 99-fips-worker
+  name: 99-worker-fips
 spec:
   fips: true

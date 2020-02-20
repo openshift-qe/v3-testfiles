@@ -3,6 +3,6 @@ kind: MachineConfig
 metadata:
   labels:
     machineconfiguration.openshift.io/role: master
-  name: 99-fips-master
+  name: 99-master-fips
 spec:
   fips: true
