@@ -1,0 +1,10 @@
+{
+   "kind": "Policy",
+   "apiVersion": "v1",
+   "predicates": [
+      {
+         "name": "HostName"
+      }
+   ],
+   "priorities": []
+}
