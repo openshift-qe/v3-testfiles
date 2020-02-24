@@ -1,7 +1,7 @@
 apiVersion: "autoscaling.openshift.io/v1beta1"
 kind: "MachineAutoscaler"
 metadata:
-  generateName: autoscale-
+  name:
   namespace: "openshift-machine-api"
 spec:
   minReplicas: 1
