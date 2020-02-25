@@ -1,4 +1,4 @@
-apiVersion: "autoscaling.openshift.io/v1alpha1"
+apiVersion: "autoscaling.openshift.io/v1"
 kind: "ClusterAutoscaler"
 metadata:
   name: "default"
@@ -8,3 +8,4 @@ spec:
     delayAfterAdd: 10s
     delayAfterDelete: 10s
     delayAfterFailure: 10s
+    unneededTime: 10s
