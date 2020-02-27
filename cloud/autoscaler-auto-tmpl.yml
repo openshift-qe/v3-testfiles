@@ -2,6 +2,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: workload
+  namespace: openshift-machine-api
 spec:
   template:
     spec:
