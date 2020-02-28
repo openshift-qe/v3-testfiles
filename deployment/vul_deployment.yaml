@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vulhigh
+spec:
+  selector:
+    matchLabels:
+      app: vulhigh
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: vulhigh
+    spec:
+      containers:
+        - name: vulhigh
+          image: quay.io/bitnami/redis@sha256:c51f9b027d358a07b7201e37163e0fabb12b1ac06a640ab1a84a78f541e6c3fa
+          ports:
+            - containerPort: 8080
+          env:
+            - name: ALLOW_EMPTY_PASSWORD
+              value: 'yes'
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vul_ruby
+spec:
+  selector:
+    matchLabels:
+      app: hello-openshift
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: hello-openshift
+    spec:
+      containers:
+        - name: hello-openshift
+          image: quay.io/hasha/rubyex-vul:latest
+          ports:
+            - containerPort: 8080
