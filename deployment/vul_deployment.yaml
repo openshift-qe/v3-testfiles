@@ -6,7 +6,7 @@ spec:
   selector:
     matchLabels:
       app: vulhigh
-  replicas: 3
+  replicas: 1
   template:
     metadata:
       labels:
@@ -31,7 +31,7 @@ spec:
   selector:
     matchLabels:
       app: hello-openshift
-  replicas: 3
+  replicas: 1
   template:
     metadata:
       labels:
@@ -39,6 +39,6 @@ spec:
     spec:
       containers:
         - name: hello-openshift
-          image: quay.io/hasha/rubyex-vul:latest
+          image: docker.io/aosqe/rubyex-vul:latest
           ports:
             - containerPort: 8080
