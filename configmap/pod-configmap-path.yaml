@@ -1,37 +1,33 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: Pod
 metadata:
   name: mariadb
+  labels:
+    app: mariadb
 spec:
-  replicas: 1
-  template:
-    metadata:
-      labels:
-        app: mariadb
-    spec:
-      containers:
-      - args: [bash, -c,
-        'for ((i = 0; ; i++)); do echo "$i: multiconfigmap-path-testing"; sleep 1; done']
-        image: ubuntu:latest
-        name: ubuntu
-        volumeMounts:
-        - mountPath: /etc/whatever
-          name: global-volume
-        - mountPath: /opt/script/bin
-          name: script-volume
-      restartPolicy: Always
-      volumes:
-      - configMap:
-          items:
-          - key: configs
-            path: globals.yaml
-          - key: network
-            path: network_topology.yaml
-          name: default-files
-        name: global-volume
-      - configMap:
-          items:
-          - key: start-script
-            path: start_script.py
-          name: default-files
-        name: script-volume
+  containers:
+  - args: [bash, -c,
+    'for ((i = 0; ; i++)); do echo "$i: multiconfigmap-path-testing"; sleep 1; done']
+    image: ubuntu:latest
+    name: ubuntu
+    volumeMounts:
+    - mountPath: /etc/whatever
+      name: global-volume
+    - mountPath: /opt/script/bin
+      name: script-volume
+  restartPolicy: Always
+  volumes:
+  - configMap:
+      items:
+      - key: configs
+        path: globals.yaml
+      - key: network
+        path: network_topology.yaml
+      name: default-files
+    name: global-volume
+  - configMap:
+      items:
+      - key: start-script
+        path: start_script.py
+      name: default-files
+    name: script-volume
