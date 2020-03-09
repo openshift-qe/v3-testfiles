@@ -1,0 +1,12 @@
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: list-pod
+  namespace: test-pro
+rules:
+  - verbs:
+      - list
+    apiGroups:
+      - ''
+    resources:
+      - pods
