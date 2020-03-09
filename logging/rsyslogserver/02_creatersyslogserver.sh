@@ -23,11 +23,16 @@ objects:
       global(processInternalMessages="on")
       module(load="imptcp")
       module(load="imudp" TimeRequery="500")
-      module(load="omstdout")
 
       input(type="imptcp" port="514")
       input(type="imudp" port="514")
-      action(type="omstdout")
+
+      :programname, contains, "kubernetes.var.log.containers" {
+        if $msg contains "namespace_name=openshift" or $msg contains "namespace_name=default" or $msg contains "namespace_name=kube" then /var/log/custom/infra-container.log
+        if not ($msg contains "namespace_name=openshift" or $msg contains "namespace_name=default" or $msg contains "namespace_name=kube") then /var/log/custom/app-container.log
+      }
+      :programname, !contains, "kubernetes.var.log.containers" /var/log/custom/infra.log
+
 - kind: ConfigMap
   apiVersion: v1
   metadata:
