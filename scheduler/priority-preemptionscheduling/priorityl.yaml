@@ -1,0 +1,8 @@
+apiVersion: scheduling.k8s.io/v1beta1
+kind: PriorityClass
+metadata:
+  name: priorityl
+value: 1
+globalDefault: false
+description: "This priority class should be used for XYZ service pods only."
+
