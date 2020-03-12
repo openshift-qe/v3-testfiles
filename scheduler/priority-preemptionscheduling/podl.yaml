@@ -11,8 +11,8 @@ spec:
     imagePullPolicy: IfNotPresent
     resources:
       requests:
-       cpu: 500m
-       memory: 500Mi
+       cpu: 50m
+       memory: 9000Mi
   priorityClassName: priorityl
   terminationGracePeriodSeconds: 60
 
