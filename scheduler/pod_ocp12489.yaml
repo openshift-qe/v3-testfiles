@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+ name: pod-request
+labels:
+ name: pod-request
+spec:
+ containers:
+ - name: pod-request
+   image: gcr.io/google_containers/nginx
+   resources:
+    requests:
+     memory: 2000Mi
+
