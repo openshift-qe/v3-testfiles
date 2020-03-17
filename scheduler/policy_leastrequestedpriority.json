@@ -1,0 +1,11 @@
+{
+   "kind": "Policy",
+   "apiVersion": "v1",
+   "predicates": [],
+   "priorities": [
+      {
+         "name": "LeastRequestedPriority",
+         "weight": 1
+      }
+   ]
+}
