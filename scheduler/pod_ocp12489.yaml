@@ -7,7 +7,7 @@ labels:
 spec:
  containers:
  - name: pod-request
-   image: gcr.io/google_containers/nginx
+   image: openshift/hello-openshift
    resources:
     requests:
      memory: 2000Mi
