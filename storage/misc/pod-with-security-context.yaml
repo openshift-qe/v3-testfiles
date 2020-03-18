@@ -1,0 +1,19 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: mypod
+  labels: {}
+spec:
+  containers:
+    - name: mycontainer
+      image: aosqe/storage
+      securityContext:
+        privileged: true
+      volumeMounts:
+      - mountPath: "/mnt/storage"
+        name: myvolume
+  volumes:
+    - name: myvolume
+      persistentVolumeClaim:
+        claimName: mypvc
+  securityContext: {}

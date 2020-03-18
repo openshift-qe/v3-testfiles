@@ -1,0 +1,11 @@
+{
+   "kind": "Policy",
+   "apiVersion": "v1",
+   "predicates": [],
+   "priorities": [
+      {
+         "name": "ServiceSpreadingPriority",
+         "weight": 1
+      }
+   ]
+}

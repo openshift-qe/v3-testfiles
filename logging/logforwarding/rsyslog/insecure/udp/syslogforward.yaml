@@ -1,0 +1,24 @@
+apiVersion: logging.openshift.io/v1alpha1
+kind: LogForwarding
+metadata:
+  name: instance
+  namespace: openshift-logging
+spec:
+  outputs:
+    - name: syslog-receiver
+      type: syslog
+      endpoint: 'rsyslogserver.openshift-logging.svc:514'
+      insecure: true
+  pipelines:
+    - name: app-pipeline
+      inputSource: logs.app
+      outputRefs:
+        - syslog-receiver
+    - name: infra-pipeline
+      inputSource: logs.infra
+      outputRefs:
+        - syslog-receiver
+    - name: audit-pipeline
+      inputSource: logs.audit
+      outputRefs:
+        - syslog-receiver

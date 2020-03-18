@@ -14,11 +14,14 @@ spec:
   selector:
     app: hello-pod
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: hello-statefulset
 spec:
+  selector:
+    matchLabels:
+      app: hello-pod
   serviceName: "foo"
   replicas: 2
   template:

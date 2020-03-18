@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  generateName: priorityl
+  labels:
+    env: test
+spec:
+  containers:
+  - name: nginx
+    image: docker.io/aosqe/sigcapture:latest
+    imagePullPolicy: IfNotPresent
+    resources:
+      requests:
+       cpu: 50m
+       memory: 9000Mi
+  priorityClassName: priorityl
+  terminationGracePeriodSeconds: 60
+

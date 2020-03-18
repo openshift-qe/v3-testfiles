@@ -1,0 +1,6 @@
+Keyword : no permissions for users
+bugs:  https://bugzilla.redhat.com/show_bug.cgi?id=1791837
+solution: 
+   Deleting/Restoring Kibana user index resolves issue
+   https://github.com/openshift/origin-aggregated-logging/blob/master/docs/access-control.md#role-definitions-and-permissions
+   https://github.com/jcantrill/cluster-logging-tools/blob/release-3.x/scripts/view-es-permissions

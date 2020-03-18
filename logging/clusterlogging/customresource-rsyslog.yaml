@@ -10,7 +10,7 @@ spec:
     elasticsearch:
       nodeCount: 1
       tolerations:
-      - key: "qetest"
+      - key: "logging"
         operator: "Exists"
         effect: "NoExecute"
         tolerationSeconds: 6000
@@ -26,7 +26,7 @@ spec:
     type: "kibana"
     kibana:
       tolerations:
-      - key: "qetest"
+      - key: "logging"
         operator: "Exists"
         effect: "NoExecute"
         tolerationSeconds: 6000
@@ -41,7 +41,7 @@ spec:
     type: "curator"
     curator:
       tolerations:
-      - key: "qetest"
+      - key: "logging"
         operator: "Exists"
         effect: "NoExecute"
         tolerationSeconds: 6000
@@ -57,7 +57,7 @@ spec:
       type: "rsyslog"
       rsyslog: 
         tolerations:
-        - key: "qetest"
+        - key: "logging"
           operator: "Exists"
           effect: "NoExecute"
           tolerationSeconds: 6000

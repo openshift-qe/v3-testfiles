@@ -13,7 +13,7 @@ kind: ConsoleExternalLogLink
 metadata:
   name: consolelog2
 spec:
-  hrefTemplate: 'https://example.com/logs?resourceName=${resourceName}&containerName=${containerName}&resourceNamespace=${resourceNamespace}&podLabels=${podLabels}'
+  hrefTemplate: 'https://example.com/logs?resourceName=${resourceName}&containerName=${containerName}&resourceNamespace=${resourceNamespace}'
   text: Example Logs
 
 ---
