@@ -8,7 +8,7 @@ spec:
       containers:
       - name: work
         image: busybox
-        command: ["sleep",  "300"]
+        command: ["sleep",  "3000"]
         resources:
           requests:
             memory: 500Mi
