@@ -1,0 +1,17 @@
+{
+   "kind":"Policy",
+   "apiVersion":"v1",
+   "predicates":[
+
+   ],
+   "priorities":[
+      {
+         "name":"LeastRequestedPriority",
+         "weight":2
+      },
+      {
+         "name":"ServiceSpreadingPriority",
+         "weight":10
+      }
+   ]
+}
