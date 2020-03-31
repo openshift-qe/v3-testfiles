@@ -1,6 +1,3 @@
 # v3-testfiles
-The repo to store the test files (json/yaml/scripts) which will be used during the OpenShift v3 tests.
+The repo is deprecated. Integrate your test data with your scripts. That is to say, if your script exists in verification-tests, put your test files in folder testdata of the repo verification-tests; if your script exists in cucushift, put your test files in folder testdata of the repo cucushift.
 
-**please do not push any sensitive data into this repo** 
-
-**eg. private sshkeys, internal service url, etc**
