@@ -12,7 +12,7 @@ spec:
         run: rctest
     spec:
       containers:
-      - image: yapei/hello-openshift
+      - image: aosqe/hello-openshift-centos
         imagePullPolicy: IfNotPresent
         name: hello-openshift
         ports:
@@ -21,7 +21,7 @@ spec:
         resources:
           limits:
             memory: 256Mi
-      - image: yapei/hello-openshift-fedora
+      - image: aosqe/hello-openshift-fedora
         imagePullPolicy: IfNotPresent
         name: hello-openshift-fedora
         ports:

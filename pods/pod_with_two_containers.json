@@ -12,7 +12,7 @@
     "containers": [
       {
         "name": "hello-openshift",
-        "image": "yapei/hello-openshift",
+        "image": "aosqe/hello-openshift-centos",
         "ports": [
           {
             "containerPort": 8080,
@@ -40,7 +40,7 @@
       },
       {
         "name": "hello-openshift-fedora",
-        "image": "yapei/hello-openshift-fedora",
+        "image": "aosqe/hello-openshift-fedora",
         "ports": [
           {
             "containerPort": 8081,
