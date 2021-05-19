@@ -40,7 +40,7 @@
                 "containers": [
                     {
                         "name": "hello-openshift",
-                        "image": "openshift/hello-openshift",
+                        "image": "quay.io/openshifttest/hello-openshift:openshift",
                         "ports": [
                             {
                                 "containerPort": 8080,
