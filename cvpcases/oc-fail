@@ -1,0 +1,4 @@
+#/bin/bash
+oc version --kubeconfig=kubeconfig
+oc get clusters --kubeconfig=kubeconfig
+exit 1
